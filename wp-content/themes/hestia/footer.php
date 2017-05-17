@@ -34,7 +34,8 @@ $hestia_general_credits = get_theme_mod( 'hestia_general_credits',
 								</div>
 							</div>
 						</div>
-						<hr />
+						<hr>
+						<p>2017 © Copyrights FB Ingeniería</p>
 					</div>
 				</footer>
 		</div>
