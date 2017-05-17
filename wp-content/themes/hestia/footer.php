@@ -26,7 +26,11 @@ $hestia_general_credits = get_theme_mod( 'hestia_general_credits',
 					<div class="container">
 						<div class="content">
 							<div class="row">
-								<div class="col-md-12">
+								<div class="col-md-12" align="center">
+									<h2>
+										<a href="https://twitter.com/FBIngenieria"><i class="fa fa-twitter"></i></a>
+										<a href="https://www.instagram.com/fbingenieriayproyectos/"><i class="fa fa-instagram"></i></a>
+									</h2>
 								<?php if ( is_active_sidebar( 'footer-one-widgets' ) ) : ?>
 									<div class="col-md-4">
 									<?php dynamic_sidebar( 'footer-one-widgets' ); ?>
