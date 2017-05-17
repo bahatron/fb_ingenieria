@@ -12,7 +12,7 @@
 
 					<article id="post-<?php the_ID(); ?>" class="section section-text">
 						<div class="row">
-							<div class="col-md-8 col-md-offset-2">
+							<div class="col-md-8 cosl-md-offset-2">
 								<?php the_content(); ?>
 							</div>
 						</div>

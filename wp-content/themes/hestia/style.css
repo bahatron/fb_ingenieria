@@ -1802,7 +1802,7 @@ select.form-control[multiple],
 	border: 0;
 	border-radius: 3px;
 	-webkit-box-shadow: 0 10px 20px -12px rgba(0,0,0,0.42),0 3px 20px 0 rgba(0,0,0,0.12),0 8px 10px -5px rgba(0,0,0,0.2);
-	box-shadow: 0 10px 20px -12px rgba(0,0,0,0.42),0 3px 20px 0 rgba(0,0,0,0.12),0 8px 10px -5px rgba(0,0,0,0.2);
+	box-shadow: 0 1px 2px -12px rgba(0,0,0,0.42),0 1px 1px 0 rgba(0,0,0,0.12),0 1px 1px -5px rgba(0,0,0,0.2);
 }
 
 .navbar .title-logo-wrapper {
@@ -1859,8 +1859,8 @@ select.form-control[multiple],
 .navbar .navbar-nav > li > a:focus {
 	color: inherit;
 }
-
-.navbar .navbar-nav > li > a:before {
+/*hover items en header*/
+.navbar .navbar-nav > li > a:before { 
 	position: absolute;
 	z-index: -1;
 	top: 0;
@@ -1868,7 +1868,7 @@ select.form-control[multiple],
 	bottom: 0;
 	left: 0;
 	border-radius: 3px;
-	background-color: rgba(255,255,255,0.1);
+	background-color: rgba(119, 119, 119, 0.18);
 	content: "";
 	-webkit-transition-timing-function: ease-out;
 	transition-timing-function: ease-out;
