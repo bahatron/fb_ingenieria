@@ -15,8 +15,8 @@ if ( ! function_exists( 'hestia_features' ) ) :
 	 */
 	function hestia_features() {
 
-		$show_features_single_product = get_theme_mod( 'hestia_features_show_on_single_product', false );
-		$hide_section                 = get_theme_mod( 'hestia_features_hide', false );
+		$show_features_single_product = false;
+		$hide_section                 = false;
 
 		if ( current_user_can('edit_theme_options' ) ) {
 			$hestia_features_title    = get_theme_mod( 'hestia_features_title', esc_html__( 'Why our product is the best', 'themeisle-companion' ) );
@@ -42,7 +42,7 @@ if ( ! function_exists( 'hestia_features' ) ) :
 					'text'       => esc_html__( 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', 'themeisle-companion' ),
 					'link'       => '#',
 					'color'      => '#4caf50',
-				),
+				),w
 			) ) );
 		} else {
 			$hestia_features_title    = get_theme_mod( 'hestia_features_title' );
@@ -58,12 +58,8 @@ if ( ! function_exists( 'hestia_features' ) ) :
 			<div class="container">
 				<div class="row">
 					<div class="col-md-8 col-md-offset-2">
-						<?php if ( ! empty( $hestia_features_title ) || is_customize_preview() ) : ?>
-							<h2 class="title"><?php echo esc_html( $hestia_features_title ); ?></h2>
-						<?php endif; ?>
-						<?php if ( ! empty( $hestia_features_subtitle ) || is_customize_preview() ) : ?>
-							<h5 class="description"><?php echo esc_html( $hestia_features_subtitle ); ?></h5>
-						<?php endif; ?>
+						<h2>text grande</h2>
+						<h5>sub header</h5>
 					</div>
 				</div>
 				<div class="row">
