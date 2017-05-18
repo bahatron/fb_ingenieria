@@ -26,39 +26,16 @@ $hestia_general_credits = get_theme_mod( 'hestia_general_credits',
 					<div class="container">
 						<div class="content">
 							<div class="row">
-								<div class="col-md-12">
-								<?php if ( is_active_sidebar( 'footer-one-widgets' ) ) : ?>
-									<div class="col-md-4">
-									<?php dynamic_sidebar( 'footer-one-widgets' ); ?>
-									</div>
-								<?php endif; ?>
-								<?php if ( is_active_sidebar( 'footer-two-widgets' ) ) : ?>
-									<div class="col-md-4">
-									<?php dynamic_sidebar( 'footer-two-widgets' ); ?>
-									</div>
-								<?php endif; ?>
-								<?php if ( is_active_sidebar( 'footer-three-widgets' ) ) : ?>
-									<div class="col-md-4">
-									<?php dynamic_sidebar( 'footer-three-widgets' ); ?>
-									</div>
-								<?php endif; ?>
+								<div class="col-md-12" align="center">
+									<h2>
+										<a href="https://twitter.com/FBIngenieria"><i class="fa fa-twitter"></i></a>
+										<a href="https://www.instagram.com/fbingenieriayproyectos/"><i class="fa fa-instagram"></i></a>
+									</h2>
 								</div>
 							</div>
 						</div>
-						<hr />
-						<?php
-							wp_nav_menu( array(
-								'theme_location'    => 'footer',
-								'depth'             => 1,
-								'container'         => 'ul',
-								'menu_class'   => 'footer-menu pull-left',
-							) );
-						?>
-						<?php if ( ! empty( $hestia_general_credits ) || is_customize_preview() ) : ?>
-						<div class="copyright pull-right">
-							<?php echo wp_kses_post( $hestia_general_credits ); ?>
-						</div>
-						<?php endif; ?>
+						<hr>
+						<p>2017 © Copyrights FB Ingeniería</p>
 					</div>
 				</footer>
 		</div>
