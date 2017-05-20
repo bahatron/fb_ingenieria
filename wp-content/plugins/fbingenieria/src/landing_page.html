@@ -2,17 +2,22 @@
 
 <head>
     <!--CSS and dependencies-->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <script src="https://unpkg.com/vue@2.3.3"></script>
+    <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet" type="text/css">
+    <link href="https://unpkg.com/vuetify/dist/vuetify.min.css" rel="stylesheet" type="text/css">
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vuetify/dist/vuetify.min.js"></script>
     <style lang="scss">
         .page-header {
             height: 100vh !important;
+        }
+        html {
+            overflow-y: hidden;
         }
     </style>
 </head>
 
 <body>
-    <div class="container" id="fbi_landing_page">
+    <div data-app class="container" id="fbi_landing_page">
         <?php include_once('/views/landing.html') ?>
     </div>
 
