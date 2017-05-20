@@ -1,13 +1,22 @@
 <html>
 
 <head>
-
-    <link rel="stylesheet" href="<?php echo FBINGENIERIA_PATH.'/src/assets/css/w3.css' ?>">
-    
+    <!--CSS and dependencies-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://unpkg.com/vue@2.3.3"></script>
+    <style lang="scss">
+        .page-header {
+            height: 100vh !important;
+        }
+    </style>
 </head>
 
 <body>
-    <?php include_once('/views/landing.html') ?>
+    <div class="container" id="fbi_landing_page">
+        <?php include_once('/views/landing.html') ?>
+    </div>
+
+    <script src="<?php echo FBINGENIERIA_URL. '/src/views/landing.js'?>"></script>
 </body>
 
 </html>
