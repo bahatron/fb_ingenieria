@@ -36,7 +36,7 @@ if ( ! function_exists( 'hestia_big_title' ) ) :
 								<?php } ?>
 								<div class="container">
 									<div class="row">
-										<div class="col-md-8 col-md-offset-2 text-center">
+										<div class="col-md-8 col-md-offset-2 text-center" style="padding-top: 30vh;">
 											<h1>FB</h1>
 										</div>
 									</div>
