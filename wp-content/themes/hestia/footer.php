@@ -27,7 +27,6 @@ $hestia_general_credits = get_theme_mod( 'hestia_general_credits',
 			<div class="container" >
 				<div class="content" id="footer">
 					<div class="col-md-12 padding-right-left">
-						<h4><b>Oficinas</b></h4>
 						<hr>
 						<table>
 							<tr>
@@ -53,7 +52,7 @@ $hestia_general_credits = get_theme_mod( 'hestia_general_credits',
 					</div>
 
 				</div>
-				<div>
+				<div class="padding-right-left">
 					<h3>
 						<a target="_blank" href="https://twitter.com/FBIngenieria"><i class="fa fa-twitter-square"></i></a>
 						<a target="_blank" href="https://www.instagram.com/fbingenieriayproyectos/"><i class="fa fa-instagram"></i></a>
