@@ -27,6 +27,7 @@ $hestia_general_credits = get_theme_mod( 'hestia_general_credits',
 			<div class="container" >
 				<div class="content" id="footer">
 					<div class="col-md-12 padding-right-left">
+						<h4><b>Oficinas</b></h4>
 						<hr>
 						<table>
 							<tr>
