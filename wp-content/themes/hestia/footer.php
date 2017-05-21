@@ -35,7 +35,7 @@ $hestia_general_credits = get_theme_mod( 'hestia_general_credits',
 									<p>
 										N° 75, Costa Sur,<br> EL Doral
 										<br>Ciudad de Panamá
-										<br><a href="https://goo.gl/maps/UUhRLZM8Qmt"><i class="fa fa-map-marker"></i>&nbsp<b>Panamá</b></a>
+										<br><a target="_blank" href="https://goo.gl/maps/UUhRLZM8Qmt"><i class="fa fa-map-marker"></i>&nbsp<b>Panamá</b></a>
 										<br><i class="fa fa-phone"></i>&nbsp +507 8311172
 									</p> 
 								</td>
@@ -44,7 +44,7 @@ $hestia_general_credits = get_theme_mod( 'hestia_general_credits',
 										C.C. Manzanares Plaza,<br>
 										Piso 1, Oficina 01-04
 										<br>Caracas
-										<br><a href="https://goo.gl/maps/EZA7xeWNryH2"><i class="fa fa-map-marker"></i>&nbsp<b>Venezuela</b></a>
+										<br><a  target="_blank" href="https://goo.gl/maps/EZA7xeWNryH2"><i class="fa fa-map-marker"></i>&nbsp<b>Venezuela</b></a>
 										<br><i class="fa fa-phone"></i>&nbsp +58 2129421048
 									</p>	
 								</td>
@@ -53,24 +53,29 @@ $hestia_general_credits = get_theme_mod( 'hestia_general_credits',
 					</div>
 
 				</div>
-				<div class="padding-right-left">
-					<h2>
-						<a href="https://twitter.com/FBIngenieria"><i class="fa fa-twitter-square"></i></a>
-						<a href="https://www.instagram.com/fbingenieriayproyectos/"><i class="fa fa-instagram"></i></a>
-						<a href="https://www.linkedin.com/company-beta/5901993/"><i class="fa fa-linkedin-square"></i></a>
+				<div>
+					<h3>
+						<a target="_blank" href="https://twitter.com/FBIngenieria"><i class="fa fa-twitter-square"></i></a>
+						<a target="_blank" href="https://www.instagram.com/fbingenieriayproyectos/"><i class="fa fa-instagram"></i></a>
+						<a target="_blank" href="https://www.linkedin.com/company-beta/5901993/"><i class="fa fa-linkedin-square"></i></a>
+						<a href="mailto:fbingenieriaproyectos@fbingenieria.com" onclick="mail()"><i class="fa fa-envelope-square"></i></a>
 
-					</h2>
-					<p>
-						<br><i class="fa fa-envelope"></i>&nbsp fbingenieriaproyectos@fbingenieria.com
-					</p>
-				
-				<hr>
-				<p>2017 © Copyrights FB Ingeniería</p>
+
+					</h3>
+					<hr>
+					<p>2017 © Copyrights FB Ingeniería</p>
 				</div>
 			</div>
 		</footer>
 	</div>
 </div>
+
 <?php wp_footer(); ?>
 </body>
 </html>
+<script type="text/javascript">
+	function mail(){	
+		alert("Escríbenos a fbingenieriayproyectos@fbingenieria.com");
+	}
+
+</script>
