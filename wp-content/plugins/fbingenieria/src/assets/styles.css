@@ -19,7 +19,7 @@ h1, h2, h3, h4, h5, h6 {
 
 footer {
     background: #232323 !important;
-    background-color: transparent !important;
+    /*background-color: transparent !important;*/
     height: auto !important;
 }
 
@@ -32,4 +32,13 @@ footer {
 
 .description, .card-description, .footer-big {
     color: #999 !important;
+}
+.padding-right-left{
+    padding-left: 60px; 
+    padding-right: 60px;
+}
+.padding-right-left-top{
+    padding-left: 60px; 
+    padding-right: 60px;
+    padding-top:60px;
 }
