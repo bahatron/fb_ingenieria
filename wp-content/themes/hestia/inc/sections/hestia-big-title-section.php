@@ -37,18 +37,7 @@ if ( ! function_exists( 'hestia_big_title' ) ) :
 								<div class="container">
 									<div class="row">
 										<div class="col-md-8 col-md-offset-2 text-center">
-											<?php if ( ! empty( $hestia_big_title_title ) ) { ?>
-												<h2 class="title"><?php echo wp_kses_post( $hestia_big_title_title ); ?></h2>
-											<?php } ?>
-											<?php if ( ! empty( $hestia_big_title_text ) ) { ?>
-												<h4><?php echo wp_kses_post( $hestia_big_title_text ); ?></h4>
-											<?php } ?>
-											<?php if ( ! empty( $hestia_big_title_button_link ) || ! empty( $hestia_big_title_button_text ) ) { ?>
-												<div class="buttons">
-													<a href="<?php echo esc_url( $hestia_big_title_button_link ); ?>"
-													   class="btn btn-primary btn-lg"><?php echo esc_html( $hestia_big_title_button_text ); ?></a>
-												</div>
-											<?php } ?>
+											<h1>FB</h1>
 										</div>
 									</div>
 								</div>
