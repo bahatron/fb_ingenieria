@@ -7,13 +7,18 @@
     <script src="https://unpkg.com/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/vuetify/dist/vuetify.min.js"></script>
     <link rel="stylesheet" href="<?php echo FBINGENIERIA_URL. '/src/assets/styles.css'?>" rel="stylesheet" type="text/css">
+    <?php
+    $lang = $GLOBALS['FBIngenieria']->getLanguage();
+    $translations =  json_decode(file_get_contents(FBINGENIERIA_URL.'/src/languages/'.$lang.'.json'));
+    ?>
 </head>
 
 <body>
     <div data-app class="container" id="fbi_landing_page">
         <section class="padding-right-left-top" id="about" style="height: 500px;">
             <p style="font-family: Roboto,Helvetica,Arial,sans-serif; font-size: 1.825em">Qué hacemos </p>
-            {{ message }}
+            {{ translations }}
+            <h1>{{translate('test')}}</h1>
             <hr>
         </section>
         <section class="padding-right-left-top" id="whyus" style="height: 500px;">
@@ -52,7 +57,12 @@
         new Vue({
             el: '#fbi_landing_page',
             data: {
-                message: "<?php echo 'hola que tal'?>"
+                translations: JSON.parse('<?php echo json_encode($translations) ?>')
+            },
+            methods: {
+                translate(str) {
+                    return (this.translations[str]) ? this.translations[str] : str
+                }
             }
         })
     </script>
