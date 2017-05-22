@@ -22,7 +22,26 @@ class FBIngenieria
     public function load_wp_functions()
     {
         load_plugin_textdomain('fbingenieria', false, plugin_basename(dirname(__FILE__)) . '/languages');
+        add_action('admin_menu', array($this, 'add_menu_pages'));
         add_shortcode('fbi_landing_page', 'fbi_landing_page_handler');
+    }
+
+    public function add_menu_pages()
+    {
+        add_menu_page('FBIngenieria', 'FBIngenieria', 'administrator', 'fbi_settings_menu', 'fbi_settings_add_client_handler');
+        add_submenu_page('fbi_settings_menu', 'Manejar Clientes', 'Manejar Clientes', 'administrator', 'fbi_settings_menu', 'fbi_settings_add_client_handler');
+        add_submenu_page('fbi_settings_menu', 'Manejar Proyectos', 'Manejar Proyectos', 'administrator', 'fbi_settings_projects', 'fbi_settings_add_project_handler');
+    }
+
+    public function getLanguage()
+    {
+        return ($this->lang) ? $this->lang : 'es';
+    }
+
+    public function setLanguage($str)
+    {
+        $this->lang = $str;
+        return $this->lang;
     }
 }
 
@@ -33,4 +52,14 @@ function fbi_landing_page_handler($atts)
     //ob_start();
     include FBINGENIERIA_PATH.'src/landing_page.html';
     //return ob_get_clean();
+}
+
+function fbi_settings_add_client_handler()
+{
+    echo "Under construction";
+}
+
+function fbi_settings_add_project_handler()
+{
+    echo "Under construction";
 }
