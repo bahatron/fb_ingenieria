@@ -2076,11 +2076,9 @@ fieldset[disabled] .navbar .btn-link:focus {
 }
 
 .navbar.navbar-transparent {
-	padding-top: 0px;
+	padding: 8px;
 	color: #fff;
 	background-color: rgba(231, 231, 231, 0.18);
-	-webkit-box-shadow: none;
-	box-shadow: none;
 }
 
 .navbar.navbar-transparent .logo-container .brand {
@@ -5048,6 +5046,7 @@ li.yith_magnifier_thumbnail a {
         display: table-cell !important;
         vertical-align: middle;
         float: none;
+        background-image: ;
     }
 
     .navbar .navbar-collapse {

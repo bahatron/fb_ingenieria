@@ -11,13 +11,13 @@
 ?><!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 <head>
-<meta charset='<?php bloginfo( 'charset' );?>'>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="profile" href="http://gmpg.org/xfn/11">
-<?php if ( is_singular() && pings_open( get_queried_object() ) ) : ?>
-<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
-<?php endif; ?>
-<?php wp_head(); ?>
+	<meta charset='<?php bloginfo( 'charset' );?>'>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="profile" href="http://gmpg.org/xfn/11">
+	<?php if ( is_singular() && pings_open( get_queried_object() ) ) : ?>
+		<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
+	<?php endif; ?>
+	<?php wp_head(); ?>
 </head>
 
 <body <?php body_class(); ?>>
@@ -37,16 +37,16 @@
 						</div>
 					</div>
 					<?php
-						wp_nav_menu( array(
-							'theme_location'    => 'primary',
-							'depth'             => 2,
-							'container'         => 'div',
-							'container_class'   => 'collapse navbar-collapse',
-							'container_id'      => 'main-navigation',
-							'menu_class'        => 'nav navbar-nav navbar-right',
-							'fallback_cb'       => 'hestia_bootstrap_navwalker::fallback',
-							'walker'            => new hestia_bootstrap_navwalker(),
+					wp_nav_menu( array(
+						'theme_location'    => 'primary',
+						'depth'             => 2,
+						'container'         => 'div',
+						'container_class'   => 'collapse navbar-collapse',
+						'container_id'      => 'main-navigation',
+						'menu_class'        => 'nav navbar-nav navbar-right',
+						'fallback_cb'       => 'hestia_bootstrap_navwalker::fallback',
+						'walker'            => new hestia_bootstrap_navwalker(),
 						) );
-					?>
-				</div>
-			</nav>
+						?>
+					</div>
+				</nav>
