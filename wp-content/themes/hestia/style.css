@@ -2078,7 +2078,7 @@ fieldset[disabled] .navbar .btn-link:focus {
 .navbar.navbar-transparent {
 	padding-top: 0px;
 	color: #fff;
-	background-color: transparent;
+	background-color: rgba(231, 231, 231, 0.18);
 	-webkit-box-shadow: none;
 	box-shadow: none;
 }

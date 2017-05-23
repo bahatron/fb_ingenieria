@@ -34,14 +34,33 @@ footer {
     color: #999 !important;
 }
 .padding-right-left{
-    padding-left: 60px; 
+    padding-left: 60px;
     padding-right: 60px;
 }
 .padding-right-left-top{
-    padding-left: 60px; 
+    padding-left: 60px;
     padding-right: 60px;
     padding-top:60px;
 }
 .about{
     padding: 0px;
+}
+.custom-icon {
+  font-size:45px;
+  background:#666;
+  background:rgba(0,0,0,0.4);
+  padding:30px;
+  -webkit-border-radius:1100%;
+  -moz-border-radius:100%;
+  -o-border-radius:100%;
+  border-radius:100%;
+  color:#fff;
+  text-align:center;
+  display:table-cell;
+  width:60px;
+  height:60px;
+  -moz-transition:.5s;
+  -webkit-transition:.5s;
+  -o-transition:.5s;
+  transition:.5s;
 }
