@@ -2076,7 +2076,7 @@ fieldset[disabled] .navbar .btn-link:focus {
 }
 
 .navbar.navbar-transparent {
-	padding: 25px;
+	padding: 10px;
 	color: #fff;
 	background-color: rgba(231, 231, 231, 0.18);
 }
@@ -5046,8 +5046,8 @@ li.yith_magnifier_thumbnail a {
         display: table-cell !important;
         vertical-align: middle;
         float: none;
-        height: 68px;
-        background-image: url('logo.png');
+        height: 48px;
+        background-image: url('logo 2 50 pixel.png');
     }
 
     .navbar .navbar-collapse {
