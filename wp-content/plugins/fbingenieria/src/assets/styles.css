@@ -103,3 +103,7 @@ footer {
   height: auto;
   width: auto;
 }
+.padding-right-left{
+  padding-right: 95px;
+  padding-left: 95px;
+}
