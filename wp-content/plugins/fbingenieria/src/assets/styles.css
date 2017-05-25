@@ -116,11 +116,12 @@ footer {
   color: white;
 }
 .box:hover{
-  background-color: orange;
+  background-color: #fb6816;
+  transition: 0.7s;
+
 }
 .label {
   font-size: 100px;
-  text-transform: uppercase;
   text-align: left;
   background-color: transparent; 
   height: 10px;
