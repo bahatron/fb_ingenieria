@@ -108,9 +108,22 @@ footer {
   padding-left: 95px;
 }
 .box {
-  float: left;
   width: 200px;
-  height: 100px;
+  height: 200px;
   margin: 1em;
   display: inline-block;
+  background-color: #202835;
+  color: white;
+}
+.box:hover{
+  background-color: orange;
+}
+.label {
+  font-size: 100px;
+  text-transform: uppercase;
+  text-align: left;
+  background-color: transparent; 
+  height: 10px;
+  width: 10px;
+  font-weight: 400;
 }
