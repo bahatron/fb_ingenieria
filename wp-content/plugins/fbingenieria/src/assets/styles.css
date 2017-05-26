@@ -109,6 +109,7 @@ footer {
 }
 .label{
   background-color: transparent;
+<<<<<<< Updated upstream
 }
 .box {
   overflow: hidden;
@@ -119,4 +120,6 @@ footer {
   display: inline-block;
   background-color: #202835;
   color: white;
+=======
+>>>>>>> Stashed changes
 }
