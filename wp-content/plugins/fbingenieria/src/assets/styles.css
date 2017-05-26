@@ -109,9 +109,8 @@ footer {
 }
 .label{
   background-color: transparent;
-<<<<<<< Updated upstream
 }
-.box {
+.box{
   overflow: hidden;
   position: relative;
   width: 180px;
@@ -120,6 +119,5 @@ footer {
   display: inline-block;
   background-color: #202835;
   color: white;
-=======
->>>>>>> Stashed changes
 }
+
