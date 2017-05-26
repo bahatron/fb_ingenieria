@@ -100,8 +100,7 @@ footer {
   margin:1em;
 }
 .section{
-  height: auto;
-  width: auto;
+  margin: auto;
 }
 .padding-right-left{
   padding-right: 95px;
@@ -129,4 +128,17 @@ footer {
   font-size: 80px;
   font-weight: 400;
   background-color: transparent;  
+}
+.hr-color{
+  border-color: #fb6816;
+}
+.section-title{
+  font-style: : Roboto;
+  font-size: 100px;
+  color: #fb6816;
+
+}
+.about p {
+    font-size: 1.895em;
+    line-height: 1.895em;
 }
