@@ -27,7 +27,7 @@ $hestia_general_credits = get_theme_mod( 'hestia_general_credits',
 			<div class="container" >
 				<div class="content" id="footer">
 					<div class="col-md-12 padding-right-left">
-						<h4><b>Oficinas</b></h4>
+					<p style="font-family: Roboto,Helvetica,Arial,sans-serif; font-size: 1.825em">Oficinas</p>
 						<hr>
 						<table>
 							<tr>
@@ -58,16 +58,28 @@ $hestia_general_credits = get_theme_mod( 'hestia_general_credits',
 						<a target="_blank" href="https://twitter.com/FBIngenieria"><i class="fa fa-twitter-square"></i></a>
 						<a target="_blank" href="https://www.instagram.com/fbingenieriayproyectos/"><i class="fa fa-instagram"></i></a>
 						<a target="_blank" href="https://www.linkedin.com/company-beta/5901993/"><i class="fa fa-linkedin-square"></i></a>
-						<a href="mailto:fbingenieriaproyectos@fbingenieria.com" onclick="mail()"><i class="fa fa-envelope-square"></i></a>
-
-
+						<a data-toggle="modal" data-target="#myModal"><i class="fa fa-envelope-square"></i></a>
 					</h3>
 					<hr>
 					<p>2017 © Copyrights FB Ingeniería</p>
+					<a href="#carousel-hestia-generic">Volver a Inicio</a>
 				</div>
 			</div>
 		</footer>
 	</div>
+</div>
+<div class="modal fade" id="myModal" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-body">	
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+
+				<p>Escríbenos a <a>fbingenieriayproyectos@fbingenieria.com</a> !</p>
+			</div>
+		</div>
+	</div>
+</div>
+
 </div>
 
 <?php wp_footer(); ?>
@@ -75,7 +87,8 @@ $hestia_general_credits = get_theme_mod( 'hestia_general_credits',
 </html>
 <script type="text/javascript">
 	function mail(){	
-		alert("Escríbenos a fbingenieriayproyectos@fbingenieria.com");
+		document.getElementById('prueba').innerHTML ='<v-alert info v-bind:value="true">This is a info alert.</v-alert>';
+		
 	}
 
 </script>
