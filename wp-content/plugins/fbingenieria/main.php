@@ -18,12 +18,14 @@ class FBIngenieria
     {
         define('FBINGENIERIA_PATH', plugin_dir_path(__FILE__));
         define('FBINGENIERIA_URL', plugins_url(basename(plugin_dir_path(__FILE__)), basename(__FILE__)));
-        $this->load_wp_functions();
+        $this->init_wp_plugin();
     }
 
-    private function load_wp_functions()
+    private function init_wp_plugin()
     {
         load_plugin_textdomain('fbingenieria', false, plugin_basename(dirname(__FILE__)) . '/languages');
+        require_once(FBINGENIERIA_PATH.'/src/database/database.php');
+        register_activation_hook(__FILE__, 'fbingenieriaDatabase');
         add_action('admin_menu', array($this, 'add_menu_pages'));
         add_shortcode('fbi_landing_page', 'fbi_landing_page_handler');
     }
@@ -36,6 +38,7 @@ class FBIngenieria
         }
         return json_decode($file);
     }
+    
     public function add_menu_pages()
     {
         add_menu_page('FBIngenieria', 'FBIngenieria', 'administrator', 'fbi_settings_menu', 'fbi_settings_add_client_handler');
