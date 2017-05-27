@@ -6,61 +6,75 @@
     <link href="https://unpkg.com/vuetify/dist/vuetify.min.css" rel="stylesheet" type="text/css">
     <script src="https://unpkg.com/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/vuetify/dist/vuetify.min.js"></script>
-    <link rel="stylesheet" href="<?php echo FBINGENIERIA_URL. '/src/assets/styles.css'?>" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="<?php echo FBINGENIERIA_URL. '/src/assets/css/styles.css'?>" rel="stylesheet" type="text/css">
+    <?php
+    $lang = $GLOBALS['FBIngenieria']->getLanguage($_GET['lang']);
+    ?>
 </head>
 
 <body>
     <div class="container" id="fbi_landing_page">
-        <section class="padding-top" id="about">
-            <p style="font-family: Roboto,Helvetica,Arial,sans-serif; font-size: 1.825em">Qué hacemos</p>
-            <hr>
-        </section>
-        <section class="padding-top" id="whyus" >
-            <p style="font-family: Roboto,Helvetica,Arial,sans-serif; font-size: 1.825em">Por qué nosotos</p>
-            <hr>
-            <div class="row">
-                <div class="box card card__box">
-                    <span class="label">01</span>
+        <div class="col-md-12">
+            <section class="padding-top" id="about">
+                <p class="section-title" align="center">Qué hacemos</p>
+                <hr class="hr-color">
+            </section>
+            <section class="padding-top" id="whyus" >
+                <p class="section-title" align="center">Por qué nosotos</p>
+                <hr  class="hr-color">
+                <div class="row">
+                    <div class="col" align="center">
+                        <div class="box card card__box">
+                            <span class="label">01</span>
+                        </div>
+                        <div class="box card card__box">
+                            <span class="label">02</span>  
+                        </div>
+                        <div class="box card card__box">
+                            <span class="label">03</span>  
+                        </div>
+                        <div class="box card card__box">
+                            <span class="label">04</span>  
+                        </div>
+                    </div>
                 </div>
-                <div class="box card card__box">
-                    <span class="label">02</span>  
-                </div>
-                <div class="box card card__box">
-                    <span class="label">03</span>  
-                </div>
-                <div class="box card card__box">
-                    <span class="label">04</span>  
-                </div>
-            </div>
-        </section>
-        <section class="padding-top" id="clients" >
-            <p style="font-family: Roboto,Helvetica,Arial,sans-serif; font-size: 1.825em">Clientes</p>
-            <hr>
-        </section>
-        <section class="padding-top" id="portfolio" >
-            <p style="font-family: Roboto,Helvetica,Arial,sans-serif; font-size: 1.825em">Portafolio</p>
-            <hr>
-        </section>
-        <section class="padding-top" id="journey" style="position: relative;">
-       
             <v-card img="<?php echo FBINGENIERIA_URL.'/src/image.png'?>" height="300px">
                 <p style="font-family: Roboto,Helvetica,Arial,sans-serif; font-size: 1.525em; color: #fb6816; padding-left: 100px; padding-top: 20px;">Trayecto</p>
                 <hr style="margin-left: 100px" width="20%">
             </v-card>
-            <hr>
+        <section class="padding-top" id="journey" style="position: relative;">
+       
         </section>
-        <section class="padding-top" id="contact" >
-            <p style="font-family: Roboto,Helvetica,Arial,sans-serif; font-size: 1.825em">Contacto</p>
-            <hr>
+            </section>
+            <section class="padding-top" id="clients" >
+                <p class="section-title" align="center">Clientes</p>
+                <hr class="hr-color">
+            </section>
+            <section class="padding-top" id="portfolio" >
+                <p class="section-title" align="center">Portafolio</p>
+                <hr class="hr-color">
+            </section>
+            <section class="padding-top" id="contact" >
+                <p class="section-title" align="center">Contacto</p>
+                <hr class="hr-color">
 
-        </section>
+            </section>
+        </div>
     </div>
 
     <script>
         new Vue({
             el: '#fbi_landing_page',
             data: {
-                message: "<?php echo 'hola que tal'?>"
+                translations: JSON.parse('<?php echo json_encode($lang) ?>')
+            },
+            mounted: function () {
+                console.log('translations: ', this.translations);
+            },
+            methods: {
+                translate(str) {
+                    return (this.translations[str]) ? this.translations[str] : str;
+                }
             }
         })
     </script>
