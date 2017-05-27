@@ -12,8 +12,6 @@ if (!defined('ABSPATH')) {
 
 class FBIngenieria
 {
-    private $lang;
-
     public function __construct()
     {
         define('FBINGENIERIA_PATH', plugin_dir_path(__FILE__));
@@ -58,10 +56,10 @@ function fbi_landing_page_handler($atts)
 
 function fbi_settings_add_client_handler()
 {
-    echo "Under construction";
+    include FBINGENIERIA_PATH.'src/views/manage_clients.php';
 }
 
 function fbi_settings_add_project_handler()
 {
-    echo "Under construction";
+    include FBINGENIERIA_PATH.'src/views/manage_projects.php';
 }
