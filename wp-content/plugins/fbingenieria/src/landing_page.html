@@ -6,53 +6,72 @@
     <link href="https://unpkg.com/vuetify/dist/vuetify.min.css" rel="stylesheet" type="text/css">
     <script src="https://unpkg.com/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/vuetify/dist/vuetify.min.js"></script>
-    <link rel="stylesheet" href="<?php echo FBINGENIERIA_URL. '/src/assets/styles.css'?>" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="<?php echo FBINGENIERIA_URL. '/src/assets/css/styles.css'?>" rel="stylesheet" type="text/css">
+    <?php
+    $lang = $GLOBALS['FBIngenieria']->getLanguage($_GET['lang']);
+    ?>
 </head>
 
 <body>
-    <div data-app class="container" id="fbi_landing_page">
-        <section class="padding-right-left-top" id="about" style="height: 500px;">
-            <p style="font-family: Roboto,Helvetica,Arial,sans-serif; font-size: 1.825em">Qué hacemos </p>
-            {{ message }}
-            <hr>
-        </section>
-        <section class="padding-right-left-top" id="whyus" style="height: 500px;">
-            <p style="font-family: Roboto,Helvetica,Arial,sans-serif; font-size: 1.825em">Por qué nosotos</p>
-            <hr>
-        </section>
-        <section class="padding-right-left-top" id="clients" style="height: 500px; ">
-            <p style="font-family: Roboto,Helvetica,Arial,sans-serif; font-size: 1.825em">Clientes</p>
-            <hr>
-        </section>
-        <section class="padding-right-left-top" id="portfolio" style="height: 500px; ">
-            <p style="font-family: Roboto,Helvetica,Arial,sans-serif; font-size: 1.825em">Portafolio</p>
-            <hr>
-        </section>
-        <section class="padding-right-left-top" id="journey" style="height: 500px; ">
-            <p style="font-family: Roboto,Helvetica,Arial,sans-serif; font-size: 1.825em">Trayecto</p>
-            <hr>
-        </section>
-        <section class="padding-right-left-top" id="contact" style="height: 500px;">
-            <p style="font-family: Roboto,Helvetica,Arial,sans-serif; font-size: 1.825em">Contacto</p>
-            <hr>
-            <table>
-                <tr>
-                    <td style=" width: 600px">
-                        PRUEBA
-                    </td>
-                    <td style=" width: 600px">
-                        PRUEBA
-                    </td>
-                </tr>
-            </table>
-        </section>
+    <div class="container" id="fbi_landing_page">
+        <div class="col-md-12">
+            <section class="padding-top" id="about">
+                <p class="section-title" align="center">Qué hacemos</p>
+                <hr class="hr-color">
+            </section>
+            <section class="padding-top" id="whyus" >
+                <p class="section-title" align="center">Por qué nosotos</p>
+                <hr  class="hr-color">
+                <div class="row">
+                    <div class="col" align="center">
+                        <div class="box card card__box">
+                            <span class="label">01</span>
+                        </div>
+                        <div class="box card card__box">
+                            <span class="label">02</span>  
+                        </div>
+                        <div class="box card card__box">
+                            <span class="label">03</span>  
+                        </div>
+                        <div class="box card card__box">
+                            <span class="label">04</span>  
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="padding-top" id="clients" >
+                <p class="section-title" align="center">Clientes</p>
+                <hr class="hr-color">
+            </section>
+            <section class="padding-top" id="portfolio" >
+                <p class="section-title" align="center">Portafolio</p>
+                <hr class="hr-color">
+            </section>
+            <section class="padding-top" id="journey" >
+                <p class="section-title" align="center">Trayecto</p>
+                <hr class="hr-color">
+            </section>
+            <section class="padding-top" id="contact" >
+                <p class="section-title" align="center">Contacto</p>
+                <hr class="hr-color">
+
+            </section>
+        </div>
     </div>
 
     <script>
         new Vue({
             el: '#fbi_landing_page',
             data: {
-                message: "<?php echo 'hola que tal'?>"
+                translations: JSON.parse('<?php echo json_encode($lang) ?>')
+            },
+            mounted: function () {
+                console.log('translations: ', this.translations);
+            },
+            methods: {
+                translate(str) {
+                    return (this.translations[str]) ? this.translations[str] : str;
+                }
             }
         })
     </script>
