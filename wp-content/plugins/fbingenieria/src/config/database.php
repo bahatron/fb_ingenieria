@@ -3,9 +3,9 @@
 function fbingenieriaDatabase()
 {
     global $wpdb;
-    $fbiClient = $wpdb->prefix.'fbi_client';
-    $fbiProject = $wpdb->prefix.'fbi_project';
-    $fbiProjectImg = $wpdb->prefix.'fbi_image';
+    $fbiClient = $wpdb->prefix.'fbi_clients';
+    $fbiProject = $wpdb->prefix.'fbi_projects';
+    $fbiProjectImg = $wpdb->prefix.'fbi_images';
 
     $sql = "CREATE TABLE IF NOT EXISTS $fbiClient (
       id INT(11) NOT NULL AUTO_INCREMENT,

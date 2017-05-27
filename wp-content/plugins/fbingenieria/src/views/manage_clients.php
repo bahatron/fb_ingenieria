@@ -1,11 +1,35 @@
 <?php
 
 global $FBIngenieria;
-
-var_dump($FBIngenieria->getClientList());
-
+var_dump($_POST);
+$clientList = $FBIngenieria->getClientList();
+var_dump($clientList);
 ?>
   <div class="wrap">
+    <form action="" method="POST">
+      <table class="form-table">
+        <tbody>
+          <tr>
+            <th scope="row"><label for="name">Cliente ya registrado </label></th>
+            <td>
+              <input name="name" id="name" list="clients" value="" class="regular-text" type="text" style="width: 100%" onchange="checkMeOut(this)">
+              <datalist id="clients">
+                <?php
+                foreach ($clientList as $client) {
+                    ?>
+                  <option data-id="<?php echo $client->id ?>" value="<?php echo $client->name ?>">
+                  <?php 
+                } ?>
+              </datalist>
+              <input type="hidden" name="id" value="">
+              <p class="description" id="website-description">Modifica un cliente registrado anteriormente</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <input type="submit" name="Go" value="Submit">
+    </form>
+    <hr>
     <form action="" method="POST">
       <table class="form-table">
         <tbody>
@@ -54,3 +78,19 @@ var_dump($FBIngenieria->getClientList());
       <?php submit_button('Enviar'); ?>
     </form>
   </div>
+
+  <script>
+    function checkMeOut(input){
+      console.log('item', input);
+      console.log(input.list);
+      console.log(input.list.options);
+      for(var i in input.list.options){
+        console.log('i', i);
+        console.log('option',input.list.options[i]);
+        if(typeof input.list.options[i] == 'object'){
+          console.log('data-id', input.list.options[i].getAttribute('data-id'));
+        }
+      }
+      //console.log(document.getElementById(input.list));
+    }
+  </script>
