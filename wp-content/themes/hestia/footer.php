@@ -9,19 +9,19 @@
  * @since Hestia 1.0
  */
 
-$hestia_general_credits = get_theme_mod( 'hestia_general_credits',
-	/* translators: %1$s is Theme Name, %2$s is WordPress */
-	sprintf( esc_html__( '%1$s | Powered by %2$s', 'hestia' ),
-		/* translators: %s is Theme name */
-		sprintf( '<a href="https://themeisle.com/themes/hestia/" target="_blank" rel="nofollow">%s</a>',
-			esc_html__( 'Hestia', 'hestia' )
-			),
-		/* translators: %s is WordPress */
-		sprintf( '<a href="http://wordpress.org/" rel="nofollow">%s</a>',
-			esc_html__( 'WordPress', 'hestia' )
-			)
-		)
-		); ?>
+$hestia_general_credits = get_theme_mod('hestia_general_credits',
+    /* translators: %1$s is Theme Name, %2$s is WordPress */
+    sprintf(esc_html__('%1$s | Powered by %2$s', 'hestia'),
+        /* translators: %s is Theme name */
+        sprintf('<a href="https://themeisle.com/themes/hestia/" target="_blank" rel="nofollow">%s</a>',
+            esc_html__('Hestia', 'hestia')
+            ),
+        /* translators: %s is WordPress */
+        sprintf('<a href="http://wordpress.org/" rel="nofollow">%s</a>',
+            esc_html__('WordPress', 'hestia')
+            )
+        )
+        ); ?>
 		<footer class="footer footer-black footer-big" >
 			<br>
 			<div class="container" >
@@ -63,12 +63,11 @@ $hestia_general_credits = get_theme_mod( 'hestia_general_credits',
 					<hr>
 					<p>2017 © Copyrights FB Ingeniería</p>
 					<a href="#carousel-hestia-generic">Volver a Inicio</a>
-						<a href="">
-							<img src="11495683679_United-States-Flag.ico" />
-						</a>
-						<a href="">
-							<img src="1495683683_Spain-Flag.ico" />
-						</a>
+						<form action="" method="GET" id="changeLanguageForm">
+							<img style="max-height: 40px; cursor: pointer;" src="<?php echo FBINGENIERIA_URL.'/src/assets/img/1495683664_United-States-Flag.png' ?>" onclick="changeLanguage('en')">
+							<img style="max-height: 40px; cursor: pointer;" src="<?php echo FBINGENIERIA_URL.'/src/assets/img/1495683661_Spain-Flag.png' ?>" onclick="changeLanguage('es')">
+							<input type="hidden" name="lang" value="" style="display: none;">
+						</form>
 				</div>
 			</div>
 		</footer>
@@ -94,7 +93,10 @@ $hestia_general_credits = get_theme_mod( 'hestia_general_credits',
 <script type="text/javascript">
 	function mail(){	
 		document.getElementById('prueba').innerHTML ='<v-alert info v-bind:value="true">This is a info alert.</v-alert>';
-		
 	}
-
+	function changeLanguage(lang){
+		var form = document.getElementById('changeLanguageForm');
+		form.elements.lang.value = lang;
+		form.submit();
+	}
 </script>

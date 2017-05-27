@@ -27,15 +27,13 @@ class FBIngenieria
         add_shortcode('fbi_landing_page', 'fbi_landing_page_handler');
     }
 
-    public function getLanguage()
+    public function getLanguage($lang=null)
     {
-        return ($this->lang) ? $this->lang : 'es';
-    }
-
-    public function setLanguage($str)
-    {
-        $this->lang = $str;
-        return $this->lang;
+        $file = @file_get_contents(FBINGENIERIA_URL.'/src/languages/'.$lang.'.json');
+        if (!$file) {
+            $file = file_get_contents(FBINGENIERIA_URL.'/src/languages/es.json'); //default language
+        }
+        return json_decode($file);
     }
 }
 
