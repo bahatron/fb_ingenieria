@@ -6,13 +6,13 @@ $clientList = $FBIngenieria->getClientList();
 var_dump($clientList);
 ?>
   <div class="wrap">
-    <form action="" method="POST">
+    <form action="" method="POST" onsubmit="return getDataId(document.getElementById('name'))">
       <table class="form-table">
         <tbody>
           <tr>
             <th scope="row"><label for="name">Cliente ya registrado </label></th>
             <td>
-              <input name="name" id="name" list="clients" value="" class="regular-text" type="text" style="width: 100%" onchange="checkMeOut(this)">
+              <input name="name" id="name" list="clients" value="" class="regular-text" type="text" style="width: 100%" onchange="getDataId(this)">
               <datalist id="clients">
                 <?php
                 foreach ($clientList as $client) {
@@ -21,7 +21,7 @@ var_dump($clientList);
                   <?php 
                 } ?>
               </datalist>
-              <input type="hidden" name="id" value="">
+              <input type="hidden" name="id" id="clientID" value="">
               <p class="description" id="website-description">Modifica un cliente registrado anteriormente</p>
             </td>
           </tr>
@@ -80,17 +80,13 @@ var_dump($clientList);
   </div>
 
   <script>
-    function checkMeOut(input){
-      console.log('item', input);
-      console.log(input.list);
-      console.log(input.list.options);
+    function getDataId(input){
       for(var i in input.list.options){
-        console.log('i', i);
-        console.log('option',input.list.options[i]);
         if(typeof input.list.options[i] == 'object'){
-          console.log('data-id', input.list.options[i].getAttribute('data-id'));
+          if(input.value === input.list.options[i].value ) {
+            document.getElementById('clientID').value = input.list.options[i].getAttribute('data-id');
+          }
         }
       }
-      //console.log(document.getElementById(input.list));
     }
   </script>
