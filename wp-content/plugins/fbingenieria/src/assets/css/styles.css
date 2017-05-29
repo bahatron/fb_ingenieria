@@ -139,7 +139,25 @@ footer {
 
 }
 .about p {
-  text-transform: uppercase;
+  text-transform: ;
   font-size: 1.895em;
   line-height: 1.895em;
+}
+.card_journey{
+  position: relative;
+  border-radius: 2px;
+  min-width: 0;
+  height: 395px; 
+  background: url(http://localhost/FBIngenieria/wp-content/plugins/fbingenieria/src/image.png) center center / cover no-repeat;
+}
+.p-journey{
+  font-family: Roboto,Helvetica,Arial,sans-serif; font-size: 1.525em; color: #fb6816;
+  padding-top: 20px;
+}
+.row{
+  margin-left: 0px;
+  margin-right: 0px;
+}
+.about > .container{
+  width: 100%;
 }
