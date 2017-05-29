@@ -156,6 +156,7 @@ footer {
 .p-journey{
   font-family: Roboto,Helvetica,Arial,sans-serif; font-size: 1.525em; color: #fb6816;
   padding-top: 20px;
+  padding-left: 100px; margin-bottom: -20px;
 }
 .row{
   margin-left: 0px;
@@ -188,4 +189,10 @@ footer {
 }
 a{
   color: inherit;
+}
+.office-section{
+  background: #202835; padding-left: 100px; width: 75%;
+}
+.p-office-section{
+  font-family: Roboto,Helvetica,Arial,sans-serif; font-size: 1.825em; text-transform: uppercase; margin-bottom: -20px; color: #fb6816;
 }

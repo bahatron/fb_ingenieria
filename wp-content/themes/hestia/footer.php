@@ -26,8 +26,8 @@ $hestia_general_credits = get_theme_mod('hestia_general_credits',
 			<div class="row" style="width: 100%;">
 				<div class="col-md-12">
 					<div style="height: 100px"></div>
-					<div style="background: #202835; padding-left: 100px; width: 75%" align="left"> 
-						<p style="font-family: Roboto,Helvetica,Arial,sans-serif; font-size: 1.825em; text-transform: uppercase; margin-bottom: -20px; color: #fb6816;">Oficinas</p>
+					<div class="office-section" align="left"> 
+						<p class="p-office-section">Oficinas</p>
 						<hr class="hr-color">
 						<table>
 							<tr>
@@ -63,32 +63,28 @@ $hestia_general_credits = get_theme_mod('hestia_general_credits',
 				<div class="col-md-12">
 					<div style="height: 100px"></div>
 				</div>
-				<div class="col-md-12" style="height: 100%; width:100%; background:#202835; border-top-style: solid; border-top-color: #fb6816; " align="center">
+				<div class="col-md-12" style="height: 100%; width:100%; background:#202835; border-top-style: solid; border-top-color: #fb6816; padding-top: 10px; " align="center">
 					<p>2017 © Copyrights FB Ingeniería</p>
 					<a href="#carousel-hestia-generic">Volver a Inicio</a>
 					<form action="" method="GET" id="changeLanguageForm">
-						<img style="max-height: 40px; cursor: pointer;" src="<?php echo FBINGENIERIA_URL.'/src/assets/img/1495683664_United-States-Flag.png' ?>" onclick="changeLanguage('en')">
-						<img style="max-height: 40px; cursor: pointer;" src="<?php echo FBINGENIERIA_URL.'/src/assets/img/1495683661_Spain-Flag.png' ?>" onclick="changeLanguage('es')">
+						<img style="max-height: 30px; cursor: pointer;" src="<?php echo FBINGENIERIA_URL.'/src/assets/img/1495683664_United-States-Flag.png' ?>" onclick="changeLanguage('en')">
+						<img style="max-height: 30px; cursor: pointer;" src="<?php echo FBINGENIERIA_URL.'/src/assets/img/1495683661_Spain-Flag.png' ?>" onclick="changeLanguage('es')">
 						<input type="hidden" name="lang" value="" style="display: none;">
 					</form>
 				</div>
 			</div>
-		</footer>
-
-		<div class="modal fade" id="myModal" role="dialog">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-body">	
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-
-						<p>Escríbenos a <a>fbingenieriayproyectos@fbingenieria.com</a> !</p>
+			<div class="modal fade" id="myModal" role="dialog">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-body">	
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<p>Escríbenos a <a>fbingenieriayproyectos@fbingenieria.com</a> !</p>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-
-	</div>
-
+	</footer>
 	<?php wp_footer(); ?>
 </body>
 </html>
