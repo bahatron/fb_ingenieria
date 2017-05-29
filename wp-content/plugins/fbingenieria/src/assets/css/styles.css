@@ -36,6 +36,9 @@ footer {
 .padding-top{
   padding-top: 60px;
 }
+.padding-top-journey{
+  padding-top: 50px;
+}
 .about{
   padding: 0px;
 }
@@ -160,4 +163,26 @@ footer {
 }
 .about > .container{
   width: 100%;
+}
+.footer-big{
+  color: #999 !important;
+  padding:0px;
+}
+.footer{
+  height: auto;
+  background: #0b465d !important;
+  border-top-style: solid;
+  border-top-color:#fb6816 ;
+  border-bottom-color:#fb6816 ; 
+  border-bottom-style:solid;
+}
+.footer>:last-child{
+  margin-right: 0px;
+}
+.footer>:first-child{
+  margin-left:0px;
+}
+.col-md-12{
+  padding-left: 0px;
+  padding-right: 0px;
 }
