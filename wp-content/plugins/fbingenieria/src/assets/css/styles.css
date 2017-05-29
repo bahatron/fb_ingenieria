@@ -153,8 +153,8 @@ footer {
   height: 395px; 
   background: url(http://localhost/FBIngenieria/wp-content/plugins/fbingenieria/src/image.png) center center / cover no-repeat;
 }
-.p-journey{
-  font-family: Roboto,Helvetica,Arial,sans-serif; font-size: 1.525em; color: #fb6816;
+.card_journey p{
+  font-family: Roboto,Helvetica,Arial,sans-serif; color: #fb6816; font-size: 1.2em;
   padding-top: 20px;
   padding-left: 100px; margin-bottom: -20px;
 }
