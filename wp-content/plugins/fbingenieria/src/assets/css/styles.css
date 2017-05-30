@@ -143,7 +143,8 @@ footer {
   line-height: 1.895em;
 }
 .about-span{
-  color:  #fb6816;;
+  color:  #fb6816;
+  font-weight: 500;
 }
 
 .card_journey {
