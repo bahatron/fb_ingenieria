@@ -57,8 +57,7 @@ footer {
 
 .custom-icon {
   font-size: 25px;
-  background: #666;
-  background: rgba(0, 0, 0, 0.4);
+  background: #202835;  
   padding: 20px;
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
@@ -143,6 +142,9 @@ footer {
   font-size: 1.895em;
   line-height: 1.895em;
 }
+.about-span{
+  color:  #fb6816;;
+}
 
 .card_journey {
   position: relative;
@@ -222,11 +224,11 @@ a {
   width: 20px;
   height: 20px;
   left: 48.8%;
-  top: 89px;
+  top: 139px;
   z-index: 2;
 }
 
 .about-us-box {
-  height: 100px;
+  height: 150px;
   padding: 15px;
 }
