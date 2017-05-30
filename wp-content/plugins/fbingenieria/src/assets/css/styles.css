@@ -133,13 +133,13 @@ footer {
 }
 
 .section-title {
-  font-style: : Roboto;
+  font-style: Roboto;
   font-size: 100px;
   color: #fb6816;
+  letter-spacing: 0.3em;
 }
 
 .about p {
-  text-transform: ;
   font-size: 1.895em;
   line-height: 1.895em;
 }
@@ -159,6 +159,7 @@ footer {
   padding-top: 20px;
   padding-left: 100px;
   margin-bottom: -20px;
+  letter-spacing: 0.3em;
 }
 
 .row {
