@@ -57,7 +57,7 @@ footer {
 
 .custom-icon {
   font-size: 25px;
-  background: #202835;  
+  background: #202835;
   padding: 20px;
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
@@ -142,8 +142,9 @@ footer {
   font-size: 1.895em;
   line-height: 1.895em;
 }
-.about-span{
-  color:  #fb6816;
+
+.about-span {
+  color: #fb6816;
   font-weight: 500;
 }
 
@@ -232,4 +233,12 @@ a {
 .about-us-box {
   height: 150px;
   padding: 15px;
+}
+
+.main-title {
+  font-size: 56px;
+  font-weight: 200;
+  line-height: 1.35;
+  letter-spacing: -.02em;
+  margin-bottom: 16px
 }
