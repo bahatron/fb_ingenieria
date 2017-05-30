@@ -52,10 +52,10 @@ $hestia_general_credits = get_theme_mod('hestia_general_credits',
 						</table>
 						<div align="left" style="margin-top: -30px;">
 							<h4>
-								<a target="_blank" href="https://twitter.com/FBIngenieria"><i class="fa fa-twitter-square"></i></a>
-								<a target="_blank" href="https://www.instagram.com/fbingenieriayproyectos/"><i class="fa fa-instagram"></i></a>
-								<a target="_blank" href="https://www.linkedin.com/company-beta/5901993/"><i class="fa fa-linkedin-square"></i></a>
-								<a data-toggle="modal" data-target="#myModal"><i class="fa fa-envelope-square"></i></a>
+								<a target="_blank" class="footer-a" href="https://twitter.com/FBIngenieria"><i class="fa fa-twitter-square"></i></a>
+								<a target="_blank" class="footer-a" href="https://www.instagram.com/fbingenieriayproyectos/"><i class="fa fa-instagram"></i></a>
+								<a target="_blank" class="footer-a" href="https://www.linkedin.com/company-beta/5901993/"><i class="fa fa-linkedin-square"></i></a>
+								<a data-toggle="modal" class="footer-a" data-target="#myModal"><i class="fa fa-envelope-square"></i></a>
 							</h4>
 						</div>
 					</div>

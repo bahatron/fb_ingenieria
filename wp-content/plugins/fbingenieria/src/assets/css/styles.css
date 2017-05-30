@@ -177,6 +177,9 @@ footer {
   border-bottom-color:#fb6816 ; 
   border-bottom-style:solid;
 }
+.footer-a{
+  padding: 2px;
+}
 .footer>:last-child{
   margin-right: 0px;
 }
