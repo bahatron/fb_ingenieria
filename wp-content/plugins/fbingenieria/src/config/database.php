@@ -10,9 +10,10 @@ function fbingenieriaDatabase()
     $sql = "CREATE TABLE IF NOT EXISTS $fbiClient (
       id INT(11) NOT NULL AUTO_INCREMENT,
       name VARCHAR(100) NOT NULL,
-      webisteUrl VARCHAR(200) NULL,
+      websiteUrl VARCHAR(200) NULL,
       imageUrl VARCHAR(1000) NULL,
       description VARCHAR(1000) NULL,
+      visible TINYINT(1) NULL,
       active TINYINT(1) NULL,
       PRIMARY KEY (id),
       UNIQUE INDEX name_UNIQUE (name ASC))
@@ -25,6 +26,7 @@ function fbingenieriaDatabase()
       name VARCHAR(100) NOT NULL,
       shortDescription VARCHAR(160) NULL,
       longDescription VARCHAR(1000) NULL,
+      active TINYINT(1) NULL,
       client_id INT(11) NOT NULL,
       PRIMARY KEY (id),
       UNIQUE INDEX name_UNIQUE (name ASC),
