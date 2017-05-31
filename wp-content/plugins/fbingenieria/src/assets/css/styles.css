@@ -180,6 +180,23 @@ footer {
 .row {
   margin-left: 0px;
   margin-right: 0px;
+  padding: 0px;
+  padding-top: 0px;
+  padding-right: 0px;
+  padding-bottom: 0px;
+  padding-left: 0px;
+}
+
+.features .row,
+.about .row,
+.products .row,
+.work .row,
+.team .row,
+.pricing .row,
+.testimonials .row,
+section.blogs .row,
+.contactus .row {
+  padding: 0px;
 }
 
 .about>.container {
@@ -235,23 +252,26 @@ a {
   color: #fb6816;
 }
 
-.contact-section{
+.contact-section {
   background: #202835;
   position: relative;
 }
-.contact-form{
+
+.contact-form {
   background-color: rgba(25, 31, 41, 0.92);
   height: 50%;
   width: 50%;
   padding: 30px;
   margin-bottom: 120px;
 }
-.contact-icon{
-  color:rgba(158, 158, 158, 0.15);
-  top:63%;
-  left:75%;
+
+.contact-icon {
+  color: rgba(158, 158, 158, 0.15);
+  top: 63%;
+  left: 75%;
   font-size: 300px;
 }
+
 .floater {
   position: absolute;
   background-color: white;
