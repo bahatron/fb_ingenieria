@@ -1,23 +1,27 @@
 <?php
-
 global $FBIngenieria;
-var_dump($_POST);
-var_dump($FBIngenieria->getClientById($_POST['id']));
-$clientList = $FBIngenieria->getClientList();
+
+# view controller
 switch ($_POST['submit']) {
   case 'Actualizar':
     $selectedClient = $FBIngenieria->getClientById($_POST['id']);
     break;
   
-  case 'Modificar':;
+  case 'Modificar':
     $FBIngenieria->updateClient($_POST);
+    break;
   
   case 'Crear':
     $FBIngenieria->createClient($_POST);
+    break;
 
   default:
     break;
 }
+
+# datalist information
+$clientList = $FBIngenieria->getClientList();
+
 ?>
   <div class="wrap">
     <form action="" method="POST" onsubmit="return getDataId(this.elements['findByName'])" name="getUser">
