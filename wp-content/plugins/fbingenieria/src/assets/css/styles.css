@@ -151,7 +151,7 @@ footer {
   border-radius: 2px;
   min-width: 0;
   height: 395px; 
-  background: url(http://localhost/FBIngenieria/wp-content/plugins/fbingenieria/src/image.png) center center / cover no-repeat;
+  background: url(http://localhost/FBIngenieria/wp-content/plugins/fbingenieria/src/assets/img/journey.png) center center / cover no-repeat;
 }
 .card_journey p{
   font-family: Roboto,Helvetica,Arial,sans-serif; color: #fb6816; font-size: 1.2em;
