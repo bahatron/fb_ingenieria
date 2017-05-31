@@ -15,6 +15,7 @@ class FBIngenieria
     private $clients;
     private $projects;
     private $images;
+    
     public function __construct()
     {
         define('FBINGENIERIA_PATH', plugin_dir_path(__FILE__));
@@ -50,11 +51,48 @@ class FBIngenieria
         add_submenu_page('fbi_settings_menu', 'Manejar Proyectos', 'Manejar Proyectos', 'administrator', 'fbi_settings_projects', 'fbi_settings_add_project_handler');
     }
 
+    private function showError($message)
+    {
+        ?>
+		<div class="error notice">
+			<p><?php echo $message  ?></p>
+		</div>
+		<?php
+
+    }
+
+    private function showWarning($message)
+    {
+        ?>
+		<div class="update-nag notice">
+			<p><?php echo $message  ?></p>
+		</div>
+		<?php
+
+    }
+
+    private function showSuccess($message)
+    {
+        ?>
+		<div class="updated notice">
+			<p><?php echo $message  ?></p>
+		</div>
+		<?php
+
+    }
+
     public function getClientList()
     {
         global $wpdb;
         $sql="SELECT id, name from $this->clients";
         return $wpdb->get_results($sql);
+    }
+
+    public function getClientById($id)
+    {
+        global $wpdb;
+        $sql="SELECT * from $this->clients WHERE id = $id";
+        return $wpdb->get_row($sql);
     }
 
     public function getProjectList()
@@ -69,6 +107,16 @@ class FBIngenieria
         global $wpdb;
         $sql="SELECT id, name FROM $this->images WHERE project_id = $id";
         return $wpdb->get_results($sql);
+    }
+
+    public function proccessClientAction($array)
+    {
+        global $wpdb;
+        if ($array['submit'] === 'Modificar') {
+            // @TODO
+        } elseif ($array['submit'] === 'Crear') {
+            // @TODO
+        }
     }
 }
 
