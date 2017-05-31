@@ -109,13 +109,30 @@ class FBIngenieria
         return $wpdb->get_results($sql);
     }
 
-    public function proccessClientAction($array)
+    public function updateClient($array)
     {
         global $wpdb;
-        if ($array['submit'] === 'Modificar') {
-            // @TODO
-        } elseif ($array['submit'] === 'Crear') {
-            // @TODO
+        $id = $array['id'];
+        unset($array['id']);
+        unset($array['submit']);
+        $result = $wpdb->update($this->clients, $array, ['id' => $id]);
+        if (!$result) {
+            $this->showError('Hubo un error actualizando los datos');
+        } else {
+            $this->showSuccess('Cliente actualizado satisfactoriamente!');
+        }
+    }
+    
+    public function createClient($array)
+    {
+        global $wpdb;
+        unset($array['id']);
+        unset($array['submit']);
+        $result = $wpdb->insert($this->clients, $array);
+        if (!$result) {
+            $this->showWarning('Ya existe un cliente con ese nombre');
+        } else {
+            $this->showSuccess('Cliente registrado satisfactoriamente!');
         }
     }
 }

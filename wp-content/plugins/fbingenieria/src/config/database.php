@@ -14,7 +14,7 @@ function fbingenieriaDatabase()
       imageUrl VARCHAR(1000) NULL,
       description VARCHAR(1000) NULL,
       visible TINYINT(1) NULL,
-      active TINYINT(1) NULL,
+      active TINYINT(1) NULL DEFAULT 1,
       PRIMARY KEY (id),
       UNIQUE INDEX name_UNIQUE (name ASC))
       ENGINE = InnoDB

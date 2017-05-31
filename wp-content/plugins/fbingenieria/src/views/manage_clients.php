@@ -2,9 +2,22 @@
 
 global $FBIngenieria;
 var_dump($_POST);
-$FBIngenieria->proccessClientAction($_POST);
+var_dump($FBIngenieria->getClientById($_POST['id']));
 $clientList = $FBIngenieria->getClientList();
-$selectedClient = $FBIngenieria->getClientById($_POST['id']);
+switch ($_POST['submit']) {
+  case 'Actualizar':
+    $selectedClient = $FBIngenieria->getClientById($_POST['id']);
+    break;
+  
+  case 'Modificar':;
+    $FBIngenieria->updateClient($_POST);
+  
+  case 'Crear':
+    $FBIngenieria->createClient($_POST);
+
+  default:
+    break;
+}
 ?>
   <div class="wrap">
     <form action="" method="POST" onsubmit="return getDataId(this.elements['findByName'])" name="getUser">
@@ -46,14 +59,14 @@ $selectedClient = $FBIngenieria->getClientById($_POST['id']);
           <tr>
             <th scope="row"><label for="image">Logo o imagen: </label></th>
             <td>
-              <input name="image" id="image" value="<?php echo $selectedClient->imageUrl ?>" class="regular-text" type="text">
+              <input name="imageUrl" id="image" value="<?php echo $selectedClient->imageUrl ?>" class="regular-text" type="text">
               <p class="description" id="image-description">Ejemplo: https://www.w3schools.com/html/pic_mountain.jpg</p>
             </td>
           </tr>
           <tr>
             <th scope="row"><label for="website">Pagina web: </label></th>
             <td>
-              <input name="website" id="website" value="<?php echo $selectedClient->websiteUrl ?>" class="regular-text" type="text">
+              <input name="websiteUrl" id="website" value="<?php echo $selectedClient->websiteUrl ?>" class="regular-text" type="text">
               <p class="description" id="website-description">Ejemplo: http://www.cisco.com/</p>
             </td>
           </tr>
