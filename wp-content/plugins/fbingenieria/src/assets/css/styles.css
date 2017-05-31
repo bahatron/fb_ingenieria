@@ -318,3 +318,28 @@ a {
   padding-left: 0px;
   padding-right: 0px;
 }
+
+@media screen and (max-width:768px) {
+  .about p {
+    font-size: 1em;
+    line-height: 1em;
+    letter-spacing: 0.1em;
+  }
+  .main-title {
+    font-size: 26px;
+    font-weight: 50;
+    line-height: 1.35;
+    letter-spacing: -.02em;
+    margin-bottom: 16px
+  }
+  .text-journey {
+    color: rgb(195, 190, 190);
+    font-size: 1em;
+  }
+  .office-section {
+  background: #202835;
+  padding-left: 10px;
+  padding-right: 10px;
+  width: 100%;
+}
+}
