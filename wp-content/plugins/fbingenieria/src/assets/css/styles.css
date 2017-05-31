@@ -51,6 +51,14 @@ footer {
   padding-top: 50px;
 }
 
+.hr-journey {
+  margin-left: 100px;
+}
+
+.div-journey {
+  margin-left: 100px
+}
+
 .about {
   padding: 0px;
 }
@@ -307,7 +315,11 @@ a {
   color: rgb(195, 190, 190);
   font-size: 2.2em;
 }
-
+.about-span{
+  color: #fb6816;
+  font-weight: 500;
+  display:block;
+}
 .about-section {
   border-top-color: #fb6816;
   border-top-style: solid;
@@ -337,9 +349,67 @@ a {
     font-size: 1em;
   }
   .office-section {
-  background: #202835;
-  padding-left: 10px;
-  padding-right: 10px;
-  width: 100%;
-}
+    background: #202835;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 100%;
+  }
+  .div-journey {
+    margin-left: 70px
+  }
+  .p-journey {
+    font-family: Roboto, Helvetica, Arial, sans-serif;
+    font-size: 1.525em;
+    color: #fb6816;
+    padding-top: 20px;
+    padding-left: 70px;
+    margin-bottom: -20px;
+    letter-spacing: 0.3em;
+  }
+  .hr-journey {
+    margin-left: 70px;
+  }
+  .about-us-box {
+    height: 50px;
+    padding: 5px;
+  }
+  .border-center {
+    border-width: 1px;
+    border-color: #fb6816;
+    border-style: solid;
+  }
+  .border-down {
+    border-width: 1px;
+    border-color: #fb6816;
+    border-style: solid;
+  }
+  .custom-icon {
+    font-size: 15px;
+    background: #202835;
+    padding: 10px;
+    -webkit-border-radius: 20%;
+    -moz-border-radius: 20%;
+    -o-border-radius: 20%;
+    border-radius: 20%;
+    color: #fff;
+    text-align: center;
+    display: table-cell;
+    width: 10px;
+    height: 10px;
+    -moz-transition: .5s;
+    -webkit-transition: .5s;
+    -o-transition: .5s;
+    transition: .5s;
+  }
+  .about-box {
+    position: relative;
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+  }
+  .floater {
+    background-color:transparent;
+  }
+
 }
