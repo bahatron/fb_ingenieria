@@ -57,8 +57,7 @@ footer {
 
 .custom-icon {
   font-size: 25px;
-  background: #666;
-  background: rgba(0, 0, 0, 0.4);
+  background: #202835;
   padding: 20px;
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
@@ -75,40 +74,16 @@ footer {
   transition: .5s;
 }
 
-.l-border-up-right {
-  border-top-width: 1px;
-  border-top-color: orange;
-  border-top-style: solid;
-  border-right-width: 1px;
-  border-right-color: orange;
-  border-right-style: solid;
-}
-
-.l-border-down-right {
-  border-bottom-width: 1px;
-  border-bottom-color: orange;
-  border-bottom-style: solid;
-  border-right-width: 1px;
-  border-right-color: orange;
-  border-right-style: solid;
-}
-
-.l-border-up-left {
-  border-top-width: 1px;
-  border-top-color: orange;
-  border-top-style: solid;
+.border-center {
   border-left-width: 1px;
-  border-left-color: orange;
+  border-left-color: #fb6816;
   border-left-style: solid;
 }
 
-.l-border-down-left {
+.border-down {
   border-bottom-width: 1px;
-  border-bottom-color: orange;
+  border-bottom-color: #fb6816;
   border-bottom-style: solid;
-  border-left-width: 1px;
-  border-left-color: orange;
-  border-left-style: solid;
 }
 
 .stacking {
@@ -173,13 +148,13 @@ footer {
 }
 
 .section-title {
-  font-style: : Roboto;
+  font-style: Roboto;
   font-size: 100px;
   color: #fb6816;
+  letter-spacing: 0.3em;
 }
 
 .about p {
-  text-transform: ;
   font-size: 1.895em;
   line-height: 1.895em;
 }
@@ -188,17 +163,18 @@ footer {
   position: relative;
   border-radius: 2px;
   min-width: 0;
-  height: 395px; 
+  height: 395px;
   background: url(http://localhost/FBIngenieria/wp-content/plugins/fbingenieria/src/assets/img/journey.png) center center / cover no-repeat;
 }
 
-.card_journey p {
+.p-journey {
   font-family: Roboto, Helvetica, Arial, sans-serif;
+  font-size: 1.525em;
   color: #fb6816;
-  font-size: 1.2em;
   padding-top: 20px;
   padding-left: 100px;
   margin-bottom: -20px;
+  letter-spacing: 0.3em;
 }
 
 .row {
@@ -223,10 +199,12 @@ footer {
   border-bottom-color: #fb6816;
   border-bottom-style: solid;
 }
-.footer-a{
+
+.footer-a {
   padding: 2px;
 }
-.footer>:last-child{
+
+.footer>:last-child {
   margin-right: 0px;
 }
 
@@ -273,4 +251,39 @@ a {
   top:63%;
   left:75%;
   font-size: 300px;
+}
+.floater {
+  position: absolute;
+  background-color: white;
+  width: 20px;
+  height: 20px;
+  left: 48.8%;
+  top: 139px;
+  z-index: 2;
+}
+
+.about-us-box {
+  height: 150px;
+  padding: 15px;
+}
+
+.main-title {
+  font-size: 56px;
+  font-weight: 200;
+  line-height: 1.35;
+  letter-spacing: -.02em;
+  margin-bottom: 16px
+}
+
+.about-box {
+  position: relative;
+  margin-left: 300px;
+  margin-right: 300px;
+  margin-top: 75px;
+  margin-bottom: 75px;
+}
+
+.text-journey {
+  color: rgb(195, 190, 190);
+  font-size: 2.2em;
 }
