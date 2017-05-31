@@ -113,6 +113,14 @@ footer {
   color: white;
 }
 
+.content_box {
+  overflow: hidden;
+  position: relative;
+  display: inline-block;
+  background-color: #202835;
+  color: white;
+}
+
 .box:hover {
   background-color: #fb6816;
   transition: 0.7s;
@@ -125,6 +133,14 @@ footer {
   font-size: 80px;
   font-weight: 400;
   background-color: transparent;
+}
+
+.label2 {
+  overflow: hidden;
+  position: absolute;
+  margin-left: 300px;
+  margin-top: 1px;
+  font-size: 500px;
 }
 
 .hr-color {
@@ -141,11 +157,6 @@ footer {
 .about p {
   font-size: 1.895em;
   line-height: 1.895em;
-}
-
-.about-span {
-  color: #fb6816;
-  font-weight: 500;
 }
 
 .card_journey {
@@ -169,6 +180,23 @@ footer {
 .row {
   margin-left: 0px;
   margin-right: 0px;
+  padding: 0px;
+  padding-top: 0px;
+  padding-right: 0px;
+  padding-bottom: 0px;
+  padding-left: 0px;
+}
+
+.features .row,
+.about .row,
+.products .row,
+.work .row,
+.team .row,
+.pricing .row,
+.testimonials .row,
+section.blogs .row,
+.contactus .row {
+  padding: 0px;
 }
 
 .about>.container {
@@ -222,6 +250,26 @@ a {
   text-transform: uppercase;
   margin-bottom: -20px;
   color: #fb6816;
+}
+
+.contact-section {
+  background: #202835;
+  position: relative;
+}
+
+.contact-form {
+  background-color: rgba(25, 31, 41, 0.92);
+  height: 50%;
+  width: 50%;
+  padding: 30px;
+  margin-bottom: 120px;
+}
+
+.contact-icon {
+  color: rgba(158, 158, 158, 0.15);
+  top: 63%;
+  left: 75%;
+  font-size: 300px;
 }
 
 .floater {
