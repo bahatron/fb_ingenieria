@@ -152,7 +152,7 @@ footer {
   position: relative;
   border-radius: 2px;
   min-width: 0;
-  height: 395px; 
+  height: 395px;
   background: url(http://localhost/FBIngenieria/wp-content/plugins/fbingenieria/src/assets/img/journey.png) center center / cover no-repeat;
 }
 
@@ -188,10 +188,12 @@ footer {
   border-bottom-color: #fb6816;
   border-bottom-style: solid;
 }
-.footer-a{
+
+.footer-a {
   padding: 2px;
 }
-.footer>:last-child{
+
+.footer>:last-child {
   margin-right: 0px;
 }
 
@@ -251,4 +253,9 @@ a {
   margin-right: 300px;
   margin-top: 75px;
   margin-bottom: 75px;
+}
+
+.text-journey {
+  color: rgb(195, 190, 190);
+  font-size: 2.2em;
 }
