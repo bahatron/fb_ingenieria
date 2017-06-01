@@ -51,6 +51,14 @@ footer {
   padding-top: 50px;
 }
 
+.hr-journey {
+  margin-left: 100px;
+}
+
+.div-journey {
+  margin-left: 100px
+}
+
 .about {
   padding: 0px;
 }
@@ -66,8 +74,8 @@ footer {
   color: #fff;
   text-align: center;
   display: table-cell;
-  width: 40px;
-  height: 40px;
+  width: 18px;
+  height: 18px;
   -moz-transition: .5s;
   -webkit-transition: .5s;
   -o-transition: .5s;
@@ -100,6 +108,16 @@ footer {
 .padding-right-left {
   padding-right: 95px;
   padding-left: 95px;
+}
+
+.whyus-p {
+  font-size: 0.8em;
+  display: inline-block;
+  margin-top: 70px;
+  text-align: right;
+  margin-right: 5px;
+  margin-left: 5px;
+  font-style: Roboto;
 }
 
 .box {
@@ -167,6 +185,22 @@ footer {
   background: url(http://localhost/FBIngenieria/wp-content/plugins/fbingenieria/src/assets/img/journey.png) center center / cover no-repeat;
 }
 
+.pen-icon {
+  background: url(http://localhost/FBIngenieria/wp-content/plugins/fbingenieria/src/assets/img/pen.png) center center / cover no-repeat;
+}
+
+.helmet-icon {
+  background: url(http://localhost/FBIngenieria/wp-content/plugins/fbingenieria/src/assets/img/helmet.png) center center / cover no-repeat;
+}
+
+.paint-icon {
+  background: url(http://localhost/FBIngenieria/wp-content/plugins/fbingenieria/src/assets/img/paint.png) center center / cover no-repeat;
+}
+
+.comment-icon {
+  background: url(http://localhost/FBIngenieria/wp-content/plugins/fbingenieria/src/assets/img/comment.png) center center / cover no-repeat;
+}
+
 .p-journey {
   font-family: Roboto, Helvetica, Arial, sans-serif;
   font-size: 1.525em;
@@ -175,6 +209,13 @@ footer {
   padding-left: 100px;
   margin-bottom: -20px;
   letter-spacing: 0.3em;
+}
+
+.spacing {
+  background: #202835;
+  height: 200px;
+  border-top-color: #fb6816;
+  border-top-style: solid;
 }
 
 .row {
@@ -306,4 +347,168 @@ a {
 .text-journey {
   color: rgb(195, 190, 190);
   font-size: 2.2em;
+}
+
+.about-span {
+  color: #fb6816;
+  font-weight: 500;
+  display: block;
+}
+
+.about-section {
+  border-top-color: #fb6816;
+  border-top-style: solid;
+  height: 630px;
+  background: url(http://localhost/FBIngenieria/wp-content/plugins/fbingenieria/src/assets/img/about-background.jpg) center center / cover no-repeat;
+}
+
+.div-page {
+  padding: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+@media screen and (min-width:1200px) {
+  .display-small {
+    display: none;
+  }
+}
+
+@media screen and (max-width:1200px) {
+  .display-big {
+    display: none;
+  }
+  .whyus-p {
+    font-size: 0.55em;
+    display: inline-block;
+    margin-top: 25px;
+    text-align: right;
+    margin-left: 5px;
+    font-style: Roboto;
+  }
+  .spacing {
+    background: #202835;
+    height: 100px;
+    border-top-color: #fb6816;
+    border-top-style: solid;
+  }
+  .about-section {
+    border-top-color: #fb6816;
+    border-top-style: solid;
+    height: 430px;
+    background: url(http://localhost/FBIngenieria/wp-content/plugins/fbingenieria/src/assets/img/about-background.jpg) center center / cover no-repeat;
+  }
+  .about-span {
+    color: #fb6816;
+    font-weight: 500;
+    display: block;
+    font-size: 0.8em;
+  }
+  .about p {
+    font-size: 1em;
+    line-height: 1em;
+    letter-spacing: 0.1em;
+  }
+  .main-title {
+    font-size: 26px;
+    font-weight: 50;
+    line-height: 1.35;
+    letter-spacing: -.02em;
+    margin-bottom: 16px
+  }
+  .text-journey {
+    color: rgb(195, 190, 190);
+    font-size: 1em;
+  }
+  .office-section {
+    background: #202835;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 100%;
+  }
+  .div-journey {
+    margin-left: 70px
+  }
+  .p-journey {
+    font-family: Roboto, Helvetica, Arial, sans-serif;
+    font-size: 1.525em;
+    color: #fb6816;
+    padding-top: 20px;
+    padding-left: 70px;
+    margin-bottom: -20px;
+    letter-spacing: 0.3em;
+  }
+  .hr-journey {
+    margin-left: 70px;
+    width: 100px;
+  }
+  .box {
+    overflow: hidden;
+    position: relative;
+    width: 90px;
+    height: 75px;
+    margin: 1em;
+    display: inline-block;
+    background-color: #202835;
+    color: white;
+  }
+  .label {
+    position: absolute;
+    top: -15px;
+    left: -17px;
+    font-size: 40px;
+    font-weight: 240;
+    background-color: transparent;
+  }
+  .about-us-box {
+    height: 50px;
+    width: 70%;
+    padding: 5px;
+    margin: auto;
+  }
+  .border-center {
+    border-width: 1px;
+    border-color: #fb6816;
+    border-style: solid;
+  }
+  .border-down {
+    border-width: 1px;
+    border-color: #fb6816;
+    border-style: solid;
+  }
+  .about-box {
+    position: relative;
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+  }
+  .custom-icon {
+    font-size: 15px;
+    background: #202835;
+    padding: 10px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -o-border-radius: 50%;
+    border-radius: 50%;
+    color: #fff;
+    text-align: center;
+    display: table-cell;
+    width: 10px;
+    height: 10px;
+    -moz-transition: .5s;
+    -webkit-transition: .5s;
+    -o-transition: .5s;
+    transition: .5s;
+  }
+  .floater {
+    background-color: black;
+  }
+  .contact-form {
+    background-color: rgba(25, 31, 41, 0.92);
+    height: 100%;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 120px;
+  }
 }
