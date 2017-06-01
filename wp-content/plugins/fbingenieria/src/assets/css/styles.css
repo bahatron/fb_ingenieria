@@ -409,6 +409,7 @@ a {
   }
   .hr-journey {
     margin-left: 70px;
+    width: 100px;
   }
   .about-us-box {
     height: 50px;
@@ -453,5 +454,12 @@ a {
   }
   .floater {
     background-color: black;
+  }
+  .contact-form {
+    background-color: rgba(25, 31, 41, 0.92);
+    height: 100%;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 120px;
   }
 }
