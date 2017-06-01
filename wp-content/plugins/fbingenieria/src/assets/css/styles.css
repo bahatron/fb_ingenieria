@@ -341,7 +341,7 @@ a {
 .about-section {
   border-top-color: #fb6816;
   border-top-style: solid;
-  height: 630px;
+  height: auto;
   background: url(http://localhost/FBIngenieria/wp-content/plugins/fbingenieria/src/assets/img/about-background.jpg) center center / cover no-repeat;
 }
 
@@ -351,7 +351,28 @@ a {
   padding-right: 0px;
 }
 
-@media screen and (max-width:768px) {
+@media screen and (min-width:1999px) {
+  .display-small {
+    display: none;
+  }
+}
+
+@media screen and (max-width:1200px) {
+  .display-big {
+    display: none;
+  }
+  .about-section {
+    border-top-color: #fb6816;
+    border-top-style: solid;
+    height: 430px;
+    background: url(http://localhost/FBIngenieria/wp-content/plugins/fbingenieria/src/assets/img/about-background.jpg) center center / cover no-repeat;
+  }
+  .about-span {
+    color: #fb6816;
+    font-weight: 500;
+    display: block;
+    font-size: 0.8em;
+  }
   .about p {
     font-size: 1em;
     line-height: 1em;
@@ -391,7 +412,9 @@ a {
   }
   .about-us-box {
     height: 50px;
+    width: 70%;
     padding: 5px;
+    margin: auto;
   }
   .border-center {
     border-width: 1px;
@@ -411,9 +434,9 @@ a {
     margin-bottom: 25px;
   }
   .custom-icon {
-    font-size: 25px;
+    font-size: 15px;
     background: #202835;
-    padding: 20px;
+    padding: 10px;
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     -o-border-radius: 50%;
@@ -429,6 +452,6 @@ a {
     transition: .5s;
   }
   .floater {
-    background-color: transparent;
+    background-color: black;
   }
 }
