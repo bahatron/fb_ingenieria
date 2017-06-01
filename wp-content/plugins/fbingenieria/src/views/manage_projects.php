@@ -21,7 +21,7 @@ switch ($_POST['submit']) {
 }
 ?>
   <div class="wrap">
-    <form action="" method="POST" onsubmit="return getDataId(this.elements['findByName'])" name="getUser">
+    <form action="" method="POST" onsubmit="return getDataId(this.elements['findByName'])" name="getProject">
       <table class="form-table">
         <tbody>
           <tr>

@@ -49,6 +49,7 @@ class FBIngenieria
         add_menu_page('FBIngenieria', 'FBIngenieria', 'administrator', 'fbi_settings_menu', 'fbi_settings_add_client_handler');
         add_submenu_page('fbi_settings_menu', 'Manejar Clientes', 'Manejar Clientes', 'administrator', 'fbi_settings_menu', 'fbi_settings_add_client_handler');
         add_submenu_page('fbi_settings_menu', 'Manejar Proyectos', 'Manejar Proyectos', 'administrator', 'fbi_settings_projects', 'fbi_settings_add_project_handler');
+        add_submenu_page('fbi_settings_menu', 'Imagenes', 'Imagenes de proyecto', 'administrator', 'fbi_settings_images', 'fbi_settings_manage_project_images_handler');
     }
 
     private function showError($message)
@@ -154,4 +155,9 @@ function fbi_settings_add_client_handler()
 function fbi_settings_add_project_handler()
 {
     include FBINGENIERIA_PATH.'src/views/manage_projects.php';
+}
+
+function fbi_settings_manage_project_images_handler()
+{
+    include FBINGENIERIA_PATH.'src/views/manage_images.php';
 }
