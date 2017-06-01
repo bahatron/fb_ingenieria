@@ -201,6 +201,13 @@ footer {
   letter-spacing: 0.3em;
 }
 
+.spacing {
+  background: #202835;
+  height: 200px;
+  border-top-color: #fb6816;
+  border-top-style: solid;
+}
+
 .row {
   margin-left: 0px;
   margin-right: 0px;
@@ -341,7 +348,7 @@ a {
 .about-section {
   border-top-color: #fb6816;
   border-top-style: solid;
-  height: auto;
+  height: 630px;
   background: url(http://localhost/FBIngenieria/wp-content/plugins/fbingenieria/src/assets/img/about-background.jpg) center center / cover no-repeat;
 }
 
@@ -351,7 +358,7 @@ a {
   padding-right: 0px;
 }
 
-@media screen and (min-width:1999px) {
+@media screen and (min-width:1200px) {
   .display-small {
     display: none;
   }
@@ -360,6 +367,12 @@ a {
 @media screen and (max-width:1200px) {
   .display-big {
     display: none;
+  }
+  .spacing {
+    background: #202835;
+    height: 100px;
+    border-top-color: #fb6816;
+    border-top-style: solid;
   }
   .about-section {
     border-top-color: #fb6816;
@@ -410,6 +423,24 @@ a {
   .hr-journey {
     margin-left: 70px;
     width: 100px;
+  }
+  .box {
+    overflow: hidden;
+    position: relative;
+    width: 90px;
+    height: 75px;
+    margin: 1em;
+    display: inline-block;
+    background-color: #202835;
+    color: white;
+  }
+  .label {
+    position: absolute;
+    top: -15px;
+    left: -17px;
+    font-size: 40px;
+    font-weight: 240;
+    background-color: transparent;
   }
   .about-us-box {
     height: 50px;
