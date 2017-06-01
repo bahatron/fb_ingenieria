@@ -110,6 +110,16 @@ footer {
   padding-left: 95px;
 }
 
+.whyus-p {
+  font-size: 0.8em;
+  display: inline-block;
+  margin-top: 70px;
+  text-align: right;
+  margin-right: 5px;
+  margin-left: 5px;
+  font-style: Roboto;
+}
+
 .box {
   overflow: hidden;
   position: relative;
@@ -367,6 +377,14 @@ a {
 @media screen and (max-width:1200px) {
   .display-big {
     display: none;
+  }
+  .whyus-p {
+    font-size: 0.55em;
+    display: inline-block;
+    margin-top: 25px;
+    text-align: right;
+    margin-left: 5px;
+    font-style: Roboto;
   }
   .spacing {
     background: #202835;
