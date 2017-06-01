@@ -74,8 +74,8 @@ footer {
   color: #fff;
   text-align: center;
   display: table-cell;
-  width: 100px;
-  height: 60px;
+  width: 20px;
+  height: 20px;
   -moz-transition: .5s;
   -webkit-transition: .5s;
   -o-transition: .5s;
@@ -182,14 +182,14 @@ footer {
 .helmet-icon {
   background: url(http://localhost/FBIngenieria/wp-content/plugins/fbingenieria/src/assets/img/helmet.png) center center / cover no-repeat;
 }
+
 .paint-icon {
   background: url(http://localhost/FBIngenieria/wp-content/plugins/fbingenieria/src/assets/img/paint.png) center center / cover no-repeat;
 }
+
 .comment-icon {
   background: url(http://localhost/FBIngenieria/wp-content/plugins/fbingenieria/src/assets/img/comment.png) center center / cover no-repeat;
 }
-
-
 
 .p-journey {
   font-family: Roboto, Helvetica, Arial, sans-serif;
@@ -403,14 +403,21 @@ a {
     border-color: #fb6816;
     border-style: solid;
   }
+  .about-box {
+    position: relative;
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+  }
   .custom-icon {
-    font-size: 15px;
+    font-size: 25px;
     background: #202835;
-    padding: 10px;
-    -webkit-border-radius: 20%;
-    -moz-border-radius: 20%;
-    -o-border-radius: 20%;
-    border-radius: 20%;
+    padding: 20px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -o-border-radius: 50%;
+    border-radius: 50%;
     color: #fff;
     text-align: center;
     display: table-cell;
@@ -420,13 +427,6 @@ a {
     -webkit-transition: .5s;
     -o-transition: .5s;
     transition: .5s;
-  }
-  .about-box {
-    position: relative;
-    margin-left: 50px;
-    margin-right: 50px;
-    margin-top: 25px;
-    margin-bottom: 25px;
   }
   .floater {
     background-color: transparent;
