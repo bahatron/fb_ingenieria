@@ -1,5 +1,10 @@
 <?php
-
+var_dump(wp_get_attachment_image(39));
+echo wp_get_attachment_image('39');
+echo '<br>';
+echo wp_get_attachment_url('39');
+echo '<br>';
+var_dump(wp_get_attachment_image_src(39));
 global $FBIngenieria;
 switch ($_POST['submit']) {
   case 'Actualizar':
