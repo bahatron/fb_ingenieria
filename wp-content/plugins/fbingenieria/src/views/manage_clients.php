@@ -86,7 +86,7 @@ $clientList = $FBIngenieria->getClientList();
             <td>
               <fieldset>
                 <label for="visible">
-                  <input name="visible" id="visible" name="visible" type="checkbox" value="1" <?php ($selectedClient->visible) ? printf('checked') : null ; ?>>
+                  <input name="visible" id="visible" type="checkbox" value="1" <?php ($selectedClient->visible) ? printf('checked') : null ; ?>>
                   Visible
                 </label>
               </fieldset>
