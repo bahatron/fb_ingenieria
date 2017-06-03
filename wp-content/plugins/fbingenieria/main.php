@@ -99,14 +99,29 @@ class FBIngenieria
     public function getProjectList()
     {
         global $wpdb;
-        $sql="SELECT id, name from $this->projects";
+        $sql="SELECT id, name FROM $this->projects WHERE active != 0";
         return $wpdb->get_results($sql);
     }
 
+    public function getProjectById($id)
+    {
+        global $wpdb;
+        $sql="SELECT * FROM $this->projects WHERE id= $id";
+        return $wpdb->get_row($sql);
+    }
+    
     public function getProjectImages($id)
     {
         global $wpdb;
         $sql="SELECT id, name FROM $this->images WHERE project_id = $id";
+        return $wpdb->get_results($sql);
+    }
+
+    public function getUploadedMedia()
+    {
+        global $wpdb;
+        $table = $wpdb->prefix.'postmeta';
+        $sql = "SELECT post_id FROM $table WHERE meta_key = '_wp_attached_file';";
         return $wpdb->get_results($sql);
     }
 

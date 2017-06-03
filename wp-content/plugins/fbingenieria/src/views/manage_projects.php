@@ -1,11 +1,8 @@
 <?php
-var_dump(wp_get_attachment_image(39));
-echo wp_get_attachment_image('39');
-echo '<br>';
-echo wp_get_attachment_url('39');
-echo '<br>';
-var_dump(wp_get_attachment_image_src(39));
+
 global $FBIngenieria;
+var_dump($_POST);
+$projectList = $FBIngenieria->getProjectList();
 switch ($_POST['submit']) {
   case 'Actualizar':
     break;
@@ -27,13 +24,14 @@ switch ($_POST['submit']) {
           <tr>
             <th scope="row"><label for="name">Proyecto ya registrado </label></th>
             <td>
-              <input name="name" id="findByName" list="clients" value="<?php echo $selectedProject->name ?>" class="regular-text" type="text" style="width: 100%" onchange="getDataId(this)">
+              <input name="name" id="findByName" list="clients" value="<?php echo $selectedProject->name ?>" class="regular-text" type="text"
+                style="width: 100%" onchange="getDataId(this)">
               <datalist id="clients">
                 <?php
                 foreach ($projectList as $project) {
                     ?>
                   <option data-id="<?php echo $project->id ?>" value="<?php echo $project->name ?>">
-                  <?php 
+                    <?php 
                 } ?>
               </datalist>
               <input type="hidden" name="id" id="clientID" value="">
@@ -71,15 +69,13 @@ switch ($_POST['submit']) {
             </td>
           </tr>
           <tr>
-            <th scope="row"><label for="images">Imagenes: </label></th>
+            <th scope="row"><label for="client">Cliente: </label></th>
             <td>
-              <fieldset>
-                <label for="visible">
-                  <input name="images" id="images" type="checkbox" value="1" <?php ($selectedProject->visible) ? printf('checked') : null ; ?>>
-                  Visible
-                </label>
-              </fieldset>
-              <p class="description" id="tagline-description">En construccion</p>
+              <select>
+                <option value=""></option>
+                <option value="<?php echo $client->id ?>" <?php $selectedProject->client_id === $client->id ? printf('selected') : null  ?>><?php echo $client->name ?></option>
+              </select>
+              <p class="description" id="tagline-description">Escoga un cliente registrdo</p>
             </td>
           </tr>
         </tbody>
@@ -87,34 +83,37 @@ switch ($_POST['submit']) {
       <?php 
       if (true) {
           ?>
-        <p class="submit">
-          <input name="submit" id="submit" class="button button-primary" value="Modificar" type="submit">
-          <input name="submit" id="submit" class="button" style="background: #D54E21; border-color: #006799; color: #fff; box-shadow: 0 1px 0 #D54E21;" value="Eliminar" type="submit">
-        </p>
+      <p class="submit">
+        <input name="submit" id="submit" class="button button-primary" value="Modificar" type="submit">
+        <input name="submit" id="submit" class="button" style="background: #D54E21; border-color: #006799; color: #fff; box-shadow: 0 1px 0 #D54E21;"
+          value="Eliminar" type="submit">
+      </p>
       <?php
+
       } else {
           ?>
         <p class="submit">
           <input name="submit" id="submit" class="button button-primary" value="Crear" type="submit">
         </p>
-      <?php
+        <?php
+
       }
       ?>
     </form>
   </div>
 
   <script>
-    function getDataId(){
+    function getDataId() {
       input = document.getElementById('findByName');
-      for(var i in input.list.options){
-        if(typeof input.list.options[i] == 'object'){
-          if(input.value === input.list.options[i].value) {
+      for (var i in input.list.options) {
+        if (typeof input.list.options[i] == 'object') {
+          if (input.value === input.list.options[i].value) {
             document.getElementById('clientID').value = input.list.options[i].getAttribute('data-id');
             return true;
           }
         }
       }
-      alert('Cliente invalido');
+      alert('Proyecto invalido');
       return false;
     }
   </script>

@@ -26,7 +26,7 @@ function fbingenieriaDatabase()
       name VARCHAR(100) NOT NULL,
       shortDescription VARCHAR(160) NULL,
       longDescription VARCHAR(1000) NULL,
-      active TINYINT(1) NULL,
+      active TINYINT(1) NULL DEFAULT 1,
       client_id INT(11) NOT NULL,
       PRIMARY KEY (id),
       UNIQUE INDEX name_UNIQUE (name ASC),
