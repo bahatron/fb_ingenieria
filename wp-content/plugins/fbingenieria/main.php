@@ -82,6 +82,7 @@ class FBIngenieria
 
     }
 
+    # client control
     public function getClientList()
     {
         global $wpdb;
@@ -94,35 +95,6 @@ class FBIngenieria
         global $wpdb;
         $sql="SELECT * from $this->clients WHERE id = $id";
         return $wpdb->get_row($sql);
-    }
-
-    public function getProjectList()
-    {
-        global $wpdb;
-        $sql="SELECT id, name FROM $this->projects WHERE active != 0";
-        return $wpdb->get_results($sql);
-    }
-
-    public function getProjectById($id)
-    {
-        global $wpdb;
-        $sql="SELECT * FROM $this->projects WHERE id= $id";
-        return $wpdb->get_row($sql);
-    }
-    
-    public function getProjectImages($id)
-    {
-        global $wpdb;
-        $sql="SELECT id, name FROM $this->images WHERE project_id = $id";
-        return $wpdb->get_results($sql);
-    }
-
-    public function getUploadedMedia()
-    {
-        global $wpdb;
-        $table = $wpdb->prefix.'postmeta';
-        $sql = "SELECT post_id FROM $table WHERE meta_key = '_wp_attached_file';";
-        return $wpdb->get_results($sql);
     }
 
     public function updateClient($array)
@@ -150,6 +122,62 @@ class FBIngenieria
         } else {
             $this->showSuccess('Cliente registrado satisfactoriamente!');
         }
+    }
+
+    # project control
+    public function getProjectList()
+    {
+        global $wpdb;
+        $sql="SELECT id, name FROM $this->projects WHERE active = 1";
+        return $wpdb->get_results($sql);
+    }
+
+    public function getProjectById($id)
+    {
+        global $wpdb;
+        $sql="SELECT * FROM $this->projects WHERE id= $id";
+        return $wpdb->get_row($sql);
+    }
+
+    public function updateProject($array)
+    {
+        // @TODO
+    }
+
+    public function createProject($array)
+    {
+        // @TODO
+    }
+
+    public function deleteProject($array)
+    {
+        // @TODO
+    }
+    
+    # image control
+    public function getProjectImages($id)
+    {
+        global $wpdb;
+        $sql="SELECT id, name FROM $this->images WHERE project_id = $id";
+        return $wpdb->get_results($sql);
+    }
+
+    public function getUploadedMedia()
+    {
+        global $wpdb;
+        $table = $wpdb->prefix.'postmeta';
+        $sql = "SELECT post_id FROM $table WHERE meta_key = '_wp_attached_file';";
+        return $wpdb->get_results($sql);
+    }
+
+    public function setImage($projectId, $url = null, $post = null)
+    {
+        // @OTOD
+    }
+
+    public function unsetImage($projectId, $imgId)
+    {
+        // @TODO
     }
 }
 

@@ -3,14 +3,20 @@
 global $FBIngenieria;
 var_dump($_POST);
 $projectList = $FBIngenieria->getProjectList();
+$clientList = $FBIngenieria->getClientList();
+var_dump($projectList);
+var_dump($clientList);
 switch ($_POST['submit']) {
   case 'Actualizar':
+    $selectedProject = $FBIngenieria->getProjectById($_POST['id']);
     break;
   
   case 'Modificar':
+    $FBIngenieria->updateProject($_POST);
     break;
 
   case 'Crear':
+    $FBIngenieria->createProject($_POST);
     break;
 
   default:
@@ -57,7 +63,7 @@ switch ($_POST['submit']) {
           <tr>
             <th scope="row"><label for="shortDescription">Ficha tecnica: </label></th>
             <td>
-              <input type="text" name="shortDescription" id="shortDescription" value="<?php echo $selectedProject->shortDescription ?>">
+              <input name="shortDescription" id="shortDescription" value="<?php echo $selectedProject->shortDescription ?>" class="regular-text" type="text">
               <p class="description" id="shortDescription">Descripcion breve del proyecto, maximo 160 caracteres</p>
             </td>
           </tr>
@@ -68,14 +74,23 @@ switch ($_POST['submit']) {
               <p class="description" id="longDescription">Descripcion completa del proyecto, maximo 1000 caracteres</p>
             </td>
           </tr>
-          <tr>
+          <tr scrope="row" <?php empty($clientList) ? printf('style="display: none;"') : null ?>>
             <th scope="row"><label for="client">Cliente: </label></th>
             <td>
-              <select>
-                <option value=""></option>
-                <option value="<?php echo $client->id ?>" <?php $selectedProject->client_id === $client->id ? printf('selected') : null  ?>><?php echo $client->name ?></option>
-              </select>
-              <p class="description" id="tagline-description">Escoga un cliente registrdo</p>
+              <fieldset>
+                <select>
+                  <option value=""></option>
+                  <?php
+                    foreach ($clientList as $client) {
+                        ?>
+                      <option value="<?php echo $client->id ?>" <?php $selectedProject->client_id === $client->id ? printf('selected') : null  ?>><?php echo $client->name ?></option>
+                      <?php
+
+                    }
+                  ?>
+                </select>
+                <p class="description" id="tagline-description">Escoga un cliente registrdo</p>
+              </fieldset>
             </td>
           </tr>
         </tbody>
