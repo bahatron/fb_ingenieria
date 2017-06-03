@@ -141,7 +141,16 @@ class FBIngenieria
 
     public function updateProject($array)
     {
-        // @TODO
+        global $wpdb;
+        $id = $array['id'];
+        unset($array['id']);
+        unset($array['submit']);
+        $result = $wpdb->update($this->projects, $array, ['id' => $id]);
+        if (!$result) {
+            $this->showError('Hubo un error actualizando los datos');
+        } else {
+            $this->showSuccess('Proyecto actualizado satisfactoriamente!');
+        }
     }
 
     public function createProject($array)

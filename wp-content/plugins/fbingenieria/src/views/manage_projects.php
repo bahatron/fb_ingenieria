@@ -4,8 +4,7 @@ global $FBIngenieria;
 var_dump($_POST);
 $projectList = $FBIngenieria->getProjectList();
 $clientList = $FBIngenieria->getClientList();
-var_dump($projectList);
-var_dump($clientList);
+
 switch ($_POST['submit']) {
   case 'Actualizar':
     $selectedProject = $FBIngenieria->getProjectById($_POST['id']);
@@ -22,9 +21,10 @@ switch ($_POST['submit']) {
   default:
     break;
 }
+var_dump($selectedProject);
 ?>
   <div class="wrap">
-    <form action="" method="POST" onsubmit="return getDataId(this.elements['findByName'])" name="getProject">
+    <form action="" method="POST" onsubmit="return checkFormAction(this)" name="getProject">
       <table class="form-table">
         <tbody>
           <tr>
@@ -46,7 +46,10 @@ switch ($_POST['submit']) {
           </tr>
         </tbody>
       </table>
-      <?php submit_button('Actualizar'); ?>
+      <p class="submit">
+        <input name="submit" id="submit" class="button button-primary" value="Actualizar" type="submit">
+        <?php isset($selectedProject) ? printif('<input name="submit" id="submit" class="button delete" value="Delete" type="submit">') : null ?>
+      </p>
     </form>
     <hr>
     <form action="" method="POST" name="manageProject">
@@ -78,7 +81,7 @@ switch ($_POST['submit']) {
             <th scope="row"><label for="client">Cliente: </label></th>
             <td>
               <fieldset>
-                <select>
+                <select name="client_id">
                   <option value=""></option>
                   <?php
                     foreach ($clientList as $client) {
@@ -95,29 +98,15 @@ switch ($_POST['submit']) {
           </tr>
         </tbody>
       </table>
-      <?php 
-      if (true) {
-          ?>
-      <p class="submit">
-        <input name="submit" id="submit" class="button button-primary" value="Modificar" type="submit">
-        <input name="submit" id="submit" class="button" style="background: #D54E21; border-color: #006799; color: #fff; box-shadow: 0 1px 0 #D54E21;"
-          value="Eliminar" type="submit">
-      </p>
-      <?php
-
-      } else {
-          ?>
-        <p class="submit">
-          <input name="submit" id="submit" class="button button-primary" value="Crear" type="submit">
-        </p>
-        <?php
-
-      }
-      ?>
+      <?php ($selectedClient) ? submit_button('Modificar') : submit_button('Crear'); ?>
     </form>
   </div>
 
   <script>
+    function checkFormAction(form) {
+      console.log('form is:', form);
+      return getDataId();
+    }
     function getDataId() {
       input = document.getElementById('findByName');
       for (var i in input.list.options) {
