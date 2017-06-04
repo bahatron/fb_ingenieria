@@ -15,14 +15,14 @@
 <body>
     <div class="container" id="fbi_landing_page" style="width: 100%">
         <div class="col-md-12 div-page">
-            <section class="padding-top about-section" id="about" >
-                <p class="section-title" align="center"> ... TRANSFORMANDO IDEAS EN PROYECTOS ... </p>
+            <section class="padding-top about-section" id="about">
+                <p class="section-title" align="center"> ... {{translate('about-us-title')}} ... </p>
                 <hr class="hr-color">
-                <div class="about-box" align="center">
+                <div class="about-box display-big" align="center">
                     <div class="row">
                         <div class="col-md-6 about-us-box border-down" align="left">
-                            <div class="col-md-3"><i class="fa fa-pencil custom-icon"></i></div>
-                            <div class="col-md-9">
+                            <div class="col-md-3" style="padding:0px;"><i class="fa fa-pencil custom-icon"></i></div>
+                            <div class="col-md-9.1" style="padding:0px;">
                                 <span class="about-span">Diseño de Proyectos
                                 </span>
                                 <span style="display:block;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
@@ -31,22 +31,22 @@
                             </div>
                         </div>
                         <div class="col-md-6 about-us-box border-down border-center" align="right">
-                            <div class="col-md-9">
+                            <div class="col-md-9 " style="padding:0px;">
                                 <span class="about-span">Construcción de Obras Civiles
                                 </span>
                                 <span style="display:block;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
                                     Fusce feugiat nibh ac mollis condimentum.   
                                 </span>
                             </div>
-                            <div class="col-md-3"><i class="material-icons custom-icon">format_paint</i></div>
+                            <div class="col-md-3" style="padding:0px;"> <i class="material-icons custom-icon">format_paint</i></div>
 
                         </div>
                     </div>
                     <div class="floater"></div>
                     <div class="row">
                         <div class="col-md-6 about-us-box" align="left">
-                            <div class="col-md-3"><i class="fa fa-wrench custom-icon"></i></div>
-                            <div class="col-md-9">
+                            <div class="col-md-3" style="padding:0px;"><i class="fa fa-wrench custom-icon"></i></div>
+                            <div class="col-md-9.1" style="padding:0px;">
                                 <span class="about-span">Administración y Supervisión de Obra
                                 </span>
                                 <span style="display:block;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
@@ -55,48 +55,74 @@
                             </div>
                         </div>
                         <div class="col-md-6 about-us-box border-center" align="right">
-                            <div class="col-md-9">
+                            <div class="col-md-9" style="padding:0px;">
                                 <span class="about-span">Asesoría y Acompañamiento
                                 </span >
                                 <span style="display:block;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
                                     Fusce feugiat nibh ac mollis condimentum.   
                                 </span>
                             </div>
-                            <div class="col-md-3"><i class="fa fa-comments custom-icon"></i></div>
+                            <div class="col-md-3" style="padding:0px;"><i class="fa fa-comments custom-icon"></i></div>
 
                         </div>
                     </div>
                 </div>
+                <!--When Screen under 1200px-->
+                <div class="about-box display-small">
+                    <p>needs fixing</p>
+                </div>
+
             </section>
-            <section style="background:#202835; height: 200px;border-top-color: #fb6816;border-top-style: solid;">
+            <section class="spacing">
             </section>
             <section class="padding-top" id="whyus">
-                <p class="section-title" align="center">Por qué nosotros</p>
+                <p class="section-title" align="center">{{translate('why-us-title')}}</p>
                 <hr class="hr-color">
                 <div class="row">
                     <div class="col" align="center">
                         <div class="box card card__box">
                             <span class="label">01</span>
-
+                            <h6 class="label2">Calidad</h6>
+                            <span class="whyus-p">Altamente calificado en acabados de primera calidad, 
+                                nuestra política se basa en la satisfacción de los clientes, y fiabilidad de los proveedores 
+                                y productos.Nuestros clientes satisfechos son nuestra mejor referencia.
+                            </span>
                         </div>
                         <div class="box card card__box">
                             <span class="label">02</span>
+                            <h6 class="label2">Servicio</h6>
+                            <span class="whyus-p">Somos una empresa de diseño integral que desarrolla proyectos, 
+                                desde la arquitectura, diseño interior, mobiliario (diseño y producción), decoración y asesoría</h6>
                         </div>
                         <div class="box card card__box">
                             <span class="label">03</span>
+                            <h6 class="label2">Experiencia</h6>
+                            <span class="whyus-p">Manejamos proyectos de seguridad y confianza con entidades bancarias, aportes en obras 
+                                públicas de alto impacto como también proyectos de decoración y diseño de interiores, estamos para servirle 
+                                y siempre dispuestos a mejorar.</span>
                         </div>
                         <div class="box card card__box">
                             <span class="label">04</span>
+                            <h6 class="label2">Precio</h6>
+                            <span class="whyus-p">La optimización de materiales y diseños eficientes garantizan el desarrollo de un gran proyecto sin pérdidas en presupuesto,
+                                 ofrecemos soluciones innovadoras con propuestas inteligentes de acabados que se ajustan a la disponibilidad de cada uno de nuestros clientes, 
+                                 adaptando las propuestas y métodos de pago a sus necesidades específicas.</span>
                         </div>
                     </div>
                 </div>
                 <section class="padding-top" id="portfolio">
-                    <p class="section-title" align="center">Portafolio</p>
+                    <p class="section-title" align="center">{{translate('portfolio-title')}}</p>
                     <hr class="hr-color">
+                    <template>
+                        <v-carousel>
+                            <v-carousel-item v-for="(item,i) in items" v-bind:src="item.src" :key="i"></v-carousel-item>
+                        </v-carousel>
+                    </template>
+
                 </section>
                 <section class="padding-top-journey" id="journey" style="position: relative;">
                     <div class="card_journey">
-                        <p class="p-journey">Trayecto</p>
+                        <p class="p-journey">{{translate('journey-title')}}</p>
                         <hr class="hr-color hr-journey" width="20%">
                         <div class="div-journey">
                             <p class="text-journey">Destacado crecimiento profesional <br> en Venezuela y en Panamá</p>
@@ -108,12 +134,12 @@
                 </section>
             </section>
             <section class="padding-top" id="clients">
-                <p class="section-title" align="center">Clientes</p>
+                <p class="section-title" align="center">{{translate('clients-title')}}</p>
                 <hr class="hr-color">
             </section>
 
             <section class="padding-top contact-section" id="contact">
-                <p class="section-title" align="center">Contacto</p>
+                <p class="section-title" align="center">{{translate('contact-title')}}</p>
                 <div class="row" style="position: relative;  overflow: hidden;">
                     <div class="col-md-3"></div>
                     <div class=" col-md-6 contact-form" style="height:auto; padding:90px;">
@@ -136,7 +162,6 @@
                 </div>
             </section>
         </div>
-
     </div>
 
     <script>
@@ -155,6 +180,8 @@
             }
         })
     </script>
+
+
 </body>
 
 </html>

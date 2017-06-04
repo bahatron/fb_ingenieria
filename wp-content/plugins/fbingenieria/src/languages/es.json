@@ -1,3 +1,17 @@
 {
-	"test": "hola que tal"
+	"home": "Inicio",
+	"about-us":"Qué Hacemos?",
+	"why-us":"Por qué Nosotros?",
+	"portfolio": "Portafolio",
+	"journey":"Trayectoria",
+	"clients": "Clientes",
+	"contact": "Contacto",
+	"about-us-title": "Transformando Ideas en Proyectos",
+	"why-us-title": "Por qué nosotros",
+	"portfolio-title":"Portafolio",
+	"journey-title":"Trayectoria",
+	"clients-title": "Clientes",
+	"contact-title": "Contacto",
+	"location-title": "OFICINAS",
+	"back-to-top":"Volver a Inicio"
 }
