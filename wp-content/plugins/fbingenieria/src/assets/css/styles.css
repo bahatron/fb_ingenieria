@@ -113,7 +113,7 @@ footer {
 .whyus-p {
   font-size: 0.8em;
   display: inline-block;
-  margin-top: 70px;
+  margin-top: 20x;
   text-align: right;
   margin-right: 5px;
   margin-left: 5px;
@@ -123,11 +123,19 @@ footer {
 .box {
   overflow: hidden;
   position: relative;
-  width: 180px;
+  width: 240px;
   height: 150px;
   margin: 1em;
   display: inline-block;
   background-color: #202835;
+  color: white;
+}
+
+.box-for-about {
+  overflow: hidden;
+  position: relative;
+  display: inline-block;
+  background-color:transparent;
   color: white;
 }
 
@@ -154,11 +162,12 @@ footer {
 }
 
 .label2 {
-  overflow: hidden;
-  position: absolute;
-  margin-left: 300px;
-  margin-top: 1px;
-  font-size: 500px;
+  margin-left: 75px;
+  margin-right: 5px;
+  text-align: right;
+  font-size: 30px;
+  font-weight: 200;
+  text-transform: capitalize;
 }
 
 .hr-color {
@@ -442,24 +451,6 @@ a {
     margin-left: 70px;
     width: 100px;
   }
-  .box {
-    overflow: hidden;
-    position: relative;
-    width: 90px;
-    height: 75px;
-    margin: 1em;
-    display: inline-block;
-    background-color: #202835;
-    color: white;
-  }
-  .label {
-    position: absolute;
-    top: -15px;
-    left: -17px;
-    font-size: 40px;
-    font-weight: 240;
-    background-color: transparent;
-  }
   .about-us-box {
     height: 50px;
     width: 70%;
@@ -477,7 +468,6 @@ a {
     border-style: solid;
   }
   .about-box {
-    position: relative;
     margin-left: 50px;
     margin-right: 50px;
     margin-top: 25px;
