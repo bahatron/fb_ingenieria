@@ -24,7 +24,7 @@
 
 	<body <?php body_class(); ?>>
 		<div class="wrapper">
-			<header class="header">
+			<header class="header" id="fbi_header">
 				<nav class="navbar navbar-default navbar-transparent navbar-fixed-top navbar-color-on-scroll">
 					<div class="container">
 						<div class="navbar-header">
@@ -49,8 +49,22 @@
 								<li id="menu-item-17" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-home menu-item-17 active"><a title="Trayectoria" href="http://localhost/FBIngenieria/#journey">{{translate('journey')}}</a></li>
 								<li id="menu-item-15" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-home menu-item-15 active"><a title="Clientes" href="http://localhost/FBIngenieria/#clients">{{translate('clients')}}</a></li>
 								<li id="menu-item-18" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-home menu-item-18 active"><a title="Contacto" href="http://localhost/FBIngenieria/#contact">{{translate('contact')}}</a></li>
-								<li id="menu-item-19" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-home menu-item-19 active"><a title="" href="http://localhost/FBIngenieria/#footer"><i class="fa fa-map-marker"></i></a></li>
+								<li id="menu-item-19" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-home menu-item-19 active"><a title="" href="http://localhost/FBIngenieria/#fbi_footer"><i class="fa fa-map-marker"></i></a></li>
 							</ul>
 						</div>
 					</div>
 				</nav>
+
+				<script>
+					new Vue({
+						el: '#fbi_header',
+						data: {
+							translations: JSON.parse('<?php echo json_encode($translations) ?>')
+						},
+						methods: {
+							translate(str) {
+								return (this.translations[str]) ? this.translations[str] : str
+							}
+						}
+					})
+				</script>

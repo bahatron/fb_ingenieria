@@ -1,3 +1,17 @@
 {
-	"test": "this is a test message"
+	"home": "Home",
+	"about-us":"About Us",
+	"why-us":"Why Us?",
+	"portfolio": "Portfolio",
+	"journey":"Journey",
+	"clients": "Clients",
+	"contact": "Contact",
+	"about-us-title": "Making Ideas Into Proyects",
+	"why-us-title": "Why Us?",
+	"portfolio-title":"Portfolio",
+	"journey-title":"Journey",
+	"clients-title": "Clients",
+	"contact-title": "Contact",
+	"location-title": "OFFICES",
+	"back-to-top":"Back to Top"
 }
