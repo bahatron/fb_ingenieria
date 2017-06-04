@@ -192,7 +192,17 @@ class FBIngenieria
         }
         return $list;
     }
+    
+    public function setImage($projectId, $url = null, $post = null)
+    {
+        // @OTOD
+    }
 
+    public function unsetImage($projectId, $imgId)
+    {
+        // @TODO
+    }
+    
     public function getHeaderCarouselImages()
     {
         global $wpdb;
@@ -205,15 +215,19 @@ class FBIngenieria
         }
         return json_encode($list);
     }
-    
-    public function setImage($projectId, $url = null, $post = null)
-    {
-        // @OTOD
-    }
 
-    public function unsetImage($projectId, $imgId)
+    public function getClientCarouselImages()
     {
-        // @TODO
+        global $wpdb;
+        $sql = "SELECT imageUrl FROM $this->clients WHERE visible = 1";
+        $result = $wpdb->get_results($sql);
+        $list=[];
+        foreach($result as $img){
+            if($img->imageUrl !== '' && $img->imageUrl !== null){
+                $list[] = $img->imageUrl;
+            }
+        }
+        return json_encode($list);
     }
 }
 
