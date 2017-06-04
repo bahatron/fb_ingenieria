@@ -9,6 +9,9 @@ var_dump(wp_get_attachment_image_src(39));
 */
 
 ?>
+<link href="<?php echo FBINGENIERIA_URL.'/src/assets/dependencies/vuetify.min.css' ?>" rel="stylesheet" type="text/css">
+<script src="<?php echo FBINGENIERIA_URL.'/src/assets/dependencies/vue.min.js' ?>"></script>
+<script src="<?php echo FBINGENIERIA_URL.'/src/assets/dependencies/vuetify.min.js' ?>"></script>
 
 <div class="wrap">
   <form action="" method="POST">
