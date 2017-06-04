@@ -1,10 +1,6 @@
 <?php
-
+# view controller
 global $FBIngenieria;
-var_dump($_POST);
-$projectList = $FBIngenieria->getProjectList();
-$clientList = $FBIngenieria->getClientList();
-
 switch ($_POST['submit']) {
   case 'Actualizar':
     $selectedProject = $FBIngenieria->getProjectById($_POST['id']);
@@ -21,7 +17,11 @@ switch ($_POST['submit']) {
   default:
     break;
 }
-var_dump($selectedProject);
+
+# datalist data
+$projectList = $FBIngenieria->getProjectList();
+$clientList = $FBIngenieria->getClientList();
+
 ?>
   <div class="wrap">
     <form action="" method="POST" onsubmit="return checkFormAction(this)" name="getProject">
@@ -31,7 +31,7 @@ var_dump($selectedProject);
             <th scope="row"><label for="name">Proyecto ya registrado </label></th>
             <td>
               <input name="name" id="findByName" list="clients" value="<?php echo $selectedProject->name ?>" class="regular-text" type="text"
-                style="width: 100%" onchange="getDataId(this)">
+                style="width: 100%">
               <datalist id="clients">
                 <?php
                 foreach ($projectList as $project) {
@@ -48,7 +48,6 @@ var_dump($selectedProject);
       </table>
       <p class="submit">
         <input name="submit" id="submit" class="button button-primary" value="Actualizar" type="submit">
-        <?php isset($selectedProject) ? printif('<input name="submit" id="submit" class="button delete" value="Delete" type="submit">') : null ?>
       </p>
     </form>
     <hr>
@@ -77,7 +76,19 @@ var_dump($selectedProject);
               <p class="description" id="longDescription">Descripcion completa del proyecto, maximo 1000 caracteres</p>
             </td>
           </tr>
-          <tr scrope="row" <?php empty($clientList) ? printf('style="display: none;"') : null ?>>
+          <tr>
+            <th scope="row"><label for="visible">Visibilidad: </label></th>
+            <td>
+              <fieldset>
+                <label for="visible">
+                  <input name="visible" id="visible" type="checkbox" value="1" <?php ($selectedProject->visible) ? printf('checked') : null ; ?>>
+                  Visible
+                </label>
+              </fieldset>
+              <p class="description" id="tagline-description">Si es importante, se vera en la seccion en la pagina web</p>
+            </td>
+          </tr>
+          <tr <?php empty($clientList) ? printf('style="display: none;"') : null ?>>
             <th scope="row"><label for="client">Cliente: </label></th>
             <td>
               <fieldset>
@@ -98,7 +109,7 @@ var_dump($selectedProject);
           </tr>
         </tbody>
       </table>
-      <?php ($selectedClient) ? submit_button('Modificar') : submit_button('Crear'); ?>
+      <?php ($selectedProject) ? submit_button('Modificar') : submit_button('Crear'); ?>
     </form>
   </div>
 

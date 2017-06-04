@@ -14,7 +14,6 @@ function fbingenieriaDatabase()
       imageUrl VARCHAR(1000) NULL,
       description VARCHAR(1000) NULL,
       visible TINYINT(1) NULL,
-      active TINYINT(1) NULL DEFAULT 1,
       PRIMARY KEY (id),
       UNIQUE INDEX name_UNIQUE (name ASC))
       ENGINE = InnoDB
@@ -26,8 +25,8 @@ function fbingenieriaDatabase()
       name VARCHAR(100) NOT NULL,
       shortDescription VARCHAR(160) NULL,
       longDescription VARCHAR(1000) NULL,
-      active TINYINT(1) NULL DEFAULT 1,
-      client_id INT(11) NOT NULL,
+      visible TINYINT(1) NULL DEFAULT 1,
+      client_id INT(11) NULL,
       PRIMARY KEY (id),
       UNIQUE INDEX name_UNIQUE (name ASC),
       INDEX fk_fbiProject_fbiClient_idx (client_id ASC),

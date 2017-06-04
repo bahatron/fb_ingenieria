@@ -103,9 +103,10 @@ class FBIngenieria
         $id = $array['id'];
         unset($array['id']);
         unset($array['submit']);
+        !isset($array['visible']) ? $array['visible'] = 0 : null;
         $result = $wpdb->update($this->clients, $array, ['id' => $id]);
         if (!$result) {
-            $this->showError('Hubo un error actualizando los datos');
+            $this->showWarning('No se registraron cambios en la base de datos');
         } else {
             $this->showSuccess('Cliente actualizado satisfactoriamente!');
         }
@@ -128,7 +129,7 @@ class FBIngenieria
     public function getProjectList()
     {
         global $wpdb;
-        $sql="SELECT id, name FROM $this->projects WHERE active = 1";
+        $sql="SELECT id, name FROM $this->projects";
         return $wpdb->get_results($sql);
     }
 
@@ -145,6 +146,8 @@ class FBIngenieria
         $id = $array['id'];
         unset($array['id']);
         unset($array['submit']);
+        !isset($array['visible']) ? $array['visible'] = 0 : null;
+        ($array['client_id'] === '') ?  $array['client_id'] = null : null;
         $result = $wpdb->update($this->projects, $array, ['id' => $id]);
         if (!$result) {
             $this->showError('Hubo un error actualizando los datos');
@@ -155,14 +158,20 @@ class FBIngenieria
 
     public function createProject($array)
     {
-        // @TODO
+        global $wpdb;
+        unset($array['id']);
+        unset($array['submit']);
+        if ($array['client_id'] === '') {
+            unset($array['client_id']);
+        }
+        $result = $wpdb->insert($this->projects, $array);
+        if (!$result) {
+            $this->showError('Hubo un error en base de datos');
+        } else {
+            $this->showSuccess('Proyecto registrado satisfactoriamente!');
+        }
     }
 
-    public function deleteProject($array)
-    {
-        // @TODO
-    }
-    
     # image control
     public function getProjectImages($id)
     {

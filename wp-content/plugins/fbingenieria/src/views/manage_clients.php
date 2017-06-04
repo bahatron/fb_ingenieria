@@ -1,7 +1,6 @@
 <?php
-global $FBIngenieria;
-
 # view controller
+global $FBIngenieria;
 switch ($_POST['submit']) {
   case 'Actualizar':
     $selectedClient = $FBIngenieria->getClientById($_POST['id']);
@@ -19,7 +18,7 @@ switch ($_POST['submit']) {
     break;
 }
 
-# datalist information
+# datalist data
 $clientList = $FBIngenieria->getClientList();
 
 ?>
@@ -30,7 +29,7 @@ $clientList = $FBIngenieria->getClientList();
           <tr>
             <th scope="row"><label for="name">Cliente ya registrado </label></th>
             <td>
-              <input name="name" id="findByName" list="clients" value="<?php echo $selectedClient->name ?>" class="regular-text" type="text" style="width: 100%" onchange="getDataId(this)">
+              <input name="name" id="findByName" list="clients" value="<?php echo $selectedClient->name ?>" class="regular-text" type="text" style="width: 100%">
               <datalist id="clients">
                 <?php
                 foreach ($clientList as $client) {
