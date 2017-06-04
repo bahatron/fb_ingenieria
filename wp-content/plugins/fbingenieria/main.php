@@ -39,9 +39,9 @@ class FBIngenieria
     {
         $file = @file_get_contents(FBINGENIERIA_URL.'/src/assets/lang/'.$lang.'.json');
         if (!$file) {
-            $file = file_get_contents(FBINGENIERIA_URL.'/src/assets/lang/es.json'); //default language
+            $file = @file_get_contents(FBINGENIERIA_URL.'/src/assets/lang/es.json'); //default language
         }
-        return json_decode($file);
+        return $file ? json_encode(json_decode($file)) : '';
     }
     
     public function add_menu_pages()
@@ -192,7 +192,7 @@ class FBIngenieria
         }
         return $list;
     }
-
+    
     public function setImage($projectId, $url = null, $post = null)
     {
         // @OTOD
@@ -201,6 +201,33 @@ class FBIngenieria
     public function unsetImage($projectId, $imgId)
     {
         // @TODO
+    }
+    
+    public function getHeaderCarouselImages()
+    {
+        global $wpdb;
+        $table = $wpdb->prefix.'postmeta';
+        $sql = "SELECT post_id FROM $table WHERE meta_key = '_wp_attached_file';";
+        $result = $wpdb->get_results($sql);
+        $list = [];
+        foreach ($result as $img) {
+            $list[] = wp_get_attachment_url($img->post_id);
+        }
+        return json_encode($list);
+    }
+
+    public function getClientCarouselImages()
+    {
+        global $wpdb;
+        $sql = "SELECT imageUrl FROM $this->clients WHERE visible = 1";
+        $result = $wpdb->get_results($sql);
+        $list=[];
+        foreach($result as $img){
+            if($img->imageUrl !== '' && $img->imageUrl !== null){
+                $list[] = $img->imageUrl;
+            }
+        }
+        return json_encode($list);
     }
 }
 

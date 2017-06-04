@@ -10,18 +10,18 @@
  */
 
 $hestia_general_credits = get_theme_mod('hestia_general_credits',
-	/* translators: %1$s is Theme Name, %2$s is WordPress */
-	sprintf(esc_html__('%1$s | Powered by %2$s', 'hestia'),
-		/* translators: %s is Theme name */
-		sprintf('<a href="https://themeisle.com/themes/hestia/" target="_blank" rel="nofollow">%s</a>',
-			esc_html__('Hestia', 'hestia')
-			),
-		/* translators: %s is WordPress */
-		sprintf('<a href="http://wordpress.org/" rel="nofollow">%s</a>',
-			esc_html__('WordPress', 'hestia')
-			)
-		)
-		); ?>
+    /* translators: %1$s is Theme Name, %2$s is WordPress */
+    sprintf(esc_html__('%1$s | Powered by %2$s', 'hestia'),
+        /* translators: %s is Theme name */
+        sprintf('<a href="https://themeisle.com/themes/hestia/" target="_blank" rel="nofollow">%s</a>',
+            esc_html__('Hestia', 'hestia')
+            ),
+        /* translators: %s is WordPress */
+        sprintf('<a href="http://wordpress.org/" rel="nofollow">%s</a>',
+            esc_html__('WordPress', 'hestia')
+            )
+        )
+        ); ?>
 	<footer id="fbi_footer" class="footer footer-big" data-app>
 		<div class="row" style="width: 100%;">
 			<div class="col-md-12">
@@ -91,6 +91,9 @@ $hestia_general_credits = get_theme_mod('hestia_general_credits',
 	</body>
 
 	</html>
+	<?php
+		$lang = $GLOBALS['FBIngenieria']->getLanguage($_GET['lang']);
+	?>
 	<script type="text/javascript">
 		function mail() {
 			document.getElementById('prueba').innerHTML = '<v-alert info v-bind:value="true">This is a info alert.</v-alert>';
@@ -101,20 +104,15 @@ $hestia_general_credits = get_theme_mod('hestia_general_credits',
 			form.elements.lang.value = lang;
 			form.submit();
 		}
+		new Vue({
+			el: '#fbi_footer',
+			data: {
+				translations: JSON.parse('<?php echo $lang ?>')
+			},
+			methods: {
+				translate(str) {
+					return (this.translations[str]) ? this.translations[str] : str;
+				}
+			}
+		})
 	</script>
-	<script>
-        new Vue({
-            el: '#fbi_footer',
-            data: {
-                translations: JSON.parse('<?php echo json_encode($lang) ?>')
-            },
-            mounted: function () {
-                console.log('translations: ', this.translations);
-            },
-            methods: {
-                translate(str) {
-                    return (this.translations[str]) ? this.translations[str] : str;
-                }
-            }
-        })
-    </script>

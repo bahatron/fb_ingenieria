@@ -2,10 +2,6 @@
 
 <head>
     <!--CSS and dependencies-->
-    <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet" type="text/css">
-    <link href="https://unpkg.com/vuetify/dist/vuetify.min.css" rel="stylesheet" type="text/css">
-    <script src="https://unpkg.com/vue/dist/vue.js"></script>
-    <script src="https://unpkg.com/vuetify/dist/vuetify.min.js"></script>
     <link rel="stylesheet" href="<?php echo FBINGENIERIA_URL. '/src/assets/css/styles.css'?>" rel="stylesheet" type="text/css">
     <?php
     $lang = $GLOBALS['FBIngenieria']->getLanguage($_GET['lang']);
@@ -114,12 +110,7 @@
                 <section class="padding-top" id="portfolio">
                     <p class="section-title" align="center">{{translate('portfolio-title')}}</p>
                     <hr class="hr-color">
-                    <template>
-                        <v-carousel>
-                            <v-carousel-item v-for="(item,i) in items" v-bind:src="item.src" :key="i"></v-carousel-item>
-                        </v-carousel>
-                    </template>
-
+                    <h2 align="center">En Construcción</h2>
                 </section>
                 <section class="padding-top-journey" id="journey" style="position: relative;">
                     <div class="card_journey" style="background: url(<?php echo FBINGENIERIA_URL.'/src/assets/img/journey.png' ?>) center center / cover no-repeat">
@@ -143,6 +134,7 @@
                             eso reiteramos nuestro compromiso en el cumplimiento, mediante soluciones adecuadas a las distintas necesidades
                             de cada uno de ustedes.
                 </span>
+                <h2 align="center">En Construcción</h2>
             </section>
             <section class="padding-top contact-section" id="contact">
                 <p class="section-title" align="center">{{translate('contact-title')}}</p>
@@ -174,10 +166,7 @@
         new Vue({
             el: '#fbi_landing_page',
             data: {
-                translations: JSON.parse('<?php echo json_encode($lang) ?>')
-            },
-            mounted: function () {
-                console.log('translations: ', this.translations);
+                translations: JSON.parse('<?php echo $lang ?>')
             },
             methods: {
                 translate(str) {
