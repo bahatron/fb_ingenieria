@@ -49,7 +49,7 @@
 								<li id="menu-item-17" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-home menu-item-17 active"><a title="Trayectoria" href="http://localhost/FBIngenieria/#journey">{{translate('journey')}}</a></li>
 								<li id="menu-item-15" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-home menu-item-15 active"><a title="Clientes" href="http://localhost/FBIngenieria/#clients">{{translate('clients')}}</a></li>
 								<li id="menu-item-18" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-home menu-item-18 active"><a title="Contacto" href="http://localhost/FBIngenieria/#contact">{{translate('contact')}}</a></li>
-								<li id="menu-item-19" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-home menu-item-19 active"><a title="" href="http://localhost/FBIngenieria/#footer"><i class="fa fa-map-marker"></i></a></li>
+								<li id="menu-item-19" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-home menu-item-19 active"><a title="" href="http://localhost/FBIngenieria/#fbi_footer"><i class="fa fa-map-marker"></i></a></li>
 							</ul>
 						</div>
 					</div>
