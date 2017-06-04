@@ -28,27 +28,6 @@ if ( ! function_exists( 'hestia_big_title' ) ) :
 			</div>
 		</div>
 	</div>
-	<script>
-		export default {
-			data() {
-				return {
-					items: [{
-							src: '/static/doc-images/carousel/squirrel.jpg'
-						},
-						{
-							src: '/static/doc-images/carousel/sky.jpg'
-						},
-						{
-							src: '/static/doc-images/carousel/bird.jpg'
-						},
-						{
-							src: '/static/doc-images/carousel/planet.jpg'
-						}
-					]
-				}
-			}
-		}
-	</script>
 
 	</html>
 	<?php

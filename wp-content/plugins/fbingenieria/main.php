@@ -39,9 +39,9 @@ class FBIngenieria
     {
         $file = @file_get_contents(FBINGENIERIA_URL.'/src/assets/lang/'.$lang.'.json');
         if (!$file) {
-            $file = file_get_contents(FBINGENIERIA_URL.'/src/assets/lang/es.json'); //default language
+            $file = @file_get_contents(FBINGENIERIA_URL.'/src/assets/lang/es.json'); //default language
         }
-        return json_decode($file);
+        return $file ? json_encode(json_decode($file)) : '';
     }
     
     public function add_menu_pages()
