@@ -16,7 +16,7 @@
     <div class="container" id="fbi_landing_page" style="width: 100%">
         <div class="col-md-12 div-page">
             <section class="padding-top about-section" id="about">
-                <p class="section-title" align="center"> ... TRANSFORMANDO IDEAS EN PROYECTOS ... </p>
+                <p class="section-title" align="center"> ... {{translate('about-us-title')}} ... </p>
                 <hr class="hr-color">
                 <div class="about-box display-big" align="center">
                     <div class="row">
@@ -76,11 +76,12 @@
             <section class="spacing">
             </section>
             <section class="padding-top" id="whyus">
-                <p class="section-title" align="center">Por qué nosotros</p>
+                <p class="section-title" align="center">{{translate('why-us-title')}}</p>
                 <hr class="hr-color">
                 <div class="row">
                     <div class="col" align="center">
                         <div class="box card card__box">
+                            <span class="label">01</span>
                             <h6 class="label2">Calidad</h6>
                             <span class="whyus-p">Con más de 12 años de experiencia en el área de construcción contamos con un equipo altamente calificado 
                                 en acabados de primera calidad, nuestra política se basa en la satisfacción de los clientes, y fiabilidad de los proveedores 
@@ -105,12 +106,18 @@
                     </div>
                 </div>
                 <section class="padding-top" id="portfolio">
-                    <p class="section-title" align="center">Portafolio</p>
+                    <p class="section-title" align="center">{{translate('portfolio-title')}}</p>
                     <hr class="hr-color">
+                    <template>
+                        <v-carousel>
+                            <v-carousel-item v-for="(item,i) in items" v-bind:src="item.src" :key="i"></v-carousel-item>
+                        </v-carousel>
+                    </template>
+
                 </section>
                 <section class="padding-top-journey" id="journey" style="position: relative;">
                     <div class="card_journey">
-                        <p class="p-journey">Trayectoria</p>
+                        <p class="p-journey">{{translate('journey-title')}}</p>
                         <hr class="hr-color hr-journey" width="20%">
                         <div class="div-journey">
                             <p class="text-journey">Destacado crecimiento profesional <br> en Venezuela y en Panamá</p>
@@ -122,7 +129,7 @@
                 </section>
             </section>
             <section class="padding-top" id="clients">
-                <p class="section-title" align="center">Clientes</p>
+                <p class="section-title" align="center">{{translate('clients-title')}}</p>
                 <hr class="hr-color">
             </section>
 
@@ -168,6 +175,8 @@
             }
         })
     </script>
+
+
 </body>
 
 </html>
