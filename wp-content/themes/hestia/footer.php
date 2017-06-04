@@ -22,7 +22,7 @@ $hestia_general_credits = get_theme_mod('hestia_general_credits',
 			)
 		)
 		); ?>
-	<footer id="fbi_footer" class="footer footer-big">
+	<footer id="fbi_footer" class="footer footer-big" data-app>
 		<div class="row" style="width: 100%;">
 			<div class="col-md-12">
 				<div style="height: 100px"></div>

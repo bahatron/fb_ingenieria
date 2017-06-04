@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <div class="container" id="fbi_landing_page" style="width: 100%">
+    <div class="container" id="fbi_landing_page" style="width: 100%" data-app>
         <div class="col-md-12 div-page">
             <section class="padding-top about-section" id="about">
                 <p class="section-title" align="center"> ... {{translate('about-us-title')}} ... </p>
@@ -23,20 +23,14 @@
                         <div class="col-md-6 about-us-box border-down" align="left">
                             <div class="col-md-3" style="padding:0px;"><i class="fa fa-pencil custom-icon"></i></div>
                             <div class="col-md-9.1" style="padding:0px;">
-                                <span class="about-span">Diseño de Proyectos
-                                </span>
-                                <span style="display:block;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                                    Fusce feugiat nibh ac mollis condimentum.   
-                                </span>
+                                <span class="about-span">{{translate('about-us-subtitle-1')}}</span>
+                                <span style="display:block;">{{translate('about-us-text-1')}}</span>
                             </div>
                         </div>
                         <div class="col-md-6 about-us-box border-down border-center" align="right">
                             <div class="col-md-9 " style="padding:0px;">
-                                <span class="about-span">Construcción de Obras Civiles
-                                </span>
-                                <span style="display:block;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                                    Fusce feugiat nibh ac mollis condimentum.   
-                                </span>
+                                <span class="about-span">{{translate('about-us-subtitle-2')}}</span>
+                                <span style="display:block;">{{translate('about-us-text-2')}}</span>
                             </div>
                             <div class="col-md-3" style="padding:0px;"> <i class="material-icons custom-icon">format_paint</i></div>
 
@@ -47,20 +41,14 @@
                         <div class="col-md-6 about-us-box" align="left">
                             <div class="col-md-3" style="padding:0px;"><i class="fa fa-wrench custom-icon"></i></div>
                             <div class="col-md-9.1" style="padding:0px;">
-                                <span class="about-span">Administración y Supervisión de Obra
-                                </span>
-                                <span style="display:block;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                                    Fusce feugiat nibh ac mollis condimentum.   
-                                </span>
+                                <span class="about-span">{{translate('about-us-subtitle-3')}}</span>
+                                <span style="display:block;">{{translate('about-us-text-3')}}</span>
                             </div>
                         </div>
                         <div class="col-md-6 about-us-box border-center" align="right">
                             <div class="col-md-9" style="padding:0px;">
-                                <span class="about-span">Asesoría y Acompañamiento
-                                </span >
-                                <span style="display:block;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                                    Fusce feugiat nibh ac mollis condimentum.   
-                                </span>
+                                <span class="about-span">{{translate('about-us-subtitle-4')}}</span >
+                                <span style="display:block;">{{translate('about-us-text-4')}}</span>
                             </div>
                             <div class="col-md-3" style="padding:0px;"><i class="fa fa-comments custom-icon"></i></div>
 
@@ -82,31 +70,23 @@
                     <div class="col" align="center">
                         <div class="box card card__box">
                             <span class="label">01</span>
-                            <h6 class="label2">Calidad</h6>
-                            <span class="whyus-p">Altamente calificado en acabados de primera calidad, 
-                                nuestra política se basa en la satisfacción de los clientes, y fiabilidad de los proveedores 
-                                y productos.Nuestros clientes satisfechos son nuestra mejor referencia.
-                            </span>
+                            <h6 class="label2">{{translate('why-us-subtitle-1')}}</h6>
+                            <span class="whyus-p">{{translate('why-us-text-1')}}</span>
                         </div>
                         <div class="box card card__box">
                             <span class="label">02</span>
-                            <h6 class="label2">Servicio</h6>
-                            <span class="whyus-p">Somos una empresa de diseño integral que desarrolla proyectos, 
-                                desde la arquitectura, diseño interior, mobiliario (diseño y producción), decoración y asesoría</h6>
+                            <h6 class="label2">{{translate('why-us-subtitle-2')}}</h6>
+                            <span class="whyus-p">{{translate('why-us-text-2')}}</span>
                         </div>
                         <div class="box card card__box">
                             <span class="label">03</span>
-                            <h6 class="label2">Experiencia</h6>
-                            <span class="whyus-p">Manejamos proyectos de seguridad y confianza con entidades bancarias, aportes en obras 
-                                públicas de alto impacto como también proyectos de decoración y diseño de interiores, estamos para servirle 
-                                y siempre dispuestos a mejorar.</span>
+                            <h6 class="label2">{{translate('why-us-subtitle-3')}}</h6>
+                            <span class="whyus-p">{{translate('why-us-text-3')}}</span>
                         </div>
                         <div class="box card card__box">
                             <span class="label">04</span>
-                            <h6 class="label2">Precio</h6>
-                            <span class="whyus-p">La optimización de materiales y diseños eficientes garantizan el desarrollo de un gran proyecto sin pérdidas en presupuesto,
-                                 ofrecemos soluciones innovadoras con propuestas inteligentes de acabados que se ajustan a la disponibilidad de cada uno de nuestros clientes, 
-                                 adaptando las propuestas y métodos de pago a sus necesidades específicas.</span>
+                            <h6 class="label2">{{translate('why-us-subtitle-4')}}</h6>
+                            <span class="whyus-p">{{translate('why-us-text-4')}}</span>
                         </div>
                     </div>
                 </div>
@@ -145,14 +125,14 @@
                     <div class=" col-md-6 contact-form" style="height:auto; padding:90px;">
                         <form name="contact-form" action="">
                             <div class="col-md-6" align="center">
-                                <input type="text" name="name" value="" placeholder="Nombre">
-                                <input type="text" name="lastname" value="" placeholder="Apellido">
-                                <input type="text" name="phone" value="" placeholder="Teléfono">
-                                <input type="text" name="mail" value="" placeholder="Correo Electrónico">
+                                <input type="text" name="name" value="" :placeholder="translate('contact-name')">
+                                <input type="text" name="lastname" value="" :placeholder="translate('contact-lastname')">
+                                <input type="text" name="phone" value="" :placeholder="translate('contact-phone')">
+                                <input type="text" name="mail" value="" :placeholder="translate('contact-mail')">
                             </div>
                             <div class="col-md-6" align="center">
-                                <textarea rows="4" cols="2" name="comment" placeholder="Mensaje"></textarea>
-                                <a href="#" class="btn btn-primary" style="text-transform: capitalize;">Enviar</a>
+                                <textarea rows="4" cols="2" name="comment" :placeholder="translate('contact-comment')"></textarea>
+                                <a href="#" class="btn btn-primary" style="text-transform: capitalize;">{{translate('contact-button')}}</a>
                             </div>
                         </form>
                     </div>
