@@ -176,7 +176,7 @@ class FBIngenieria
     public function getProjectImages($id)
     {
         global $wpdb;
-        $sql="SELECT id, name FROM $this->images WHERE project_id = $id";
+        $sql="SELECT id, url FROM $this->images WHERE project_id = $id";
         return $wpdb->get_results($sql);
     }
 
@@ -185,7 +185,12 @@ class FBIngenieria
         global $wpdb;
         $table = $wpdb->prefix.'postmeta';
         $sql = "SELECT post_id FROM $table WHERE meta_key = '_wp_attached_file';";
-        return $wpdb->get_results($sql);
+        $result = $wpdb->get_results($sql);
+        $list = [];
+        foreach ($result as $img) {
+            $list[] = wp_get_attachment_url($img->post_id);
+        }
+        return $list;
     }
 
     public function setImage($projectId, $url = null, $post = null)

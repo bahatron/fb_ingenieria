@@ -42,7 +42,6 @@ function fbingenieriaDatabase()
     $sql = "CREATE TABLE IF NOT EXISTS $fbiProjectImg (
       id INT(11) NOT NULL AUTO_INCREMENT,
       url VARCHAR(1000) NULL,
-      post VARCHAR(100) NULL,
       project_id INT(11) NOT NULL,
       PRIMARY KEY (id),
       INDEX fk_fbiProjectImg_fbiProject1_idx (project_id ASC),
