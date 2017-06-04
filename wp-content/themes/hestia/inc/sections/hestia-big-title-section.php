@@ -7,11 +7,6 @@
  * @since Hestia 1.0
  */
 
- global $FBIngenieria;
- if($FBIngenieria) {
- $images = $FBIngenieria->getHeaderCarouselImages();
- }
-
 if ( ! function_exists( 'hestia_big_title' ) ) :
 	/**
 	 * Big title section content.
@@ -21,29 +16,18 @@ if ( ! function_exists( 'hestia_big_title' ) ) :
 	function hestia_big_title() {
 	?>
 	<html>
-	<link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet" type="text/css">
-	<link href="<?php echo FBINGENIERIA_URL.'/src/assets/dependencies/vuetify.min.css' ?>" rel="stylesheet" type="text/css">
-	<script src="<?php echo FBINGENIERIA_URL.'/src/assets/dependencies/vue.min.js' ?>"></script>
-	<script src="<?php echo FBINGENIERIA_URL.'/src/assets/dependencies/vuetify.min.js' ?>"></script>
 
-	<div class="page-header " style="background-color: #0b465d;" id="fbi_header" data-app>
+	<div class="page-header " style="background-color: #0b465d;">
 		<div class="container">
 			<div class="col-md-8 col-md-offset-2 text-center" style="padding-top: 30vh; ">
 				<div style="background-color:rgb(8, 49, 65); padding-bottom:25px; border-bottom-color: #fb6816; border-bottom-style: solid;">
 					<h2 class="main-title"><b>FB</b> Ingeniería y Proyectos</h2>
 					<hr style="width:50%; margin-left:25%"> VENEZUELA - PANAMÁ
 				</div>
+				<?php echo do_shortcode( '[slide-anything id="67"]' )?>
 			</div>
 		</div>
 	</div>
-	<script>
-		new Vue({
-			el: '#fbi_header',
-			data: {
-				images: JSON.parse('<?php echo $images ?>')
-			}
-		})
-	</script>
 
 	</html>
 	<?php
