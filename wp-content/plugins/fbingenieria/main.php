@@ -203,7 +203,7 @@ class FBIngenieria
         foreach ($result as $img) {
             $list[] = wp_get_attachment_url($img->post_id);
         }
-        return $list;
+        return json_encode($list);
     }
     
     public function setImage($projectId, $url = null, $post = null)
