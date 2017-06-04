@@ -37,9 +37,9 @@ class FBIngenieria
 
     public function getLanguage($lang=null)
     {
-        $file = @file_get_contents(FBINGENIERIA_URL.'/src/languages/'.$lang.'.json');
+        $file = @file_get_contents(FBINGENIERIA_URL.'/src/assets/lang/'.$lang.'.json');
         if (!$file) {
-            $file = file_get_contents(FBINGENIERIA_URL.'/src/languages/es.json'); //default language
+            $file = file_get_contents(FBINGENIERIA_URL.'/src/assets/lang/es.json'); //default language
         }
         return json_decode($file);
     }
@@ -209,7 +209,7 @@ $GLOBALS['FBIngenieria'] = new FBIngenieria();
 function fbi_landing_page_handler($atts)
 {
     ob_start();
-    include FBINGENIERIA_PATH.'src/landing_page.html';
+    include FBINGENIERIA_PATH.'src/views/landing_page.html';
     return ob_get_clean();
 }
 
