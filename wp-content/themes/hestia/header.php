@@ -24,7 +24,7 @@
 
 	<body <?php body_class(); ?>>
 		<div class="wrapper">
-			<header class="header">
+			<header class="header" id="fbi_header">
 				<nav class="navbar navbar-default navbar-transparent navbar-fixed-top navbar-color-on-scroll">
 					<div class="container">
 						<div class="navbar-header">
@@ -54,3 +54,17 @@
 						</div>
 					</div>
 				</nav>
+
+				<script>
+					new Vue({
+						el: '#fbi_header',
+						data: {
+							translations: JSON.parse('<?php echo json_encode($translations) ?>')
+						},
+						methods: {
+							translate(str) {
+								return (this.translations[str]) ? this.translations[str] : str
+							}
+						}
+					})
+				</script>
