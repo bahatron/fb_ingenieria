@@ -20,6 +20,13 @@
 		<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
 		<?php endif; ?>
 		<?php wp_head(); ?>
+		<link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet" type="text/css">
+		<link href="<?php echo FBINGENIERIA_URL.'/src/assets/dependencies/vuetify.min.css' ?>" rel="stylesheet" type="text/css">
+		<script src="<?php echo FBINGENIERIA_URL.'/src/assets/dependencies/vue.min.js' ?>"></script>
+		<script src="<?php echo FBINGENIERIA_URL.'/src/assets/dependencies/vuetify.min.js' ?>"></script>
+		<?php
+		$lang = $GLOBALS['FBIngenieria']->getLanguage($_GET['lang']);
+		?>
 	</head>
 
 	<body <?php body_class(); ?>>
@@ -54,3 +61,20 @@
 						</div>
 					</div>
 				</nav>
+			</header>
+		</div>
+	</body>
+
+	<script>
+		new Vue({
+			el: '#fbi_header',
+			data: {
+				translations: JSON.parse('<?php echo $lang ?>')
+			},
+			methods: {
+				translate(str) {
+					return (this.translations[str]) ? this.translations[str] : str;
+				}
+			}
+		})
+	</script>

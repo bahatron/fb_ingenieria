@@ -2,10 +2,6 @@
 
 <head>
     <!--CSS and dependencies-->
-    <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet" type="text/css">
-    <link href="https://unpkg.com/vuetify/dist/vuetify.min.css" rel="stylesheet" type="text/css">
-    <script src="https://unpkg.com/vue/dist/vue.js"></script>
-    <script src="https://unpkg.com/vuetify/dist/vuetify.min.js"></script>
     <link rel="stylesheet" href="<?php echo FBINGENIERIA_URL. '/src/assets/css/styles.css'?>" rel="stylesheet" type="text/css">
     <?php
     $lang = $GLOBALS['FBIngenieria']->getLanguage($_GET['lang']);
@@ -149,9 +145,6 @@
             el: '#fbi_landing_page',
             data: {
                 translations: JSON.parse('<?php echo $lang ?>')
-            },
-            mounted: function () {
-                console.log('translations: ', this.translations);
             },
             methods: {
                 translate(str) {
