@@ -15,44 +15,47 @@ if ( ! function_exists( 'hestia_big_title' ) ) :
 	 */
 	function hestia_big_title() {
 	?>
-		<div id="carousel-hestia-generic" class="carousel slide" data-ride="carousel">
-			<div class="carousel slide" data-ride="carousel">
-				<div class="carousel-inner">
-					<?php
+	<html>
 
-					$hestia_big_title_background  = get_theme_mod( 'hestia_big_title_background', get_template_directory_uri() . '/assets/img/slider2.jpg' );
-					$hestia_big_title_title       = get_theme_mod( 'hestia_big_title_title', __( 'Lorem Ipsum', 'hestia' ) );
-					$hestia_big_title_text        = get_theme_mod( 'hestia_big_title_text', __( 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', 'hestia' ) );
-					$hestia_big_title_button_text = get_theme_mod( 'hestia_big_title_button_text', __( 'Button', 'hestia' ) );
-					$hestia_big_title_button_link = get_theme_mod( 'hestia_big_title_button_link', '#' );
-
-					if ( ! empty( $hestia_big_title_background ) || ! empty( $hestia_big_title_title ) || ! empty( $hestia_big_title_text ) || ( ! empty( $hestia_big_title_button_text ) && ! empty( $hestia_big_title_button_link ) ) ) { ?>
-					<div class="item active">
-						<?php if ( ! empty( $hestia_big_title_background ) ) { ?>
-						<div class="page-header "style="background-color: #0b465d;">
-							<?php } else { ?>
-							<div class="page-header header-filter">
-								<?php } ?>
-								<div class="container">
-									<div class="row">
-										<div class="col-md-8 col-md-offset-2 text-center" style="padding-top: 30vh; ">
-											<div style="background-color:rgb(8, 49, 65); padding-bottom:25px; border-bottom-color: #fb6816; border-bottom-style: solid;">
-												<h2 class="main-title"><b>FB</b> Ingeniería y Proyectos</h2>
-												<hr style="width:50%; margin-left:25%">
-												VENEZUELA - PANAMÁ
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
+	<div class="page-header " style="background-color: #0b465d;">
+		<div class="container">
+			<div class="col-md-8 col-md-offset-2 text-center" style="padding-top: 30vh; ">
+				<v-carousel>
+					<v-carousel-item v-for="(item,i) in items" v-bind:src="item.src" :key="i">
+						<div style="background-color:rgb(8, 49, 65); padding-bottom:25px; border-bottom-color: #fb6816; border-bottom-style: solid;">
+							<h2 class="main-title"><b>FB</b> Ingeniería y Proyectos</h2>
+							<hr style="width:50%; margin-left:25%"> VENEZUELA - PANAMÁ
 						</div>
-						<?php
-					} ?>
-					</div>
-				</div>
+					</v-carousel-item>
+				</v-carousel>
+
 			</div>
 		</div>
-		<?php
+	</div>
+	<script>
+		export default {
+			data() {
+				return {
+					items: [{
+							src: '/static/doc-images/carousel/squirrel.jpg'
+						},
+						{
+							src: '/static/doc-images/carousel/sky.jpg'
+						},
+						{
+							src: '/static/doc-images/carousel/bird.jpg'
+						},
+						{
+							src: '/static/doc-images/carousel/planet.jpg'
+						}
+					]
+				}
+			}
+		}
+	</script>
+
+	</html>
+	<?php
 	}
 endif;
 

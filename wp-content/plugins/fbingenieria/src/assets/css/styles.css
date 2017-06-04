@@ -301,7 +301,12 @@ a {
   margin-bottom: -20px;
   color: #fb6816;
 }
-
+.clients-p{
+  display: block;
+  font-size: 1.3em;
+  padding: 60px;
+  text-align: justify;
+}
 .contact-section {
   background: #202835;
   position: relative;
