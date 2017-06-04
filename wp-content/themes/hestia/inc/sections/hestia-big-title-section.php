@@ -29,15 +29,18 @@ if ( ! function_exists( 'hestia_big_title' ) ) :
 					if ( ! empty( $hestia_big_title_background ) || ! empty( $hestia_big_title_title ) || ! empty( $hestia_big_title_text ) || ( ! empty( $hestia_big_title_button_text ) && ! empty( $hestia_big_title_button_link ) ) ) { ?>
 					<div class="item active">
 						<?php if ( ! empty( $hestia_big_title_background ) ) { ?>
-						<div class="page-header header-filter"
-							 style="background-image: url('<?php echo esc_url( $hestia_big_title_background ); ?>');">
+						<div class="page-header "style="background-color: #0b465d;">
 							<?php } else { ?>
 							<div class="page-header header-filter">
 								<?php } ?>
 								<div class="container">
 									<div class="row">
-										<div class="col-md-8 col-md-offset-2 text-center" style="padding-top: 30vh;">
-											<h1>FB</h1>
+										<div class="col-md-8 col-md-offset-2 text-center" style="padding-top: 30vh; ">
+											<div style="background-color:rgb(8, 49, 65); padding-bottom:25px; border-bottom-color: #fb6816; border-bottom-style: solid;">
+												<h2 class="main-title"><b>FB</b> Ingeniería y Proyectos</h2>
+												<hr style="width:50%; margin-left:25%">
+												VENEZUELA - PANAMÁ
+											</div>
 										</div>
 									</div>
 								</div>

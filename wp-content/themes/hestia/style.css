@@ -2076,11 +2076,9 @@ fieldset[disabled] .navbar .btn-link:focus {
 }
 
 .navbar.navbar-transparent {
-	padding-top: 0px;
+	padding: 10px;
 	color: #fff;
-	background-color: transparent;
-	-webkit-box-shadow: none;
-	box-shadow: none;
+	background-color: rgba(231, 231, 231, 0.18);
 }
 
 .navbar.navbar-transparent .logo-container .brand {
@@ -5048,6 +5046,8 @@ li.yith_magnifier_thumbnail a {
         display: table-cell !important;
         vertical-align: middle;
         float: none;
+        height: 48px;
+        background-image: url('logo 2 50 pixel.png');
     }
 
     .navbar .navbar-collapse {
@@ -5166,7 +5166,7 @@ li.yith_magnifier_thumbnail a {
 	}
 
 	.navbar.navbar-transparent {
-		padding-top: 10px;
+		padding-top: 0px;
 		border-radius: 0;
 		background-color: rgba(0,0,0,0.8);
 	}
