@@ -193,6 +193,19 @@ class FBIngenieria
         return $list;
     }
 
+    public function getHeaderCarouselImages()
+    {
+        global $wpdb;
+        $table = $wpdb->prefix.'postmeta';
+        $sql = "SELECT post_id FROM $table WHERE meta_key = '_wp_attached_file';";
+        $result = $wpdb->get_results($sql);
+        $list = [];
+        foreach ($result as $img) {
+            $list[] = wp_get_attachment_url($img->post_id);
+        }
+        return $list;
+    }
+    
     public function setImage($projectId, $url = null, $post = null)
     {
         // @OTOD
