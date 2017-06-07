@@ -92,7 +92,8 @@ $hestia_general_credits = get_theme_mod('hestia_general_credits',
 
 	</html>
 	<?php
-		$lang = $GLOBALS['FBIngenieria']->getLanguage($_GET['lang']);
+		$lang = isset($_GET['lang']) ? $_GET['lang'] : 'es';
+		$lang = $GLOBALS['FBIngenieria']->getLanguage($lang);
 	?>
 	<script type="text/javascript">
 		function mail() {

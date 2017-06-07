@@ -24,9 +24,6 @@
 		<link href="<?php echo FBINGENIERIA_URL.'/src/assets/dependencies/vuetify.min.css' ?>" rel="stylesheet" type="text/css">
 		<script src="<?php echo FBINGENIERIA_URL.'/src/assets/dependencies/vue.min.js' ?>"></script>
 		<script src="<?php echo FBINGENIERIA_URL.'/src/assets/dependencies/vuetify.min.js' ?>"></script>
-		<?php
-		$lang = $GLOBALS['FBIngenieria']->getLanguage($_GET['lang']);
-		?>
 	</head>
 
 	<body <?php body_class(); ?>>
@@ -64,7 +61,10 @@
 			</header>
 		</div>
 	</body>
-
+	<?php
+		$lang = isset($_GET['lang']) ? $_GET['lang'] : 'es';
+		$lang = $GLOBALS['FBIngenieria']->getLanguage($lang);
+	?>
 	<script>
 		new Vue({
 			el: '#fbi_header',
