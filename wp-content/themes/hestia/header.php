@@ -46,14 +46,14 @@
 						</div>
 						<div id="main-navigation" class="navbar-collapse collapse" aria-expanded="false" style="height: 0px;">
 							<ul id="menu-header" class="nav navbar-nav navbar-right">
-								<li id="menu-item-12" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-home menu-item-12 active"><a title="Inicio" href="http://localhost/FBIngenieria/#carousel-hestia-generic">{{translate('home')}}</a></li>
-								<li id="menu-item-13" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-home menu-item-13 active"><a title="Qué hacemos?" href="http://localhost/FBIngenieria/#about">{{translate('about-us')}}</a></li>
-								<li id="menu-item-14" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-home menu-item-14 active"><a title="Por qué nosotros?" href="http://localhost/FBIngenieria/#whyus">{{translate('why-us')}}</a></li>
-								<li id="menu-item-16" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-home menu-item-16 active"><a title="Portafolio" href="http://localhost/FBIngenieria/#portfolio">{{translate('portfolio')}}</a></li>
-								<li id="menu-item-17" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-home menu-item-17 active"><a title="Trayectoria" href="http://localhost/FBIngenieria/#journey">{{translate('journey')}}</a></li>
-								<li id="menu-item-15" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-home menu-item-15 active"><a title="Clientes" href="http://localhost/FBIngenieria/#clients">{{translate('clients')}}</a></li>
-								<li id="menu-item-18" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-home menu-item-18 active"><a title="Contacto" href="http://localhost/FBIngenieria/#contact">{{translate('contact')}}</a></li>
-								<li id="menu-item-19" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-home menu-item-19 active"><a title="" href="http://localhost/FBIngenieria/#fbi_footer"><i class="fa fa-map-marker"></i></a></li>
+								<li id="menu-item-12" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-home menu-item-12 active"><a title="Inicio" href="#carousel-hestia-generic">{{translate('home')}}</a></li>
+								<li id="menu-item-13" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-home menu-item-13 active"><a title="Qué hacemos?" href="#about">{{translate('about-us')}}</a></li>
+								<li id="menu-item-14" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-home menu-item-14 active"><a title="Por qué nosotros?" href="#whyus">{{translate('why-us')}}</a></li>
+								<li id="menu-item-16" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-home menu-item-16 active"><a title="Portafolio" href="#portfolio">{{translate('portfolio')}}</a></li>
+								<li id="menu-item-17" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-home menu-item-17 active"><a title="Trayectoria" href="#journey">{{translate('journey')}}</a></li>
+								<li id="menu-item-15" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-home menu-item-15 active"><a title="Clientes" href="#clients">{{translate('clients')}}</a></li>
+								<li id="menu-item-18" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-home menu-item-18 active"><a title="Contacto" href="#contact">{{translate('contact')}}</a></li>
+								<li id="menu-item-19" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-home menu-item-19 active"><a title="" href="#fbi_footer"><i class="fa fa-map-marker"></i></a></li>
 							</ul>
 						</div>
 					</div>
