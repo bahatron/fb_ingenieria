@@ -144,13 +144,12 @@
                     <div class=" col-md-6 contact-form" style="height:auto; padding:90px;">
                         <form name="contact-form" action="">
                             <div class="col-md-6" align="center">
-                                <input type="text" name="name" value="" :placeholder="translate('contact-name')">
-                                <input type="text" name="lastname" value="" :placeholder="translate('contact-lastname')">
-                                <input type="text" name="phone" value="" :placeholder="translate('contact-phone')">
-                                <input type="email" name="mail" value="" :placeholder="translate('contact-mail')">
+                                <input type="text" name="name" value="" :placeholder="translate('contact-name')" required>
+                                <input type="text" name="lastname" value="" :placeholder="translate('contact-lastname')" required>
+                                <input type="text" name="mail" value="" :placeholder="translate('contact-mail')" required>
                             </div>
                             <div class="col-md-6" align="center">
-                                <textarea rows="4" cols="2" name="comment" :placeholder="translate('contact-comment')"></textarea>
+                                <textarea rows="4" cols="2" name="comment" :placeholder="translate('contact-comment')" required></textarea>
                                 <a href="#" class="btn btn-primary" style="text-transform: capitalize;">{{translate('contact-button')}}</a>
                             </div>
                         </form>
