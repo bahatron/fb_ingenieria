@@ -17,42 +17,16 @@ if ( ! function_exists( 'hestia_big_title' ) ) :
 	?>
 	<html>
 
-	<div class="page-header " style="background-color: #0b465d;">
+	<div class="page-header " style="background-color: #0b465d;" id="home">
 		<div class="container">
 			<div class="col-md-8 col-md-offset-2 text-center" style="padding-top: 30vh; ">
-				<v-carousel>
-					<v-carousel-item v-for="(item,i) in items" v-bind:src="item.src" :key="i">
-						<div style="background-color:rgb(8, 49, 65); padding-bottom:25px; border-bottom-color: #fb6816; border-bottom-style: solid;">
-							<h2 class="main-title"><b>FB</b> Ingeniería y Proyectos</h2>
-							<hr style="width:50%; margin-left:25%"> VENEZUELA - PANAMÁ
-						</div>
-					</v-carousel-item>
-				</v-carousel>
-
+				<div style="background-color:rgb(8, 49, 65); padding-bottom:25px; border-bottom-color: #fb6816; border-bottom-style: solid;">
+					<h2 class="main-title"><b>FB</b> Ingeniería y Proyectos</h2>
+					<hr style="width:50%; margin-left:25%"> VENEZUELA - PANAMÁ
+				</div>
 			</div>
 		</div>
 	</div>
-	<script>
-		export default {
-			data() {
-				return {
-					items: [{
-							src: '/static/doc-images/carousel/squirrel.jpg'
-						},
-						{
-							src: '/static/doc-images/carousel/sky.jpg'
-						},
-						{
-							src: '/static/doc-images/carousel/bird.jpg'
-						},
-						{
-							src: '/static/doc-images/carousel/planet.jpg'
-						}
-					]
-				}
-			}
-		}
-	</script>
 
 	</html>
 	<?php

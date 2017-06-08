@@ -20,8 +20,18 @@
 		<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
 		<?php endif; ?>
 		<?php wp_head(); ?>
+		<link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet" type="text/css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link href="<?php echo FBINGENIERIA_URL.'/src/assets/dependencies/vuetify.min.css' ?>" rel="stylesheet" type="text/css">
+		<script src="<?php echo FBINGENIERIA_URL.'/src/assets/dependencies/vue.min.js' ?>"></script>
+		<script src="<?php echo FBINGENIERIA_URL.'/src/assets/dependencies/vuetify.min.js' ?>"></script>
+		<?php
+		global $FBIngenieria;
+    $lang = isset($_GET['lang']) ? $_GET['lang'] : 'es';
+		$translations = $FBIngenieria->getLanguage($lang);
+	?>
 	</head>
-
+	
 	<body <?php body_class(); ?>>
 		<div class="wrapper">
 			<header class="header" id="fbi_header">
@@ -42,29 +52,48 @@
 						</div>
 						<div id="main-navigation" class="navbar-collapse collapse" aria-expanded="false" style="height: 0px;">
 							<ul id="menu-header" class="nav navbar-nav navbar-right">
-								<li id="menu-item-12" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-home menu-item-12 active"><a title="Inicio" href="http://localhost/FBIngenieria/#carousel-hestia-generic">{{translate('home')}}</a></li>
-								<li id="menu-item-13" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-home menu-item-13 active"><a title="Qué hacemos?" href="http://localhost/FBIngenieria/#about">{{translate('about-us')}}</a></li>
-								<li id="menu-item-14" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-home menu-item-14 active"><a title="Por qué nosotros?" href="http://localhost/FBIngenieria/#whyus">{{translate('why-us')}}</a></li>
-								<li id="menu-item-16" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-home menu-item-16 active"><a title="Portafolio" href="http://localhost/FBIngenieria/#portfolio">{{translate('portfolio')}}</a></li>
-								<li id="menu-item-17" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-home menu-item-17 active"><a title="Trayectoria" href="http://localhost/FBIngenieria/#journey">{{translate('journey')}}</a></li>
-								<li id="menu-item-15" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-home menu-item-15 active"><a title="Clientes" href="http://localhost/FBIngenieria/#clients">{{translate('clients')}}</a></li>
-								<li id="menu-item-18" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-home menu-item-18 active"><a title="Contacto" href="http://localhost/FBIngenieria/#contact">{{translate('contact')}}</a></li>
-								<li id="menu-item-19" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-home menu-item-19 active"><a title="" href="http://localhost/FBIngenieria/#fbi_footer"><i class="fa fa-map-marker"></i></a></li>
+								<li id="menu-item-12" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-home menu-item-12 active">
+									<a title="Inicio" href="#home"><?php echo $FBIngenieria->translate('home', $lang) ?></a>
+								</li>
+								<li id="menu-item-13" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-home menu-item-13 active">
+									<a title="Qué hacemos?" href="#about"><?php echo $FBIngenieria->translate('about-us', $lang) ?></a>
+								</li>
+								<li id="menu-item-14" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-home menu-item-14 active">
+									<a title="Por qué nosotros?" href="#whyus"><?php echo $FBIngenieria->translate('why-us', $lang) ?></a>
+								</li>
+								<li id="menu-item-16" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-home menu-item-16 active">
+									<a title="Portafolio" href="#portfolio"><?php echo $FBIngenieria->translate('portfolio', $lang) ?></a>
+								</li>
+								<li id="menu-item-17" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-home menu-item-17 active">
+									<a title="Trayectoria" href="#journey"><?php echo $FBIngenieria->translate('journey', $lang) ?></a>
+								</li>
+								<li id="menu-item-15" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-home menu-item-15 active">
+									<a title="Clientes" href="#clients"><?php echo $FBIngenieria->translate('clients', $lang) ?></a>
+								</li>
+								<li id="menu-item-18" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-home menu-item-18 active">
+									<a title="Contacto" href="#contact"><?php echo $FBIngenieria->translate('contact', $lang) ?></a>
+									</li>
+								<li id="menu-item-19" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-home menu-item-19 active">
+									<a title="" href="#fbi_footer"><i class="fa fa-map-marker"></i></a>
+								</li>
 							</ul>
 						</div>
 					</div>
 				</nav>
+			</header>
+		</div>
+	</body>
 
-				<script>
-					new Vue({
-						el: '#fbi_header',
-						data: {
-							translations: JSON.parse('<?php echo json_encode($translations) ?>')
-						},
-						methods: {
-							translate(str) {
-								return (this.translations[str]) ? this.translations[str] : str
-							}
-						}
-					})
-				</script>
+	<script>
+		new Vue({
+			el: '#fbi_header',
+			data: {
+				translations: JSON.parse('<?php echo $translations ?>')
+			},
+			methods: {
+				translate(str) {
+					return (this.translations[str]) ? this.translations[str] : str;
+				}
+			}
+		})
+	</script>

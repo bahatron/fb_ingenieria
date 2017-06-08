@@ -44,7 +44,7 @@ footer {
 }
 
 .padding-top {
-  padding-top: 60px;
+  padding-top: 80px;
 }
 
 .padding-top-journey {
@@ -132,10 +132,19 @@ footer {
 }
 
 .box-for-about {
+  width: 240px;
+  height: 150px;
+  margin: 1em;
+  display: inline-block;
+  background-color: red;
+  border-color: transparent;
+}
+
+.box-for-about {
   overflow: hidden;
   position: relative;
   display: inline-block;
-  background-color:transparent;
+  background-color: transparent;
   color: white;
 }
 
@@ -176,7 +185,7 @@ footer {
 
 .section-title {
   font-style: Roboto;
-  font-size: 100px;
+  font-size: 200px;
   color: #fb6816;
   letter-spacing: 0.3em;
 }
@@ -191,23 +200,6 @@ footer {
   border-radius: 2px;
   min-width: 0;
   height: 395px;
-  background: url(http://localhost/FBIngenieria/wp-content/plugins/fbingenieria/src/assets/img/journey.png) center center / cover no-repeat;
-}
-
-.pen-icon {
-  background: url(http://localhost/FBIngenieria/wp-content/plugins/fbingenieria/src/assets/img/pen.png) center center / cover no-repeat;
-}
-
-.helmet-icon {
-  background: url(http://localhost/FBIngenieria/wp-content/plugins/fbingenieria/src/assets/img/helmet.png) center center / cover no-repeat;
-}
-
-.paint-icon {
-  background: url(http://localhost/FBIngenieria/wp-content/plugins/fbingenieria/src/assets/img/paint.png) center center / cover no-repeat;
-}
-
-.comment-icon {
-  background: url(http://localhost/FBIngenieria/wp-content/plugins/fbingenieria/src/assets/img/comment.png) center center / cover no-repeat;
 }
 
 .p-journey {
@@ -301,12 +293,14 @@ a {
   margin-bottom: -20px;
   color: #fb6816;
 }
-.clients-p{
+
+.clients-p {
   display: block;
   font-size: 1.3em;
   padding: 60px;
   text-align: justify;
 }
+
 .contact-section {
   background: #202835;
   position: relative;
@@ -330,10 +324,10 @@ a {
 .floater {
   position: absolute;
   background-color: white;
-  width: 20px;
-  height: 20px;
+  width: 2.5%;
+  height: 7%;
   left: 48.8%;
-  top: 139px;
+  top: 46.5%;
   z-index: 2;
 }
 
@@ -369,11 +363,11 @@ a {
   display: block;
 }
 
+
 .about-section {
   border-top-color: #fb6816;
   border-top-style: solid;
   height: 630px;
-  background: url(http://localhost/FBIngenieria/wp-content/plugins/fbingenieria/src/assets/img/about-background.jpg) center center / cover no-repeat;
 }
 
 .div-page {
@@ -409,17 +403,31 @@ a {
   .about-section {
     border-top-color: #fb6816;
     border-top-style: solid;
-    height: 430px;
+    height: 100%;
     background: url(http://localhost/FBIngenieria/wp-content/plugins/fbingenieria/src/assets/img/about-background.jpg) center center / cover no-repeat;
   }
   .about-span {
     color: #fb6816;
     font-weight: 500;
-    display: block;
+    display: inline-block;
+    font-size: 1em;
+  }
+  .about-span-small {
+    color: #999;
+    display: inline-block;
     font-size: 0.8em;
+    text-align:justify;
+  }
+  .box-for-about {
+    width: 240px;
+    height: 150px;
+    margin: 1em;
+    display: inline-block;
+    background-color: transparent;
+    border-color: transparent;
   }
   .about p {
-    font-size: 1em;
+    font-size: 1.13em;
     line-height: 1em;
     letter-spacing: 0.1em;
   }
@@ -473,10 +481,7 @@ a {
     border-style: solid;
   }
   .about-box {
-    margin-left: 50px;
-    margin-right: 50px;
-    margin-top: 25px;
-    margin-bottom: 25px;
+    margin: auto;
   }
   .custom-icon {
     font-size: 15px;

@@ -10,18 +10,23 @@
  */
 
 $hestia_general_credits = get_theme_mod('hestia_general_credits',
-	/* translators: %1$s is Theme Name, %2$s is WordPress */
-	sprintf(esc_html__('%1$s | Powered by %2$s', 'hestia'),
-		/* translators: %s is Theme name */
-		sprintf('<a href="https://themeisle.com/themes/hestia/" target="_blank" rel="nofollow">%s</a>',
-			esc_html__('Hestia', 'hestia')
-			),
-		/* translators: %s is WordPress */
-		sprintf('<a href="http://wordpress.org/" rel="nofollow">%s</a>',
-			esc_html__('WordPress', 'hestia')
-			)
-		)
-		); ?>
+    /* translators: %1$s is Theme Name, %2$s is WordPress */
+    sprintf(esc_html__('%1$s | Powered by %2$s', 'hestia'),
+        /* translators: %s is Theme name */
+        sprintf('<a href="https://themeisle.com/themes/hestia/" target="_blank" rel="nofollow">%s</a>',
+            esc_html__('Hestia', 'hestia')
+            ),
+        /* translators: %s is WordPress */
+        sprintf('<a href="http://wordpress.org/" rel="nofollow">%s</a>',
+            esc_html__('WordPress', 'hestia')
+            )
+        )
+        ); ?>
+	<?php
+		global $FBIngenieria;
+        $lang = isset($_GET['lang']) ? $_GET['lang'] : 'es';
+		$translations = $FBIngenieria->getLanguage($lang);
+	?>
 	<footer id="fbi_footer" class="footer footer-big" data-app>
 		<div class="row" style="width: 100%;">
 			<div class="col-md-12">
@@ -65,7 +70,7 @@ $hestia_general_credits = get_theme_mod('hestia_general_credits',
 			<div class="col-md-12" style="height: 100%; width:100%; background:#202835; border-top-style: solid; border-top-color: #fb6816; padding-top: 10px; "
 			    align="center">
 				<p>2017 © Copyrights FB Ingeniería</p>
-				<a href="#carousel-hestia-generic">Volver a Inicio</a>
+				<a href="#home"><?php echo $FBIngenieria->translate('back-to-top', $lang) ?></a>
 				<form action="" method="GET" id="changeLanguageForm">
 					<img style="max-height: 30px; cursor: pointer;" src="<?php echo FBINGENIERIA_URL.'/src/assets/img/1495683664_United-States-Flag.png' ?>"
 					    onclick="changeLanguage('en')">
@@ -101,20 +106,15 @@ $hestia_general_credits = get_theme_mod('hestia_general_credits',
 			form.elements.lang.value = lang;
 			form.submit();
 		}
+		new Vue({
+			el: '#fbi_footer',
+			data: {
+				translations: JSON.parse('<?php echo $translations ?>')
+			},
+			methods: {
+				translate(str) {
+					return (this.translations[str]) ? this.translations[str] : str;
+				}
+			}
+		})
 	</script>
-	<script>
-        new Vue({
-            el: '#fbi_footer',
-            data: {
-                translations: JSON.parse('<?php echo json_encode($lang) ?>')
-            },
-            mounted: function () {
-                console.log('translations: ', this.translations);
-            },
-            methods: {
-                translate(str) {
-                    return (this.translations[str]) ? this.translations[str] : str;
-                }
-            }
-        })
-    </script>
