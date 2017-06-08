@@ -38,7 +38,8 @@ $hestia_general_credits = get_theme_mod('hestia_general_credits',
 						<tr>
 							<td style=" width: auto;">
 								<p>
-									N° 75, Costa Sur,<br> EL Doral
+									Corregimiento Juan Díaz,<br>
+									N° 75, Costa Sur,<br> El Doral
 									<br>Ciudad de Panamá
 									<br><a target="_blank" href="https://goo.gl/maps/UUhRLZM8Qmt"><i class="fa fa-map-marker"></i>&nbsp<b>Panamá</b></a>
 									<br><i class="fa fa-phone"></i>&nbsp +507 8311172
@@ -46,6 +47,7 @@ $hestia_general_credits = get_theme_mod('hestia_general_credits',
 							</td>
 							<td style=" width: auto;">
 								<p>
+									Av. Principal de Manzanares,<br>
 									C.C. Manzanares Plaza,<br> Piso 1, Oficina 01-04
 									<br>Caracas
 									<br><a target="_blank" href="https://goo.gl/maps/EZA7xeWNryH2"><i class="fa fa-map-marker"></i>&nbsp<b>Venezuela</b></a>

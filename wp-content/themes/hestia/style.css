@@ -5046,7 +5046,8 @@ li.yith_magnifier_thumbnail a {
         display: table-cell !important;
         vertical-align: middle;
         float: none;
-        height: 48px;
+        height: 49.5px;
+		background-image: url(logo-2-50-pixel.png);
     }
 
     .navbar .navbar-collapse {
@@ -5065,7 +5066,13 @@ li.yith_magnifier_thumbnail a {
 	.navbar. .dropdown-menu li > a > i {
 		color: #333;
 	}
-
+    .container>.navbar-header {
+        display: table-cell !important;
+        vertical-align: middle;
+        float: none;
+        height: 49.5px;
+		background-image: url(cropped-logo-2-50-pixel.png);
+    }
 
 	.woocommerce.single-product .product,
 	.single .section {
