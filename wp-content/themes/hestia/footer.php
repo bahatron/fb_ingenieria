@@ -70,7 +70,7 @@ $hestia_general_credits = get_theme_mod('hestia_general_credits',
 			<div class="col-md-12" style="height: 100%; width:100%; background:#202835; border-top-style: solid; border-top-color: #fb6816; padding-top: 10px; "
 			    align="center">
 				<p>2017 © Copyrights FB Ingeniería</p>
-				<a href="#home">><?php echo $FBIngenieria->translate('back-to-top', $lang) ?></a>
+				<a href="#home"><?php echo $FBIngenieria->translate('back-to-top', $lang) ?></a>
 				<form action="" method="GET" id="changeLanguageForm">
 					<img style="max-height: 30px; cursor: pointer;" src="<?php echo FBINGENIERIA_URL.'/src/assets/img/1495683664_United-States-Flag.png' ?>"
 					    onclick="changeLanguage('en')">
