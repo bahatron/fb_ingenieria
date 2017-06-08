@@ -47,7 +47,7 @@
 						</div>
 						<div id="main-navigation" class="navbar-collapse collapse" aria-expanded="false" style="height: 0px;">
 							<ul id="menu-header" class="nav navbar-nav navbar-right">
-								<li id="menu-item-12" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-home menu-item-12 active"><a title="Inicio" href="#carousel-hestia-generic">{{translate('home')}}</a></li>
+								<li id="menu-item-12" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-home menu-item-12 active"><a title="Inicio" href="#home">{{translate('home')}}</a></li>
 								<li id="menu-item-13" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-home menu-item-13 active"><a title="Qué hacemos?" href="#about">{{translate('about-us')}}</a></li>
 								<li id="menu-item-14" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-home menu-item-14 active"><a title="Por qué nosotros?" href="#whyus">{{translate('why-us')}}</a></li>
 								<li id="menu-item-16" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-home menu-item-16 active"><a title="Portafolio" href="#portfolio">{{translate('portfolio')}}</a></li>

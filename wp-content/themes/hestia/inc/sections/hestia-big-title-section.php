@@ -17,7 +17,7 @@ if ( ! function_exists( 'hestia_big_title' ) ) :
 	?>
 	<html>
 
-	<div class="page-header " style="background-color: #0b465d;">
+	<div class="page-header " style="background-color: #0b465d;" id="home">
 		<div class="container">
 			<div class="col-md-8 col-md-offset-2 text-center" style="padding-top: 30vh; ">
 				<div style="background-color:rgb(8, 49, 65); padding-bottom:25px; border-bottom-color: #fb6816; border-bottom-style: solid;">

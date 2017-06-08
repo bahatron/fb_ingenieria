@@ -44,7 +44,7 @@ footer {
 }
 
 .padding-top {
-  padding-top: 60px;
+  padding-top: 80px;
 }
 
 .padding-top-journey {
@@ -185,7 +185,7 @@ footer {
 
 .section-title {
   font-style: Roboto;
-  font-size: 100px;
+  font-size: 200px;
   color: #fb6816;
   letter-spacing: 0.3em;
 }
@@ -427,7 +427,7 @@ a {
     border-color: transparent;
   }
   .about p {
-    font-size: 1em;
+    font-size: 1.13em;
     line-height: 1em;
     letter-spacing: 0.1em;
   }
