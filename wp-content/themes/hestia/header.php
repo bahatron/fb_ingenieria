@@ -25,8 +25,13 @@
 		<link href="<?php echo FBINGENIERIA_URL.'/src/assets/dependencies/vuetify.min.css' ?>" rel="stylesheet" type="text/css">
 		<script src="<?php echo FBINGENIERIA_URL.'/src/assets/dependencies/vue.min.js' ?>"></script>
 		<script src="<?php echo FBINGENIERIA_URL.'/src/assets/dependencies/vuetify.min.js' ?>"></script>
+		<?php
+		global $FBIngenieria;
+    $lang = isset($_GET['lang']) ? $_GET['lang'] : 'es';
+		$translations = $FBIngenieria->getLanguage($lang);
+	?>
 	</head>
-
+	
 	<body <?php body_class(); ?>>
 		<div class="wrapper">
 			<header class="header" id="fbi_header">
@@ -47,14 +52,30 @@
 						</div>
 						<div id="main-navigation" class="navbar-collapse collapse" aria-expanded="false" style="height: 0px;">
 							<ul id="menu-header" class="nav navbar-nav navbar-right">
-								<li id="menu-item-12" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-home menu-item-12 active"><a title="Inicio" href="#home">{{translate('home')}}</a></li>
-								<li id="menu-item-13" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-home menu-item-13 active"><a title="Qué hacemos?" href="#about">{{translate('about-us')}}</a></li>
-								<li id="menu-item-14" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-home menu-item-14 active"><a title="Por qué nosotros?" href="#whyus">{{translate('why-us')}}</a></li>
-								<li id="menu-item-16" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-home menu-item-16 active"><a title="Portafolio" href="#portfolio">{{translate('portfolio')}}</a></li>
-								<li id="menu-item-17" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-home menu-item-17 active"><a title="Trayectoria" href="#journey">{{translate('journey')}}</a></li>
-								<li id="menu-item-15" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-home menu-item-15 active"><a title="Clientes" href="#clients">{{translate('clients')}}</a></li>
-								<li id="menu-item-18" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-home menu-item-18 active"><a title="Contacto" href="#contact">{{translate('contact')}}</a></li>
-								<li id="menu-item-19" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-home menu-item-19 active"><a title="" href="#fbi_footer"><i class="fa fa-map-marker"></i></a></li>
+								<li id="menu-item-12" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-home menu-item-12 active">
+									<a title="Inicio" href="#home"><?php echo $FBIngenieria->translate('home', $lang) ?></a>
+								</li>
+								<li id="menu-item-13" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-home menu-item-13 active">
+									<a title="Qué hacemos?" href="#about"><?php echo $FBIngenieria->translate('about-us', $lang) ?></a>
+								</li>
+								<li id="menu-item-14" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-home menu-item-14 active">
+									<a title="Por qué nosotros?" href="#whyus"><?php echo $FBIngenieria->translate('why-us', $lang) ?></a>
+								</li>
+								<li id="menu-item-16" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-home menu-item-16 active">
+									<a title="Portafolio" href="#portfolio"><?php echo $FBIngenieria->translate('portfolio', $lang) ?></a>
+								</li>
+								<li id="menu-item-17" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-home menu-item-17 active">
+									<a title="Trayectoria" href="#journey"><?php echo $FBIngenieria->translate('journey', $lang) ?></a>
+								</li>
+								<li id="menu-item-15" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-home menu-item-15 active">
+									<a title="Clientes" href="#clients"><?php echo $FBIngenieria->translate('clients', $lang) ?></a>
+								</li>
+								<li id="menu-item-18" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-home menu-item-18 active">
+									<a title="Contacto" href="#contact"><?php echo $FBIngenieria->translate('contact', $lang) ?></a>
+									</li>
+								<li id="menu-item-19" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-home menu-item-19 active">
+									<a title="" href="#fbi_footer"><i class="fa fa-map-marker"></i></a>
+								</li>
 							</ul>
 						</div>
 					</div>
@@ -62,15 +83,12 @@
 			</header>
 		</div>
 	</body>
-	<?php
-		$lang = isset($_GET['lang']) ? $_GET['lang'] : 'es';
-		$lang = $GLOBALS['FBIngenieria']->getLanguage($lang);
-	?>
+
 	<script>
 		new Vue({
 			el: '#fbi_header',
 			data: {
-				translations: JSON.parse('<?php echo $lang ?>')
+				translations: JSON.parse('<?php echo $translations ?>')
 			},
 			methods: {
 				translate(str) {
