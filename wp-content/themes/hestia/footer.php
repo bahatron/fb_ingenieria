@@ -22,6 +22,11 @@ $hestia_general_credits = get_theme_mod('hestia_general_credits',
             )
         )
         ); ?>
+	<?php
+		global $FBIngenieria;
+        $lang = isset($_GET['lang']) ? $_GET['lang'] : 'es';
+		$translations = $FBIngenieria->getLanguage($lang);
+	?>
 	<footer id="fbi_footer" class="footer footer-big" data-app>
 		<div class="row" style="width: 100%;">
 			<div class="col-md-12">
@@ -65,7 +70,7 @@ $hestia_general_credits = get_theme_mod('hestia_general_credits',
 			<div class="col-md-12" style="height: 100%; width:100%; background:#202835; border-top-style: solid; border-top-color: #fb6816; padding-top: 10px; "
 			    align="center">
 				<p>2017 © Copyrights FB Ingeniería</p>
-				<a href="#home">{{translate('back-to-top')}}</a>
+				<a href="#home">><?php echo $FBIngenieria->translate('back-to-top', $lang) ?></a>
 				<form action="" method="GET" id="changeLanguageForm">
 					<img style="max-height: 30px; cursor: pointer;" src="<?php echo FBINGENIERIA_URL.'/src/assets/img/1495683664_United-States-Flag.png' ?>"
 					    onclick="changeLanguage('en')">
@@ -91,11 +96,6 @@ $hestia_general_credits = get_theme_mod('hestia_general_credits',
 	</body>
 
 	</html>
-	<?php
-		global $FBIngenieria;
-        $lang = isset($_GET['lang']) ? $_GET['lang'] : 'es';
-		$translations = $FBIngenieria->getLanguage($lang);
-	?>
 	<script type="text/javascript">
 		function mail() {
 			document.getElementById('prueba').innerHTML = '<v-alert info v-bind:value="true">This is a info alert.</v-alert>';
