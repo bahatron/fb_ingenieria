@@ -5047,7 +5047,6 @@ li.yith_magnifier_thumbnail a {
         vertical-align: middle;
         float: none;
         height: 48px;
-        background-image: url('logo 2 50 pixel.png');
     }
 
     .navbar .navbar-collapse {
@@ -5168,7 +5167,7 @@ li.yith_magnifier_thumbnail a {
 	.navbar.navbar-transparent {
 		padding-top: 0px;
 		border-radius: 0;
-		background-color: rgba(0,0,0,0.8);
+		background-color: #083141;
 	}
 
 	.main-raised {
