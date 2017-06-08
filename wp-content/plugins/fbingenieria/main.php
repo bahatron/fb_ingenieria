@@ -41,9 +41,14 @@ class FBIngenieria
         if (!$file) {
             $file = @file_get_contents(FBINGENIERIA_URL.'/src/assets/lang/es.json'); //default language
         }
-        return $file ? json_encode(json_decode($file)) : '';
+        return $file ? json_encode(json_decode($file)) : null;
     }
     
+    public function translate($key, $lang = null){
+        $translations = json_decode($this->getLanguage($lang));
+        return $translations->$key ? $translations->$key : $key;
+    }
+
     public function add_menu_pages()
     {
         add_menu_page('FBIngenieria', 'FBIngenieria', 'administrator', 'fbi_settings_menu', 'fbi_settings_add_client_handler');
