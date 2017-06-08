@@ -63,14 +63,15 @@
 		</div>
 	</body>
 	<?php
-		$lang = isset($_GET['lang']) ? $_GET['lang'] : 'es';
-		$lang = $GLOBALS['FBIngenieria']->getLanguage($lang);
+		global $FBIngenieria;
+    $lang = isset($_GET['lang']) ? $_GET['lang'] : 'es';
+		$translations = $FBIngenieria->getLanguage($lang);
 	?>
 	<script>
 		new Vue({
 			el: '#fbi_header',
 			data: {
-				translations: JSON.parse('<?php echo $lang ?>')
+				translations: JSON.parse('<?php echo $translations ?>')
 			},
 			methods: {
 				translate(str) {

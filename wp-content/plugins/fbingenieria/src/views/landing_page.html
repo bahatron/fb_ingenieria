@@ -4,8 +4,9 @@
     <!--CSS and dependencies-->
     <link rel="stylesheet" href="<?php echo FBINGENIERIA_URL. '/src/assets/css/styles.css'?>" rel="stylesheet" type="text/css">
     <?php
+        global $FBIngenieria;
         $lang = isset($_GET['lang']) ? $_GET['lang'] : 'es';
-		$lang = $GLOBALS['FBIngenieria']->getLanguage($lang);
+		$translations = $FBIngenieria->getLanguage($lang);
     ?>
 </head>
 
@@ -166,7 +167,7 @@
         new Vue({
             el: '#fbi_landing_page',
             data: {
-                translations: JSON.parse('<?php echo $lang ?>')
+                translations: JSON.parse('<?php echo $translations ?>')
             },
             methods: {
                 translate(str) {

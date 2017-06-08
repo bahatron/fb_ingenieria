@@ -92,8 +92,9 @@ $hestia_general_credits = get_theme_mod('hestia_general_credits',
 
 	</html>
 	<?php
-		$lang = isset($_GET['lang']) ? $_GET['lang'] : 'es';
-		$lang = $GLOBALS['FBIngenieria']->getLanguage($lang);
+		global $FBIngenieria;
+        $lang = isset($_GET['lang']) ? $_GET['lang'] : 'es';
+		$translations = $FBIngenieria->getLanguage($lang);
 	?>
 	<script type="text/javascript">
 		function mail() {
@@ -108,7 +109,7 @@ $hestia_general_credits = get_theme_mod('hestia_general_credits',
 		new Vue({
 			el: '#fbi_footer',
 			data: {
-				translations: JSON.parse('<?php echo $lang ?>')
+				translations: JSON.parse('<?php echo $translations ?>')
 			},
 			methods: {
 				translate(str) {
