@@ -169,7 +169,7 @@
                 clientList: JSON.parse('<?php echo json_encode($FBIngenieria->getActiveClients()) ?>')
             },
             mounted: function () {
-                console.log('clientList', clientList);
+                console.log('clientList', this.clientList);
             }
         })
     </script>
