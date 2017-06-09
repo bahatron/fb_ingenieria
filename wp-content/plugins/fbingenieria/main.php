@@ -16,7 +16,8 @@ class FBIngenieria
     private $projects;
     private $images;
     private $headerImages;
-    
+    private $translations;
+
     public function __construct()
     {
         define('FBINGENIERIA_PATH', plugin_dir_path(__FILE__));
@@ -37,19 +38,21 @@ class FBIngenieria
         add_shortcode('fbi_landing_page', 'fbi_landing_page_handler');
     }
 
-    public function getLanguage($lang=null)
+    public function setLanguage($lang=null)
     {
         $file = @file_get_contents(FBINGENIERIA_URL.'/src/assets/lang/'.$lang.'.json');
         if (!$file) {
             $file = @file_get_contents(FBINGENIERIA_URL.'/src/assets/lang/es.json'); //default language
         }
-        return $file ? json_encode(json_decode($file)) : null;
+        $this->translations = json_decode($file);
     }
     
     public function translate($key, $lang = null)
     {
-        $translations = json_decode($this->getLanguage($lang));
-        return $translations->$key ? $translations->$key : $key;
+        if($lang !== null){
+            $this->setLanguage($lang);
+        }
+        return $this->translations->$key ? $this->translations->$key : $key;
     }
 
     public function add_menu_pages()

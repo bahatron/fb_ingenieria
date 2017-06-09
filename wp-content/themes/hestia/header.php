@@ -28,7 +28,7 @@
 		<?php
 		global $FBIngenieria;
     $lang = isset($_GET['lang']) ? $_GET['lang'] : 'es';
-		$translations = $FBIngenieria->getLanguage($lang);
+		$translations = $FBIngenieria->setLanguage($lang);
 	?>
 	</head>
 	

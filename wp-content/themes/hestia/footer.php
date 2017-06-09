@@ -25,7 +25,7 @@ $hestia_general_credits = get_theme_mod('hestia_general_credits',
 	<?php
 		global $FBIngenieria;
         $lang = isset($_GET['lang']) ? $_GET['lang'] : 'es';
-		$translations = $FBIngenieria->getLanguage($lang);
+		$translations = $FBIngenieria->setLanguage($lang);
 	?>
 	<footer id="fbi_footer" class="footer footer-big" data-app>
 		<div class="row" style="width: 100%;">
