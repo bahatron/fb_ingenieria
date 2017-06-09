@@ -24,8 +24,6 @@ $hestia_general_credits = get_theme_mod('hestia_general_credits',
         ); ?>
 	<?php
 		global $FBIngenieria;
-        $lang = isset($_GET['lang']) ? $_GET['lang'] : 'es';
-		$translations = $FBIngenieria->setLanguage($lang);
 	?>
 	<footer id="fbi_footer" class="footer footer-big" data-app>
 		<div class="row" style="width: 100%;">
@@ -109,14 +107,6 @@ $hestia_general_credits = get_theme_mod('hestia_general_credits',
 			form.submit();
 		}
 		new Vue({
-			el: '#fbi_footer',
-			data: {
-				translations: JSON.parse('<?php echo $translations ?>')
-			},
-			methods: {
-				translate(str) {
-					return (this.translations[str]) ? this.translations[str] : str;
-				}
-			}
+			el: '#fbi_footer'
 		})
 	</script>

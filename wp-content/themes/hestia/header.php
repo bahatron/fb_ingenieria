@@ -28,7 +28,7 @@
 		<?php
 		global $FBIngenieria;
     $lang = isset($_GET['lang']) ? $_GET['lang'] : 'es';
-		$translations = $FBIngenieria->setLanguage($lang);
+		$FBIngenieria->setLanguage($lang);
 	?>
 	</head>
 	
@@ -86,14 +86,6 @@
 
 	<script>
 		new Vue({
-			el: '#fbi_header',
-			data: {
-				translations: JSON.parse('<?php echo $translations ?>')
-			},
-			methods: {
-				translate(str) {
-					return (this.translations[str]) ? this.translations[str] : str;
-				}
-			}
+			el: '#fbi_header'
 		})
 	</script>

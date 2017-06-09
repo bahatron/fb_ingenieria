@@ -49,7 +49,7 @@ class FBIngenieria
     
     public function translate($key, $lang = null)
     {
-        if($lang !== null){
+        if($lang !== null || !isset($this->translations)){
             $this->setLanguage($lang);
         }
         return $this->translations->$key ? $this->translations->$key : $key;
