@@ -106,7 +106,7 @@ class FBIngenieria
         return $wpdb->get_row($sql);
     }
 
-    public function getActiveClientImages()
+    public function getActiveClients()
     {
         global $wpdb;
         $sql="SELECT id, name, imageUrl from $this->clients WHERE visible=1";
@@ -273,6 +273,15 @@ class FBIngenieria
         global $wpdb;
         $sql = "SELECT * FROM $this->headerImages";
         return $wpdb->get_results($sql);
+    }
+
+    public function getHeaderImagesUrl()
+    {
+        $array = $this->getHeaderImages();
+        foreach($array as $img){
+            $list[] = wp_get_attachment_url($img->post_id);
+        }
+        return $list;
     }
 }
 

@@ -133,7 +133,11 @@
                 <span class="clients-p">
                     <?php echo $FBIngenieria->translate('clients-text', $lang) ?>
                 </span>
-                <h2 align="center">En Construcción</h2>
+                <div class="client-carousel"  v-if="clientList.length > 0">
+                    <v-carousel cycle="false" style="height: 100vh">
+                        <v-carousel-item v-for="client in clientList" :src="client.imageUrl"></v-carousel-item>
+                    </v-carousel>
+                </div>
             </section>
             <section class="padding-top contact-section" id="contact">
                 <p class="section-title" align="center"><?php echo $FBIngenieria->translate('contact-title', $lang) ?></p>
@@ -164,12 +168,10 @@
         new Vue({
             el: '#fbi_landing_page',
             data: {
-                translations: JSON.parse('<?php echo $translations ?>')
+                clientList: JSON.parse('<?php echo json_encode($FBIngenieria->getActiveClients()) ?>')
             },
-            methods: {
-                translate(str) {
-                    return (this.translations[str]) ? this.translations[str] : str;
-                }
+            mounted: function () {
+                console.log('clientList', clientList);
             }
         })
     </script>
