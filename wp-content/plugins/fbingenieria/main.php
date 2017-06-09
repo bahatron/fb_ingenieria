@@ -106,6 +106,13 @@ class FBIngenieria
         return $wpdb->get_row($sql);
     }
 
+    public function getActiveClientImages()
+    {
+        global $wpdb;
+        $sql="SELECT id, name, imageUrl from $this->clients WHERE visible=1";
+        return $wpdb->get_results($sql);
+    }
+    
     public function updateClient($array)
     {
         global $wpdb;
