@@ -106,7 +106,7 @@ class FBIngenieria
         return $wpdb->get_row($sql);
     }
 
-    public function getActiveClientImages()
+    public function getActiveClients()
     {
         global $wpdb;
         $sql="SELECT id, name, imageUrl from $this->clients WHERE visible=1";
