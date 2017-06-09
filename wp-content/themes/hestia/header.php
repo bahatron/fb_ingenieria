@@ -37,7 +37,7 @@
 			<header class="header" id="fbi_header">
 				<nav class="navbar navbar-default navbar-transparent navbar-fixed-top navbar-color-on-scroll">
 					<div class="container">
-						<div class="navbar-header">
+						<div class="navbar-header" style="padding:5px;width:100vw">
 							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navigation">
 							<span class="sr-only"><?php esc_html_e( 'Toggle Navigation', 'hestia' ); ?></span>
 							<span class="icon-bar"></span>

@@ -15,6 +15,7 @@ class FBIngenieria
     private $clients;
     private $projects;
     private $images;
+    private $headerImages;
     
     public function __construct()
     {
@@ -23,6 +24,7 @@ class FBIngenieria
         $this->clients = $GLOBALS['wpdb']->prefix.'fbi_clients';
         $this->projects = $GLOBALS['wpdb']->prefix.'fbi_projects';
         $this->images = $GLOBALS['wpdb']->prefix.'fbi_images';
+        $this->headerImages = $GLOBALS['wpdb']->prefix.'fbi_header_images';
         $this->init_wp_plugin();
     }
 
@@ -44,7 +46,8 @@ class FBIngenieria
         return $file ? json_encode(json_decode($file)) : null;
     }
     
-    public function translate($key, $lang = null){
+    public function translate($key, $lang = null)
+    {
         $translations = json_decode($this->getLanguage($lang));
         return $translations->$key ? $translations->$key : $key;
     }
@@ -55,6 +58,7 @@ class FBIngenieria
         add_submenu_page('fbi_settings_menu', 'Manejar Clientes', 'Manejar Clientes', 'administrator', 'fbi_settings_menu', 'fbi_settings_add_client_handler');
         add_submenu_page('fbi_settings_menu', 'Manejar Proyectos', 'Manejar Proyectos', 'administrator', 'fbi_settings_projects', 'fbi_settings_add_project_handler');
         add_submenu_page('fbi_settings_menu', 'Imagenes', 'Imagenes de proyecto', 'administrator', 'fbi_settings_images', 'fbi_settings_manage_project_images_handler');
+        add_submenu_page('fbi_settings_menu', 'Imagenes', 'Imagenes de cabezera', 'administrator', 'fbi_settings_header_images', 'fbi_settings_manage_header_images_handler');
     }
 
     private function showError($message)
@@ -100,6 +104,20 @@ class FBIngenieria
         global $wpdb;
         $sql="SELECT * from $this->clients WHERE id = $id";
         return $wpdb->get_row($sql);
+    }
+
+    public function getActiveClientImages()
+    {
+        global $wpdb;
+        $sql="SELECT id, name, imageUrl from $this->clients WHERE visible=1";
+        return $wpdb->get_results($sql);
+    }
+
+    public function getClientProjects($id)
+    {
+        global $wpdb;
+        $sql = "SELECT * FROM $this->projects WHERE client_id=$id";
+        return $wpdb->get_results($sql);
     }
 
     public function updateClient($array)
@@ -181,8 +199,60 @@ class FBIngenieria
     public function getProjectImages($id)
     {
         global $wpdb;
-        $sql="SELECT id, url FROM $this->images WHERE project_id = $id";
+        $sql="SELECT * FROM $this->images WHERE project_id = $id";
         return $wpdb->get_results($sql);
+    }
+
+    public function addMediaToProject($id, $array)
+    {
+        global $wpdb;
+        foreach ($array as $img) {
+            $result += $wpdb->insert($this->images, ['post_id' => $img, 'project_id' => $id]);
+        }
+        if (!$result) {
+            $this->showError('Hubo un error registrado en base de datos');
+        } else {
+            $this->showSuccess('Actualizacion satisfactoria!');
+        }
+    }
+
+    public function deleteMediaFromProject($id, $array)
+    {
+        global $wpdb;
+        foreach ($array as $img) {
+            $result += $wpdb->delete($this->images, ['post_id' => $img, 'project_id' => $id]);
+        }
+        if (!$result) {
+            $this->showError('Hubo un error registrado en base de datos');
+        } else {
+            $this->showSuccess('Actualizacion satisfactoria!');
+        }
+    }
+
+    public function addMediaToHeader($array)
+    {
+        global $wpdb;
+        foreach ($array as $img) {
+            $result += $wpdb->insert($this->headerImages, ['post_id' => $img]);
+        }
+        if (!$result) {
+            $this->showError('Error registrado en base de datos');
+        } else {
+            $this->showSuccess('Actualizacion satisfactoria!');
+        }
+    }
+
+    public function deleteMediaFromHeader($array)
+    {
+        global $wpdb;
+        foreach ($array as $img) {
+            $result += $wpdb->delete($this->headerImages, ['post_id' => $img]);
+        }
+        if (!$result) {
+            $this->showError('Error registrado en base de datos');
+        } else {
+            $this->showSuccess('Actualizacion satisfactoria!');
+        }
     }
 
     public function getUploadedMedia()
@@ -193,46 +263,16 @@ class FBIngenieria
         $result = $wpdb->get_results($sql);
         $list = [];
         foreach ($result as $img) {
-            $list[] = wp_get_attachment_url($img->post_id);
+            $list[] = array('id' => $img->post_id, 'url' => wp_get_attachment_url($img->post_id));
         }
         return $list;
     }
     
-    public function setImage($projectId, $url = null, $post = null)
-    {
-        // @OTOD
-    }
-
-    public function unsetImage($projectId, $imgId)
-    {
-        // @TODO
-    }
-    
-    public function getHeaderCarouselImages()
+    public function getHeaderImages()
     {
         global $wpdb;
-        $table = $wpdb->prefix.'postmeta';
-        $sql = "SELECT post_id FROM $table WHERE meta_key = '_wp_attached_file';";
-        $result = $wpdb->get_results($sql);
-        $list = [];
-        foreach ($result as $img) {
-            $list[] = wp_get_attachment_url($img->post_id);
-        }
-        return json_encode($list);
-    }
-
-    public function getClientCarouselImages()
-    {
-        global $wpdb;
-        $sql = "SELECT imageUrl FROM $this->clients WHERE visible = 1";
-        $result = $wpdb->get_results($sql);
-        $list=[];
-        foreach($result as $img){
-            if($img->imageUrl !== '' && $img->imageUrl !== null){
-                $list[] = $img->imageUrl;
-            }
-        }
-        return json_encode($list);
+        $sql = "SELECT * FROM $this->headerImages";
+        return $wpdb->get_results($sql);
     }
 }
 
@@ -258,4 +298,9 @@ function fbi_settings_add_project_handler()
 function fbi_settings_manage_project_images_handler()
 {
     include FBINGENIERIA_PATH.'src/views/manage_images.php';
+}
+
+function fbi_settings_manage_header_images_handler()
+{
+    include FBINGENIERIA_PATH.'src/views/manage_header.php';
 }
