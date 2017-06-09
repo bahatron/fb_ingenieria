@@ -6,6 +6,7 @@ function fbingenieriaDatabase()
     $fbiClient = $wpdb->prefix.'fbi_clients';
     $fbiProject = $wpdb->prefix.'fbi_projects';
     $fbiProjectImg = $wpdb->prefix.'fbi_images';
+    $fbiHeaderImg = $wpdb->prefix.'fbi_header_images';
 
     $sql = "CREATE TABLE IF NOT EXISTS $fbiClient (
       id INT(11) NOT NULL AUTO_INCREMENT,
@@ -51,6 +52,14 @@ function fbingenieriaDatabase()
         REFERENCES $fbiProject (id)
         ON DELETE NO ACTION
         ON UPDATE NO ACTION)
+      ENGINE = InnoDB
+      DEFAULT CHARACTER SET = utf8;";
+    $wpdb->query($sql);
+
+    $sql = "CREATE TABLE IF NOT EXISTS $fbiHeaderImg (
+      id INT(11) NOT NULL AUTO_INCREMENT,
+      post_id VARCHAR(45) NOT NULL,
+      PRIMARY KEY (id))
       ENGINE = InnoDB
       DEFAULT CHARACTER SET = utf8;";
     $wpdb->query($sql);

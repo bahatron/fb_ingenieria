@@ -15,6 +15,7 @@ class FBIngenieria
     private $clients;
     private $projects;
     private $images;
+    private $headerImages;
     
     public function __construct()
     {
@@ -23,6 +24,7 @@ class FBIngenieria
         $this->clients = $GLOBALS['wpdb']->prefix.'fbi_clients';
         $this->projects = $GLOBALS['wpdb']->prefix.'fbi_projects';
         $this->images = $GLOBALS['wpdb']->prefix.'fbi_images';
+        $this->headerImages = $GLOBALS['wpdb']->prefix.'fbi_header_images';
         $this->init_wp_plugin();
     }
 
@@ -192,7 +194,7 @@ class FBIngenieria
         foreach ($array as $img) {
             $result += $wpdb->insert($this->images, ['post_id' => $img, 'project_id' => $id]);
         }
-        if(!$result){
+        if (!$result) {
             $this->showError('Hubo un error registrado en base de datos');
         } else {
             $this->showSuccess('Actualizacion satisfactoria!');
@@ -204,7 +206,7 @@ class FBIngenieria
         foreach ($array as $img) {
             $result += $wpdb->delete($this->images, ['post_id' => $img, 'project_id' => $id]);
         }
-        if(!$result){
+        if (!$result) {
             $this->showError('Hubo un error registrado en base de datos');
         } else {
             $this->showSuccess('Actualizacion satisfactoria!');
@@ -223,41 +225,11 @@ class FBIngenieria
         return $list;
     }
     
-    public function setImage($projectId, $url = null, $post = null)
-    {
-        // @OTOD
-    }
-
-    public function unsetImage($projectId, $imgId)
-    {
-        // @TODO
-    }
-    
-    public function getHeaderCarouselImages()
+    public function getHeaderImages()
     {
         global $wpdb;
-        $table = $wpdb->prefix.'postmeta';
-        $sql = "SELECT post_id FROM $table WHERE meta_key = '_wp_attached_file';";
-        $result = $wpdb->get_results($sql);
-        $list = [];
-        foreach ($result as $img) {
-            $list[] = wp_get_attachment_url($img->post_id);
-        }
-        return json_encode($list);
-    }
-
-    public function getClientCarouselImages()
-    {
-        global $wpdb;
-        $sql = "SELECT imageUrl FROM $this->clients WHERE visible = 1";
-        $result = $wpdb->get_results($sql);
-        $list=[];
-        foreach ($result as $img) {
-            if ($img->imageUrl !== '' && $img->imageUrl !== null) {
-                $list[] = $img->imageUrl;
-            }
-        }
-        return json_encode($list);
+        $sql = "SELECT * FROM $this->headerImages";
+        return $wpdb->get_results($sql);
     }
 }
 
