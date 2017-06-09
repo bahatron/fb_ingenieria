@@ -274,6 +274,15 @@ class FBIngenieria
         $sql = "SELECT * FROM $this->headerImages";
         return $wpdb->get_results($sql);
     }
+
+    public function getHeaderImagesUrl()
+    {
+        $array = $this->getHeaderImages();
+        foreach($array as $img){
+            $list[] = wp_get_attachment_url($img->post_id);
+        }
+        return $list;
+    }
 }
 
 $GLOBALS['FBIngenieria'] = new FBIngenieria();
