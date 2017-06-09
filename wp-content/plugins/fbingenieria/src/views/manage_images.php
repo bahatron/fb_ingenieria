@@ -2,7 +2,8 @@
 global $FBIngenieria;
 $images = $FBIngenieria->getUploadedMedia();
 $projectList = $FBIngenieria->getProjectList();
-var_dump($_POST);
+$selectedProject = $FBIngenieria->getProjectById($_POST['id']);
+$projectImages = $FBIngenieria->getProjectImages($selectedProject->id);
 function paintRow($row)
 {
     ?>
