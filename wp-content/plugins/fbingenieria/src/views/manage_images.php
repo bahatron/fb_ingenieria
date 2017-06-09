@@ -1,18 +1,19 @@
 <?php
 global $FBIngenieria;
+switch ($_POST['submit']) {
+  case 'Agregar':
+    $FBIngenieria->addMediaToProject($_POST['id'], $_POST['media']);
+    break;
+  case 'Eliminar':
+    $FBIngenieria->deleteMediaFromProject($_POST['id'], $_POST['media']);
+    break;
+  default:
+    break;
+}
 $images = $FBIngenieria->getUploadedMedia();
 $projectList = $FBIngenieria->getProjectList();
 $selectedProject = $FBIngenieria->getProjectById($_POST['id']);
 $projectImages = $FBIngenieria->getProjectImages($selectedProject->id);
-var_dump($projectImages);
-switch($_POST['submit']){
-  case 'Agregar':
-    $FBIngenieria->addMediaToProject($_POST['project'], $_POST['media']);
-    break;
-  default:
-    echo "default";
-    break;
-}
 function tableRow($id)
 {
     ?>
@@ -62,7 +63,7 @@ function tableHead()
 }
 ?>
     <link href="<?php echo FBINGENIERIA_URL.'/src/assets/dependencies/vuetify.min.css' ?>" rel="stylesheet" type="text/css">
-    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="<?php echo FBINGENIERIA_URL.'/src/assets/dependencies/vue.min.js' ?>"></script>
     <script src="<?php echo FBINGENIERIA_URL.'/src/assets/dependencies/vuetify.min.js' ?>"></script>
     <style lang="scss">
       .tabs__bar>ul {
@@ -114,7 +115,7 @@ function tableHead()
           <v-tabs-content id="add">
             <!--ADD TAB-->
             <form action="" method="POST" style="background-color: white">
-              <input type="hidden" name="project" value="<?php echo $selectedProject->id ?>">
+              <input type="hidden" name="id" value="<?php echo $selectedProject->id ?>">
               <table class="wp-list-table widefat fixed striped media">
                 <?php tableHead('') ?>
                 <tbody>
@@ -132,7 +133,7 @@ function tableHead()
           <v-tabs-content id="delete">
             <!--DELETE ITEMS TAB-->
             <form action="" method="POST" style="background-color: white">
-              <input type="hidden" name="project" value="<?php echo $selectedProject->id ?>">
+              <input type="hidden" name="id" value="<?php echo $selectedProject->id ?>">
               <table class="wp-list-table widefat fixed striped media">
                 <?php tableHead() ?>
                 <tbody>

@@ -189,11 +189,26 @@ class FBIngenieria
     public function addMediaToProject($id, $array)
     {
         global $wpdb;
-        // $result;
-        foreach($array as $img){
+        foreach ($array as $img) {
             $result += $wpdb->insert($this->images, ['post_id' => $img, 'project_id' => $id]);
         }
-        var_dump($result);
+        if(!$result){
+            $this->showError('Hubo un error registrado en base de datos');
+        } else {
+            $this->showSuccess('Actualizacion satisfactoria!');
+        }
+    }
+    public function deleteMediaFromProject($id, $array)
+    {
+        global $wpdb;
+        foreach ($array as $img) {
+            $result += $wpdb->delete($this->images, ['post_id' => $img, 'project_id' => $id]);
+        }
+        if(!$result){
+            $this->showError('Hubo un error registrado en base de datos');
+        } else {
+            $this->showSuccess('Actualizacion satisfactoria!');
+        }
     }
     public function getUploadedMedia()
     {
