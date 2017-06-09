@@ -182,10 +182,19 @@ class FBIngenieria
     public function getProjectImages($id)
     {
         global $wpdb;
-        $sql="SELECT id, url FROM $this->images WHERE project_id = $id";
+        $sql="SELECT * FROM $this->images WHERE project_id = $id";
         return $wpdb->get_results($sql);
     }
 
+    public function addMediaToProject($id, $array)
+    {
+        global $wpdb;
+        // $result;
+        foreach($array as $img){
+            $result += $wpdb->insert($this->images, ['post_id' => $img, 'project_id' => $id]);
+        }
+        var_dump($result);
+    }
     public function getUploadedMedia()
     {
         global $wpdb;
