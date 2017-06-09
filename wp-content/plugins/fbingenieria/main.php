@@ -44,7 +44,8 @@ class FBIngenieria
         return $file ? json_encode(json_decode($file)) : null;
     }
     
-    public function translate($key, $lang = null){
+    public function translate($key, $lang = null)
+    {
         $translations = json_decode($this->getLanguage($lang));
         return $translations->$key ? $translations->$key : $key;
     }
@@ -193,9 +194,9 @@ class FBIngenieria
         $result = $wpdb->get_results($sql);
         $list = [];
         foreach ($result as $img) {
-            $list[] = wp_get_attachment_url($img->post_id);
+            $list[] = array('id' => $img->post_id, 'url' => wp_get_attachment_url($img->post_id));
         }
-        return json_encode($list);
+        return $list;
     }
     
     public function setImage($projectId, $url = null, $post = null)
@@ -216,7 +217,7 @@ class FBIngenieria
         $result = $wpdb->get_results($sql);
         $list = [];
         foreach ($result as $img) {
-            $list[] = wp_get_attachment_url($img->post_id);
+            $list[] = wp_get_attachment_image_src($img->post_id);
         }
         return json_encode($list);
     }
@@ -227,8 +228,8 @@ class FBIngenieria
         $sql = "SELECT imageUrl FROM $this->clients WHERE visible = 1";
         $result = $wpdb->get_results($sql);
         $list=[];
-        foreach($result as $img){
-            if($img->imageUrl !== '' && $img->imageUrl !== null){
+        foreach ($result as $img) {
+            if ($img->imageUrl !== '' && $img->imageUrl !== null) {
                 $list[] = $img->imageUrl;
             }
         }
