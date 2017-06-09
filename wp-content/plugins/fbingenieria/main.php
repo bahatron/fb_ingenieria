@@ -58,6 +58,7 @@ class FBIngenieria
         add_submenu_page('fbi_settings_menu', 'Manejar Clientes', 'Manejar Clientes', 'administrator', 'fbi_settings_menu', 'fbi_settings_add_client_handler');
         add_submenu_page('fbi_settings_menu', 'Manejar Proyectos', 'Manejar Proyectos', 'administrator', 'fbi_settings_projects', 'fbi_settings_add_project_handler');
         add_submenu_page('fbi_settings_menu', 'Imagenes', 'Imagenes de proyecto', 'administrator', 'fbi_settings_images', 'fbi_settings_manage_project_images_handler');
+        add_submenu_page('fbi_settings_menu', 'Imagenes', 'Imagenes de cabezera', 'administrator', 'fbi_settings_header_images', 'fbi_settings_manage_header_images_handler');
     }
 
     private function showError($message)
@@ -200,6 +201,7 @@ class FBIngenieria
             $this->showSuccess('Actualizacion satisfactoria!');
         }
     }
+
     public function deleteMediaFromProject($id, $array)
     {
         global $wpdb;
@@ -212,6 +214,33 @@ class FBIngenieria
             $this->showSuccess('Actualizacion satisfactoria!');
         }
     }
+
+    public function addMediaToHeader($array)
+    {
+        global $wpdb;
+        foreach ($array as $img) {
+            $result += $wpdb->insert($this->headerImages, ['post_id' => $img]);
+        }
+        if (!$result) {
+            $this->showError('Error registrado en base de datos');
+        } else {
+            $this->showSuccess('Actualizacion satisfactoria!');
+        }
+    }
+
+    public function deleteMediaFromHeader($array)
+    {
+        global $wpdb;
+        foreach ($array as $img) {
+            $result += $wpdb->delete($this->headerImages, ['post_id' => $img]);
+        }
+        if (!$result) {
+            $this->showError('Error registrado en base de datos');
+        } else {
+            $this->showSuccess('Actualizacion satisfactoria!');
+        }
+    }
+
     public function getUploadedMedia()
     {
         global $wpdb;
@@ -255,4 +284,9 @@ function fbi_settings_add_project_handler()
 function fbi_settings_manage_project_images_handler()
 {
     include FBINGENIERIA_PATH.'src/views/manage_images.php';
+}
+
+function fbi_settings_manage_header_images_handler()
+{
+    include FBINGENIERIA_PATH.'src/views/manage_header.php';
 }
