@@ -217,7 +217,7 @@ class FBIngenieria
         $result = $wpdb->get_results($sql);
         $list = [];
         foreach ($result as $img) {
-            $list[] = wp_get_attachment_image_src($img->post_id);
+            $list[] = wp_get_attachment_url($img->post_id);
         }
         return json_encode($list);
     }

@@ -2,8 +2,7 @@
 global $FBIngenieria;
 $images = $FBIngenieria->getUploadedMedia();
 $projectList = $FBIngenieria->getProjectList();
-
-var_dump(get_site_url());
+var_dump($_POST);
 function paintRow($row)
 {
     ?>
@@ -14,34 +13,52 @@ function paintRow($row)
     </th>
     <td class="title column-title has-row-actions column-primary" data-colname="File">
       <strong class="has-media-icon">
-          <a href="<?php echo get_site_url().'/wp-admin/post.php?post='.$row['id'].'&amp;action=edit' ?>" aria-label="Edit">
-            <span class="media-icon image-icon">
-              <img src="<?php echo $row['url'] ?>" class="attachment-60x60 size-60x60" alt="" srcset="<?php echo $row['url'] ?> 100w" sizes="100vw" height="60" width="60">
-            </span>
-            <?php echo 'File ID: '.$row['id'] ?>
-          </a>
-        </strong>
-      <p class="filename">
-        <span class="screen-reader-text"><?php echo 'File ID: '.$row['id'] ?></span>
-      </p>
+        <span class="media-icon image-icon">
+          <?php echo wp_get_attachment_image($row['id']) ?>
+        </span>
+          <?php echo basename(get_attached_file($row['id'])) ?>
+      </strong>
       <div class="row-actions">
         <span class="edit">
-            <a href="<?php echo get_site_url().'/wp-admin/post.php?post='.$row['id'].'&amp;action=edit' ?>" aria-label="Edit">
-            Edit
-            </a>
+          <a href="<?php echo get_site_url().'/wp-admin/post.php?post='.$row['id'].'&amp;action=edit' ?>" aria-label="Edit">
+          Edit
+          </a>
         </span>
       </div>
-      <button type="button" class="toggle-row"><span class="screen-reader-text">Show more details</span></button>
     </td>
   </tr>
   <?php
 
 }
 
+function tableHead()
+{
+    ?>
+  <thead>
+    <tr>
+      <td id="cb" class="manage-column column-cb check-column">
+        <label class="screen-reader-text" for="cb-select-all-1">Select All</label>
+        <input id="cb-select-all-1" type="checkbox">
+      </td>
+      <th scope="col" id="title" class="manage-column column-title column-primary sortable desc">
+        <strong>
+          <span>Todos</span>
+        </strong>
+      </th>
+    </tr>
+  </thead>
+  <?php
+
+}
 ?>
   <link href="<?php echo FBINGENIERIA_URL.'/src/assets/dependencies/vuetify.min.css' ?>" rel="stylesheet" type="text/css">
   <script src="https://unpkg.com/vue/dist/vue.js"></script>
   <script src="<?php echo FBINGENIERIA_URL.'/src/assets/dependencies/vuetify.min.js' ?>"></script>
+  <style lang="scss">
+    .tabs__bar>ul {
+      overflow:hidden;
+    }
+  </style>
 
   <div class="wrap" id="fbi_manage_images">
     <form action="" method="POST" onsubmit="return getDataId()" name="getProject">
@@ -83,28 +100,37 @@ function paintRow($row)
       </v-tabs-bar>
       <v-tabs-content id="add">
         <!--ADD TAB-->
-        <table class="wp-list-table widefat fixed striped media">
-          <thead>
-            <tr>
-              <td id="cb" class="manage-column column-cb check-column">
-                <label class="screen-reader-text" for="cb-select-all-1">Select All</label>
-                <input id="cb-select-all-1" type="checkbox">
-              </td>
-              <th scope="col" id="title" class="manage-column column-title column-primary sortable desc">
-                <span>Seleccionar todos</span>
-              </th>
-            </tr>
-          </thead>
+        <form action="" method="POST" style="background-color: white">
+          <table class="wp-list-table widefat fixed striped media">
+          <?php tableHead('') ?>
           <tbody>
-            <?php foreach($images as $img){
-              paintRow($img);
-            } ?>
+            <?php foreach ($images as $img) {
+                    paintRow($img);
+                } ?>
           </tbody>
         </table>
+        <div style="display: flex; flex-direction: row-reverse;">
+          <input name="submit" id="submit" value="Agregar" class="button button-primary" type="submit">
+        </div>
+        </form>
         <!--END ADD TAB-->
       </v-tabs-content>
       <v-tabs-content id="delete">
-        eliminar eliminar
+        <!--DELETE ITEMS TAB-->
+        <form action="" method="POST" style="background-color: white">
+          <table class="wp-list-table widefat fixed striped media">
+          <?php tableHead() ?>
+          <tbody>
+            <?php foreach ($images as $img) {
+                    paintRow($img);
+                } ?>
+          </tbody>
+        </table>
+        <div style="display: flex; flex-direction: row-reverse;">
+          <input name="submit" id="submit" value="Eliminar" onclick="return confirm('Esta seguro que quiere continuar con esta accion?')" class="button" type="submit">
+        </div>
+        </form>
+        <!--END DELETE ITEMS TAB-->
       </v-tabs-content>
     </v-tabs>
   </div>
@@ -112,29 +138,6 @@ function paintRow($row)
   <script>
     new Vue({
       el: '#fbi_manage_images',
-      data: {
-        addedMedia: JSON.parse('<?php echo json_encode($images) ?>'),
-        projectList: JSON.parse('<?php echo json_encode($projectList) ?>'),
-        tableData: null
-      },
-      mounted: function () {
-        this.tableData = this.getTableData();
-        console.log(this.tableData);
-      },
-      methods: {
-        getTableData: function () {
-          var array = [];
-          this.addedMedia.forEach(function (item, index) {
-            console.log('item', item);
-            array.push({
-              selected: false,
-              id: item.id,
-              url: item.url
-            });
-          });
-          return array;
-        }
-      }
     })
 
     function getDataId() {
