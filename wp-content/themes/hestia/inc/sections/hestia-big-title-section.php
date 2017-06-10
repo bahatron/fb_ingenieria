@@ -15,12 +15,20 @@ if (! function_exists('hestia_big_title')) :
      */
     function hestia_big_title()
     {
-        global $FBIngenieria; ?>
+        global $FBIngenieria;
+        $headerImages = $FBIngenieria->getHeaderImagesUrl();
+         ?>
 	<html>
 	<div class="page-header" style="background-color: #0b465d;" id="fbi_big_title">
 		<div style="position: relative;">
 			<v-carousel>
-				<v-carousel-item v-for="(image, i) in headerImages" :src="image" :key="i"></v-carousel-item>
+                <?php
+                foreach($headerImages as $img){
+                    ?>
+                    <v-carousel-item src="<?php echo $img ?>"></v-carousel-item>
+                    <?php
+                }
+                ?>
 			</v-carousel>
 			<div class="main-header-title">
 				<h2 class="main-title"><b>FB</b> Ingeniería y Proyectos</h2>
@@ -30,10 +38,7 @@ if (! function_exists('hestia_big_title')) :
 	</div>
 	<script>
 		new Vue({
-			el: '#fbi_big_title',
-			data: {
-				headerImages: JSON.parse('<?php echo json_encode($FBIngenieria->getHeaderImagesUrl()) ?>')
-			}
+			el: '#fbi_big_title'
 		})
 	</script>
 	</html>
