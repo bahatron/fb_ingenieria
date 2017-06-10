@@ -293,9 +293,9 @@ class FBIngenieria
         $table = $wpdb->prefix.'options';
         $sql = "SELECT option_value FROM $table WHERE option_name = 'mail_from'";
         $to = $wpdb->get_row($sql);
-        $message = "$data->name $data->lastname commented: $data->comment. You can get back to $data->name through $data->mail.";
+        $message = "$data->name $data->lastname commented: '$data->comment'. You can get back to $data->name through $data->mail.";
         try {
-            $result = wp_mail($to->option_value, 'correo de contacto', $message);
+            $result = wp_mail($to->option_value, 'Contact email from fbingenieria', $message);
         } catch (phpmailerException  $e) {
             return $e;
         }
