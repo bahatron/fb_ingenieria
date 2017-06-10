@@ -289,13 +289,15 @@ class FBIngenieria
 
     public function sendMail($data)
     {
+        global $wpdb;
+        $table = $wpdb->prefix.'options';
+        $sql = "SELECT option_value FROM $table WHERE option_name = 'mail_from'";
+        $to = $wpdb->get_row($sql);
         $message = "$data->name $data->lastname commented: $data->comment. You can get back to $data->name through $data->mail.";
         try {
-            $result = wp_mail('simonpiscitelli@gmail.com', 'correo de contacto', $message);
-        } catch (Exception $e) {
-            return $e->getMessage();
-        } catch (\Exception $e) {
-            return $e->getMessage();
+            $result = wp_mail($to->option_value, 'correo de contacto', $message);
+        } catch (phpmailerException  $e) {
+            return $e;
         }
         return $result;
     }
