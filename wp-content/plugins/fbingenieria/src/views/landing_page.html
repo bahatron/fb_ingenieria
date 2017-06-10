@@ -5,6 +5,11 @@
     <link rel="stylesheet" href="<?php echo FBINGENIERIA_URL. '/src/assets/css/styles.css'?>" rel="stylesheet" type="text/css">
     <?php
         global $FBIngenieria;
+        echo "key: <br>";
+        var_dump(key($_POST));
+        echo "key: <br>";
+        $data = json_decode(key($_POST));
+        var_dump($data);
     ?>
 </head>
 
@@ -152,7 +157,7 @@
                 <span class="clients-p">
                     <?php echo $FBIngenieria->translate('clients-text', $lang) ?>
                 </span>
-                <div class="client-carousel"  v-if="clientList.length > 0">
+                <div class="client-carousel" v-if="clientList.length > 0">
                     <v-carousel cycle="false" style="height: 100vh">
                         <v-carousel-item v-for="client in clientList" :src="client.imageUrl"></v-carousel-item>
                     </v-carousel>
@@ -200,15 +205,46 @@
         new Vue({
             el: '#fbi_landing_page',
             data: {
-                clientList: JSON.parse('<?php echo json_encode($FBIngenieria->getActiveClients()) ?>')
+                clientList: JSON.parse('<?php echo json_encode($FBIngenieria->getActiveClients()) ?>'),
+                contact: {}
             },
             mounted: function () {
                 console.log('clientList', this.clientList);
+            },
+            methods: {
+                ajax: function (data) {
+                    var xmlhttp = new XMLHttpRequest();
+                    xmlhttp.onreadystatechange = function () {
+                        if (this.readyState == 4) {
+                            alert("Gracias por contactarnos");
+                        }
+                    };
+                    xmlhttp.open("POST", '', true);
+                    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                    
+                    console.log('with data', data);
+                    var stringed = JSON.stringify(this.contact);
+                    console.log('stringed', stringed);
+                    //xmlhttp.send(data);
+                    xmlhttp.send(stringed);
+                },
+                testytest: function (form) {
+                    console.log('form?', form);
+                    var data = this.serializeData(this.contact);
+                    this.ajax(data);
+                    return false;
+                },
+                serializeData: function (data) {
+                    var keys = Object.keys(data);
+                    var str = '';
+                    keys.forEach(function(key, index){
+                        index == 0 ? str += key + '=' + data[key] : str += '&' + key + '=' + data[key];
+                    })
+                    return str;
+                }
             }
         })
     </script>
-
-
 </body>
 
 </html>
