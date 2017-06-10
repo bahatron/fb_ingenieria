@@ -115,7 +115,6 @@ $clientList = $FBIngenieria->getClientList();
 
   <script>
     function checkFormAction(form) {
-      console.log('form is:', form);
       return getDataId();
     }
     function getDataId() {

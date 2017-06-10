@@ -5,8 +5,6 @@
     <link rel="stylesheet" href="<?php echo FBINGENIERIA_URL. '/src/assets/css/styles.css'?>" rel="stylesheet" type="text/css">
     <?php
         global $FBIngenieria;
-        $lang = isset($_GET['lang']) ? $_GET['lang'] : 'es';
-		$translations = $FBIngenieria->getLanguage($lang);
     ?>
 </head>
 
@@ -131,12 +129,13 @@
                 <p class="section-title" align="center"><?php echo $FBIngenieria->translate('clients-title', $lang) ?></p>
                 <hr class="hr-color">
                 <span class="clients-p">
-                            En FB Ingeniería y Proyectos nos sentimos orgullosos de contar con clientes que nos han ayudado a ser cada día mejores y
-                            queremos agradecerles a todos su confianza. Entendemos lo importante que es sentirse respaldado, por
-                            eso reiteramos nuestro compromiso en el cumplimiento, mediante soluciones adecuadas a las distintas necesidades
-                            de cada uno de ustedes.
+                    <?php echo $FBIngenieria->translate('clients-text', $lang) ?>
                 </span>
-                <h2 align="center">En Construcción</h2>
+                <div class="client-carousel"  v-if="clientList.length > 0">
+                    <v-carousel cycle="false" style="height: 100vh">
+                        <v-carousel-item v-for="client in clientList" :src="client.imageUrl"></v-carousel-item>
+                    </v-carousel>
+                </div>
             </section>
             <section class="padding-top contact-section" id="contact">
                 <p class="section-title" align="center"><?php echo $FBIngenieria->translate('contact-title', $lang) ?></p>
@@ -167,12 +166,10 @@
         new Vue({
             el: '#fbi_landing_page',
             data: {
-                translations: JSON.parse('<?php echo $translations ?>')
+                clientList: JSON.parse('<?php echo json_encode($FBIngenieria->getActiveClients()) ?>')
             },
-            methods: {
-                translate(str) {
-                    return (this.translations[str]) ? this.translations[str] : str;
-                }
+            mounted: function () {
+                console.log('clientList', this.clientList);
             }
         })
     </script>
