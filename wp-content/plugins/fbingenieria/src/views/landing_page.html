@@ -12,7 +12,9 @@
     <div class="container" id="fbi_landing_page" style="width: 100%" data-app>
         <div class="col-md-12 div-page">
             <section class="padding-top about-section" id="about" style="background: url(<?php echo FBINGENIERIA_URL.'/src/assets/img/about-background.jpg' ?>) center center / cover no-repeat">
-                <p class="section-title" align="center"><?php echo $FBIngenieria->translate('about-us-title', $lang) ?></p>
+                <p class="section-title" align="center">
+                    <?php echo $FBIngenieria->translate('about-us-title', $lang) ?>
+                </p>
                 <hr class="hr-color">
                 <div class="about-box display-big" align="center">
                     <div class="row">
@@ -81,43 +83,60 @@
             <section class="spacing">
             </section>
             <section class="padding-top" id="whyus">
-                <p class="section-title" align="center"><?php echo $FBIngenieria->translate('why-us-title', $lang) ?></p>
+                <p class="section-title" align="center">
+                    <?php echo $FBIngenieria->translate('why-us-title', $lang) ?>
+                </p>
                 <hr class="hr-color">
                 <div class="row">
                     <div class="col" align="center">
                         <div class="box card card__box">
                             <span class="label">01</span>
-                            <h6 class="label2"><?php echo $FBIngenieria->translate('why-us-subtitle-1', $lang) ?></h6>
+                            <h6 class="label2">
+                                <?php echo $FBIngenieria->translate('why-us-subtitle-1', $lang) ?>
+                            </h6>
                             <span class="whyus-p"><?php echo $FBIngenieria->translate('why-us-text-1', $lang) ?></span>
                         </div>
                         <div class="box card card__box">
                             <span class="label">02</span>
-                            <h6 class="label2"><?php echo $FBIngenieria->translate('why-us-subtitle-2', $lang) ?></h6>
+                            <h6 class="label2">
+                                <?php echo $FBIngenieria->translate('why-us-subtitle-2', $lang) ?>
+                            </h6>
                             <span class="whyus-p"><?php echo $FBIngenieria->translate('why-us-text-2', $lang) ?></span>
                         </div>
                         <div class="box card card__box">
                             <span class="label">03</span>
-                            <h6 class="label2"><?php echo $FBIngenieria->translate('why-us-subtitle-3', $lang) ?></h6>
+                            <h6 class="label2">
+                                <?php echo $FBIngenieria->translate('why-us-subtitle-3', $lang) ?>
+                            </h6>
                             <span class="whyus-p"><?php echo $FBIngenieria->translate('why-us-text-3', $lang) ?></span>
                         </div>
                         <div class="box card card__box">
                             <span class="label">04</span>
-                            <h6 class="label2"><?php echo $FBIngenieria->translate('why-us-subtitle-4', $lang) ?></h6>
+                            <h6 class="label2">
+                                <?php echo $FBIngenieria->translate('why-us-subtitle-4', $lang) ?>
+                            </h6>
                             <span class="whyus-p"><?php echo $FBIngenieria->translate('why-us-text-4', $lang) ?></span>
                         </div>
                     </div>
                 </div>
                 <section class="padding-top" id="portfolio">
-                    <p class="section-title" align="center"><?php echo $FBIngenieria->translate('portfolio-title', $lang) ?></p>
+                    <p class="section-title" align="center">
+                        <?php echo $FBIngenieria->translate('portfolio-title', $lang) ?>
+                    </p>
                     <hr class="hr-color">
                     <h2 align="center">En Construcción</h2>
                 </section>
                 <section class="padding-top-journey" id="journey" style="position: relative;">
                     <div class="card_journey" style="background: url(<?php echo FBINGENIERIA_URL.'/src/assets/img/journey.png' ?>) center center / cover no-repeat">
-                        <p class="p-journey"><?php echo $FBIngenieria->translate('journey-title', $lang) ?></p>
+                        <p class="p-journey">
+                            <?php echo $FBIngenieria->translate('journey-title', $lang) ?>
+                        </p>
                         <hr class="hr-color hr-journey" width="20%">
                         <div class="div-journey">
-                            <p class="text-journey"><?php echo $FBIngenieria->translate('journey-text-1', $lang) ?> <br> <?php echo $FBIngenieria->translate('journey-text-2', $lang) ?></p>
+                            <p class="text-journey">
+                                <?php echo $FBIngenieria->translate('journey-text-1', $lang) ?> <br>
+                                <?php echo $FBIngenieria->translate('journey-text-2', $lang) ?>
+                            </p>
                             <p>
                                 <a href="#portfolio" class="btn btn-primary" style="text-transform: capitalize;"><?php echo $FBIngenieria->translate('journey-botton', $lang) ?></a>
                             </p>
@@ -126,7 +145,9 @@
                 </section>
             </section>
             <section class="padding-top" id="clients">
-                <p class="section-title" align="center"><?php echo $FBIngenieria->translate('clients-title', $lang) ?></p>
+                <p class="section-title" align="center">
+                    <?php echo $FBIngenieria->translate('clients-title', $lang) ?>
+                </p>
                 <hr class="hr-color">
                 <span class="clients-p">
                     <?php echo $FBIngenieria->translate('clients-text', $lang) ?>
@@ -138,19 +159,32 @@
                 </div>
             </section>
             <section class="padding-top contact-section" id="contact">
-                <p class="section-title" align="center"><?php echo $FBIngenieria->translate('contact-title', $lang) ?></p>
+                <p class="section-title" align="center">
+                    <?php echo $FBIngenieria->translate('contact-title', $lang) ?>
+                </p>
                 <div class="row" style="position: relative;  overflow: hidden;">
                     <div class="col-md-3"></div>
                     <div class=" col-md-6 contact-form" style="height:auto; padding:90px;">
-                        <form name="contact-form" action="">
+                        <form name="contact-form" action="" method="POST" @submit.prevent="testytest(this)">
                             <div class="col-md-6" align="center">
-                                <input type="text" name="name" value="" placeholder="<?php echo $FBIngenieria->translate('contact-name', $lang) ?>" required>
-                                <input type="text" name="lastname" value="" placeholder="<?php echo $FBIngenieria->translate('contact-lastname', $lang) ?>" required>
-                                <input type="email" name="mail" value="" placeholder="<?php echo $FBIngenieria->translate('contact-mail', $lang) ?>" required>
+                                <div class="row">
+                                    <input type="text" v-model="contact.name" name="name" value="" placeholder="<?php echo $FBIngenieria->translate('contact-name', $lang) ?>" required>
+                                </div>
+                                <div class="row">
+                                    <input type="text" v-model="contact.lastname" name="lastname" value="" placeholder="<?php echo $FBIngenieria->translate('contact-lastname', $lang) ?>"
+                                        required>
+                                </div>
+                                <div class="row">
+                                    <input type="email" v-model="contact.mail" name="mail" value="" placeholder="<?php echo $FBIngenieria->translate('contact-mail', $lang) ?>"
+                                        required>
+                                </div>
                             </div>
                             <div class="col-md-6" align="center">
-                                <textarea rows="4" cols="2" name="comment" placeholder="<?php echo $FBIngenieria->translate('contact-comment', $lang) ?>" required></textarea>
-                                <a href="#" class="btn btn-primary" style="text-transform: capitalize;"><?php echo $FBIngenieria->translate('contact-button', $lang) ?></a>
+                                <textarea rows="4" cols="2" v-model="contact.comment" name="comment" placeholder="<?php echo $FBIngenieria->translate('contact-comment', $lang) ?>"
+                                    required>
+                                </textarea>
+                                <input type="submit" name="submit" value="<?php echo $FBIngenieria->translate('contact-button', $lang) ?>" class="btn btn-primary"
+                                    style="text-transform: capitalize;">
                             </div>
                         </form>
                     </div>
