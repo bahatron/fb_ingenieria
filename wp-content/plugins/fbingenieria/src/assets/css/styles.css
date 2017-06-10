@@ -526,3 +526,7 @@ a {
 .page-header .carousel {
   height: 100vh;
 }
+
+div > .form-group {
+  margin-bottom: 0px;
+}
