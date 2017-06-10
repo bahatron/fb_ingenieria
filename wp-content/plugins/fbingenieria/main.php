@@ -49,7 +49,7 @@ class FBIngenieria
     
     public function translate($key, $lang = null)
     {
-        if($lang !== null || !isset($this->translations)){
+        if ($lang !== null || !isset($this->translations)) {
             $this->setLanguage($lang);
         }
         return $this->translations->$key ? $this->translations->$key : $key;
@@ -281,10 +281,23 @@ class FBIngenieria
     public function getHeaderImagesUrl()
     {
         $array = $this->getHeaderImages();
-        foreach($array as $img){
+        foreach ($array as $img) {
             $list[] = wp_get_attachment_url($img->post_id);
         }
         return $list;
+    }
+
+    public function sendMail($data)
+    {
+        $message = "$data->name $data->lastname commented: $data->comment. You can get back to $data->name through $data->mail.";
+        try {
+            $result = wp_mail('simonpiscitelli@gmail.com', 'correo de contacto', $message);
+        } catch (Exception $e) {
+            return $e->getMessage();
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
+        return $result;
     }
 }
 
