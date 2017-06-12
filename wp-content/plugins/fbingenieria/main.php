@@ -57,8 +57,9 @@ class FBIngenieria
 
     public function add_menu_pages()
     {
-        add_menu_page('FBIngenieria', 'FBIngenieria', 'administrator', 'fbi_settings_menu', 'fbi_settings_add_client_handler');
-        add_submenu_page('fbi_settings_menu', 'Manejar Clientes', 'Manejar Clientes', 'administrator', 'fbi_settings_menu', 'fbi_settings_add_client_handler');
+        add_menu_page('FBIngenieria', 'FBIngenieria', 'administrator', 'fbi_settings_menu', 'fbi_general_settings_handler');
+        add_submenu_page('fbi_settings_menu', 'Opciones ', 'Opciones', 'administrator', 'fbi_settings_menu', 'fbi_general_settings_handler');
+        add_submenu_page('fbi_settings_menu', 'Manejar Clientes', 'Manejar Clientes', 'administrator', 'fbi_settings_clients', 'fbi_settings_add_client_handler');
         add_submenu_page('fbi_settings_menu', 'Manejar Proyectos', 'Manejar Proyectos', 'administrator', 'fbi_settings_projects', 'fbi_settings_add_project_handler');
         add_submenu_page('fbi_settings_menu', 'Imagenes', 'Imagenes de proyecto', 'administrator', 'fbi_settings_images', 'fbi_settings_manage_project_images_handler');
         add_submenu_page('fbi_settings_menu', 'Imagenes', 'Imagenes de cabezera', 'administrator', 'fbi_settings_header_images', 'fbi_settings_manage_header_images_handler');
@@ -287,15 +288,27 @@ class FBIngenieria
         return $list;
     }
 
+    public function getRecieverMailer()
+    {
+        return get_option('fbi_mail_to');
+    }
+
+    public function setRecieverMailer($mail)
+    {
+        $result = update_option('fbi_mail_to', $mail, 'no');
+        if (!$result) {
+            $this->showError('Error registrado en base de datos');
+        } else {
+            $this->showSuccess('Datos guardados!');
+        }
+    }
+
     public function sendMail($data)
     {
-        global $wpdb;
-        $table = $wpdb->prefix.'options';
-        $sql = "SELECT option_value FROM $table WHERE option_name = 'mail_from'";
-        $to = $wpdb->get_row($sql);
         $message = "$data->name $data->lastname commented: '$data->comment'. You can get back to $data->name through $data->mail.";
+        $to = $this->getRecieverMailer();
         try {
-            $result = wp_mail($to->option_value, 'Contact email from fbingenieria', $message);
+            $result = wp_mail($to, 'Contact email from fbingenieria', $message);
         } catch (phpmailerException  $e) {
             return $e;
         }
@@ -310,6 +323,11 @@ function fbi_landing_page_handler($atts)
     ob_start();
     include FBINGENIERIA_PATH.'src/views/landing_page.html';
     return ob_get_clean();
+}
+
+function fbi_general_settings_handler()
+{
+    include FBINGENIERIA_PATH.'src/views/general_settings.php';
 }
 
 function fbi_settings_add_client_handler()
