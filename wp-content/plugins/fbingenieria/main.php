@@ -199,6 +199,25 @@ class FBIngenieria
         }
     }
 
+    public function getActiveProjects()
+    {
+        global $wpdb;
+        $sql = "SELECT p.id as 'project_id', p.name as 'project_name', p.shortDescription, p.longDescription, c.* 
+                FROM $this->projects p
+                INNER JOIN $this->clients c on p.client_id = c.id
+                WHERE p.visible = '1'";
+        $projects = $wpdb->get_results($sql);
+        
+        $array = [];
+        foreach ($projects as $project) {
+            $sql = "SELECT url FROM $this->images WHERE project_id = $project->project_id";
+            $project->images = $wpdb->get_results($sql);
+            $array[] = $project;
+            var_dump($project);
+        }
+        return $array;
+    }
+
     # image control
     public function getProjectImages($id)
     {
