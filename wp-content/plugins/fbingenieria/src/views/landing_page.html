@@ -228,7 +228,7 @@
             el: '#fbi_landing_page',
             data: {
                 clientList: JSON.parse('<?php echo json_encode($FBIngenieria->getActiveClients()) ?>'),
-                contact: {}
+                projectList: JSON.parse('<?php echo json_encode($FBIngenieria->getActiveProjects) ?>')
             },
             mounted: function () {
                 console.log('clientList', this.clientList);
