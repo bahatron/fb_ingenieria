@@ -188,11 +188,20 @@ footer {
   transition: 0.7s;
 }
 
+.cp-footer {
+  height: 100%;
+  width: 100%;
+  background: #202835;
+  border-top-style: solid;
+  border-top-color: #fb6816;
+  padding-top: 10px;
+}
+
 .client-carousel {
   background-color: transparent;
   height: 35vh;
   border-style: 0px;
-  box-shadow:none;
+  box-shadow: none;
 }
 
 .label {
