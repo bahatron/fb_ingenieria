@@ -177,8 +177,10 @@
                     <?php echo $FBIngenieria->translate('clients-text', $lang) ?>
                 </span>
                 <div class="client-carousel" v-if="clientList.length > 0" >
-                    <v-carousel cycle="false" style="height: 50vh;" style="background-color:gray;">
-                        <v-carousel-item v-for="client in clientList" :src="client.imageUrl" style="width:10%; height:10%;"></v-carousel-item>
+                    <v-carousel cycle="false" style="background-color:rgba(153, 153, 153, 0.32); height:35vh;">
+                        <v-carousel-item v-for="client in clientList">
+                            <img :src="client.imageUrl">
+                        </v-carousel-item>
                     </v-carousel>
                 </div>
             </section>

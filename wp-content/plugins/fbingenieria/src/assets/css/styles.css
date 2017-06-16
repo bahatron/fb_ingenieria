@@ -218,6 +218,9 @@ footer {
   min-width: 0;
   height: 395px;
 }
+.carousel__controls{
+  background-color: rgba(153, 153, 153, 0.32);
+}
 
 .p-journey {
   font-family: Roboto, Helvetica, Arial, sans-serif;
