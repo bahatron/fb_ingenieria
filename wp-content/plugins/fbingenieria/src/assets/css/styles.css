@@ -363,7 +363,6 @@ a {
   display: block;
 }
 
-
 .about-section {
   border-top-color: #fb6816;
   border-top-style: solid;
@@ -416,7 +415,7 @@ a {
     color: #999;
     display: inline-block;
     font-size: 0.8em;
-    text-align:justify;
+    text-align: justify;
   }
   .box-for-about {
     width: 240px;
@@ -514,13 +513,13 @@ a {
 }
 
 .main-header-title {
-  background-color: rgba(231, 231, 231, 0.18);
+  background-color: rgba(8, 49, 65, 0);
   position: absolute;
   top: 40%;
   width: 50%;
   left: 25%;
   height: 20%;
-  color: white;
+  color: black;
   text-align: center;
 }
 
@@ -528,6 +527,6 @@ a {
   height: 100vh;
 }
 
-div>.form-group {
+div > .form-group {
   margin-bottom: 0px;
 }

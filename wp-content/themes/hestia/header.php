@@ -28,7 +28,7 @@
 		<?php
 		global $FBIngenieria;
     $lang = isset($_GET['lang']) ? $_GET['lang'] : 'es';
-		$translations = $FBIngenieria->getLanguage($lang);
+		$FBIngenieria->setLanguage($lang);
 	?>
 	</head>
 	
@@ -37,7 +37,7 @@
 			<header class="header" id="fbi_header">
 				<nav class="navbar navbar-default navbar-transparent navbar-fixed-top navbar-color-on-scroll">
 					<div class="container">
-						<div class="navbar-header">
+						<div class="navbar-header" style="padding:5px;width:100vw">
 							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navigation">
 							<span class="sr-only"><?php esc_html_e( 'Toggle Navigation', 'hestia' ); ?></span>
 							<span class="icon-bar"></span>
@@ -86,14 +86,6 @@
 
 	<script>
 		new Vue({
-			el: '#fbi_header',
-			data: {
-				translations: JSON.parse('<?php echo $translations ?>')
-			},
-			methods: {
-				translate(str) {
-					return (this.translations[str]) ? this.translations[str] : str;
-				}
-			}
+			el: '#fbi_header'
 		})
 	</script>
