@@ -112,7 +112,21 @@
                 <section class="padding-top" id="portfolio">
                     <p class="section-title" align="center"><?php echo $FBIngenieria->translate('portfolio-title', $lang) ?></p>
                     <hr class="hr-color">
-                    <h2 align="center">En Construcción</h2>
+                    <v-carousel style="background-color:transparent;">
+                        <v-carousel-item>
+                            <v-layout row wrap>
+                                <v-flex xs6 md3 v-for="n in 8">
+                                    <div class="box">
+                                        <span class="label">03</span>
+                                        <h6 class=  "label2">
+                                            <?php echo $FBIngenieria->translate('why-us-subtitle-3', $lang) ?>
+                                        </h6>
+                                        <span class="whyus-p"><?php echo $FBIngenieria->translate('why-us-text-3', $lang) ?></span>
+                                    </div>
+                                </v-flex>
+                            </v-layout>
+                        </v-carousel-item>
+                    </v-carousel>
                 </section>
                 <section class="padding-top-journey" id="journey" style="position: relative;">
                     <div class="card_journey" style="background: url(<?php echo FBINGENIERIA_URL.'/src/assets/img/journey.png' ?>) center center / cover no-repeat">
