@@ -29,15 +29,23 @@ footer {
   /*background-color: transparent !important;*/
   height: auto !important;
 }
- .showme{ 
-   display: none;
- }
- .showhim:hover .showme{
-   display : block;
- }
- .showhim:hover .ok{
-   display : none;
- }
+
+.showme {
+  display: none;
+}
+
+.portfolio-item {
+  text-align: center;
+}
+
+.showhim:hover .showme {
+  display: block;
+}
+
+.showhim:hover .ok {
+  display: none;
+}
+
 .container {
   margin-right: auto !important;
   margin-left: auto !important;
@@ -138,6 +146,7 @@ footer {
   background-color: #202835;
   color: white;
 }
+
 
 .box-for-about {
   width: 240px;
@@ -449,6 +458,7 @@ a {
     color: rgb(195, 190, 190);
     font-size: 1em;
   }
+
   .office-section {
     background: #202835;
     padding-left: 10px;
@@ -535,6 +545,6 @@ a {
   height: 100vh;
 }
 
-div > .form-group {
+div>.form-group {
   margin-bottom: 0px;
 }
