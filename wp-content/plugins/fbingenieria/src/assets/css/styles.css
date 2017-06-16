@@ -29,7 +29,15 @@ footer {
   /*background-color: transparent !important;*/
   height: auto !important;
 }
-
+ .showme{ 
+   display: none;
+ }
+ .showhim:hover .showme{
+   display : block;
+ }
+ .showhim:hover .ok{
+   display : none;
+ }
 .container {
   margin-right: auto !important;
   margin-left: auto !important;
