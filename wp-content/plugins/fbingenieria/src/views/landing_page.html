@@ -125,24 +125,26 @@
                         </div>
                     </div>
                 </div>
-                <section class="padding-top" id="portfolio">
+                <section class="padding-top project-portfolio" id="portfolio">
                     <p class="section-title" align="center">
                         <?php echo $FBIngenieria->translate('portfolio-title', $lang) ?>
                     </p>
                     <hr class="hr-color">
 
-                    <v-carousel class="portfolio-carousel" >
+                    <v-carousel class="portfolio-carousel">
                         <v-carousel-item>
                             <v-layout row wrap>
-                                <v-flex xs6 md3 v-for="n in 8">
+                                <v-flex xs12 md6 v-for="project in projectList">
                                     <div class="p-box showhim">
                                         <div class="showme">
                                             <br>
                                             <br>
                                             <div class="portfolio-item">
+                                                <img v-if="project.images.length === 0" src="" alt="">
+                                                <img v-else src="project.images[0]" alt="">
                                                 <i class="material-icons">menu</i>
                                                 <i class="material-icons">share</i>
-                                                <p>PROYECT NAME</p>
+                                                <p>{{project.project_name}}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -257,6 +259,9 @@
                     this.ajax(JSON.stringify(this.contact));
                     return false;
                 }
+            },
+            computed: {
+
             }
         })
     </script>

@@ -152,7 +152,6 @@ footer {
   position: relative;
   width: 240px;
   height: 150px;
-  margin: 1em;
   display: inline-block;
   background-color: #202835;
   color: white;
@@ -213,6 +212,8 @@ footer {
   background-color: transparent;
   border-style: 0px;
   box-shadow: none;
+  height:auto;
+  width:auto;
 }
 
 .label {
@@ -590,6 +591,10 @@ a {
 .page-header .carousel {
   height: 100vh;
 }
+.project-portfolio .carousel{
+  height: auto;
+}
+.
 
 div>.form-group {
   margin-bottom: 0px;
