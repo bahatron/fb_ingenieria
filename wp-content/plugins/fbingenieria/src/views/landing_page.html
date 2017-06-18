@@ -130,6 +130,7 @@
                         <?php echo $FBIngenieria->translate('portfolio-title', $lang) ?>
                     </p>
                     <hr class="hr-color">
+
                     <v-carousel style="background-color:transparent;">
                         <v-carousel-item>
                             <v-layout row wrap>
@@ -176,7 +177,7 @@
                 <span class="clients-p">
                     <?php echo $FBIngenieria->translate('clients-text', $lang) ?>
                 </span>
-                <div class="client-carousel" v-if="clientList.length > 0" >
+                <div class="client-carousel" v-if="clientList.length > 0">
                     <v-carousel cycle="false" class="client-carousel">
                         <v-carousel-item v-for="client in clientList">
                             <img :src="client.imageUrl" style="height:100px;width:auto;">
@@ -221,6 +222,7 @@
                 </div>
             </section>
         </div>
+
     </div>
 
     <script>
@@ -228,12 +230,18 @@
             el: '#fbi_landing_page',
             data: {
                 clientList: JSON.parse('<?php echo json_encode($FBIngenieria->getActiveClients()) ?>'),
-                projectList: JSON.parse('<?php echo json_encode($FBIngenieria->getActiveProjects) ?>')
+                projectList: JSON.parse('<?php echo json_encode($FBIngenieria->getActiveProjects) ?>'),
+                dialogOpen: false
             },
             mounted: function () {
                 console.log('clientList', this.clientList);
+                console.log('project list', this.projectList);
             },
             methods: {
+                showDialog(event) {
+                    event.stopPropagation();
+                    this.dialogOpen = !this.dialogOpen
+                },
                 ajax: function (data) {
                     var xmlhttp = new XMLHttpRequest();
                     xmlhttp.onreadystatechange = function () {

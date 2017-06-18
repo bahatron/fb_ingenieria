@@ -56,28 +56,16 @@ $hestia_general_credits = get_theme_mod('hestia_general_credits',
 							<h4>
 								<a target="_blank" class="footer-a" href="https://www.instagram.com/fbingenieriayproyectos/"><i class="fa fa-instagram"></i></a>
 								<a target="_blank" class="footer-a" href="https://www.linkedin.com/company-beta/5901993/"><i class="fa fa-linkedin-square"></i></a>
-								<a><i class="fa fa-envelope-square"></i></a>
-								<template>
-									<v-layout row justify-center>
-										<v-dialog v-model="dialog">
-											<v-btn primary light slot="activator">Open Dialog</v-btn>
-											<v-card>
-												<v-card-row>
-													<v-card-title>Use Google's location service?</v-card-title>
-												</v-card-row>
-												<v-card-row>
-													<v-card-text>Let Google help apps determine location. This means sending anonymous location data to Google, even when no
-														apps are running.</v-card-text>
-												</v-card-row>
-												<v-card-row actions>
-													<v-btn class="green--text darken-1" flat="flat" @click.native="dialog = false">Disagree</v-btn>
-													<v-btn class="green--text darken-1" flat="flat" @click.native="dialog = false">Agree</v-btn>
-												</v-card-row>
-											</v-card>
-										</v-dialog>
-									</v-layout>
-								</template>
+								<a @click="showDialog($event)"><i class="fa fa-envelope-square"></i></a>
+								<v-dialog v-model="dialogOpen">
+									<v-card style="width:auto;padding:12px;">
+										<v-card-row>
+											Escríbenos a fbingenieriayproyectos@fbingenieriayproyectos.com
+										</v-card-row>
+										
+									</v-card>
 
+								</v-dialog>
 							</h4>
 						</div>
 					</div>
@@ -114,13 +102,15 @@ $hestia_general_credits = get_theme_mod('hestia_general_credits',
 				form.submit();
 			}
 			new Vue({
-				el: '#fbi_footer'
-			})
-			export default {
-				data() {
-					return {
-						dialog: false
+				el: '#fbi_footer',
+				data: {
+					dialogOpen: false
+				},
+				methods: {
+					showDialog(event) {
+						event.stopPropagation();
+						this.dialogOpen = !this.dialogOpen
 					}
 				}
-			}
+			})
 		</script>
