@@ -16,20 +16,23 @@ if (! function_exists('hestia_big_title')) :
     function hestia_big_title()
     {
         global $FBIngenieria;
-        $headerImages = $FBIngenieria->getHeaderImagesUrl();
-         ?>
+        $headerImages = $FBIngenieria->getHeaderImagesUrl(); ?>
 	<html>
 	<div class="page-header" style="background-color: #0b465d;" id="fbi_big_title">
-		<div style="position: relative;">
-			<v-carousel>
+		<div style="position: relative; height: 100vh;">
+            <?php
+            if (!empty($headerImages)) {
+                ?>
+                <v-carousel>
                 <?php
-                foreach($headerImages as $img){
+                foreach ($headerImages as $img) {
                     ?>
                     <v-carousel-item src="<?php echo $img ?>"></v-carousel-item>
-                    <?php
-                }
-                ?>
+                    <?php 
+                } ?>
 			</v-carousel>
+            <?php 
+            } ?>
 			<div class="main-header-title">
 				<h2 class="main-title"><b>FB</b> Ingeniería y Proyectos</h2>
 				<hr style="width:50%; margin-left:25%"> VENEZUELA - PANAMÁ
