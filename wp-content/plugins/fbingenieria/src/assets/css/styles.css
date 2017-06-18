@@ -30,6 +30,22 @@ footer {
   height: auto !important;
 }
 
+.showme {
+  display: none;
+}
+
+.portfolio-item {
+  text-align: center;
+}
+
+.showhim:hover .showme {
+  display: block;
+}
+
+.showhim:hover .ok {
+  display: none;
+}
+
 .container {
   margin-right: auto !important;
   margin-left: auto !important;
@@ -131,6 +147,16 @@ footer {
   color: white;
 }
 
+.p-box {
+  overflow: hidden;
+  position: relative;
+  width: 240px;
+  height: 150px;
+  display: inline-block;
+  background-color: #202835;
+  color: white;
+}
+
 .box-for-about {
   width: 240px;
   height: 150px;
@@ -159,6 +185,35 @@ footer {
 .box:hover {
   background-color: #fb6816;
   transition: 0.7s;
+}
+
+.p-box:hover {
+  background-color: #fb6816;
+  transition: 0.7s;
+}
+
+.cp-footer {
+  height: 100%;
+  width: 100%;
+  background: #202835;
+  border-top-style: solid;
+  border-top-color: #fb6816;
+  padding-top: 10px;
+}
+
+.client-carousel {
+  background-color: transparent;
+  height: 35vh;
+  border-style: 0px;
+  box-shadow: none;
+}
+
+.portfolio-carousel {
+  background-color: transparent;
+  border-style: 0px;
+  box-shadow: none;
+  height:auto;
+  width:auto;
 }
 
 .label {
@@ -200,6 +255,15 @@ footer {
   border-radius: 2px;
   min-width: 0;
   height: 395px;
+}
+
+.carousel__controls {
+  background-color: rgba(153, 153, 153, 0.32);
+}
+
+.carousel__left .btn,
+.carousel__right .btn {
+  color: transparent;
 }
 
 .p-journey {
@@ -385,6 +449,7 @@ a {
   .display-big {
     display: none;
   }
+
   .whyus-p {
     font-size: 0.55em;
     display: inline-block;
@@ -513,20 +578,24 @@ a {
 }
 
 .main-header-title {
-  background-color: rgba(8, 49, 65, 0);
+  background-color: rgba(49, 49, 49, 0.41);
   position: absolute;
   top: 40%;
   width: 50%;
   left: 25%;
-  height: 20%;
-  color: black;
+  height: auto;
+  color: white;
   text-align: center;
 }
 
 .page-header .carousel {
   height: 100vh;
 }
+.project-portfolio .carousel{
+  height: auto;
+}
+.
 
-div > .form-group {
+div>.form-group {
   margin-bottom: 0px;
 }

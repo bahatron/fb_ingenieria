@@ -125,12 +125,33 @@
                         </div>
                     </div>
                 </div>
-                <section class="padding-top" id="portfolio">
+                <section class="padding-top project-portfolio" id="portfolio">
                     <p class="section-title" align="center">
                         <?php echo $FBIngenieria->translate('portfolio-title', $lang) ?>
                     </p>
                     <hr class="hr-color">
-                    <h2 align="center">En Construcción</h2>
+
+                    <v-carousel class="portfolio-carousel">
+                        <v-carousel-item>
+                            <v-layout row wrap>
+                                <v-flex xs12 md6 v-for="project in projectList">
+                                    <div class="p-box showhim">
+                                        <div class="showme">
+                                            <br>
+                                            <br>
+                                            <div class="portfolio-item">
+                                                <img v-if="project.images.length === 0" src="" alt="">
+                                                <img v-else src="project.images[0]" alt="">
+                                                <i class="material-icons">menu</i>
+                                                <i class="material-icons">share</i>
+                                                <p>{{project.project_name}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </v-flex>
+                            </v-layout>
+                        </v-carousel-item>
+                    </v-carousel>
                 </section>
                 <section class="padding-top-journey" id="journey" style="position: relative;">
                     <div class="card_journey" style="background: url(<?php echo FBINGENIERIA_URL.'/src/assets/img/journey.png' ?>) center center / cover no-repeat">
@@ -159,8 +180,10 @@
                     <?php echo $FBIngenieria->translate('clients-text', $lang) ?>
                 </span>
                 <div class="client-carousel" v-if="clientList.length > 0">
-                    <v-carousel cycle="false" style="height: 100vh">
-                        <v-carousel-item v-for="client in clientList" :src="client.imageUrl"></v-carousel-item>
+                    <v-carousel cycle="false" class="client-carousel">
+                        <v-carousel-item v-for="client in clientList">
+                            <img :src="client.imageUrl" style="height:100px;width:auto;">
+                        </v-carousel-item>
                     </v-carousel>
                 </div>
             </section>
@@ -201,6 +224,7 @@
                 </div>
             </section>
         </div>
+
     </div>
 
     <script>
@@ -208,12 +232,18 @@
             el: '#fbi_landing_page',
             data: {
                 clientList: JSON.parse('<?php echo json_encode($FBIngenieria->getActiveClients()) ?>'),
-                contact: {}
+                projectList: JSON.parse('<?php echo json_encode($FBIngenieria->getActiveProjects()) ?>'),
+                dialogOpen: false
             },
             mounted: function () {
                 console.log('clientList', this.clientList);
+                console.log('project list', this.projectList);
             },
             methods: {
+                showDialog(event) {
+                    event.stopPropagation();
+                    this.dialogOpen = !this.dialogOpen
+                },
                 ajax: function (data) {
                     var xmlhttp = new XMLHttpRequest();
                     xmlhttp.onreadystatechange = function () {
@@ -229,6 +259,9 @@
                     this.ajax(JSON.stringify(this.contact));
                     return false;
                 }
+            },
+            computed: {
+
             }
         })
     </script>

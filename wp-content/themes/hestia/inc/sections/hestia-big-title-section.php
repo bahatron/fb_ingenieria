@@ -35,7 +35,8 @@ if (! function_exists('hestia_big_title')) :
             } ?>
 			<div class="main-header-title">
 				<h2 class="main-title"><b>FB</b> Ingeniería y Proyectos</h2>
-				<hr style="width:50%; margin-left:25%"> VENEZUELA - PANAMÁ
+				<hr style="width:50%; margin-left:25%"> 
+                <p style="font-size:1em;">VENEZUELA - PANAMÁ</p>
 			</div>
 		</div>
 	</div>

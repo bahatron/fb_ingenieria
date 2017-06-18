@@ -53,7 +53,7 @@
 						<div id="main-navigation" class="navbar-collapse collapse" aria-expanded="false" style="height: 0px;">
 							<ul id="menu-header" class="nav navbar-nav navbar-right">
 								<li id="menu-item-12" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-home menu-item-12 active">
-									<a title="Inicio" href="#home"><?php echo $FBIngenieria->translate('home', $lang) ?></a>
+									<a title="Inicio" href="#fbi_big_title"><?php echo $FBIngenieria->translate('home', $lang) ?></a>
 								</li>
 								<li id="menu-item-13" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-home menu-item-13 active">
 									<a title="Qué hacemos?" href="#about"><?php echo $FBIngenieria->translate('about-us', $lang) ?></a>

@@ -33,7 +33,7 @@ class FBIngenieria
     {
         require_once(FBINGENIERIA_PATH.'/src/config/database.php');
         load_plugin_textdomain('fbingenieria', false, plugin_basename(dirname(__FILE__)) . '/languages');
-        // register_activation_hook(__FILE__, 'cleanFbingenieriaDatabase');
+        # register_activation_hook(__FILE__, 'cleanFbingenieriaDatabase');
         register_activation_hook(__FILE__, 'fbingenieriaDatabase');
         add_action('admin_menu', array($this, 'add_menu_pages'));
         add_shortcode('fbi_landing_page', 'fbi_landing_page_handler');
@@ -115,7 +115,8 @@ class FBIngenieria
     {
         global $wpdb;
         $sql="SELECT id, name, imageUrl from $this->clients WHERE visible=1";
-        return $wpdb->get_results($sql);
+        $result = $wpdb->get_results($sql);
+        return $result;
     }
 
     public function getClientProjects($id)
@@ -198,6 +199,24 @@ class FBIngenieria
         } else {
             $this->showSuccess('Proyecto registrado satisfactoriamente!');
         }
+    }
+
+    public function getActiveProjects()
+    {
+        global $wpdb;
+        $sql = "SELECT p.id as 'project_id', p.name as 'project_name', p.shortDescription, p.longDescription, c.* 
+                FROM $this->projects p
+                INNER JOIN $this->clients c on p.client_id = c.id
+                WHERE p.visible = '1'";
+        $projects = $wpdb->get_results($sql);
+        
+        $array = [];
+        foreach ($projects as $project) {
+            $sql = "SELECT url FROM $this->images WHERE project_id = $project->project_id";
+            $project->images = $wpdb->get_results($sql);
+            $array[] = $project;
+        }
+        return $array;
     }
 
     # image control
