@@ -188,6 +188,11 @@ footer {
   transition: 0.7s;
 }
 
+.p-box:hover {
+  background-color: #fb6816;
+  transition: 0.7s;
+}
+
 .cp-footer {
   height: 100%;
   width: 100%;
@@ -200,6 +205,12 @@ footer {
 .client-carousel {
   background-color: transparent;
   height: 35vh;
+  border-style: 0px;
+  box-shadow: none;
+}
+
+.portfolio-carousel {
+  background-color: transparent;
   border-style: 0px;
   box-shadow: none;
 }
@@ -437,6 +448,7 @@ a {
   .display-big {
     display: none;
   }
+
   .whyus-p {
     font-size: 0.55em;
     display: inline-block;

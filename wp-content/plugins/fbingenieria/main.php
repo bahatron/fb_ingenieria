@@ -33,7 +33,7 @@ class FBIngenieria
     {
         require_once(FBINGENIERIA_PATH.'/src/config/database.php');
         load_plugin_textdomain('fbingenieria', false, plugin_basename(dirname(__FILE__)) . '/languages');
-        // register_activation_hook(__FILE__, 'cleanFbingenieriaDatabase');
+        # register_activation_hook(__FILE__, 'cleanFbingenieriaDatabase');
         register_activation_hook(__FILE__, 'fbingenieriaDatabase');
         add_action('admin_menu', array($this, 'add_menu_pages'));
         add_shortcode('fbi_landing_page', 'fbi_landing_page_handler');
