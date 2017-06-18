@@ -565,13 +565,13 @@ a {
 }
 
 .main-header-title {
-  background-color: rgba(8, 49, 65, 0);
+  background-color: rgba(49, 49, 49, 0.41);
   position: absolute;
   top: 40%;
   width: 50%;
   left: 25%;
-  height: 20%;
-  color: black;
+  height: auto;
+  color: white;
   text-align: center;
 }
 
