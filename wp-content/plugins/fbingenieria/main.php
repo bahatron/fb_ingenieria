@@ -114,9 +114,8 @@ class FBIngenieria
     public function getActiveClients()
     {
         global $wpdb;
-        $sql="SELECT id, name, imageUrl from $this->clients WHERE visible=1";
-        $result = $wpdb->get_results($sql);
-        return $result;
+        $sql="SELECT * from $this->clients WHERE visible=1";
+        return $wpdb->get_results($sql);
     }
 
     public function getClientProjects($id)
@@ -231,7 +230,8 @@ class FBIngenieria
     {
         global $wpdb;
         foreach ($array as $img) {
-            $result += $wpdb->insert($this->images, ['post_id' => $img, 'project_id' => $id]);
+            $url = wp_get_attachment_url($img);
+            $result += $wpdb->insert($this->images, ['post_id' => $img, 'project_id' => $id, 'url' => $url]);
         }
         if (!$result) {
             $this->showError('Hubo un error registrado en base de datos');
