@@ -131,10 +131,10 @@
                     </p>
                     <hr class="hr-color">
 
-                    <v-carousel class="portfolio-carousel">
+                    <v-carousel class="portfolio-carousel" align="center">
                         <v-carousel-item>
                             <v-layout row wrap>
-                                <v-flex xs12 md6 v-for="project in projectList">
+                                <v-flex xs12 md3 v-for="project in projectList">
                                     <div class="p-box showhim">
                                         <div class="showme">
                                             <br>
@@ -182,7 +182,7 @@
                 <div class="client-carousel" v-if="clientList.length > 0">
                     <v-carousel cycle="false" class="client-carousel">
                         <v-carousel-item v-for="client in clientList">
-                            <img :src="client.imageUrl" style="height:100px;width:auto;">
+                            <a :href="client.websiteUrl"><img :src="client.imageUrl" style="height:100px;width:auto;"></a>
                         </v-carousel-item>
                     </v-carousel>
                 </div>
