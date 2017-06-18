@@ -115,7 +115,8 @@ class FBIngenieria
     {
         global $wpdb;
         $sql="SELECT id, name, imageUrl from $this->clients WHERE visible=1";
-        return $wpdb->get_results($sql);
+        $result = $wpdb->get_results($sql);
+        return $result;
     }
 
     public function getClientProjects($id)
@@ -214,7 +215,6 @@ class FBIngenieria
             $sql = "SELECT url FROM $this->images WHERE project_id = $project->project_id";
             $project->images = $wpdb->get_results($sql);
             $array[] = $project;
-            var_dump($project);
         }
         return $array;
     }
