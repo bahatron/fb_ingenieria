@@ -1,5 +1,23 @@
 <?php
 
+function cleanFbingenieriaDatabase()
+{
+    global $wpdb;
+    $fbiClient = $wpdb->prefix.'fbi_clients';
+    $fbiProject = $wpdb->prefix.'fbi_projects';
+    $fbiProjectImg = $wpdb->prefix.'fbi_images';
+    $fbiHeaderImg = $wpdb->prefix.'fbi_header_images';
+
+    $sql = "DROP TABLE $fbiHeaderImg";
+    $wpdb->query($sql);
+    $sql = "DROP TABLE $fbiProjectImg";
+    $wpdb->query($sql);
+    $sql = "DROP TABLE $fbiProject";
+    $wpdb->query($sql);
+    $sql = "DROP TABLE $fbiClient";
+    $wpdb->query($sql);
+}
+
 function fbingenieriaDatabase()
 {
     global $wpdb;
