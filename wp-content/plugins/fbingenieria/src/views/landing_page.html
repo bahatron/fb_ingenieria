@@ -142,7 +142,7 @@
                                             <div class="portfolio-item">
                                                 <img v-if="project.images.length === 0" src="" alt="">
                                                 <img v-else src="project.images[0]" alt="">
-                                                <i class="material-icons">menu</i>
+                                                <a @click="showDialog($event)"><i class="material-icons">menu</i></a>
                                                 <i class="material-icons">share</i>
                                                 <p>{{project.project_name}}</p>
                                             </div>
@@ -152,6 +152,31 @@
                             </v-layout>
                         </v-carousel-item>
                     </v-carousel>
+                    <v-dialog v-model="dialogOpen">
+                        <v-card style="width:auto;padding:12px;">
+                            <v-card-row>
+                                <v-card-title>Prueba</v-card-title>
+                            </v-card-row>
+                            <v-card-row>
+                                <p style="font-size:0.89em;text-align:justify;">akdjasljdaldsjsaljdalsdjaljsdakdslasjdlajsdlajsdlkasj askdjalsdjlaksjdlkajsdklajsldjalsdjalskjdklajdsslasj
+                                </p>
+                            </v-card-row>
+                            <v-card-row>
+                                <p style="font-size:1em;text-align:justify;">
+                                    akdjasljdaldsjsaljdalsdjaljsdakdslasjdlajsdlajsdlkasj askdjalsdjlaksjdlkajsdklajsldjalsdjalskjdklajdsslasj akdjasljdaldsjsaljdalsdjaljsdakdslasjdlajsdlajsdlkasj
+                                    askdjalsdjlaksjdlkajsdklajsldjalsdjalskjdklajdsslasj
+                                </p>
+                            </v-card-row>
+                            <v-card-row>
+                                <v-carousel cycle="false" class="client-carousel">
+                                    <v-carousel-item v-for="client in clientList">
+                                        <a :href="client.websiteUrl"><img :src="client.imageUrl" style="height:100px;width:auto;"></a>
+                                    </v-carousel-item>
+                                </v-carousel>
+                            </v-card-row>
+                        </v-card>
+
+                    </v-dialog>
                 </section>
                 <section class="padding-top-journey" id="journey" style="position: relative;">
                     <div class="card_journey" style="background: url(<?php echo FBINGENIERIA_URL.'/src/assets/img/journey.png' ?>) center center / cover no-repeat">
@@ -213,8 +238,7 @@
                                 <textarea rows="4" cols="2" v-model="contact.comment" name="comment" placeholder="<?php echo $FBIngenieria->translate('contact-comment', $lang) ?>"
                                     required>
                                 </textarea>
-                                <input type="submit" name="submit" value="<?php echo $FBIngenieria->translate('contact-button', $lang) ?>" class="btn btn-primary"
-                                    style="text-transform: capitalize;">
+                                <input type="submit" name="submit" value="<?php echo $FBIngenieria->translate('contact-button', $lang) ?>" class="btn" style="background-color:#fb6816; box-shadow:none;">
                             </div>
                         </form>
                     </div>
