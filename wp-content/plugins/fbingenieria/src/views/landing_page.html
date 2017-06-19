@@ -148,35 +148,38 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <v-dialog v-model="dialogOpen">
+                                        <v-card style="width:auto;padding:12px;">
+                                            <v-card-row>
+                                                <v-card-title>{{project.project_name}}</v-card-title>
+                                            </v-card-row>
+                                            <v-card-row>
+                                                <p style="font-size:0.89em;text-align:justify;"> 
+                                                    
+                                                </p>
+                                            </v-card-row>
+                                            <v-card-row>
+                                                <p style="font-size:1em;text-align:justify;">
+                                                    akdjasljdaldsjsaljdalsdjaljsdakdslasjdlajsdlajsdlkasj askdjalsdjlaksjdlkajsdklajsldjalsdjalskjdklajdsslasj akdjasljdaldsjsaljdalsdjaljsdakdslasjdlajsdlajsdlkasj
+                                                    askdjalsdjlaksjdlkajsdklajsldjalsdjalskjdklajdsslasj
+                                                </p>
+                                            </v-card-row>
+                                            <v-card-row>
+                                                <v-carousel cycle="false" class="client-carousel">
+                                                    <v-carousel-item v-for="client in clientList">
+                                                        <a :href="client.websiteUrl"><img :src="client.imageUrl" style="height:100px;width:auto;"></a>
+                                                    </v-carousel-item>
+                                                </v-carousel>
+                                            </v-card-row>
+                                        </v-card>
+
+                                    </v-dialog>
                                 </v-flex>
                             </v-layout>
                         </v-carousel-item>
-                    </v-carousel>
-                    <v-dialog v-model="dialogOpen">
-                        <v-card style="width:auto;padding:12px;">
-                            <v-card-row>
-                                <v-card-title>Prueba</v-card-title>
-                            </v-card-row>
-                            <v-card-row>
-                                <p style="font-size:0.89em;text-align:justify;">akdjasljdaldsjsaljdalsdjaljsdakdslasjdlajsdlajsdlkasj askdjalsdjlaksjdlkajsdklajsldjalsdjalskjdklajdsslasj
-                                </p>
-                            </v-card-row>
-                            <v-card-row>
-                                <p style="font-size:1em;text-align:justify;">
-                                    akdjasljdaldsjsaljdalsdjaljsdakdslasjdlajsdlajsdlkasj askdjalsdjlaksjdlkajsdklajsldjalsdjalskjdklajdsslasj akdjasljdaldsjsaljdalsdjaljsdakdslasjdlajsdlajsdlkasj
-                                    askdjalsdjlaksjdlkajsdklajsldjalsdjalskjdklajdsslasj
-                                </p>
-                            </v-card-row>
-                            <v-card-row>
-                                <v-carousel cycle="false" class="client-carousel">
-                                    <v-carousel-item v-for="client in clientList">
-                                        <a :href="client.websiteUrl"><img :src="client.imageUrl" style="height:100px;width:auto;"></a>
-                                    </v-carousel-item>
-                                </v-carousel>
-                            </v-card-row>
-                        </v-card>
 
-                    </v-dialog>
+
+                    </v-carousel>
                 </section>
                 <section class="padding-top-journey" id="journey" style="position: relative;">
                     <div class="card_journey" style="background: url(<?php echo FBINGENIERIA_URL.'/src/assets/img/journey.png' ?>) center center / cover no-repeat">
