@@ -12,6 +12,7 @@
             die();
         }
     ?>
+    
 </head>
 
 <body>
@@ -143,11 +144,11 @@
                                                 <img v-if="project.images.length === 0" src="" alt="">
                                                 <img v-else src="project.images[0].url" alt="">
                                                 <a @click="showDialog($event)"><i class="material-icons">menu</i></a>
-                                                <i class="material-icons">share</i>
+                                                
                                                 <p>{{project.project_name}}</p>
                                             </div>
                                         </div>
-                                    </div>
+                                        
                                     <v-dialog v-model="dialogOpen" width="50%">
                                         <v-card style="padding:12px;">
                                             <v-card-row>
