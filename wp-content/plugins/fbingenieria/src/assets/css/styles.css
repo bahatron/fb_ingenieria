@@ -30,20 +30,8 @@ footer {
   height: auto !important;
 }
 
-.showme {
-  display: none;
-}
-
 .portfolio-item {
   text-align: center;
-}
-
-.showhim:hover .showme {
-  display: block;
-}
-
-.showhim:hover .ok {
-  display: none;
 }
 
 .container {
@@ -158,6 +146,26 @@ footer {
   color: white;
 }
 
+.portoflio-img {
+  height: 150px;
+  width: auto;
+}
+
+.p-hover {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition: .5s ease;
+  background-color: #fb6816;
+}
+.p-box:hover .p-hover{
+  opacity: 1;
+}
 .box-for-about {
   width: 240px;
   height: 150px;
@@ -188,11 +196,6 @@ footer {
   transition: 0.7s;
 }
 
-.p-box:hover {
-  background-color: #fb6816;
-  transition: 0.7s;
-}
-
 .cp-footer {
   height: 100%;
   width: 100%;
@@ -208,6 +211,7 @@ footer {
   border-style: 0px;
   box-shadow: none;
 }
+
 .modal-carousel {
   background-color: transparent;
   height: 40vh;
@@ -219,8 +223,8 @@ footer {
   background-color: transparent;
   border-style: 0px;
   box-shadow: none;
-  height:auto;
-  width:auto;
+  height: auto;
+  width: auto;
 }
 
 .label {
@@ -456,7 +460,6 @@ a {
   .display-big {
     display: none;
   }
-
   .whyus-p {
     font-size: 0.55em;
     display: inline-block;
@@ -598,9 +601,11 @@ a {
 .page-header .carousel {
   height: 100vh;
 }
-.project-portfolio .carousel{
+
+.project-portfolio .carousel {
   height: auto;
 }
+
 .div>.form-group {
   margin-bottom: 0px;
 }

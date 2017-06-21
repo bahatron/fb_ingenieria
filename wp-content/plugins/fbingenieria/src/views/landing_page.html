@@ -12,7 +12,7 @@
             die();
         }
     ?>
-    
+
 </head>
 
 <body>
@@ -136,45 +136,46 @@
                         <v-carousel-item>
                             <v-layout row wrap>
                                 <v-flex xs12 md3 v-for="project in projectList">
-                                    <div class="p-box showhim">
-                                        <div class="showme">
+                                    <div class="p-box ">
+                                        <img v-if="project.images.length === 0" src="" alt="">
+                                        <img v-else :src="getBackgroundImage(project)" class="portoflio-img">
+                                        <div class="p-hover">
                                             <br>
                                             <br>
                                             <div class="portfolio-item">
-                                                <img v-if="project.images.length === 0" src="" alt="">
-                                                <img v-else src="project.images[0].url" alt="">
+
                                                 <a @click="showDialog($event)"><i class="material-icons">menu</i></a>
-                                                
+
                                                 <p>{{project.project_name}}</p>
                                             </div>
                                         </div>
-                                        
-                                    <v-dialog v-model="dialogOpen" width="50%">
-                                        <v-card style="padding:12px;">
-                                            <v-card-row>
-                                                <a :href="project.websiteUrl"><img :src="project.imageUrl" style="width:100px;"></a>
-                                                <v-card-title>{{project.project_name}}</v-card-title>
-                                            </v-card-row>
-                                            <v-card-row>
-                                                <p style="font-size:0.89em;text-align:justify;"> 
-                                                    {{project.shortDescription}}
-                                                </p>
-                                            </v-card-row>
-                                            <v-card-row>
-                                                <p style="font-size:1em;text-align:justify;">
-                                                    {{project.longDescription}}
-                                                </p>
-                                            </v-card-row>
-                                            <v-card-row>
-                                                <v-carousel cycle="false" class="modal-carousel">
-                                                    <v-carousel-item v-for="image in project.images">
-                                                        <img :src="image.url" style="height:40vh;width:auto;">
-                                                    </v-carousel-item>
-                                                </v-carousel>
-                                            </v-card-row>
-                                        </v-card>
 
-                                    </v-dialog>
+                                        <v-dialog v-model="dialogOpen" width="756">
+                                            <v-card style="padding:12px;">
+                                                <v-card-row>
+                                                    <a :href="project.websiteUrl"><img :src="project.imageUrl" style="width:100px;"></a>
+                                                    <v-card-title>{{project.project_name}}</v-card-title>
+                                                </v-card-row>
+                                                <v-card-row>
+                                                    <p style="font-size:0.89em;text-align:justify;">
+                                                        {{project.shortDescription}}
+                                                    </p>
+                                                </v-card-row>
+                                                <v-card-row>
+                                                    <p style="font-size:1em;text-align:justify;">
+                                                        {{project.longDescription}}
+                                                    </p>
+                                                </v-card-row>
+                                                <v-card-row>
+                                                    <v-carousel cycle="false" class="modal-carousel">
+                                                        <v-carousel-item v-for="image in project.images">
+                                                            <img :src="image.url" style="height:40vh;width:auto;">
+                                                        </v-carousel-item>
+                                                    </v-carousel>
+                                                </v-card-row>
+                                            </v-card>
+
+                                        </v-dialog>
                                 </v-flex>
                             </v-layout>
                         </v-carousel-item>
@@ -251,87 +252,52 @@
                     <i class="material-icons contact-icon" style="position:absolute;">mail_outline</i>
                 </div>
             </section>
+            </div>
+
         </div>
 
-    </div>
+        <script>
+            new Vue({
+                el: '#fbi_landing_page',
+                data: {
+                    clientList: JSON.parse('<?php echo json_encode($FBIngenieria->getActiveClients()) ?>'),
+                    projectList: JSON.parse('<?php echo json_encode($FBIngenieria->getActiveProjects()) ?>'),
+                    dialogOpen: false
+                },
+                mounted: function () {
 
-    <script>
-        new Vue({
-            el: '#fbi_landing_page',
-            data: {
-                clientList: JSON.parse('<?php echo json_encode($FBIngenieria->getActiveClients()) ?>'),
-                projectList: JSON.parse('<?php echo json_encode($FBIngenieria->getActiveProjects()) ?>'),
-                dialogOpen: false
-            },
-            mounted: function () {
-                console.log('clientList', this.clientList);
-                console.log('project list', this.projectList);
-            },
-            methods: {
-                showDialog(event) {
-                    event.stopPropagation();
-                    this.dialogOpen = !this.dialogOpen
                 },
-                ajax: function (data) {
-                    var xmlhttp = new XMLHttpRequest();
-                    xmlhttp.onreadystatechange = function () {
-                        if (this.readyState == 4) {
-                            alert("Gracias por contactarnos");
-                        }
-                    };
-                    xmlhttp.open("POST", '', true);
-                    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                    xmlhttp.send(data);
+                methods: {
+                    showDialog(event) {
+                        event.stopPropagation();
+                        this.dialogOpen = !this.dialogOpen
+                    },
+                    ajax: function (data) {
+                        var xmlhttp = new XMLHttpRequest();
+                        xmlhttp.onreadystatechange = function () {
+                            if (this.readyState == 4) {
+                                alert("Gracias por contactarnos");
+                            }
+                        };
+                        xmlhttp.open("POST", '', true);
+                        xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                        xmlhttp.send(data);
+                    },
+                    sendContactForm: function () {
+                        this.ajax(JSON.stringify(this.contact));
+                        return false;
+                    },
+                    getBackgroundImage(project) {
+                        var bck = project.images.length > 0 ? project.images[0].url : ''
+                        console.log('get background', bck)
+                        return bck
+                    }
                 },
-                sendContactForm: function () {
-                    this.ajax(JSON.stringify(this.contact));
-                    return false;
+                computed: {
+
                 }
-            },
-            computed: {
-
-            }
-        })
-    </script>
-    <script>
-	$(document).ready(function () {
-		$(document).on("scroll", onScroll);
- 
-		$('a[href^="#"]').on('click', function (e) {
-			e.preventDefault();
-			$(document).off("scroll");
- 
-			$('a').each(function () {
-				$(this).removeClass('active');
-			})
-			$(this).addClass('active');
- 
-			var target = this.hash;
-			$target = $(target);
-			$('html, body').stop().animate({
-				'scrollTop': $target.offset().top+2
-			}, 500, 'swing', function () {
-				window.location.hash = target;
-				$(document).on("scroll", onScroll);
-			});
-		});
-	});
- 
-	function onScroll(event){
-		var scrollPosition = $(document).scrollTop();
-		$('nav a').each(function () {
-			var currentLink = $(this);
-			var refElement = $(currentLink.attr("href"));
-			if (refElement.position().top <= scrollPosition && refElement.position().top + refElement.height() > scrollPosition) {
-				$('nav ul li a').removeClass("active");
-				currentLink.addClass("active");
-			}
-			else{
-				currentLink.removeClass("active");
-			}
-		});
-	}
-</script>
+            })
+        </script>
 </body>
 
 </html>
