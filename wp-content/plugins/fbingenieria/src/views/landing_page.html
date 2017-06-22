@@ -157,11 +157,11 @@
                                     <div class="showme">
                                         <br>
                                         <br>
-                                        <div class="portfolio-item">
+                                        <div class="portfolio-item" >
                                             <img v-if="project.images.length === 0" src="" alt="">
                                             <img v-else src="project.images[0].url" alt="">
-                                            <a @click="showDialog($event)"><i class="material-icons">menu</i></a>
-                                            <p>{{project.project_name}}</p>
+                                            <a @click="showDialog($event)" ><i class="material-icons p-a">menu</i></a>
+                                            <p class="projet-p" style="color:white;">{{project.project_name}}</p>
                                         </div>
                                     </div>
 

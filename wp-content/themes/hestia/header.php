@@ -74,7 +74,7 @@
 									<a title="Contacto" href="#contact"><?php echo $FBIngenieria->translate('contact', $lang) ?></a>
 									</li>
 								<li id="menu-item-19" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-home menu-item-19 active">
-									<a title="" href="#fbi_footer"><i class="fa fa-map-marker"></i></a>
+									<a title="" href="#fbi_footer"><i class="fa fa-map-marker" style="margin-left:10px;"></i></a>
 								</li>
 							</ul>
 						</div>
