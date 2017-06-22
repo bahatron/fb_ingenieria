@@ -30,20 +30,8 @@ footer {
   height: auto !important;
 }
 
-.showme {
-  display: none;
-}
-
 .portfolio-item {
   text-align: center;
-}
-
-.showhim:hover .showme {
-  display: block;
-}
-
-.showhim:hover .ok {
-  display: none;
 }
 
 .container {
@@ -162,6 +150,26 @@ footer {
   color: white;
 }
 
+.portoflio-img {
+  height: 150px;
+  width: auto;
+}
+
+.p-hover {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition: .5s ease;
+  background-color: #fb6816;
+}
+.p-box:hover .p-hover{
+  opacity: 1;
+}
 .box-for-about {
   width: 240px;
   height: 150px;
@@ -188,11 +196,6 @@ footer {
 }
 
 .box:hover {
-  background-color: #fb6816;
-  transition: 0.7s;
-}
-
-.p-box:hover {
   background-color: #fb6816;
   transition: 0.7s;
 }
