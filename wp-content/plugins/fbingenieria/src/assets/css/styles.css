@@ -167,9 +167,11 @@ footer {
   transition: .5s ease;
   background-color: #fb6816;
 }
-.p-box:hover .p-hover{
+
+.p-box:hover .p-hover {
   opacity: 1;
 }
+
 .box-for-about {
   width: 240px;
   height: 150px;
@@ -256,8 +258,6 @@ footer {
 .section-title {
   font-style: Roboto;
   color: #fb6816;
-  letter-spacing: 0.3em;
-  font-style: Roboto;
   font-size: 1.895em;
   line-height: 1.895em;
   letter-spacing: 0.3em;
@@ -488,6 +488,13 @@ a {
     border-top-style: solid;
     height: 100%;
     background: url(http://localhost/FBIngenieria/wp-content/plugins/fbingenieria/src/assets/img/about-background.jpg) center center / cover no-repeat;
+  }
+  .section-title {
+    font-style: Roboto;
+    color: #fb6816;
+    font-size: 1.13em;
+    line-height: 1em;
+    letter-spacing: 0.1em;
   }
   .blog-post .section-text p {}
   .about-span {
