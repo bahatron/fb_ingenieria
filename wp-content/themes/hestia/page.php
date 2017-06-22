@@ -7,32 +7,38 @@
  * @since Hestia 1.0
  */
 
-get_header(); ?>
-			<div id="primary" class="page-header header-filter header-small" data-parallax="active" style="background-image: url('<?php echo hestia_featured_header(); ?>');">
-				<div class="container">
-					<div class="row">
-						<div class="col-md-8 col-md-offset-2 text-center">
-							<?php single_post_title( '<h1 class="title">', '</h1>' ); ?>
-						</div>
-					</div>
+    get_header();
+    global $FBIngenieria;
+    $headerImages = $FBIngenieria->getHeaderImagesUrl();
+?>
+	<div class="page-header" style="background-color: #0b465d;" id="fbi_big_title">
+		<div style="position: relative; height: 100vh;">
+			<?php
+        if (!empty($headerImages)) {
+            ?>
+			<v-carousel>
+			<?php
+        foreach ($headerImages as $img) {
+            ?>
+						<v-carousel-item src="<?php echo $img ?>"></v-carousel-item>
+						<?php 
+        } ?>
+				</v-carousel>
+				<?php 
+        } ?>
+				<div class="main-header-title">
+					<h2 class="main-title"><b>FB</b> Ingeniería y Proyectos</h2>
+					<hr style="width:50%; margin-left:25%">
+					<p style="font-size:1em;">VENEZUELA - PANAMÁ</p>
 				</div>
-			</div>
-		</header>
-		<div class="<?php echo hestia_layout(); ?>">
-			<div class="blog-post">
-				<div class="container">
-					<?php
-					if ( have_posts() ) :
-						while ( have_posts() ) : the_post();
-							get_template_part( 'template-parts/content', 'page' );
-							if ( comments_open() || get_comments_number() ) :
-								comments_template();
-							endif;
-						endwhile;
-					else :
-						get_template_part( 'template-parts/content', 'none' );
-					endif;
-					?>
-				</div>
-			</div>
-<?php get_footer(); ?>
+		</div>
+	</div>
+	<?php 
+    fbi_landing_page_handler();
+  ?>
+	<script>
+		new Vue({
+			el: '#fbi_big_title'
+		})
+	</script>
+	<?php get_footer(); ?>
