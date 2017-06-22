@@ -49,10 +49,16 @@ footer {
 
 .padding-top {
   padding-top: 80px;
+  background-color: white;
+}
+
+.projet-p {
+  color: white;
 }
 
 .padding-top-journey {
   padding-top: 50px;
+  background-color: white;
 }
 
 .hr-journey {
@@ -61,6 +67,9 @@ footer {
 
 .div-journey {
   margin-left: 100px
+}
+.i-hover:hover{
+  color:white;
 }
 
 .about {
@@ -163,9 +172,11 @@ footer {
   transition: .5s ease;
   background-color: #fb6816;
 }
-.p-box:hover .p-hover{
+
+.p-box:hover .p-hover {
   opacity: 1;
 }
+
 .box-for-about {
   width: 240px;
   height: 150px;
@@ -251,10 +262,13 @@ footer {
 
 .section-title {
   font-style: Roboto;
-  font-size: 200px;
   color: #fb6816;
+  font-size: 1.895em;
+  line-height: 1.895em;
   letter-spacing: 0.3em;
 }
+
+.blog-post .section-text p {}
 
 .about p {
   font-size: 1.895em;
@@ -480,6 +494,14 @@ a {
     height: 100%;
     background: url(http://localhost/FBIngenieria/wp-content/plugins/fbingenieria/src/assets/img/about-background.jpg) center center / cover no-repeat;
   }
+  .section-title {
+    font-style: Roboto;
+    color: #fb6816;
+    font-size: 1.13em;
+    line-height: 1em;
+    letter-spacing: 0.1em;
+  }
+  .blog-post .section-text p {}
   .about-span {
     color: #fb6816;
     font-weight: 500;
@@ -554,6 +576,12 @@ a {
     border-color: #fb6816;
     border-style: solid;
   }
+  .p-a {
+    color: white;
+  }
+  .p-a:hover {
+    color: white;
+  }
   .about-box {
     margin: auto;
   }
@@ -608,4 +636,30 @@ a {
 
 .div>.form-group {
   margin-bottom: 0px;
+}
+
+.project-filter .menu {
+  position: absolute;
+}
+
+.project-filter {
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.project-filter .menu__content {
+  top: 0px !important;
+  left: 0px !important;
+}
+
+.project-filter ul {
+  margin-bottom: 0px;
+}
+
+.project-filter .card {
+  margin-bottom: 0px;
+}
+
+.container {
+  width: 100%;
 }
