@@ -5000,7 +5000,7 @@ li.yith_magnifier_thumbnail a {
 
 @media (min-width: 601px) {
 	body.admin-bar .navbar-default:not(.navbar-transparent) {
-		margin-top: 32px;
+		margin-top: 0px;
 	}
 }
 

@@ -66,6 +66,9 @@ footer {
 .div-journey {
   margin-left: 100px
 }
+.i-hover:hover{
+  color:white;
+}
 
 .about {
   padding: 0px;
