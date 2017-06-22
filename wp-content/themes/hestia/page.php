@@ -33,8 +33,8 @@
 				</div>
 		</div>
 	</div>
-	<?php 
-    fbi_landing_page_handler();
+	<?php
+    function_exists('fbi_landing_page_handler') ? fbi_landing_page_handler() : '<h1>FBIngenieria</h1>';
   ?>
 	<script>
 		new Vue({
