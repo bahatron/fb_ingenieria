@@ -338,11 +338,11 @@ class FBIngenieria
 
 $GLOBALS['FBIngenieria'] = new FBIngenieria();
 
-function fbi_landing_page_handler($atts)
+function fbi_landing_page_handler($atts = null)
 {
     ob_start();
     include FBINGENIERIA_PATH.'src/views/landing_page.html';
-    return ob_get_clean();
+    ob_end_flush();
 }
 
 function fbi_general_settings_handler()
