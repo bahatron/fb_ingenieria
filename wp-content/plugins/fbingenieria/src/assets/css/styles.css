@@ -604,3 +604,29 @@ a {
 .div>.form-group {
   margin-bottom: 0px;
 }
+
+.project-filter .menu {
+  position: absolute;
+}
+
+.project-filter {
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.project-filter .menu__content {
+  top: 0px !important;
+  left: 0px !important;
+}
+
+.project-filter ul {
+  margin-bottom: 0px;
+}
+
+.project-filter .card {
+  margin-bottom: 0px;
+}
+
+.container {
+  width: 100%;
+}

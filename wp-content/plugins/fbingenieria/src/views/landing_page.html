@@ -85,7 +85,6 @@
                         <span class="about-span-small"><?php echo $FBIngenieria->translate('about-us-text-4', $lang) ?></span>
                     </div>
                 </div>
-
             </section>
             <section class="spacing">
             </section>
@@ -126,29 +125,46 @@
                         </div>
                     </div>
                 </div>
-                <section class="padding-top project-portfolio" id="portfolio">
-                    <p class="section-title" align="center">
-                        <?php echo $FBIngenieria->translate('portfolio-title', $lang) ?>
-                    </p>
-                    <hr class="hr-color">
+            </section>
+            <section class="padding-top project-portfolio" id="portfolio">
+                <p class="section-title" align="center">
+                    <?php echo $FBIngenieria->translate('portfolio-title', $lang) ?>
+                </p>
+                <hr class="hr-color">
+                <v-layout class="project-filter">
+                    <v-flex xs4>
+                        <v-select @click.native="checkMe($event)" :id="filters[0]" :items="items" v-model="countryFilter" item-value="text" single-line
+                            persistent-hint hint="<?php echo $FBIngenieria->translate('FILER_COUNTRY', $lang) ?>" label="<?php echo $FBIngenieria->translate('FILER_COUNTRY', $lang) ?>">
+                        </v-select>
+                    </v-flex>
+                    <v-flex xs4>
+                        <v-select @click.native="checkMe($event)" :id="filters[1]" :items="items" v-model="typeFilter" item-value="text" single-line
+                            persistent-hint hint="<?php echo $FBIngenieria->translate('FILER_COUNTRY', $lang) ?>" label="<?php echo $FBIngenieria->translate('FILER_COUNTRY', $lang) ?>">
+                        </v-select>
+                    </v-flex>
+                    <v-flex xs4>
+                        <v-select @click.native="checkMe($event)" :id="filters[2]" :items="items" v-model="areaFilter" item-value="text" single-line
+                            persistent-hint hint="<?php echo $FBIngenieria->translate('FILER_COUNTRY', $lang) ?>" label="<?php echo $FBIngenieria->translate('FILER_COUNTRY', $lang) ?>">
+                        </v-select>
+                    </v-flex>
+                </v-layout>
 
-                    <v-carousel class="portfolio-carousel" align="center">
-                        <v-carousel-item>
-                            <v-layout row wrap>
-                                <v-flex xs12 md3 v-for="project in projectList">
-                                    <div class="p-box showhim">
-                                        <div class="showme">
-                                            <br>
-                                            <br>
-                                            <div class="portfolio-item">
-                                                <img v-if="project.images.length === 0" src="" alt="">
-                                                <img v-else src="project.images[0].url" alt="">
-                                                <a @click="showDialog($event)"><i class="material-icons">menu</i></a>
-                                                
-                                                <p>{{project.project_name}}</p>
-                                            </div>
+                <v-carousel class="portfolio-carousel" align="center">
+                    <v-carousel-item>
+                        <v-layout row wrap>
+                            <v-flex xs12 md3 v-for="project in projectList">
+                                <div class="p-box showhim">
+                                    <div class="showme">
+                                        <br>
+                                        <br>
+                                        <div class="portfolio-item">
+                                            <img v-if="project.images.length === 0" src="" alt="">
+                                            <img v-else src="project.images[0].url" alt="">
+                                            <a @click="showDialog($event)"><i class="material-icons">menu</i></a>
+                                            <p>{{project.project_name}}</p>
                                         </div>
-                                        
+                                    </div>
+
                                     <v-dialog v-model="dialogOpen" width="50%">
                                         <v-card style="padding:12px;">
                                             <v-card-row>
@@ -156,7 +172,7 @@
                                                 <v-card-title>{{project.project_name}}</v-card-title>
                                             </v-card-row>
                                             <v-card-row>
-                                                <p style="font-size:0.89em;text-align:justify;"> 
+                                                <p style="font-size:0.89em;text-align:justify;">
                                                     {{project.shortDescription}}
                                                 </p>
                                             </v-card-row>
@@ -173,32 +189,28 @@
                                                 </v-carousel>
                                             </v-card-row>
                                         </v-card>
-
                                     </v-dialog>
-                                </v-flex>
-                            </v-layout>
-                        </v-carousel-item>
-
-
-                    </v-carousel>
-                </section>
-                <section class="padding-top-journey" id="journey" style="position: relative;">
-                    <div class="card_journey" style="background: url(<?php echo FBINGENIERIA_URL.'/src/assets/img/journey.png' ?>) center center / cover no-repeat">
-                        <p class="p-journey">
-                            <?php echo $FBIngenieria->translate('journey-title', $lang) ?>
+                            </v-flex>
+                        </v-layout>
+                    </v-carousel-item>
+                </v-carousel>
+            </section>
+            <section class="padding-top-journey" id="journey" style="position: relative;">
+                <div class="card_journey" style="background: url(<?php echo FBINGENIERIA_URL.'/src/assets/img/journey.png' ?>) center center / cover no-repeat">
+                    <p class="p-journey">
+                        <?php echo $FBIngenieria->translate('journey-title', $lang) ?>
+                    </p>
+                    <hr class="hr-color hr-journey" width="20%">
+                    <div class="div-journey">
+                        <p class="text-journey">
+                            <?php echo $FBIngenieria->translate('journey-text-1', $lang) ?> <br>
+                            <?php echo $FBIngenieria->translate('journey-text-2', $lang) ?>
                         </p>
-                        <hr class="hr-color hr-journey" width="20%">
-                        <div class="div-journey">
-                            <p class="text-journey">
-                                <?php echo $FBIngenieria->translate('journey-text-1', $lang) ?> <br>
-                                <?php echo $FBIngenieria->translate('journey-text-2', $lang) ?>
-                            </p>
-                            <p>
-                                <a href="#portfolio" class="btn" style="background-color:#fb6816; box-shadow:none;color:white;"><?php echo $FBIngenieria->translate('journey-botton', $lang) ?></a>
-                            </p>
-                        </div>
+                        <p>
+                            <a href="#portfolio" class="btn" style="background-color:#fb6816; box-shadow:none;color:white;"><?php echo $FBIngenieria->translate('journey-botton', $lang) ?></a>
+                        </p>
                     </div>
-                </section>
+                </div>
             </section>
             <section class="padding-top" id="clients">
                 <p class="section-title" align="center">
@@ -247,91 +259,79 @@
                         </form>
                     </div>
                     <div class="col-md-3"></div>
-
                     <i class="material-icons contact-icon" style="position:absolute;">mail_outline</i>
                 </div>
             </section>
         </div>
-
     </div>
-
-    <script>
-        new Vue({
-            el: '#fbi_landing_page',
-            data: {
-                clientList: JSON.parse('<?php echo json_encode($FBIngenieria->getActiveClients()) ?>'),
-                projectList: JSON.parse('<?php echo json_encode($FBIngenieria->getActiveProjects()) ?>'),
-                dialogOpen: false
-            },
-            mounted: function () {
-                console.log('clientList', this.clientList);
-                console.log('project list', this.projectList);
-            },
-            methods: {
-                showDialog(event) {
-                    event.stopPropagation();
-                    this.dialogOpen = !this.dialogOpen
-                },
-                ajax: function (data) {
-                    var xmlhttp = new XMLHttpRequest();
-                    xmlhttp.onreadystatechange = function () {
-                        if (this.readyState == 4) {
-                            alert("Gracias por contactarnos");
-                        }
-                    };
-                    xmlhttp.open("POST", '', true);
-                    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                    xmlhttp.send(data);
-                },
-                sendContactForm: function () {
-                    this.ajax(JSON.stringify(this.contact));
-                    return false;
-                }
-            },
-            computed: {
-
-            }
-        })
-    </script>
-    <script>
-	$(document).ready(function () {
-		$(document).on("scroll", onScroll);
- 
-		$('a[href^="#"]').on('click', function (e) {
-			e.preventDefault();
-			$(document).off("scroll");
- 
-			$('a').each(function () {
-				$(this).removeClass('active');
-			})
-			$(this).addClass('active');
- 
-			var target = this.hash;
-			$target = $(target);
-			$('html, body').stop().animate({
-				'scrollTop': $target.offset().top+2
-			}, 500, 'swing', function () {
-				window.location.hash = target;
-				$(document).on("scroll", onScroll);
-			});
-		});
-	});
- 
-	function onScroll(event){
-		var scrollPosition = $(document).scrollTop();
-		$('nav a').each(function () {
-			var currentLink = $(this);
-			var refElement = $(currentLink.attr("href"));
-			if (refElement.position().top <= scrollPosition && refElement.position().top + refElement.height() > scrollPosition) {
-				$('nav ul li a').removeClass("active");
-				currentLink.addClass("active");
-			}
-			else{
-				currentLink.removeClass("active");
-			}
-		});
-	}
-</script>
 </body>
+<script>
+    new Vue({
+        el: '#fbi_landing_page',
+        data: {
+            clientList: JSON.parse('<?php echo json_encode($FBIngenieria->getActiveClients()) ?>'),
+            projectList: JSON.parse('<?php echo json_encode($FBIngenieria->getActiveProjects()) ?>'),
+            dialogOpen: false,
+            items: [],
+            filters: ['countryFilter', 'areaFilter', 'typeFilter'],
+            countryFilter: {},
+            areaFilter: {},
+            typeFilter: {}
+        },
+        mounted: function () {
+            this.processList(this.clientList);
+            console.log(this.items)
+        },
+        methods: {
+            checkMe: function (event) {
+                var focused =
+                    'input-group input-group--focused input-group--dark input-group--append-icon input-group--text-field input-group--select input-group--single-line'
+                var unfocused =
+                    'input-group input-group--dark input-group--append-icon input-group--text-field input-group--select input-group--single-line'
+                var targetId = event.target.offsetParent.id
+                console.log('target className', event.target.offsetParent.className)
+                console.log('target attributes', event.target.offsetParent.attributes)
+                var targetClass = event.target.offsetParent.attributes.class
+                this.filters.forEach(function (item) {
+                    console.log('item', item)
+                    if (item !== targetId) {
+                        var selector = document.getElementById(item)
+                        console.log('selector className', selector.className)
+                        selector.className = unfocused
+                    }
+                })
+            },
+            processList: function (array) {
+                this.items = array.map(function (item) {
+                    return {
+                        text: item.name
+                    }
+                })
+            },
+            showDialog: function (event) {
+                event.stopPropagation();
+                this.dialogOpen = !this.dialogOpen
+            },
+            ajax: function (data) {
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.onreadystatechange = function () {
+                    if (this.readyState == 4) {
+                        alert("Gracias por contactarnos");
+                    }
+                };
+                xmlhttp.open("POST", '', true);
+                xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                xmlhttp.send(data);
+            },
+            sendContactForm: function () {
+                this.ajax(JSON.stringify(this.contact));
+                return false;
+            }
+        },
+        computed: {
+
+        }
+    })
+</script>
 
 </html>
