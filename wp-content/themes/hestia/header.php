@@ -31,7 +31,7 @@
 		$FBIngenieria->setLanguage($lang);
 	?>
 	</head>
-	
+
 	<body <?php body_class(); ?>>
 		<div class="wrapper">
 			<header class="header" id="fbi_header">
@@ -45,6 +45,7 @@
 							<span class="icon-bar"></span>
 						</button>
 							<div class="title-logo-wrapper">
+								<?php echo "aqui" ?>
 								<a class="navbar-brand" href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php bloginfo( 'name' ); ?>">
 									<?php echo hestia_logo(); ?>
 								</a>
@@ -53,7 +54,7 @@
 						<div id="main-navigation" class="navbar-collapse collapse" aria-expanded="false" style="height: 0px;">
 							<ul id="menu-header" class="nav navbar-nav navbar-right">
 								<li id="menu-item-12" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-home menu-item-12 active">
-									<a title="Inicio" href="#fbi_big_title"><?php echo $FBIngenieria->translate('home', $lang) ?></a>
+									<a title="Inicio" href="#main-navigation"><?php echo $FBIngenieria->translate('home', $lang) ?></a>
 								</li>
 								<li id="menu-item-13" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-home menu-item-13 active">
 									<a title="Qué hacemos?" href="#about"><?php echo $FBIngenieria->translate('about-us', $lang) ?></a>
@@ -72,7 +73,7 @@
 								</li>
 								<li id="menu-item-18" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-home menu-item-18 active">
 									<a title="Contacto" href="#contact"><?php echo $FBIngenieria->translate('contact', $lang) ?></a>
-									</li>
+								</li>
 								<li id="menu-item-19" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-home menu-item-19 active">
 									<a title="" href="#fbi_footer"><i class="fa fa-map-marker" style="margin-left:10px;"></i></a>
 								</li>
