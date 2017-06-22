@@ -149,66 +149,66 @@
                     </v-flex>
                 </v-layout>
 
-                    <v-carousel class="portfolio-carousel" align="center">
-                        <v-carousel-item>
-                            <v-layout row wrap>
-                                <v-flex xs12 md3 v-for="project in projectList">
-                                    <div class="p-box ">
-                                        <img v-if="project.images.length === 0" src="" alt="">
-                                        <img v-else :src="getBackgroundImage(project)" class="portoflio-img">
-                                        <div class="p-hover">
-                                            <br>
-                                            <br>
-                                            <div class="portfolio-item">
+                <v-carousel class="portfolio-carousel" align="center">
+                    <v-carousel-item>
+                        <v-layout row wrap>
+                            <v-flex xs12 md3 v-for="project in projectList">
+                                <div class="p-box ">
+                                    <img v-if="project.images.length === 0" src="" alt="">
+                                    <img v-else :src="getBackgroundImage(project)" class="portoflio-img">
+                                    <div class="p-hover">
+                                        <br>
+                                        <br>
+                                        <div class="portfolio-item">
 
-                                                <a @click="showDialog($event)"><i class="material-icons">menu</i></a>
+                                            <a @click="showDialog($event)"><i class="material-icons">menu</i></a>
 
-                                                <p>{{project.project_name}}</p>
-                                            </div>
+                                            <p>{{project.project_name}}</p>
                                         </div>
+                                    </div>
 
-                                        <v-dialog v-model="dialogOpen" width="756">
-                                            <v-card style="padding:12px;">
-                                                <v-card-row>
-                                                    <a :href="project.websiteUrl"><img :src="project.imageUrl" style="width:100px;"></a>
-                                                    <v-card-title>{{project.project_name}}</v-card-title>
-                                                </v-card-row>
-                                                <v-card-row>
-                                                    <p style="font-size:0.89em;text-align:justify;">
-                                                        {{project.shortDescription}}
-                                                    </p>
-                                                </v-card-row>
-                                                <v-card-row>
-                                                    <p style="font-size:1em;text-align:justify;">
-                                                        {{project.longDescription}}
-                                                    </p>
-                                                </v-card-row>
-                                                <v-card-row>
-                                                    <v-carousel cycle="false" class="modal-carousel">
-                                                        <v-carousel-item v-for="image in project.images">
-                                                            <img :src="image.url" style="height:40vh;width:auto;">
-                                                        </v-carousel-item>
-                                                    </v-carousel>
-                                                </v-card-row>
-                                            </v-card>
+                                    <v-dialog v-model="dialogOpen" width="756">
+                                        <v-card style="padding:12px;">
+                                            <v-card-row>
+                                                <a :href="project.websiteUrl"><img :src="project.imageUrl" style="width:100px;"></a>
+                                                <v-card-title>{{project.project_name}}</v-card-title>
+                                            </v-card-row>
+                                            <v-card-row>
+                                                <p style="font-size:0.89em;text-align:justify;">
+                                                    {{project.shortDescription}}
+                                                </p>
+                                            </v-card-row>
+                                            <v-card-row>
+                                                <p style="font-size:1em;text-align:justify;">
+                                                    {{project.longDescription}}
+                                                </p>
+                                            </v-card-row>
+                                            <v-card-row>
+                                                <v-carousel cycle="false" class="modal-carousel">
+                                                    <v-carousel-item v-for="image in project.images">
+                                                        <img :src="image.url" style="height:40vh;width:auto;">
+                                                    </v-carousel-item>
+                                                </v-carousel>
+                                            </v-card-row>
+                                        </v-card>
 
-                                        </v-dialog>
-                                </v-flex>
-                            </v-layout>
-                        </v-carousel-item>
+                                    </v-dialog>
+                            </v-flex>
+                        </v-layout>
+                    </v-carousel-item>
 
 
-                    </v-carousel>
-                </section>
-                <section class="padding-top-journey" id="journey" style="position: relative;">
-                    <div class="card_journey" style="background: url(<?php echo FBINGENIERIA_URL.'/src/assets/img/journey.png' ?>) center center / cover no-repeat">
-                        <p class="p-journey">
-                            <?php echo $FBIngenieria->translate('journey-title', $lang) ?>
-                        </p>
-                        <p>
-                            <a href="#portfolio" class="btn" style="background-color:#fb6816; box-shadow:none;color:white;"><?php echo $FBIngenieria->translate('journey-botton', $lang) ?></a>
-                        </p>
-                    </div>
+                </v-carousel>
+            </section>
+            <section class="padding-top-journey" id="journey" style="position: relative;">
+                <div class="card_journey" style="background: url(<?php echo FBINGENIERIA_URL.'/src/assets/img/journey.png' ?>) center center / cover no-repeat">
+                    <p class="p-journey">
+                        <?php echo $FBIngenieria->translate('journey-title', $lang) ?>
+                    </p>
+                    <p>
+                        <a href="#portfolio" class="btn" style="background-color:#fb6816; box-shadow:none;color:white;"><?php echo $FBIngenieria->translate('journey-botton', $lang) ?></a>
+                    </p>
+                </div>
                 </div>
             </section>
             <section class="padding-top" id="clients">
@@ -261,9 +261,9 @@
                     <i class="material-icons contact-icon" style="position:absolute;">mail_outline</i>
                 </div>
             </section>
-            </div>
-
         </div>
+
+    </div>
     </div>
 </body>
 <script>
@@ -327,6 +327,11 @@
             sendContactForm: function () {
                 this.ajax(JSON.stringify(this.contact));
                 return false;
+            },
+            getBackgroundImage(project) {
+                var bck = project.images.length > 0 ? project.images[0].url : ''
+                console.log('get background', bck)
+                return bck
             }
         },
         computed: {
