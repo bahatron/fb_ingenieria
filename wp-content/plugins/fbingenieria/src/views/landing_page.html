@@ -287,8 +287,20 @@
                 },
                 methods: {
                     checkMe: function (event) {
-                        console.log('id', event.target.offsetParent.id)
-                        console.log(event.target.offsetParent.id)
+                        var focused = 'input-group input-group--focused input-group--dark input-group--append-icon input-group--text-field input-group--select input-group--single-line'
+                        var unfocused = 'input-group input-group--dark input-group--append-icon input-group--text-field input-group--select input-group--single-line'
+                        var targetId = event.target.offsetParent.id
+                        console.log('target className', event.target.offsetParent.className)
+                        console.log('target attributes', event.target.offsetParent.attributes)
+                        var targetClass = event.target.offsetParent.attributes.class
+                        this.filters.forEach(function(item){
+                            console.log('item', item)
+                            if(item !== targetId){
+                                var selector = document.getElementById(item)
+                                console.log('selector className', selector.className)
+                                selector.className = unfocused
+                            }
+                        })
                     }, 
                     processList: function (array) {
                         this.items = array.map(function (item) {
