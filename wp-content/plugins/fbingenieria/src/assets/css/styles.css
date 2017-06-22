@@ -208,6 +208,7 @@ footer {
   border-style: 0px;
   box-shadow: none;
 }
+
 .modal-carousel {
   background-color: transparent;
   height: 40vh;
@@ -219,8 +220,8 @@ footer {
   background-color: transparent;
   border-style: 0px;
   box-shadow: none;
-  height:auto;
-  width:auto;
+  height: auto;
+  width: auto;
 }
 
 .label {
@@ -456,7 +457,6 @@ a {
   .display-big {
     display: none;
   }
-
   .whyus-p {
     font-size: 0.55em;
     display: inline-block;
@@ -598,9 +598,33 @@ a {
 .page-header .carousel {
   height: 100vh;
 }
-.project-portfolio .carousel{
+
+.project-portfolio .carousel {
   height: auto;
 }
+
 .div>.form-group {
+  margin-bottom: 0px;
+}
+
+.project-filter .menu {
+  position: absolute;
+}
+
+.project-filter {
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.project-filter .menu__content {
+  top: 0px !important;
+  left: 0px !important;
+}
+
+.project-filter ul {
+  margin-bottom: 0px;
+}
+
+.project-filter .card {
   margin-bottom: 0px;
 }
