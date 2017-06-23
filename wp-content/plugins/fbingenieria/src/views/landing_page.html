@@ -123,18 +123,26 @@
                         <span class="whyus-p"><?php echo $FBIngenieria->translate('why-us-text-4', $lang) ?></span>
                     </div>
                 </div>
-            </section>
-            <section class="padding-top project-portfolio" id="portfolio">
-                <p class="section-title" align="center">
-                    <?php echo $FBIngenieria->translate('portfolio-title', $lang) ?>
-                </p>
-                <hr class="hr-color">
-                <v-layout class="project-filter">
-                    <v-flex xs12 class="project-filter-list">
-                        <v-chip class="white--text" @click.native="changeFilter('selectedCountryFilter', filter)" :style="isCountryFilterSelected(filter)"
-                            v-for="filter in countryFilters">{{filter}}</v-chip>
-                    </v-flex>
-                </v-layout>
+        </section>
+        <section class="padding-top project-portfolio" id="portfolio">
+            <p class="section-title" align="center">
+                <?php echo $FBIngenieria->translate('portfolio-title', $lang) ?>
+            </p>
+            <hr class="hr-color">
+            <v-layout class="project-filter" row wrap>
+                <v-flex xs12 class="project-filter-list">
+                    <v-chip class="white--text" @click.native="changeFilter('selectedCountryFilter', filter)" :style="isCountryFilterSelected(filter)"
+                        v-for="filter in countryFilters">{{filter}}</v-chip>
+                </v-flex>
+                <v-flex xs12 class="project-filter-list">
+                    <v-chip class="white--text" @click.native="changeFilter('selectedAreaFilter', filter)" :style="isAreaFilterSelected(filter)"
+                        v-for="filter in areaFilters">{{filter}}</v-chip>
+                </v-flex>
+                <v-flex xs12 class="project-filter-list">
+                    <v-chip class="white--text" @click.native="changeFilter('selectedTypeFilter', filter)" :style="isTypeFilterSelected(filter)"
+                        v-for="filter in typeFilters">{{filter}}</v-chip>
+                </v-flex>
+            </v-layout>
 
             <v-carousel class="portfolio-carousel" align="center">
                 <v-carousel-item>
@@ -261,26 +269,28 @@
                 'Caracas',
                 'Panama'
             ],
-            selectedCountryFilter: {},
+            selectedCountryFilter: null,
             areaFilters: [
                 'Industrial',
                 'Comercial',
-                'Residencial'
-            ]
+                'Residencial',
+                'Institucional'
+            ],
+            selectedAreaFilter: null,
+            typeFilters: [
+                'Tiendas', //area comercial
+                'Restaurantes', //area comercial
+                'Oficinas', //area comercial
+                'Publico', //area institucional
+                'Privado' //area institucional
+            ],
+            selectedTypeFilter: null
         },
         mounted: function () {
-            this.processList(this.clientList);
         },
         methods: {
             changeFilter: function (filter, value) {
                 this[filter] = value;
-            },
-            processList: function (array) {
-                this.items = array.map(function (item) {
-                    return {
-                        text: item.name
-                    };
-                })
             },
             showDialog: function (event, project) {
                 event.stopPropagation();
@@ -312,6 +322,22 @@
                     return {
                         'background-color': this.selectedCountryFilter === filter ? this.selectorColor : 'grey',
                         'border-color': this.selectedCountryFilter === filter ? this.selectorColor : 'grey'
+                    };
+                }
+            },
+            isAreaFilterSelected: function () {
+                return function (filter) {
+                    return {
+                        'background-color': this.selectedAreaFilter === filter ? this.selectorColor : 'grey',
+                        'border-color': this.selectedAreaFilter === filter ? this.selectorColor : 'grey'
+                    };
+                }
+            },
+            isTypeFilterSelected: function () {
+                return function (filter) {
+                    return {
+                        'background-color': this.selectedTypeFilter === filter ? this.selectorColor : 'grey',
+                        'border-color': this.selectedTypeFilter === filter ? this.selectorColor : 'grey'
                     };
                 }
             }
