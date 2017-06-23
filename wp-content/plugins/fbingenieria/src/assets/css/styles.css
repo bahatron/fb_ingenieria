@@ -227,7 +227,7 @@ footer {
   border-style: 0px;
   box-shadow: none;
   height: auto;
-  width: auto;
+  /*width: auto;*/
 }
 
 .label {
