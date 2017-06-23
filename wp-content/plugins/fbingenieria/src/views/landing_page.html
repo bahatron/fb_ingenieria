@@ -132,20 +132,9 @@
                 </p>
                 <hr class="hr-color">
                 <v-layout class="project-filter">
-                    <v-flex xs4>
-                        <v-select @click.native="checkMe($event)" :id="filters[0]" :items="items" v-model="countryFilter" item-value="text" single-line
-                            persistent-hint hint="<?php echo $FBIngenieria->translate('FILER_COUNTRY', $lang) ?>" label="<?php echo $FBIngenieria->translate('FILER_COUNTRY', $lang) ?>">
-                        </v-select>
-                    </v-flex>
-                    <v-flex xs4>
-                        <v-select @click.native="checkMe($event)" :id="filters[1]" :items="items" v-model="typeFilter" item-value="text" single-line
-                            persistent-hint hint="<?php echo $FBIngenieria->translate('FILER_COUNTRY', $lang) ?>" label="<?php echo $FBIngenieria->translate('FILER_COUNTRY', $lang) ?>">
-                        </v-select>
-                    </v-flex>
-                    <v-flex xs4>
-                        <v-select @click.native="checkMe($event)" :id="filters[2]" :items="items" v-model="areaFilter" item-value="text" single-line
-                            persistent-hint hint="<?php echo $FBIngenieria->translate('FILER_COUNTRY', $lang) ?>" label="<?php echo $FBIngenieria->translate('FILER_COUNTRY', $lang) ?>">
-                        </v-select>
+                    <v-flex xs12 class="project-filter-list">
+                        <v-chip class="white--text" @click.native="changeFilter('selectedCountryFilter', filter)" :style="isCountryFilterSelected(filter)"
+                            v-for="filter in countryFilters">{{filter}}</v-chip>
                     </v-flex>
                 </v-layout>
 
@@ -279,45 +268,35 @@
             clientList: JSON.parse('<?php echo json_encode($FBIngenieria->getActiveClients()) ?>'),
             projectList: JSON.parse('<?php echo json_encode($FBIngenieria->getActiveProjects()) ?>'),
             dialogOpen: false,
-            items: [],
-            filters: ['countryFilter', 'areaFilter', 'typeFilter'],
-            countryFilter: {},
-            areaFilter: {},
-            typeFilter: {}
+            selectorColor: '#fb6816',
+            countryFilters: [
+                'Caracas',
+                'Panama'
+            ],
+            selectedCountryFilter: {},
+            areaFilters: [
+                'Industrial',
+                'Comercial',
+                'Residencial'
+            ]
         },
         mounted: function () {
             this.processList(this.clientList);
-            console.log(this.items)
         },
         methods: {
-            checkMe: function (event) {
-                var focused =
-                    'input-group input-group--focused input-group--dark input-group--append-icon input-group--text-field input-group--select input-group--single-line'
-                var unfocused =
-                    'input-group input-group--dark input-group--append-icon input-group--text-field input-group--select input-group--single-line'
-                var targetId = event.target.offsetParent.id
-                console.log('target className', event.target.offsetParent.className)
-                console.log('target attributes', event.target.offsetParent.attributes)
-                var targetClass = event.target.offsetParent.attributes.class
-                this.filters.forEach(function (item) {
-                    console.log('item', item)
-                    if (item !== targetId) {
-                        var selector = document.getElementById(item)
-                        console.log('selector className', selector.className)
-                        selector.className = unfocused
-                    }
-                })
+            changeFilter: function (filter, value) {
+                this[filter] = value;
             },
             processList: function (array) {
                 this.items = array.map(function (item) {
                     return {
                         text: item.name
-                    }
+                    };
                 })
             },
             showDialog: function (event) {
                 event.stopPropagation();
-                this.dialogOpen = !this.dialogOpen
+                this.dialogOpen = !this.dialogOpen;
             },
             ajax: function (data) {
                 var xmlhttp = new XMLHttpRequest();
@@ -335,15 +314,21 @@
                 return false;
             },
             getBackgroundImage(project) {
-                var bck = project.images.length > 0 ? project.images[0].url : ''
-                console.log('get background', bck)
-                return bck
+                return project.images.length > 0 ? project.images[0].url : '';
             }
         },
         computed: {
-
+            isCountryFilterSelected: function () {
+                return function (filter) {
+                    return {
+                        'background-color': this.selectedCountryFilter === filter ? this.selectorColor : 'grey',
+                        'border-color': this.selectedCountryFilter === filter ? this.selectorColor : 'grey'
+                    };
+                }
+            }
         }
     })
+
 </script>
 
 </html>
