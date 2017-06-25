@@ -260,9 +260,6 @@ footer {
   letter-spacing: 0.3em;
 }
 
-.blog-post .section-text p {
-}
-
 .about p {
   font-size: 1.895em;
   line-height: 1.895em;
@@ -484,8 +481,6 @@ a {
     font-size: 1.13em;
     line-height: 1em;
     letter-spacing: 0.1em;
-  }
-  .blog-post .section-text p {
   }
   .about-span {
     color: #fb6816;
