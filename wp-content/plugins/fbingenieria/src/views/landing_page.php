@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="<?php echo FBINGENIERIA_URL. '/src/assets/css/styles.css'?>" rel="stylesheet" type="text/css">
     <?php
         global $FBIngenieria;
-        if(!empty($_POST)){
+        if (!empty($_POST)) {
             $data = json_decode(key($_POST));
             $result = $FBIngenieria->sendMail($data);
             var_dump($result);
@@ -123,32 +123,28 @@
                         <span class="whyus-p"><?php echo $FBIngenieria->translate('why-us-text-4', $lang) ?></span>
                     </div>
                 </div>
-            </div>
         </section>
         <section class="padding-top project-portfolio" id="portfolio">
             <p class="section-title" align="center">
                 <?php echo $FBIngenieria->translate('portfolio-title', $lang) ?>
             </p>
             <hr class="hr-color">
-            <v-layout class="project-filter">
-                <v-flex xs4>
-                    <v-select @click.native="checkMe($event)" :id="filters[0]" :items="items" v-model="countryFilter" item-value="text" single-line
-                        persistent-hint hint="<?php echo $FBIngenieria->translate('FILER_COUNTRY', $lang) ?>" label="<?php echo $FBIngenieria->translate('FILER_COUNTRY', $lang) ?>">
-                    </v-select>
+            <v-layout class="project-filter" row wrap>
+                <v-flex xs12 class="project-filter-list">
+                    <v-chip class="white--text" @click.native="changeFilter('selectedCountryFilter', filter)" :style="isCountryFilterSelected(filter)"
+                        v-for="filter in countryFilters">{{filter}}</v-chip>
                 </v-flex>
-                <v-flex xs4>
-                    <v-select @click.native="checkMe($event)" :id="filters[1]" :items="items" v-model="typeFilter" item-value="text" single-line
-                        persistent-hint hint="<?php echo $FBIngenieria->translate('FILER_COUNTRY', $lang) ?>" label="<?php echo $FBIngenieria->translate('FILER_COUNTRY', $lang) ?>">
-                    </v-select>
+                <v-flex xs12 class="project-filter-list">
+                    <v-chip class="white--text" @click.native="changeFilter('selectedAreaFilter', filter)" :style="isAreaFilterSelected(filter)"
+                        v-for="filter in areaFilters">{{filter}}</v-chip>
                 </v-flex>
-                <v-flex xs4>
-                    <v-select @click.native="checkMe($event)" :id="filters[2]" :items="items" v-model="areaFilter" item-value="text" single-line
-                        persistent-hint hint="<?php echo $FBIngenieria->translate('FILER_COUNTRY', $lang) ?>" label="<?php echo $FBIngenieria->translate('FILER_COUNTRY', $lang) ?>">
-                    </v-select>
+                <v-flex xs12 class="project-filter-list">
+                    <v-chip class="white--text" @click.native="changeFilter('selectedTypeFilter', filter)" :style="isTypeFilterSelected(filter)"
+                        v-for="filter in typeFilters">{{filter}}</v-chip>
                 </v-flex>
             </v-layout>
 
-            <v-carousel class="portfolio-carousel" align="center">
+            <v-carousel class="portfolio-carousel">
                 <v-carousel-item>
                     <v-layout row wrap>
                         <v-flex xs12 md3 v-for="project in projectList">
@@ -265,43 +261,26 @@
         el: '#fbi_landing_page',
         data: {
             clientList: JSON.parse('<?php echo json_encode($FBIngenieria->getActiveClients()) ?>'),
-            projectList: JSON.parse('<?php echo json_encode($FBIngenieria->getActiveProjects()) ?>'),
+            projectList: JSON.parse('<?php echo json_encode($FBIngenieria->getActiveProjects($lang)) ?>'),
             dialogOpen: false,
-            items: [],
-            filters: ['countryFilter', 'areaFilter', 'typeFilter'],
             selectedProject: {},
-            countryFilter: {},
-            areaFilter: {},
-            typeFilter: {}
+            selectorColor: '#fb6816',
+            countryFilters: JSON.parse('<?php echo json_encode($FBIngenieria->getCountryFilters($lang)) ?>'),
+            selectedCountryFilter: null,
+            areaFilters: JSON.parse('<?php echo json_encode($FBIngenieria->getAreaFilters($lang)) ?>'),
+            selectedAreaFilter: null,
+            typeFilters: JSON.parse('<?php echo json_encode($FBIngenieria->getTypeFilters($lang)) ?>'),
+            selectedTypeFilter: null
         },
         mounted: function () {
-            this.processList(this.clientList);
+            console.log('projects', this.projectList);
+            console.log('country filters', this.countryFilters);
+            console.log('area filters', this.areaFilters);
+            console.log('type filters', this.typeFilters);
         },
         methods: {
-            checkMe: function (event) {
-                var focused =
-                    'input-group input-group--focused input-group--dark input-group--append-icon input-group--text-field input-group--select input-group--single-line'
-                var unfocused =
-                    'input-group input-group--dark input-group--append-icon input-group--text-field input-group--select input-group--single-line'
-                var targetId = event.target.offsetParent.id
-                console.log('target className', event.target.offsetParent.className)
-                console.log('target attributes', event.target.offsetParent.attributes)
-                var targetClass = event.target.offsetParent.attributes.class
-                this.filters.forEach(function (item) {
-                    console.log('item', item)
-                    if (item !== targetId) {
-                        var selector = document.getElementById(item)
-                        console.log('selector className', selector.className)
-                        selector.className = unfocused
-                    }
-                })
-            },
-            processList: function (array) {
-                this.items = array.map(function (item) {
-                    return {
-                        text: item.name
-                    }
-                })
+            changeFilter: function (filter, value) {
+                this[filter] = value;
             },
             showDialog: function (event, project) {
                 event.stopPropagation();
@@ -324,13 +303,34 @@
                 return false;
             },
             getBackgroundImage(project) {
-                var bck = project.images.length > 0 ? project.images[0].url : ''
-                console.log('get background', bck)
-                return bck
+                return project.images.length > 0 ? project.images[0].url : '';
             }
         },
         computed: {
-
+            isCountryFilterSelected: function () {
+                return function (filter) {
+                    return {
+                        'background-color': this.selectedCountryFilter === filter ? this.selectorColor : 'grey',
+                        'border-color': this.selectedCountryFilter === filter ? this.selectorColor : 'grey'
+                    };
+                }
+            },
+            isAreaFilterSelected: function () {
+                return function (filter) {
+                    return {
+                        'background-color': this.selectedAreaFilter === filter ? this.selectorColor : 'grey',
+                        'border-color': this.selectedAreaFilter === filter ? this.selectorColor : 'grey'
+                    };
+                }
+            },
+            isTypeFilterSelected: function () {
+                return function (filter) {
+                    return {
+                        'background-color': this.selectedTypeFilter === filter ? this.selectorColor : 'grey',
+                        'border-color': this.selectedTypeFilter === filter ? this.selectorColor : 'grey'
+                    };
+                }
+            }
         }
     })
 

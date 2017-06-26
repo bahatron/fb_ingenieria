@@ -65,7 +65,8 @@ $clientList = $FBIngenieria->getClientList();
           <tr>
             <th scope="row"><label for="shortDescription">Ficha tecnica: </label></th>
             <td>
-              <input name="shortDescription" id="shortDescription" value="<?php echo $selectedProject->shortDescription ?>" class="regular-text" type="text">
+              <input name="shortDescription" id="shortDescription" value="<?php echo $selectedProject->shortDescription ?>" class="regular-text"
+                type="text">
               <p class="description" id="shortDescription">Descripcion breve del proyecto, maximo 160 caracteres</p>
             </td>
           </tr>
@@ -97,13 +98,55 @@ $clientList = $FBIngenieria->getClientList();
                   <?php
                     foreach ($clientList as $client) {
                         ?>
-                      <option value="<?php echo $client->id ?>" <?php $selectedProject->client_id === $client->id ? printf('selected') : null  ?>><?php echo $client->name ?></option>
+                      <option value="<?php echo $client->id ?>" <?php $selectedProject->client_id === $client->id ? printf('selected') : null ?>><?php echo $client->name ?></option>
                       <?php
 
                     }
                   ?>
                 </select>
                 <p class="description" id="tagline-description">Escoga un cliente registrdo</p>
+              </fieldset>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row"><label for="country">Pais</label></th>
+            <td>
+              <fieldset>
+                <select name="country">
+                  <option value="Venezuela" <?php $selectedProject->country === 'Venezuela' ? printf('selected') : null ?>>Venezuela</option>
+                  <option value="Panama" <?php $selectedProject->country === 'Panama' ? printf('selected') : null ?>>Panama</option>
+                </select>
+                <p class="description" id="tagline-description">Pais en que se realizo el proyecto</p>
+              </fieldset>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row"><label for="country">Area de Proyecto</label></th>
+            <td>
+              <fieldset>
+                <select name="area" id="project_type" onchange="checkAreaType()">
+                  <option value="Industrial" <?php $selectedProject->area === 'Industrial' ? printf('selected') : null ?>>Industrial</option>
+                  <option value="Comercial" <?php $selectedProject->area === 'Comercial' ? printf('selected') : null ?>>Comercial</option>
+                  <option value="Institucional" <?php $selectedProject->area === 'Institucional' ? printf('selected') : null ?>>Institucional</option>
+                  <option value="Residencial" <?php $selectedProject->area === 'Residencial' ? printf('selected') : null ?>>Residencial</option>
+                </select>
+                <p class="description" id="tagline-description">Area de proyecto</p>
+              </fieldset>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row"><label for="country">Tipo del proyecto</label></th>
+            <td>
+              <fieldset>
+                <select name="type" id="project_area">
+                  <option value="" <?php $selectedProject->type === '' ? printf('selected') : null ?>></option>
+                  <option value="Tiendas" <?php $selectedProject->type === 'Tiendas' ? printf('selected') : null ?>>Tiendas</option>
+                  <option value="Restaurantes" <?php $selectedProject->type === 'Restaurantes' ? printf('selected') : null ?>>Restaurantes</option>
+                  <option value="Oficinas" <?php $selectedProject->type === 'Oficinas' ? printf('selected') : null ?>>Oficinas</option>
+                  <option value="Privado" <?php $selectedProject->type === 'Privado' ? printf('selected') : null ?>>Privado</option>
+                  <option value="Publico" <?php $selectedProject->type === 'Publico' ? printf('selected') : null ?>>Publico</option>
+                </select>
+                <p class="description" id="tagline-description">Tipo de proyecto</p>
               </fieldset>
             </td>
           </tr>
@@ -129,5 +172,42 @@ $clientList = $FBIngenieria->getClientList();
       }
       alert('Proyecto invalido');
       return false;
+    }
+    function checkAreaType() {
+      var type = document.getElementById('project_type').value;
+      var area = document.getElementById('project_area');
+      switch(type){
+        case 'Comercial':
+        if(area.options.selectedIndex !== 1 && area.options.selectedIndex !== 2 && area.options.selectedIndex !== 3){
+          area.options.selectedIndex = 1;
+        }
+        area.options[0].disabled = true;
+        area.options[1].disabled = false;
+        area.options[2].disabled = false;
+        area.options[3].disabled = false;
+        area.options[4].disabled = true;
+        area.options[5].disabled = true;
+        break
+        case 'Institucional':
+        if(area.options.selectedIndex !== 4 && area.options.selectedIndex !== 5){
+          area.options.selectedIndex = 4;
+        }
+        area.options[0].disabled = true;
+        area.options[1].disabled = true;
+        area.options[2].disabled = true;
+        area.options[3].disabled = true;
+        area.options[4].disabled = false;
+        area.options[5].disabled = false;
+        break
+        default:
+        area.options.selectedIndex = 0;
+        area.options[0].disabled = true;
+        area.options[1].disabled = true;
+        area.options[2].disabled = true;
+        area.options[3].disabled = true;
+        area.options[4].disabled = true;
+        area.options[5].disabled = true;
+        break
+      }
     }
   </script>

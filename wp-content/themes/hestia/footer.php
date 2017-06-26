@@ -23,8 +23,8 @@ $hestia_general_credits = get_theme_mod('hestia_general_credits',
         )
         ); ?>
 	<?php
-		global $FBIngenieria;
-	?>
+        global $FBIngenieria;
+    ?>
 		<footer id="fbi_footer" class="footer footer-big" data-app>
 			<div class="row" style="width: 100%;">
 				<div class="col-md-12">
@@ -75,7 +75,9 @@ $hestia_general_credits = get_theme_mod('hestia_general_credits',
 				</div>
 				<div class="col-md-12 cp-footer" align="center">
 					<p>2017 © Copyrights FB Ingeniería</p>
-					<a href="#home"><?php echo $FBIngenieria->translate('back-to-top', $lang) ?></a>
+					<nav class="navbar navbar-transparent footer-nav">
+						<a title="Inicio" href="#fbi_big_title"><?php echo $FBIngenieria->translate('back-to-top', $lang) ?></a>
+					</nav>
 					<form action="" method="GET" id="changeLanguageForm">
 						<img style="max-height: 30px; cursor: pointer;" src="<?php echo FBINGENIERIA_URL.'/src/assets/img/1495683664_United-States-Flag.png' ?>"
 						    onclick="changeLanguage('en')">

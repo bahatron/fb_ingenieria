@@ -1,5 +1,4 @@
-#carousel-hestia-generic,
-#carousel-hestia-generic .carousel {
+#carousel-hestia-generic, #carousel-hestia-generic .carousel {
   height: auto;
 }
 
@@ -11,12 +10,7 @@ body {
   overflow: hidden;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h1, h2, h3, h4, h5, h6 {
   color: inherit !important;
 }
 
@@ -41,9 +35,7 @@ footer {
   padding: 0px !important;
 }
 
-.description,
-.card-description,
-.footer-big {
+.description, .card-description, .footer-big {
   color: #999 !important;
 }
 
@@ -66,10 +58,10 @@ footer {
 }
 
 .div-journey {
-  margin-left: 100px
+  margin-left: 100px;
 }
-.i-hover:hover{
-  color:white;
+.i-hover:hover {
+  color: white;
 }
 
 .about {
@@ -235,7 +227,7 @@ footer {
   border-style: 0px;
   box-shadow: none;
   height: auto;
-  width: auto;
+  /*width: auto;*/
 }
 
 .label {
@@ -268,8 +260,6 @@ footer {
   letter-spacing: 0.3em;
 }
 
-.blog-post .section-text p {}
-
 .about p {
   font-size: 1.895em;
   line-height: 1.895em;
@@ -286,8 +276,7 @@ footer {
   background-color: rgba(153, 153, 153, 0.32);
 }
 
-.carousel__left .btn,
-.carousel__right .btn {
+.carousel__left .btn, .carousel__right .btn {
   color: transparent;
 }
 
@@ -318,19 +307,11 @@ footer {
   padding-left: 0px;
 }
 
-.features .row,
-.about .row,
-.products .row,
-.work .row,
-.team .row,
-.pricing .row,
-.testimonials .row,
-section.blogs .row,
-.contactus .row {
+.features .row, .about .row, .products .row, .work .row, .team .row, .pricing .row, .testimonials .row, section.blogs .row, .contactus .row {
   padding: 0px;
 }
 
-.about>.container {
+.about > .container {
   width: 100%;
 }
 
@@ -352,11 +333,11 @@ section.blogs .row,
   padding: 2px;
 }
 
-.footer>:last-child {
+.footer > :last-child {
   margin-right: 0px;
 }
 
-.footer>:first-child {
+.footer > :first-child {
   margin-left: 0px;
 }
 
@@ -430,7 +411,7 @@ a {
   font-weight: 200;
   line-height: 1.35;
   letter-spacing: -.02em;
-  margin-bottom: 16px
+  margin-bottom: 16px;
 }
 
 .about-box {
@@ -464,13 +445,13 @@ a {
   padding-right: 0px;
 }
 
-@media screen and (min-width:1200px) {
+@media screen and (min-width: 1200px) {
   .display-small {
     display: none;
   }
 }
 
-@media screen and (max-width:1200px) {
+@media screen and (max-width: 1200px) {
   .display-big {
     display: none;
   }
@@ -501,7 +482,6 @@ a {
     line-height: 1em;
     letter-spacing: 0.1em;
   }
-  .blog-post .section-text p {}
   .about-span {
     color: #fb6816;
     font-weight: 500;
@@ -532,7 +512,7 @@ a {
     font-weight: 50;
     line-height: 1.35;
     letter-spacing: -.02em;
-    margin-bottom: 16px
+    margin-bottom: 16px;
   }
   .text-journey {
     color: rgb(195, 190, 190);
@@ -545,7 +525,7 @@ a {
     width: 100%;
   }
   .div-journey {
-    margin-left: 70px
+    margin-left: 70px;
   }
   .p-journey {
     font-family: Roboto, Helvetica, Arial, sans-serif;
@@ -634,7 +614,7 @@ a {
   height: auto;
 }
 
-.div>.form-group {
+.div > .form-group {
   margin-bottom: 0px;
 }
 
@@ -662,4 +642,45 @@ a {
 
 .container {
   width: 100%;
+}
+
+.project-filter .menu {
+  position: absolute;
+}
+
+.project-filter {
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.project-filter .menu__content {
+  top: 0px !important;
+  left: 0px !important;
+}
+
+.project-filter ul {
+  margin-bottom: 0px;
+}
+
+.project-filter .card {
+  margin-bottom: 0px;
+}
+
+.project-filter-list {
+  display: flex;
+  justify-content: center;
+}
+
+.project-filter .chip {
+  cursor: pointer;
+}
+
+.footer-nav {
+  background-color: rgba(0, 0, 0, 0) !important;
+  color: rgb(153, 153, 153) !important;
+  margin: 0px !important;
+  min-height: 0px !important;
+  border-radius: 0px !important;
+  padding: 0px !important;
+  box-shadow: none !important;
 }
