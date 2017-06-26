@@ -17,6 +17,7 @@ class FBIngenieria
     private $images;
     private $headerImages;
     private $translations;
+    private $language;
 
     public function __construct()
     {
@@ -50,7 +51,8 @@ class FBIngenieria
     
     public function translate($key, $lang = null)
     {
-        if ($lang !== null || !isset($this->translations)) {
+        if ($lang !== $this->language || !isset($this->translations)) {
+            $this->language = $lang;
             $this->setLanguage($lang);
         }
         return $this->translations->$key ? $this->translations->$key : $key;
@@ -200,7 +202,7 @@ class FBIngenieria
         }
     }
 
-    public function getActiveProjects()
+    public function getActiveProjects($lang = null)
     {
         global $wpdb;
         $sql = "SELECT p.id as 'project_id', p.name as 'project_name', p.shortDescription, p.longDescription, c.* 
@@ -213,8 +215,42 @@ class FBIngenieria
         foreach ($projects as $project) {
             $sql = "SELECT url FROM $this->images WHERE project_id = $project->project_id";
             $project->images = $wpdb->get_results($sql);
+            $project->country = $this->translate($project->country, $lang);
+            $project->area = $this->translate($project->area, $lang);
+            $project->type = $this->translate($project->type, $lang);
             $array[] = $project;
         }
+        return $array;
+    }
+
+    public function getCountryFilters($lang = null)
+    {
+        $array = [];
+        $array[] = $this->translate('Venezuela', $lang);
+        $array[] = $this->translate('Panama', $lang);
+        return $array;
+    }
+
+    public function getAreaFilters($lang = null)
+    {
+        $array = [];
+        $array[] = ['id' => 1, 'name' => $this->translate('Institucional', $lang)];
+        $array[] = ['id' => 2, 'name' => $this->translate('Comercial', $lang)];
+        $array[] = ['id' => 3, 'name' => $this->translate('Industrial', $lang)];
+        $array[] = ['id' => 4, 'name' => $this->translate('Residencial', $lang)];
+
+        return $array;
+    }
+
+    public function getTypeFilters($lang = null)
+    {
+        $array = [];
+        $array[] = ['id' => 1, 'area' => 2, 'name' => $this->translate('Tiendas', $lang)];
+        $array[] = ['id' => 2, 'area' => 2, 'name' => $this->translate('Restaurantes', $lang)];
+        $array[] = ['id' => 3, 'area' => 2, 'name' => $this->translate('Oficinas', $lang)];
+        $array[] = ['id' => 4, 'area' => 1, 'name' => $this->translate('Publico', $lang)];
+        $array[] = ['id' => 5, 'area' => 1, 'name' => $this->translate('Privado', $lang)];
+
         return $array;
     }
 
