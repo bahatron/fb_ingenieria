@@ -132,15 +132,15 @@
             <v-layout class="project-filter" row wrap>
                 <v-flex xs12 class="project-filter-list">
                     <v-chip class="white--text" @click.native="changeFilter('selectedCountryFilter', filter)" :style="isCountryFilterSelected(filter)"
-                        v-for="filter in countryFilters">{{filter}}</v-chip>
+                        v-for="filter in countryFilters">{{filter.name}}</v-chip>
                 </v-flex>
                 <v-flex xs12 class="project-filter-list">
                     <v-chip class="white--text" @click.native="changeFilter('selectedAreaFilter', filter)" :style="isAreaFilterSelected(filter)"
-                        v-for="filter in areaFilters">{{filter}}</v-chip>
+                        v-for="filter in areaFilters">{{filter.name}}</v-chip>
                 </v-flex>
                 <v-flex xs12 class="project-filter-list">
                     <v-chip class="white--text" @click.native="changeFilter('selectedTypeFilter', filter)" :style="isTypeFilterSelected(filter)"
-                        v-for="filter in typeFilters">{{filter}}</v-chip>
+                        v-for="filter in typeFilters">{{filter.name}}</v-chip>
                 </v-flex>
             </v-layout>
 
@@ -263,8 +263,9 @@
             clientList: JSON.parse('<?php echo json_encode($FBIngenieria->getActiveClients()) ?>'),
             projectList: JSON.parse('<?php echo json_encode($FBIngenieria->getActiveProjects($lang)) ?>'),
             dialogOpen: false,
-            selectedProject: {},
             selectorColor: '#fb6816',
+            availableColor: '#202835',
+            selectedProject: {},
             countryFilters: JSON.parse('<?php echo json_encode($FBIngenieria->getCountryFilters($lang)) ?>'),
             selectedCountryFilter: null,
             areaFilters: JSON.parse('<?php echo json_encode($FBIngenieria->getAreaFilters($lang)) ?>'),
@@ -280,7 +281,17 @@
         },
         methods: {
             changeFilter: function (filter, value) {
-                this[filter] = value;
+                this[filter] = this[filter] !== value ? value : null;
+                this.checkAreaFilters()
+            },
+            checkAreaFilters: function(){
+                if(this.selectedAreaFilter !== null){
+                    if(this.selectedTypeFilter !== null && this.selectedTypeFilter.area !== this.selectedAreaFilter.id){
+                        this.selectedTypeFilter = null;
+                    }
+                } else {
+                    this.selectedTypeFilter = null;
+                }
             },
             showDialog: function (event, project) {
                 event.stopPropagation();
@@ -310,25 +321,32 @@
             isCountryFilterSelected: function () {
                 return function (filter) {
                     return {
-                        'background-color': this.selectedCountryFilter === filter ? this.selectorColor : 'grey',
-                        'border-color': this.selectedCountryFilter === filter ? this.selectorColor : 'grey'
+                        'background-color': this.selectedCountryFilter === filter ? this.selectorColor : this.availableColor,
+                        'border-color': this.selectedCountryFilter === filter ? this.selectorColor : this.availableColor
                     };
                 }
             },
             isAreaFilterSelected: function () {
                 return function (filter) {
                     return {
-                        'background-color': this.selectedAreaFilter === filter ? this.selectorColor : 'grey',
-                        'border-color': this.selectedAreaFilter === filter ? this.selectorColor : 'grey'
+                        'background-color': this.selectedAreaFilter === filter ? this.selectorColor : this.availableColor,
+                        'border-color': this.selectedAreaFilter === filter ? this.selectorColor : this.availableColor
                     };
                 }
             },
             isTypeFilterSelected: function () {
                 return function (filter) {
-                    return {
-                        'background-color': this.selectedTypeFilter === filter ? this.selectorColor : 'grey',
-                        'border-color': this.selectedTypeFilter === filter ? this.selectorColor : 'grey'
-                    };
+                    if(!this.selectedAreaFilter || filter.area !== this.selectedAreaFilter.id){
+                        return {
+                            'background-color': 'grey',
+                            'border-color': 'grey'
+                        }
+                    } else if (filter.area === this.selectedAreaFilter.id) {
+                         return {
+                            'background-color': this.selectedTypeFilter === filter ? this.selectorColor : this.availableColor,
+                            'border-color': this.selectedTypeFilter === filter ? this.selectorColor : this.availableColor
+                        };
+                    }
                 }
             }
         }
