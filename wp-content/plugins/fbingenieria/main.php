@@ -55,7 +55,7 @@ class FBIngenieria
             $this->language = $lang;
             $this->setLanguage($lang);
         }
-        return $this->translations->$key ? $this->translations->$key : $key;
+        return isset($this->translations->$key) ? $this->translations->$key : $key;
     }
 
     public function add_menu_pages()
@@ -205,9 +205,9 @@ class FBIngenieria
     public function getActiveProjects($lang = null)
     {
         global $wpdb;
-        $sql = "SELECT p.id as 'project_id', p.name as 'project_name', p.shortDescription, p.longDescription, c.* 
+        $sql = "SELECT p.id as 'project_id', p.name as 'project_name', p.shortDescription, p.longDescription, p.country, p.area, p.type, c.*
                 FROM $this->projects p
-                INNER JOIN $this->clients c on p.client_id = c.id
+                LEFT JOIN $this->clients c on p.client_id = c.id
                 WHERE p.visible = '1'";
         $projects = $wpdb->get_results($sql);
         

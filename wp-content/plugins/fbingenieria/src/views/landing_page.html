@@ -261,32 +261,22 @@
         el: '#fbi_landing_page',
         data: {
             clientList: JSON.parse('<?php echo json_encode($FBIngenieria->getActiveClients()) ?>'),
-            projectList: JSON.parse('<?php echo json_encode($FBIngenieria->getActiveProjects()) ?>'),
+            projectList: JSON.parse('<?php echo json_encode($FBIngenieria->getActiveProjects($lang)) ?>'),
             dialogOpen: false,
             selectedProject: {},
             selectorColor: '#fb6816',
-            countryFilters: [
-                'Caracas',
-                'Panama'
-            ],
+            countryFilters: JSON.parse('<?php echo json_encode($FBIngenieria->getCountryFilters($lang)) ?>'),
             selectedCountryFilter: null,
-            areaFilters: [
-                'Industrial',
-                'Comercial',
-                'Residencial',
-                'Institucional'
-            ],
+            areaFilters: JSON.parse('<?php echo json_encode($FBIngenieria->getAreaFilters($lang)) ?>'),
             selectedAreaFilter: null,
-            typeFilters: [
-                'Tiendas', //area comercial
-                'Restaurantes', //area comercial
-                'Oficinas', //area comercial
-                'Publico', //area institucional
-                'Privado' //area institucional
-            ],
+            typeFilters: JSON.parse('<?php echo json_encode($FBIngenieria->getTypeFilters($lang)) ?>'),
             selectedTypeFilter: null
         },
         mounted: function () {
+            console.log('projects', this.projectList);
+            console.log('country filters', this.countryFilters);
+            console.log('area filters', this.areaFilters);
+            console.log('type filters', this.typeFilters);
         },
         methods: {
             changeFilter: function (filter, value) {
