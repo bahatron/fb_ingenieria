@@ -254,7 +254,9 @@
                 </v-card-row>
             </v-card>
         </v-dialog>
-        </div>
+        {{filteredProjects}}
+        {{dividedProjects}}
+    </div>
 </body>
 <script>
     new Vue({
@@ -275,9 +277,6 @@
         },
         mounted: function () {
             console.log('projects', this.projectList);
-            console.log('country filters', this.countryFilters);
-            console.log('area filters', this.areaFilters);
-            console.log('type filters', this.typeFilters);
         },
         methods: {
             changeFilter: function (filter, value) {
@@ -318,6 +317,22 @@
             }
         },
         computed: {
+            dividedProjects: function (){
+                return this.filteredProjects.map(function(item){
+                    console.log('divided project item', item);
+                    return item;
+                });
+            },
+            filteredProjects: function () {
+                var countryFilter = this.selectedCountryFilter;
+                var areaFilter = this.selectedAreaFilter;
+                var typeFilter = this.selectedTypeFilter;
+                return this.projectList.map(function(item){
+                    console.log('item', item);
+                    console.log('country filter', countryFilter);
+                    return item;
+                });
+            },
             isCountryFilterSelected: function () {
                 return function (filter) {
                     return {
