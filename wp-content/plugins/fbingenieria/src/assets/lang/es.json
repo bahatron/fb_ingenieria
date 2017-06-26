@@ -40,5 +40,16 @@
 	"contact-button": "Enviar",
 	"location-title": "OFICINAS",
 	"back-to-top": "Volver a Inicio",
-	"THANK_YOU_CONTACT": "Gracias por contactarnos"
+	"THANK_YOU_CONTACT": "Gracias por contactarnos",
+	"Venezuela": "Venezuela",
+	"Panama": "Panamá",
+	"Industrial": "Industrial",
+	"Residencial": "Residencial",
+	"Comercial": "Comercial",
+	"Institucional": "Institucional",
+	"Tiendas": "Tiendas",
+	"Oficinas": "Oficinas",
+	"Restaurantes": "Restaurantes",
+	"Publico": "Publico",
+	"Privado": "Privado"
 }
