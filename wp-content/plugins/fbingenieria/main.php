@@ -226,8 +226,8 @@ class FBIngenieria
     public function getCountryFilters($lang = null)
     {
         $array = [];
-        $array[] = $this->translate('Venezuela', $lang);
-        $array[] = $this->translate('Panama', $lang);
+        $array[] = ['id' => 1, 'name' => $this->translate('Venezuela', $lang)];
+        $array[] = ['id' => 2, 'name' => $this->translate('Panama', $lang)];
         return $array;
     }
 
@@ -377,7 +377,7 @@ $GLOBALS['FBIngenieria'] = new FBIngenieria();
 function fbi_landing_page_handler($atts = null)
 {
     ob_start();
-    include FBINGENIERIA_PATH.'src/views/landing_page.html';
+    include FBINGENIERIA_PATH.'src/views/landing_page.php';
     ob_end_flush();
 }
 

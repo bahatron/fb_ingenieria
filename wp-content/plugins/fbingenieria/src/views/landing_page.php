@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="<?php echo FBINGENIERIA_URL. '/src/assets/css/styles.css'?>" rel="stylesheet" type="text/css">
     <?php
         global $FBIngenieria;
-        if(!empty($_POST)){
+        if (!empty($_POST)) {
             $data = json_decode(key($_POST));
             $result = $FBIngenieria->sendMail($data);
             var_dump($result);
