@@ -674,3 +674,13 @@ a {
 .project-filter .chip {
   cursor: pointer;
 }
+
+.footer-nav {
+  background-color: rgba(0, 0, 0, 0) !important;
+  color: rgb(153, 153, 153) !important;
+  margin: 0px !important;
+  min-height: 0px !important;
+  border-radius: 0px !important;
+  padding: 0px !important;
+  box-shadow: none !important;
+}
