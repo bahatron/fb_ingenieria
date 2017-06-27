@@ -327,11 +327,22 @@
                 var countryFilter = this.selectedCountryFilter;
                 var areaFilter = this.selectedAreaFilter;
                 var typeFilter = this.selectedTypeFilter;
-                return this.projectList.map(function(item){
-                    console.log('item', item);
-                    console.log('country filter', countryFilter);
-                    return item;
-                });
+                return this.projectList.reduce(function(acum, item, index){
+                    var valid = true;
+                    if(countryFilter && countryFilter.name !== item.country){
+                        valid = false;
+                    }
+                    if(areaFilter && areaFilter.name !== item.area){
+                        valid = false;
+                    }
+                    if(typeFilter && typeFilter.name !== item.type){
+                        valid = false;
+                    }
+                    if(valid){
+                        acum.push(item);
+                    }
+                    return acum;
+                }, []);
             },
             isCountryFilterSelected: function () {
                 return function (filter) {
