@@ -684,3 +684,7 @@ a {
   padding: 0px !important;
   box-shadow: none !important;
 }
+
+.portfolio-carousel .layout .flex {
+  max-width: 100% !important;
+}

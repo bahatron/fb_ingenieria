@@ -274,7 +274,6 @@
             selectedTypeFilter: null
         },
         mounted: function () {
-            console.log('projects', this.projectList);
         },
         methods: {
             changeFilter: function (filter, value) {
@@ -322,12 +321,9 @@
                 }
                 var inner = [];
                 var outer = [];
-                console.log('dividedProejcts', projects);
                 for(var i=0; i < projects.length; i++){
                     inner.push(projects[i]);
-                    console.log('inner', inner);
                     if(i !== 0 && i % 8 === 0){
-                        console.log('hits the if');
                         outer.push(inner);
                         inner = [];
                     }
