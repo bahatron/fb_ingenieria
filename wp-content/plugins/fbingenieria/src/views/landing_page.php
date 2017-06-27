@@ -132,22 +132,22 @@
             <v-layout class="project-filter" row wrap>
                 <v-flex xs12 class="project-filter-list">
                     <v-chip class="white--text" @click.native="changeFilter('selectedCountryFilter', filter)" :style="isCountryFilterSelected(filter)"
-                        v-for="filter in countryFilters">{{filter}}</v-chip>
+                        v-for="filter in countryFilters">{{filter.name}}</v-chip>
                 </v-flex>
                 <v-flex xs12 class="project-filter-list">
                     <v-chip class="white--text" @click.native="changeFilter('selectedAreaFilter', filter)" :style="isAreaFilterSelected(filter)"
-                        v-for="filter in areaFilters">{{filter}}</v-chip>
+                        v-for="filter in areaFilters">{{filter.name}}</v-chip>
                 </v-flex>
                 <v-flex xs12 class="project-filter-list">
                     <v-chip class="white--text" @click.native="changeFilter('selectedTypeFilter', filter)" :style="isTypeFilterSelected(filter)"
-                        v-for="filter in typeFilters">{{filter}}</v-chip>
+                        v-for="filter in typeFilters">{{filter.name}}</v-chip>
                 </v-flex>
             </v-layout>
 
             <v-carousel class="portfolio-carousel">
-                <v-carousel-item>
+                <v-carousel-item v-for="list in dividedProjects">
                     <v-layout row wrap>
-                        <v-flex xs12 md3 v-for="project in projectList">
+                        <v-flex xs12 md3 v-for="project in list">
                             <div class="p-box ">
                                 <img v-if="project.images.length === 0" src="" alt="">
                                 <img v-else :src="getBackgroundImage(project)" class="portoflio-img">
@@ -254,7 +254,7 @@
                 </v-card-row>
             </v-card>
         </v-dialog>
-        </div>
+    </div>
 </body>
 <script>
     new Vue({
@@ -263,8 +263,9 @@
             clientList: JSON.parse('<?php echo json_encode($FBIngenieria->getActiveClients()) ?>'),
             projectList: JSON.parse('<?php echo json_encode($FBIngenieria->getActiveProjects($lang)) ?>'),
             dialogOpen: false,
-            selectedProject: {},
             selectorColor: '#fb6816',
+            availableColor: '#202835',
+            selectedProject: {},
             countryFilters: JSON.parse('<?php echo json_encode($FBIngenieria->getCountryFilters($lang)) ?>'),
             selectedCountryFilter: null,
             areaFilters: JSON.parse('<?php echo json_encode($FBIngenieria->getAreaFilters($lang)) ?>'),
@@ -273,14 +274,20 @@
             selectedTypeFilter: null
         },
         mounted: function () {
-            console.log('projects', this.projectList);
-            console.log('country filters', this.countryFilters);
-            console.log('area filters', this.areaFilters);
-            console.log('type filters', this.typeFilters);
         },
         methods: {
             changeFilter: function (filter, value) {
-                this[filter] = value;
+                this[filter] = this[filter] !== value ? value : null;
+                this.checkAreaFilters()
+            },
+            checkAreaFilters: function(){
+                if(this.selectedAreaFilter !== null){
+                    if(this.selectedTypeFilter !== null && this.selectedTypeFilter.area !== this.selectedAreaFilter.id){
+                        this.selectedTypeFilter = null;
+                    }
+                } else {
+                    this.selectedTypeFilter = null;
+                }
             },
             showDialog: function (event, project) {
                 event.stopPropagation();
@@ -307,28 +314,75 @@
             }
         },
         computed: {
+            dividedProjects: function (){
+                var projects = this.filteredProjects;
+                if(!projects){
+                    return false;
+                }
+                var inner = [];
+                var outer = [];
+                for(var i=0; i < projects.length; i++){
+                    inner.push(projects[i]);
+                    if(i !== 0 && i % 8 === 0){
+                        outer.push(inner);
+                        inner = [];
+                    }
+                }
+                if(inner.length > 0 ){
+                    outer.push(inner);
+                }
+                return outer;
+            },
+            filteredProjects: function () {
+                var countryFilter = this.selectedCountryFilter;
+                var areaFilter = this.selectedAreaFilter;
+                var typeFilter = this.selectedTypeFilter;
+                return this.projectList.reduce(function(acum, item, index){
+                    var valid = true;
+                    if(countryFilter && countryFilter.name !== item.country){
+                        valid = false;
+                    }
+                    if(areaFilter && areaFilter.name !== item.area){
+                        valid = false;
+                    }
+                    if(typeFilter && typeFilter.name !== item.type){
+                        valid = false;
+                    }
+                    if(valid){
+                        acum.push(item);
+                    }
+                    return acum;
+                }, []);
+            },
             isCountryFilterSelected: function () {
                 return function (filter) {
                     return {
-                        'background-color': this.selectedCountryFilter === filter ? this.selectorColor : 'grey',
-                        'border-color': this.selectedCountryFilter === filter ? this.selectorColor : 'grey'
+                        'background-color': this.selectedCountryFilter === filter ? this.selectorColor : this.availableColor,
+                        'border-color': this.selectedCountryFilter === filter ? this.selectorColor : this.availableColor
                     };
                 }
             },
             isAreaFilterSelected: function () {
                 return function (filter) {
                     return {
-                        'background-color': this.selectedAreaFilter === filter ? this.selectorColor : 'grey',
-                        'border-color': this.selectedAreaFilter === filter ? this.selectorColor : 'grey'
+                        'background-color': this.selectedAreaFilter === filter ? this.selectorColor : this.availableColor,
+                        'border-color': this.selectedAreaFilter === filter ? this.selectorColor : this.availableColor
                     };
                 }
             },
             isTypeFilterSelected: function () {
                 return function (filter) {
-                    return {
-                        'background-color': this.selectedTypeFilter === filter ? this.selectorColor : 'grey',
-                        'border-color': this.selectedTypeFilter === filter ? this.selectorColor : 'grey'
-                    };
+                    if(!this.selectedAreaFilter || filter.area !== this.selectedAreaFilter.id){
+                        return {
+                            'background-color': 'grey',
+                            'border-color': 'grey'
+                        }
+                    } else if (filter.area === this.selectedAreaFilter.id) {
+                         return {
+                            'background-color': this.selectedTypeFilter === filter ? this.selectorColor : this.availableColor,
+                            'border-color': this.selectedTypeFilter === filter ? this.selectorColor : this.availableColor
+                        };
+                    }
                 }
             }
         }
