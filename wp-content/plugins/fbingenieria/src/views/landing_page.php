@@ -145,9 +145,9 @@
             </v-layout>
 
             <v-carousel class="portfolio-carousel">
-                <v-carousel-item>
+                <v-carousel-item v-for="list in dividedProjects">
                     <v-layout row wrap>
-                        <v-flex xs12 md3 v-for="project in projectList">
+                        <v-flex xs12 md3 v-for="project in list">
                             <div class="p-box ">
                                 <img v-if="project.images.length === 0" src="" alt="">
                                 <img v-else :src="getBackgroundImage(project)" class="portoflio-img">
@@ -322,12 +322,18 @@
                 }
                 var inner = [];
                 var outer = [];
+                console.log('dividedProejcts', projects);
                 for(var i=0; i < projects.length; i++){
                     inner.push(projects[i]);
-                    if(i % 8 === 0){
+                    console.log('inner', inner);
+                    if(i !== 0 && i % 8 === 0){
+                        console.log('hits the if');
                         outer.push(inner);
                         inner = [];
                     }
+                }
+                if(inner.length > 0 ){
+                    outer.push(inner);
                 }
                 return outer;
             },
