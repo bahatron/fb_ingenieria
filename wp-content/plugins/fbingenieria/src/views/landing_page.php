@@ -254,8 +254,6 @@
                 </v-card-row>
             </v-card>
         </v-dialog>
-        {{filteredProjects}}
-        {{dividedProjects}}
     </div>
 </body>
 <script>
@@ -318,10 +316,20 @@
         },
         computed: {
             dividedProjects: function (){
-                return this.filteredProjects.map(function(item){
-                    console.log('divided project item', item);
-                    return item;
-                });
+                var projects = this.filteredProjects;
+                if(!projects){
+                    return false;
+                }
+                var inner = [];
+                var outer = [];
+                for(var i=0; i < projects.length; i++){
+                    inner.push(projects[i]);
+                    if(i % 8 === 0){
+                        outer.push(inner);
+                        inner = [];
+                    }
+                }
+                return outer;
             },
             filteredProjects: function () {
                 var countryFilter = this.selectedCountryFilter;
