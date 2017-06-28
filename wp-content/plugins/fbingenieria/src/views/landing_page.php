@@ -143,7 +143,6 @@
                         v-for="filter in typeFilters">{{filter.name}}</v-chip>
                 </v-flex>
             </v-layout>
-            {{dividedProjects}}
             <v-carousel class="portfolio-carousel" v-if="dividedProjects.length > 0">
                 <v-carousel-item v-for="list in dividedProjects">
                     <v-layout row wrap v-if="list">
