@@ -2,7 +2,7 @@
 
 <head>
     <!--CSS and dependencies-->
-    <link rel="stylesheet" href="<?php echo FBINGENIERIA_URL. '/src/assets/css/styles.css'?>" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="<?php echo FBINGENIERIA_URL.'/src/assets/css/styles.css'; ?>" rel="stylesheet" type="text/css">
     <?php
         global $FBIngenieria;
         if (!empty($_POST)) {
@@ -17,9 +17,9 @@
 
 <body>
     <div class="container" id="fbi_landing_page" style="width: 100%">
-        <section class="padding-top about-section" id="about" style="background: url(<?php echo FBINGENIERIA_URL.'/src/assets/img/about-background.jpg'?>) center / cover no-repeat">
+        <section class="padding-top about-section" id="about" style="background: url(<?php echo FBINGENIERIA_URL.'/src/assets/img/about-background.jpg'; ?>) center / cover no-repeat">
             <p class="section-title" align="center">
-                <?php echo $FBIngenieria->translate('about-us-title', $lang) ?>
+                <?php echo $FBIngenieria->translate('about-us-title', $lang); ?>
             </p>
             <hr class="hr-color">
             <div class="about-box display-big" align="center">
@@ -27,14 +27,14 @@
                     <div class="col-md-6 about-us-box border-down" align="left">
                         <div class="col-md-3" style="padding:0px;"><i class="fa fa-pencil custom-icon"></i></div>
                         <div class="col-md-9.1" style="padding:0px;">
-                            <span class="about-span"><?php echo $FBIngenieria->translate('about-us-subtitle-1', $lang) ?></span>
-                            <span style="display:block;"><?php echo $FBIngenieria->translate('about-us-text-1', $lang) ?></span>
+                            <span class="about-span"><?php echo $FBIngenieria->translate('about-us-subtitle-1', $lang); ?></span>
+                            <span style="display:block;"><?php echo $FBIngenieria->translate('about-us-text-1', $lang); ?></span>
                         </div>
                     </div>
                     <div class="col-md-6 about-us-box border-down border-center" align="right">
                         <div class="col-md-9 " style="padding:0px;">
-                            <span class="about-span"><?php echo $FBIngenieria->translate('about-us-subtitle-2', $lang) ?></span>
-                            <span style="display:block;"><?php echo $FBIngenieria->translate('about-us-text-2', $lang) ?></span>
+                            <span class="about-span"><?php echo $FBIngenieria->translate('about-us-subtitle-2', $lang); ?></span>
+                            <span style="display:block;"><?php echo $FBIngenieria->translate('about-us-text-2', $lang); ?></span>
                         </div>
                         <div class="col-md-3" style="padding:0px;"> <i class="material-icons custom-icon">format_paint</i></div>
 
@@ -45,14 +45,14 @@
                     <div class="col-md-6 about-us-box" align="left">
                         <div class="col-md-3" style="padding:0px;"><i class="fa fa-wrench custom-icon"></i></div>
                         <div class="col-md-9.1" style="padding:0px;">
-                            <span class="about-span"><?php echo $FBIngenieria->translate('about-us-subtitle-3', $lang) ?></span>
-                            <span style="display:block;"><?php echo $FBIngenieria->translate('about-us-text-3', $lang) ?></span>
+                            <span class="about-span"><?php echo $FBIngenieria->translate('about-us-subtitle-3', $lang); ?></span>
+                            <span style="display:block;"><?php echo $FBIngenieria->translate('about-us-text-3', $lang); ?></span>
                         </div>
                     </div>
                     <div class="col-md-6 about-us-box border-center" align="right">
                         <div class="col-md-9" style="padding:0px;">
-                            <span class="about-span"><?php echo $FBIngenieria->translate('about-us-subtitle-4', $lang) ?></span >
-                                <span style="display:block;"><?php echo $FBIngenieria->translate('about-us-text-4', $lang) ?></span>
+                            <span class="about-span"><?php echo $FBIngenieria->translate('about-us-subtitle-4', $lang); ?></span >
+                                <span style="display:block;"><?php echo $FBIngenieria->translate('about-us-text-4', $lang); ?></span>
                         </div>
                         <div class="col-md-3" style="padding:0px;"><i class="fa fa-comments custom-icon"></i></div>
 
@@ -64,24 +64,24 @@
                 <div class="box-for-about">
                     <i class="fa fa-pencil custom-icon"></i>
                     <div>
-                        <span class="about-span"><?php echo $FBIngenieria->translate('about-us-subtitle-1', $lang) ?></span >
-                            <span class="about-span-small"><?php echo $FBIngenieria->translate('about-us-text-1', $lang) ?></span>
+                        <span class="about-span"><?php echo $FBIngenieria->translate('about-us-subtitle-1', $lang); ?></span >
+                            <span class="about-span-small"><?php echo $FBIngenieria->translate('about-us-text-1', $lang); ?></span>
                     </div>
                 </div>
                 <div class="box-for-about">
                     <i class="material-icons custom-icon">format_paint</i>
-                    <span class="about-span"><?php echo $FBIngenieria->translate('about-us-subtitle-2', $lang) ?></span >
-                        <span class="about-span-small"><?php echo $FBIngenieria->translate('about-us-text-2', $lang) ?></span>
+                    <span class="about-span"><?php echo $FBIngenieria->translate('about-us-subtitle-2', $lang); ?></span >
+                        <span class="about-span-small"><?php echo $FBIngenieria->translate('about-us-text-2', $lang); ?></span>
                 </div>
                 <div class="box-for-about">
                     <i class="fa fa-wrench custom-icon"></i>
-                    <span class="about-span"><?php echo $FBIngenieria->translate('about-us-subtitle-3', $lang) ?></span >
-                        <span class="about-span-small"><?php echo $FBIngenieria->translate('about-us-text-3', $lang) ?></span>
+                    <span class="about-span"><?php echo $FBIngenieria->translate('about-us-subtitle-3', $lang); ?></span >
+                        <span class="about-span-small"><?php echo $FBIngenieria->translate('about-us-text-3', $lang); ?></span>
                 </div>
                 <div class="box-for-about">
                     <i class="fa fa-comments custom-icon"></i>
-                    <span class="about-span"><?php echo $FBIngenieria->translate('about-us-subtitle-4', $lang) ?></span >
-                        <span class="about-span-small"><?php echo $FBIngenieria->translate('about-us-text-4', $lang) ?></span>
+                    <span class="about-span"><?php echo $FBIngenieria->translate('about-us-subtitle-4', $lang); ?></span >
+                        <span class="about-span-small"><?php echo $FBIngenieria->translate('about-us-text-4', $lang); ?></span>
                 </div>
             </div>
         </section>
@@ -89,7 +89,7 @@
         </section>
         <section class="padding-top" id="whyus">
             <p class="section-title" align="center">
-                <?php echo $FBIngenieria->translate('why-us-title', $lang) ?>
+                <?php echo $FBIngenieria->translate('why-us-title', $lang); ?>
             </p>
             <hr class="hr-color">
             <div class="row">
@@ -97,36 +97,36 @@
                     <div class="box card card__box">
                         <span class="label">01</span>
                         <h6 class="label2">
-                            <?php echo $FBIngenieria->translate('why-us-subtitle-1', $lang) ?>
+                            <?php echo $FBIngenieria->translate('why-us-subtitle-1', $lang); ?>
                         </h6>
-                        <span class="whyus-p"><?php echo $FBIngenieria->translate('why-us-text-1', $lang) ?></span>
+                        <span class="whyus-p"><?php echo $FBIngenieria->translate('why-us-text-1', $lang); ?></span>
                     </div>
                     <div class="box card card__box">
                         <span class="label">02</span>
                         <h6 class="label2">
-                            <?php echo $FBIngenieria->translate('why-us-subtitle-2', $lang) ?>
+                            <?php echo $FBIngenieria->translate('why-us-subtitle-2', $lang); ?>
                         </h6>
-                        <span class="whyus-p"><?php echo $FBIngenieria->translate('why-us-text-2', $lang) ?></span>
+                        <span class="whyus-p"><?php echo $FBIngenieria->translate('why-us-text-2', $lang); ?></span>
                     </div>
                     <div class="box card card__box">
                         <span class="label">03</span>
                         <h6 class="label2">
-                            <?php echo $FBIngenieria->translate('why-us-subtitle-3', $lang) ?>
+                            <?php echo $FBIngenieria->translate('why-us-subtitle-3', $lang); ?>
                         </h6>
-                        <span class="whyus-p"><?php echo $FBIngenieria->translate('why-us-text-3', $lang) ?></span>
+                        <span class="whyus-p"><?php echo $FBIngenieria->translate('why-us-text-3', $lang); ?></span>
                     </div>
                     <div class="box card card__box">
                         <span class="label">04</span>
                         <h6 class="label2">
-                            <?php echo $FBIngenieria->translate('why-us-subtitle-4', $lang) ?>
+                            <?php echo $FBIngenieria->translate('why-us-subtitle-4', $lang); ?>
                         </h6>
-                        <span class="whyus-p"><?php echo $FBIngenieria->translate('why-us-text-4', $lang) ?></span>
+                        <span class="whyus-p"><?php echo $FBIngenieria->translate('why-us-text-4', $lang); ?></span>
                     </div>
                 </div>
         </section>
         <section class="padding-top project-portfolio" id="portfolio">
             <p class="section-title" align="center">
-                <?php echo $FBIngenieria->translate('portfolio-title', $lang) ?>
+                <?php echo $FBIngenieria->translate('portfolio-title', $lang); ?>
             </p>
             <hr class="hr-color">
             <v-layout class="project-filter" row wrap>
@@ -166,28 +166,28 @@
             </v-carousel>
         </section>
         <section class="padding-top-journey" id="journey" style="position: relative;">
-            <div class="card_journey" style="background: url(<?php echo FBINGENIERIA_URL.'/src/assets/img/journey.png' ?>) center center / cover no-repeat">
+            <div class="card_journey" style="background: url(<?php echo FBINGENIERIA_URL.'/src/assets/img/journey.png'; ?>) center center / cover no-repeat">
                 <p class="p-journey">
-                    <?php echo $FBIngenieria->translate('journey-title', $lang) ?>
+                    <?php echo $FBIngenieria->translate('journey-title', $lang); ?>
                 </p>
                 <hr class="hr-color hr-journey" width="20%">
                 <div class="div-journey">
                     <p class="text-journey">
-                        <?php echo $FBIngenieria->translate('journey-text-1', $lang) ?> <br>
-                        <?php echo $FBIngenieria->translate('journey-text-2', $lang) ?>
+                        <?php echo $FBIngenieria->translate('journey-text-1', $lang); ?> <br>
+                        <?php echo $FBIngenieria->translate('journey-text-2', $lang); ?>
                     </p>
                     <p>
-                        <a href="#portfolio" class="btn" style="background-color:#fb6816; box-shadow:none;color:white;"><?php echo $FBIngenieria->translate('journey-botton', $lang) ?></a>
+                        <a href="#portfolio" class="btn" style="background-color:#fb6816; box-shadow:none;color:white;"><?php echo $FBIngenieria->translate('journey-botton', $lang); ?></a>
                     </p>
                 </div>
             </div>
         </section>
         <section class="padding-top" id="clients">
             <p class="section-title" align="center">
-                <?php echo $FBIngenieria->translate('clients-title', $lang) ?>
+                <?php echo $FBIngenieria->translate('clients-title', $lang); ?>
             </p>
             <hr class="hr-color">
-            <span class="clients-p"><?php echo $FBIngenieria->translate('clients-text', $lang) ?></span>
+            <span class="clients-p"><?php echo $FBIngenieria->translate('clients-text', $lang); ?></span>
             <div class="client-carousel" v-if="clientList.length > 0">
                 <v-carousel cycle="false" class="client-carousel">
                     <v-carousel-item v-for="client in clientList">
@@ -198,7 +198,7 @@
         </section>
         <section class="padding-top contact-section" id="contact">
             <p class="section-title" align="center">
-                <?php echo $FBIngenieria->translate('contact-title', $lang) ?>
+                <?php echo $FBIngenieria->translate('contact-title', $lang); ?>
             </p>
             <div class="row" style="position: relative;  overflow: hidden;">
                 <div class="col-md-3"></div>
@@ -206,21 +206,21 @@
                     <form name="contact-form" action="" method="POST" @submit.prevent="sendContactForm()">
                         <div class="col-md-6" align="center">
                             <div class="row">
-                                <input type="text" name="name" value="" placeholder="<?php echo $FBIngenieria->translate('contact-name', $lang) ?>" required>
+                                <input type="text" name="name" value="" placeholder="<?php echo $FBIngenieria->translate('contact-name', $lang); ?>" required>
                             </div>
                             <div class="row">
-                                <input type="text" name="lastname" value="" placeholder="<?php echo $FBIngenieria->translate('contact-lastname', $lang) ?>"
+                                <input type="text" name="lastname" value="" placeholder="<?php echo $FBIngenieria->translate('contact-lastname', $lang); ?>"
                                     required>
                             </div>
                             <div class="row">
-                                <input type="email" name="mail" value="" placeholder="<?php echo $FBIngenieria->translate('contact-mail', $lang) ?>" required>
+                                <input type="email" name="mail" value="" placeholder="<?php echo $FBIngenieria->translate('contact-mail', $lang); ?>" required>
                             </div>
                         </div>
                         <div class="col-md-6" align="center">
-                            <textarea rows="4" cols="2" name="comment" placeholder="<?php echo $FBIngenieria->translate('contact-comment', $lang) ?>"
+                            <textarea rows="4" cols="2" name="comment" placeholder="<?php echo $FBIngenieria->translate('contact-comment', $lang); ?>"
                                 required>
                             </textarea>
-                            <input type="submit" name="submit" value="<?php echo $FBIngenieria->translate('contact-button', $lang) ?>" class="btn" style="background-color:#fb6816; box-shadow:none;">
+                            <input type="submit" name="submit" value="<?php echo $FBIngenieria->translate('contact-button', $lang); ?>" class="btn" style="background-color:#fb6816; box-shadow:none;">
                         </div>
                     </form>
                 </div>
@@ -259,22 +259,52 @@
     new Vue({
         el: '#fbi_landing_page',
         data: {
-            clientList: JSON.parse('<?php echo json_encode($FBIngenieria->getActiveClients()) ?>'),
-            projectList: JSON.parse('<?php echo json_encode($FBIngenieria->getActiveProjects($lang)) ?>'),
+            clientListing: loadClientList(),
+            projectList: loadProjectList(),
             dialogOpen: false,
             selectorColor: '#fb6816',
             availableColor: '#202835',
             selectedProject: {},
-            countryFilters: JSON.parse('<?php echo json_encode($FBIngenieria->getCountryFilters($lang)) ?>'),
+            countryFilters: JSON.parse('<?php echo json_encode($FBIngenieria->getCountryFilters($lang)); ?>'),
             selectedCountryFilter: null,
-            areaFilters: JSON.parse('<?php echo json_encode($FBIngenieria->getAreaFilters($lang)) ?>'),
+            areaFilters: JSON.parse('<?php echo json_encode($FBIngenieria->getAreaFilters($lang)); ?>'),
             selectedAreaFilter: null,
-            typeFilters: JSON.parse('<?php echo json_encode($FBIngenieria->getTypeFilters($lang)) ?>'),
+            typeFilters: JSON.parse('<?php echo json_encode($FBIngenieria->getTypeFilters($lang)); ?>'),
             selectedTypeFilter: null
         },
         mounted: function () {
         },
         methods: {
+            loadClientList() {
+                var clientList = []
+                <?php
+                    foreach ($FBIngenieria->getActiveClients() as $client) {
+                        ?>
+                        try {
+                            clientList.push(JSON.parse(<?php echo json_encode($client); ?>))
+                        } catch (err) {
+                            //
+                        }
+                        <?php
+                    }
+                ?>
+                return clientList
+            },
+            loadProjectList() {
+                var projectList = []
+                <?php
+                    foreach ($FBIngenieria->getActiveProjects() as $project) {
+                        ?>
+                        try {
+                            projectList.push(JSON.parse(<?php echo json_encode($project); ?>))
+                        } catch (err) {
+                            //
+                        }
+                        <?php
+                    }
+                ?>
+                return projectList
+            },
             changeFilter: function (filter, value) {
                 this[filter] = this[filter] !== value ? value : null;
                 this.checkAreaFilters()
@@ -297,7 +327,7 @@
                 var xmlhttp = new XMLHttpRequest();
                 xmlhttp.onreadystatechange = function () {
                     if (this.readyState == 4) {
-                        alert("<?php echo $FBIngenieria->translate('THANK_YOU_CONTACT', $lang)?>");
+                        alert("<?php echo $FBIngenieria->translate('THANK_YOU_CONTACT', $lang); ?>");
                     }
                 };
                 xmlhttp.open("POST", '', true);
