@@ -7,6 +7,6 @@ RUN pm2 install typescript
 
 WORKDIR /usr/node/app
 
-COPY ./ .
+COPY ./app .
 
 RUN npm install

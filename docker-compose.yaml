@@ -6,8 +6,8 @@ services:
         build: ./firebase
         user: node
         command: sh -c '${DEPLOY_CMD}'
-        volumes:
-            - ./firebase:/usr/node/app
+        # volumes:
+        #     - ./firebase/app:/usr/node/app
         # env_file: .env
         ports:
             - '${PORT}:${PORT}'
