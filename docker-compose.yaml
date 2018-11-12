@@ -1,20 +1,13 @@
-version: "3.3"
+version: '3.5'
 
 services:
-    wordpress:
-        container_name: fbingenieria
-        image: wordpress
-        ports:
-            - 5000:80
+    firebase:
+        container_name: fb_ingenieria_firebase
+        build: ./firebase
+        user: node
+        command: sh -c '${DEPLOY_CMD}'
         volumes:
-            - .:/var/www/html/
-        environment:
-            WORDPRESS_DB_PASSWORD: example
-
-    mysql:
-        container_name: fbingenieria_db
-        image: mysql:5.7
+            - ./firebase:/usr/node/app
+        # env_file: .env
         ports:
-            - 3307:3306
-        environment:
-            MYSQL_ROOT_PASSWORD: example
+            - '${PORT}:${PORT}'
