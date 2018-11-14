@@ -48,3 +48,9 @@
         </div>
     </section>
 </template>
+
+<style>
+.header-section {
+    background: url('/img/about-background.jpg') center / cover no-repeat;
+}
+</style>
