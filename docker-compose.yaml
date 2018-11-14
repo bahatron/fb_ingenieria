@@ -8,7 +8,8 @@ services:
         command: sh -c '${DEPLOY_CMD}'
         working_dir: /usr/node/app
         volumes:
-            - ./firebase/app:/usr/node/app
+            - ./firebase:/usr/node/app
         # env_file: .env
         ports:
-            - '8080:8080'
+            - 8080:8080
+            - 9005:9005
