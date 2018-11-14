@@ -28,7 +28,7 @@
 </template>
 
 <script lang="ts">
-import ProjectDetails from '@/components/ProjectDetails.vue';
+import ProjectDetails from '@/pages/homepage/components/ProjectDetails.vue';
 import Vue from 'vue';
 
 export default Vue.extend({

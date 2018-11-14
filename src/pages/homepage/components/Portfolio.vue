@@ -10,8 +10,8 @@
 <script lang="ts">
 import Vue from 'vue';
 
-import PortfolioFilter from '@/components/PortfolioFilter.vue';
-import PortfolioCarousel from '@/components/PortfolioCarousel.vue';
+import PortfolioFilter from '@/pages/homepage/components/PortfolioFilter.vue';
+import PortfolioCarousel from '@/pages/homepage/components/PortfolioCarousel.vue';
 
 export default Vue.extend({
     components: {

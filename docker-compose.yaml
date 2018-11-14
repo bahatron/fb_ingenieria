@@ -3,13 +3,12 @@ version: '3.5'
 services:
     firebase:
         container_name: fb_ingenieria_firebase
-        build: ./firebase
+        build: .
         user: node
         command: sh -c '${DEPLOY_CMD}'
         working_dir: /usr/node/app
         volumes:
-            - ./firebase:/usr/node/app
-        # env_file: .env
+            - ./:/usr/node/app
         ports:
             - 8080:8080
             - 9005:9005

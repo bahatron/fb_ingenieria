@@ -1,6 +1,10 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Home from './pages/Home.vue';
+
+/**
+ * @todo: fix eslint rules to not defining file name index.vue
+ */
+import Home from './pages/homepage/index.vue';
 
 Vue.use(Router);
 
@@ -8,7 +12,7 @@ export default new Router({
     routes: [
         {
             path: '/',
-            name: 'landing',
+            name: 'homepage',
             component: Home,
         },
         // {

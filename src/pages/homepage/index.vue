@@ -13,12 +13,12 @@
 <script lang="ts">
 import Vue from 'vue';
 
-import About from '@/components/About.vue';
-import WhyUs from '@/components/WhyUs.vue';
-import Portfolio from '@/components/Portfolio.vue';
-import Journey from '@/components/Journey.vue';
-import Clients from '@/components/Clients.vue';
-import ContactUs from '@/components/ContactUs.vue';
+import About from '@/pages/homepage/components/About.vue';
+import WhyUs from '@/pages/homepage/components/WhyUs.vue';
+import Portfolio from '@/pages/homepage/components/Portfolio.vue';
+import Journey from '@/pages/homepage/components/Journey.vue';
+import Clients from '@/pages/homepage/components/Clients.vue';
+import ContactUs from '@/pages/homepage/components/ContactUs.vue';
 
 export default Vue.extend({
     components: {
