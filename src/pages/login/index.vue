@@ -26,11 +26,12 @@ export default {
 
     methods: {
         async login(credentials: any) {
+            const self: any = this;
             try {
-                await this.$store.dispatch('auth/login', credentials);
-                this.$router.push({ name: 'dashboard' });
+                await self.$store.dispatch('auth/login', credentials);
+                self.$router.push({ name: 'admin' });
             } catch (err) {
-                this.authFailed = true;
+                self.authFailed = true;
                 console.log(err.message);
             }
         },

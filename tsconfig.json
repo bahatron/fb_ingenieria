@@ -16,7 +16,8 @@
         },
         "lib": ["esnext", "dom", "dom.iterable", "scripthost"],
         "noImplicitAny": true,
-        "noImplicitReturns": true
+        "noImplicitReturns": true,
+        "noImplicitThis": true
     },
     "include": [
         "src/**/*.ts",

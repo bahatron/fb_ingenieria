@@ -55,7 +55,7 @@ export default {
             this.$emit('submit', { email: this.email, password: this.password });
         },
 
-        clear() {
+        clear(this: any) {
             this.email = null;
             this.password = null;
         },
