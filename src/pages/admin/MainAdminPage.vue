@@ -16,7 +16,6 @@ export default Vue.extend({
 
     mounted() {
         const self: any = this;
-        console.log('router', self.$router);
     },
 });
 

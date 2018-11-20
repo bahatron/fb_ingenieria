@@ -1,15 +1,28 @@
 import {
     Module, GetterTree, MutationTree, ActionTree,
 } from 'vuex';
-import $firebase from '@/modules/filebase';
+import $firebase from '@/modules/firebase';
 import { User } from 'firebase';
 
 export interface AuthState {
     user: User | null;
 }
 
+function initUser(): User | null {
+    const user = localStorage.getItem('auth_user');
+
+    if (!user) {
+        return null;
+    }
+
+    /**
+     * @todo: validate user and verify credentials before returning
+     */
+    return JSON.parse(user);
+}
+
 const state: AuthState = {
-    user: JSON.parse(localStorage.getItem('auth_user') || ''),
+    user: initUser(),
 };
 
 const getters: GetterTree<AuthState, any> = {
