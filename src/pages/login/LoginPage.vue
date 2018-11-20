@@ -9,6 +9,7 @@
 </template>
 
 <script lang="ts">
+import VueRouter from 'vue-router';
 import LoginForm from './components/LoginForm.vue';
 
 export default {

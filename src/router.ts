@@ -4,8 +4,8 @@ import store from './store';
 /**
  * @todo: fix eslint rules to not defining file name index.vue
  */
-import Home from './pages/homepage/index.vue';
-import Login from './pages/login/index.vue';
+import Home from './pages/homepage/HomePage.vue';
+import Login from './pages/login/LoginPage.vue';
 
 Vue.use(Router);
 
@@ -24,19 +24,20 @@ const router = new Router({
         {
             path: '/admin',
             name: 'admin',
-            component: () => import(/* webpackChunkName: "Admin" */ './pages/admin/index.vue'),
+            component: () => import(/* webpackChunkName: "AdminPage" */ './pages/admin/MainAdminPage.vue'),
             meta: {
                 requiresAuth: true,
             },
+            children: [
+                {
+                    path: 'clients',
+                    component: () => import(/* webpackChunkName: "ClientAdminPage" */ './pages/admin/ClientAdminPage.vue'),
+                    meta: {
+                        requiresAuth: true, // is this really necessary for children pages?
+                    },
+                },
+            ],
         },
-        // {
-        //     path: '/about',
-        //     name: 'about',
-        //     // route level code-splitting
-        //     // this generates a separate chunk (about.[hash].js) for this route
-        //     // which is lazy-loaded when the route is visited.
-        //     component: () => import(/* webpackChunkName: "about" */ './views/About.vue'),
-        // },
     ],
 });
 
