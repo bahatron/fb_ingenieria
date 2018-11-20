@@ -9,7 +9,7 @@ export interface AuthState {
 }
 
 const state: AuthState = {
-    user: null,
+    user: JSON.parse(localStorage.getItem('auth_user') || ''),
 };
 
 const getters: GetterTree<AuthState, any> = {
@@ -25,11 +25,13 @@ const mutations: MutationTree<AuthState> = {
 const actions: ActionTree<AuthState, any> = {
     async login({ commit }, { email, password }) {
         await $firebase.auth().signInWithEmailAndPassword(email, password);
-        commit('user', $firebase.auth().currentUser);
+        const user = $firebase.auth().currentUser;
+        commit('user', user);
+        localStorage.setItem('auth_user', JSON.stringify(user));
     },
 };
 
-const $loginStore: Module<AuthState, any> = {
+const $loginModule: Module<AuthState, any> = {
     namespaced: true,
     state,
     getters,
@@ -37,4 +39,4 @@ const $loginStore: Module<AuthState, any> = {
     actions,
 };
 
-export default $loginStore;
+export default $loginModule;
