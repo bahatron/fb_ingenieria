@@ -1,5 +1,9 @@
-import Vue from 'vue';
-import $firebase from 'firebase';
+import Vue from "vue";
+import $firebase from "firebase";
+
+// export interface FirebaseDocument<T> extends $firebase.firestore.DocumentReference {
+//     data: T;
+// }
 
 const config = {
     apiKey: process.env.VUE_APP_FIREBASE_API_KEY,

@@ -1,12 +1,12 @@
-FROM node:8.12
+FROM node:10
 
-RUN npm install -g npm@latest
-RUN npm install -g pm2
 RUN npm install -g firebase-tools
-RUN npm install -g typescript
+RUN npm install -g typescript@3
+RUN npm install -g ts-node
+RUN npm install -g pm2@3
 RUN pm2 install typescript
 
-WORKDIR /usr/node/app
+WORKDIR /home/node/app
 
 COPY . .
 
