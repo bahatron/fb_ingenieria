@@ -11,12 +11,12 @@
 </template>
 
 <script>
-import Vue from 'vue';
-import MenuBar from '@/components/layout/MenuBar.vue';
-import ToolBar from '@/components/layout/ToolBar.vue';
+import Vue from "vue";
+import MenuBar from "@/components/layout/MenuBar.vue";
+import ToolBar from "@/components/layout/ToolBar.vue";
 
 export default Vue.extend({
-    name: 'default',
+    name: "default",
 
     components: {
         ToolBar,

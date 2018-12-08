@@ -1,7 +1,7 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
-import $loginModule from './pages/login/LoginModule';
-import $layoutModule from './components/layout/module';
+import Vue from "vue";
+import Vuex from "vuex";
+import $loginModule from "./pages/login/LoginModule";
+import $layoutModule from "./components/layout/LayoutModule";
 
 Vue.use(Vuex);
 export default new Vuex.Store<any>({

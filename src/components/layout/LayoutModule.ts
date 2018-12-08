@@ -1,4 +1,4 @@
-import { GetterTree, MutationTree, Module } from 'vuex';
+import { GetterTree, MutationTree, Module } from "vuex";
 
 export interface LayoutState {
     nav: boolean;
@@ -10,7 +10,7 @@ const state: LayoutState = {
 
 const getters: GetterTree<LayoutState, any> = {
     nav(state, getters, rootState, rootGetters) {
-        return state.nav && !!rootGetters['auth/user'];
+        return state.nav && !!rootGetters["auth/user"];
     },
 };
 

@@ -5,9 +5,9 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import Vue from "vue";
 
-import Default from '@/components/layout/default.vue';
+import Default from "@/components/layout/DefaultLayout.vue";
 
 export default Vue.extend({
     components: {

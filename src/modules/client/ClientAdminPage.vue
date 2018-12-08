@@ -9,8 +9,8 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-import ClientCard from '@/domain/client/components/ClientCard.vue';
+import Vue from "vue";
+import ClientCard from "@/modules/client/components/ClientCard.vue";
 
 export default Vue.extend({
     components: {

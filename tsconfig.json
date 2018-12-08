@@ -24,7 +24,6 @@
         "src/**/*.ts",
         "src/**/*.tsx",
         "src/**/*.vue",
-        "tests/**/*.ts",
         "vue.config.js",
         "vue.config.ts"
     ],
