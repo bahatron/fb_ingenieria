@@ -1,4 +1,4 @@
-import $error from "@/components/error/Error";
+import $error from "../../../components/error/Error";
 
 export interface Client {
     name: string;
