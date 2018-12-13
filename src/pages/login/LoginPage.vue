@@ -9,8 +9,8 @@
 </template>
 
 <script lang="ts">
-import VueRouter from 'vue-router';
-import LoginForm from './components/LoginForm.vue';
+import VueRouter from "vue-router";
+import LoginForm from "./components/LoginForm.vue";
 
 export default {
     components: {
@@ -29,8 +29,8 @@ export default {
         async login(credentials: any) {
             const self: any = this;
             try {
-                await self.$store.dispatch('auth/login', credentials);
-                self.$router.push({ name: 'admin' });
+                await self.$store.dispatch("auth/login", credentials);
+                self.$router.push({ name: "admin" });
             } catch (err) {
                 self.authFailed = true;
                 console.log(err.message);

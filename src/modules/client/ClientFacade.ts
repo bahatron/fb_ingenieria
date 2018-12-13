@@ -1,7 +1,7 @@
-import $clientManager from "./services/ClientManager";
+import $clientFirestoreManager from "./services/ClientFirestoreManager";
 
 const $client = {
-    manager: $clientManager,
+    firestore: $clientFirestoreManager,
 };
 
 export default $client;
