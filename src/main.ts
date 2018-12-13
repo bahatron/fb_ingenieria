@@ -1,15 +1,15 @@
-import Vue from 'vue';
-import './plugins/vuetify';
-import App from './App.vue';
-import router from './router';
-import store from './store';
+import Vue from "vue";
+import "./services/vuetify";
+import App from "./App.vue";
+import router from "./router";
+import store from "./store";
 
 // PWA
-import './registerServiceWorker';
+import "./registerServiceWorker";
 
 // Styles
-import 'roboto-fontface/css/roboto/roboto-fontface.css';
-import 'font-awesome/css/font-awesome.css';
+import "roboto-fontface/css/roboto/roboto-fontface.css";
+import "font-awesome/css/font-awesome.css";
 
 // require('./assets/styles/hestia.scss');
 
@@ -19,4 +19,4 @@ new Vue({
     router,
     store,
     render: h => h(App),
-}).$mount('#app');
+}).$mount("#app");

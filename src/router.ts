@@ -31,7 +31,7 @@ const router = new Router({
             children: [
                 {
                     path: "clients",
-                    component: () => import(/* webpackChunkName: "ClientAdminPage" */ "./modules/client/ClientAdminPage.vue"),
+                    component: () => import(/* webpackChunkName: "ClientAdminPage" */ "./pages/admin/ClientAdminPage.vue"),
                     meta: {
                         requiresAuth: true, // is this really necessary for children pages?
                     },

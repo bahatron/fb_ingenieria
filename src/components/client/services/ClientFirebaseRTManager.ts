@@ -1,5 +1,5 @@
-import $firebase from "@/services/Firebase";
-import { Client } from "./ClientFirestoreManager";
+import $firebase from "@/services/firebase";
+import $clientMapper, { Client } from "./ClientMapperService";
 
 const uuid = require("uuid");
 
@@ -8,10 +8,10 @@ const $db = $firebase.database();
 const BASE_PATH = "/clients";
 
 const $clientFirebaseRTManager = Object.freeze({
-    async persist(data: any) {
+    async persist(data: any): Promise<$firebase.database.Reference> {
         const client = $db.ref(`${BASE_PATH}/${uuid.v4()}`);
 
-        await client.set(data);
+        await client.set($clientMapper.map(data));
 
         console.log(`client key: ${client.key}`);
 

@@ -1,15 +1,15 @@
 import {
     Module, GetterTree, MutationTree, ActionTree,
-} from 'vuex';
-import $firebase from '@/services/Firebase';
-import { User } from 'firebase';
+} from "vuex";
+import $firebase from "@/services/firebase";
+import { User } from "firebase";
 
 export interface AuthState {
     user: User | null;
 }
 
 function initUser(): User | null {
-    const user = localStorage.getItem('auth_user');
+    const user = localStorage.getItem("auth_user");
 
     if (!user) {
         return null;
@@ -31,6 +31,8 @@ const getters: GetterTree<AuthState, any> = {
 
 const mutations: MutationTree<AuthState> = {
     user(store, user: User) {
+        localStorage.setItem("auth_user", JSON.stringify(user));
+
         store.user = user;
     },
 };
@@ -39,8 +41,7 @@ const actions: ActionTree<AuthState, any> = {
     async login({ commit }, { email, password }) {
         await $firebase.auth().signInWithEmailAndPassword(email, password);
         const user = $firebase.auth().currentUser;
-        commit('user', user);
-        localStorage.setItem('auth_user', JSON.stringify(user));
+        commit("user", user);
     },
 };
 

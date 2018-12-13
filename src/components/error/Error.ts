@@ -18,7 +18,7 @@ function createError(type: string, statusCode: number, message: any): Error {
 
 const $error = {
     ValidationException(message: string): Error {
-        return createError('ValidationException', 400, message);
+        return createError("ValidationException", 400, message);
     },
 };
 
