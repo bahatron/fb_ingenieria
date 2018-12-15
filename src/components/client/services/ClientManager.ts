@@ -1,5 +1,5 @@
 import $firebase from "../../../services/firebase";
-import $clientMapper, { Client } from "./ClientMapperService";
+import $clientMapper, { Client } from "./ClientFactory";
 
 const uuid = require("uuid");
 

@@ -3,11 +3,10 @@
     "version": "0.1.0",
     "private": true,
     "scripts": {
-        "start": "vue-cli-service serve",
-        "dev": "pm2-docker start process.json",
+        "dev": "vue-cli-service serve",
         "build": "vue-cli-service build",
         "cucumber": "cucumber-js",
-        "mocha": "mocha -r ts-node/register tests/**/*.test.ts",
+        "mocha": "mocha tests/",
         "lint": "vue-cli-service lint"
     },
     "dependencies": {

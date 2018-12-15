@@ -1,17 +1,17 @@
-import $error from "../../../components/error/Error";
+import $error from "../../error/Error";
 
 export interface Client {
     name: string;
     website?: string;
-    imageUrl?: string;
+    image?: string;
     description?: string;
     visible: boolean;
 }
 
-const $clientMapper = Object.freeze({
+const $clientFactory = {
     map(data: any): Client {
         const {
-            name, website, description, visible, imageUrl,
+            name, website, description, visible, image,
         } = data;
 
         if (!name || typeof visible !== "boolean") {
@@ -22,10 +22,10 @@ const $clientMapper = Object.freeze({
             name,
             website: website || null,
             description: description || null,
-            imageUrl: imageUrl || null,
+            image: image || null,
             visible,
         };
     },
-});
+};
 
-export default $clientMapper;
+export default $clientFactory;
