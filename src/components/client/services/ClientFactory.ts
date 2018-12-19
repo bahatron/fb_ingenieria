@@ -37,10 +37,6 @@ const $clientFactory: ClientFactory = {
 
         return client;
     },
-
-    isInstanceOf(obj: any): boolean {
-        return obj.isPrototypeOf($clientClass);
-    },
 };
 
 export default $clientFactory;

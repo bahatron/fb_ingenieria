@@ -1,18 +1,3 @@
-import $clientFactory from "./services/ClientFactory";
-import $clientManager from "./services/ClientManager";
-
-/**
- * @todo: DRY this
- */
-interface Factory {
-    isInstanceOf(obj: any): boolean;
-}
-/**
- * @todo: ins it worth getting interfaces this far?
- */
-export interface ClientFactory extends Factory {
-    create({ ref, id }: { ref: firebase.database.Reference; id: string }): Client;
-}
 export interface ClientData {
     name: string;
     website?: string;
@@ -30,13 +15,10 @@ export interface ClientProto {
     ref: firebase.database.Reference;
 }
 
+export interface ClientFactory {
+    create({ ref, id }: { ref: firebase.database.Reference; id: string }): Client;
+}
+
 export interface Client extends ClientBehaviour {
     id: string;
 }
-
-const $clientFacade = {
-    manager: $clientManager,
-    factory: $clientFactory,
-};
-
-export default $clientFacade;
