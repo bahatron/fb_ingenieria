@@ -1,22 +1,44 @@
 import $firebase from "../../../services/firebase";
-import $clientMapper, { Client } from "./ClientFactory";
-
-const uuid = require("uuid");
+import { Client } from "../ClientFacade";
+import $clientFactory from "./ClientFactory";
 
 const $db = $firebase.database();
+const uuid = require("uuid");
 
+/**
+ * @todo: move this to an env file?
+ */
 const BASE_PATH = "/clients";
 
-const $clientFirebaseRTManager = Object.freeze({
-    async persist(data: any): Promise<$firebase.database.Reference> {
-        const client = $db.ref(`${BASE_PATH}/${uuid.v4()}`);
+interface PersistInteface {
+    data: any;
+    id?: string;
+}
 
-        await client.set($clientMapper.map(data));
+interface UpdateInterface {
+    id: string;
+    data?: any;
+}
 
-        console.log(`client key: ${client.key}`);
+interface DeleteInterface {
+    id: string;
+}
 
-        return client;
+const $clientManager = Object.freeze({
+    async persist({ data, id }: PersistInteface): Promise<Client> {
+        const clientId = id || uuid.v4();
+        const reference = $db.ref(`${BASE_PATH}/${clientId}`);
+
+        await reference.set(data);
+
+        return $clientFactory.create({
+            ref: reference,
+            /**
+             * @todo: investigate where key is not ID
+             */
+            id: reference.key || clientId,
+        });
     },
 });
 
-export default $clientFirebaseRTManager;
+export default $clientManager;
