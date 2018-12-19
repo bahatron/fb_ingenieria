@@ -6,7 +6,7 @@
         "dev": "vue-cli-service serve",
         "build": "vue-cli-service build",
         "cucumber": "cucumber-js",
-        "mocha": "mocha tests/",
+        "mocha-ts": "TS_NODE_COMPILER_OPTIONS='{\"module\":\"commonjs\"}' mocha -r ts-node/register tests/**/*.test.ts",
         "lint": "vue-cli-service lint"
     },
     "dependencies": {

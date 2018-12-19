@@ -11,22 +11,22 @@
         "sourceMap": true,
         "baseUrl": ".",
         "types": ["webpack-env", "mocha", "chai"],
-        "paths": {
-            "@/*": ["./src/*"]
-        },
+        // "paths": {
+        //     "@/*": ["./src/*"]
+        // },
         "lib": ["esnext", "dom", "dom.iterable", "scripthost"],
         "outDir": "./dist",
         "noImplicitAny": true,
         "noImplicitReturns": true,
-        "noImplicitThis": true
+        "noImplicitThis": true,
+        "removeComments": true
     },
     "include": [
         "src/**/*.ts",
         "src/**/*.tsx",
         "src/**/*.vue",
         "vue.config.js",
-        "vue.config.ts",
-        "tests/**/*.ts"
+        "vue.config.ts"
     ],
     "exclude": ["node_modules"]
 }

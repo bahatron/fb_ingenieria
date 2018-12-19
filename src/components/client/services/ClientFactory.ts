@@ -1,30 +1,45 @@
-import $error from "../../error/Error";
+import $clientValidator from "./ClientValidator";
+import $clientManager from "./ClientManager";
+import { Client, ClientData, ClientProto, ClientBehaviour, ClientFactory } from "../ClientFacade";
+// import * as uuid from 'uuid';
+const uuid = require("uuid");
 
-export interface Client {
-    name: string;
-    website?: string;
-    image?: string;
-    description?: string;
-    visible: boolean;
+interface CreateInterface {
+    ref: firebase.database.Reference;
+    id: string;
 }
 
-const $clientFactory = {
-    map(data: any): Client {
-        const {
-            name, website, description, visible, image,
-        } = data;
+const $clientClass: ClientBehaviour = Object.freeze({
+    async update(this: ClientProto, data: any): Promise<ClientData> {
+        const clientData = $clientValidator.validate(data);
+        await this.ref.update(clientData);
+        return clientData;
+    },
 
-        if (!name || typeof visible !== "boolean") {
-            throw $error.ValidationException("name and visible are required for Client");
-        }
+    async data(this: ClientProto): Promise<ClientData> {
+        const data = await this.ref.once("value");
 
-        return {
-            name,
-            website: website || null,
-            description: description || null,
-            image: image || null,
-            visible,
+        return data.val();
+    },
+});
+
+const $clientFactory: ClientFactory = {
+    create({ ref, id }: CreateInterface): Client {
+        const proto: ClientProto = {
+            id,
+            ref,
         };
+
+        /**
+         * @todo: is there a way for typescript to validate this?
+         */
+        const client = <Client>Object.setPrototypeOf(proto, $clientClass);
+
+        return client;
+    },
+
+    isInstanceOf(obj: any): boolean {
+        return obj.isPrototypeOf($clientClass);
     },
 };
 

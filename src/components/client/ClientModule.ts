@@ -1,30 +1,42 @@
 import {
     Module, GetterTree, MutationTree, ActionTree,
 } from "vuex";
-import $client from "./ClientFacade";
+import Vue from "vue";
+import { Client } from "./ClientFacade";
+import $clientManager from "./services/ClientManager";
 
-export interface ClientSate {}
+export interface ClientSate {
+    clients: {
+        [id: string]: Client;
+    };
+}
 
-/**
- * @todo: define state
- */
-const state: ClientSate = {};
+const state: ClientSate = {
+    clients: {},
+};
 
 /**
  * @todo: define getters
  */
-const getters: GetterTree<ClientSate, any> = {};
+const getters: GetterTree<ClientSate, any> = {
+    clients(state) {
+        return state.clients;
+    },
+};
 
-const mutations: MutationTree<ClientSate> = {};
+const mutations: MutationTree<ClientSate> = {
+    client(this: Vue, state, client: Client) {
+        this.$set(state.clients, client.id, client);
+
+        return client.id;
+    },
+};
 
 const actions: ActionTree<ClientSate, any> = {
-    async create(context, payload): Promise<any> {
-        const client = await $client.manager.persist(payload);
+    async create(context, data): Promise<any> {
+        const client = await $clientManager.persist(data);
 
-        /**
-         * @todo: commit client reference
-         */
-        return client;
+        return context.commit("client", client);
     },
 };
 
