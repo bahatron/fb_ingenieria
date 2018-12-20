@@ -8,6 +8,7 @@ export interface ClientData {
 export interface ClientBehaviour {
     data(): Promise<ClientData>;
     update(data: any): Promise<ClientData>;
+    on(condition: string, callback: (data: ClientData) => void): void;
 }
 
 export interface ClientProto {

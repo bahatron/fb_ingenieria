@@ -25,6 +25,14 @@ const $clientClass: ClientBehaviour = Object.freeze({
 
         return data.val();
     },
+
+    on(this: ClientProto, condition: string, callback: (data: ClientData) => void) {
+        this.ref.on(<firebase.database.EventType>condition, snapshot => {
+            if (snapshot) {
+                callback(snapshot.val());
+            }
+        });
+    },
 });
 
 const $clientFactory: ClientFactory = {

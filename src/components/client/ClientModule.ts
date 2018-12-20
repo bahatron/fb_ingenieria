@@ -2,33 +2,38 @@ import {
     Module, GetterTree, MutationTree, ActionTree,
 } from "vuex";
 import Vue from "vue";
-import { Client } from "./ClientFacade";
 import $clientManager from "./services/ClientManager";
+import { Client } from "./ClientFacade";
 
 export interface ClientSate {
     clients: {
         [id: string]: Client;
     };
+
+    clientData: {
+        [id: string]: ClientData;
+    };
 }
 
 const state: ClientSate = {
     clients: {},
+    clientData: {},
 };
 
 /**
  * @todo: define getters
  */
 const getters: GetterTree<ClientSate, any> = {
-    clients(state) {
-        return state.clients;
-    },
+    all: state => Object.values(state.clientData),
 };
 
 const mutations: MutationTree<ClientSate> = {
-    client(this: Vue, state, client: Client) {
-        this.$set(state.clients, client.id, client);
+    client(this: any, state, client: Client) {
+        this._vm.$set(state.clients, client.id, client);
+    },
 
-        return client.id;
+    clientData(this: any, state, { id, data }) {
+        this._vm.$set(state.clientData, id, data);
     },
 };
 
@@ -36,7 +41,32 @@ const actions: ActionTree<ClientSate, any> = {
     async create(context, data): Promise<any> {
         const client = await $clientManager.persist(data);
 
-        return context.commit("client", client);
+        const clientData = await client.data();
+
+        return context.commit("client", {
+            id: client.id,
+            data: clientData,
+        });
+    },
+
+    async load(context): Promise<void> {
+        const clients = await $clientManager.all();
+
+        await Promise.all(
+            clients.map(async (client) => {
+                context.commit("client", client);
+
+                client.on("value", (data) => {
+                    context.commit("clientData", {
+                        id: client.id,
+                        data: {
+                            id: client.id,
+                            ...data,
+                        },
+                    });
+                });
+            }),
+        );
     },
 };
 

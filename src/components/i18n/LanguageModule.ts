@@ -7,8 +7,6 @@ export interface LanguageState {
     };
 }
 
-const translationIndex = ["../client/translations"];
-
 function initLanguage(): "en" | "es" {
     const lang = <"en" | "es" | null>localStorage.getItem("language");
 
@@ -16,26 +14,7 @@ function initLanguage(): "en" | "es" {
 }
 
 function loadTranslations(): any {
-    const translations: any = {};
-
-    /**
-     * @todo: find a good way to import json files
-     */
-    translationIndex.forEach((path: string) => {
-        ["en", "es.js"].forEach((file: string) => {
-            let partial = require(`${path}/${file}`);
-
-            if (!partial) {
-                return;
-            }
-
-            Object.keys(partial).forEach((key: string) => {
-                translations[key] = partial[key];
-            });
-        });
-    });
-
-    return translations;
+    /** @todo */
 }
 
 const state: LanguageState = {
