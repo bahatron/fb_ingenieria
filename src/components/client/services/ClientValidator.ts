@@ -1,5 +1,5 @@
 import { ClientData } from "../ClientFacade";
-import $error from 'src/services/error';
+import $error from "../../../services/error";
 
 const $clientValidator = {
     validate(data: any): ClientData {

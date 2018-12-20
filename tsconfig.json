@@ -9,11 +9,7 @@
         "esModuleInterop": true,
         "allowSyntheticDefaultImports": true,
         "sourceMap": true,
-        "baseUrl": ".",
         "types": ["webpack-env", "mocha", "chai"],
-        // "paths": {
-        //     "@/*": ["./src/*"]
-        // },
         "lib": ["esnext", "dom", "dom.iterable", "scripthost"],
         "outDir": "./dist",
         "noImplicitAny": true,
@@ -22,9 +18,9 @@
         "removeComments": true
     },
     "include": [
-        "src/**/*.ts",
-        "src/**/*.tsx",
-        "src/**/*.vue",
+        "./src/**/*.ts",
+        "./src/**/*.tsx",
+        "./src/**/*.vue",
         "vue.config.js",
         "vue.config.ts"
     ],

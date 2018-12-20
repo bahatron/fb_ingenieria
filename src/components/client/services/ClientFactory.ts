@@ -1,14 +1,18 @@
 import $clientValidator from "./ClientValidator";
-import $clientManager from "./ClientManager";
 import { Client, ClientData, ClientProto, ClientBehaviour, ClientFactory } from "../ClientFacade";
-// import * as uuid from 'uuid';
-const uuid = require("uuid");
+import $firebase from "../../../services/firebase";
 
 interface CreateInterface {
-    ref: firebase.database.Reference;
+    ref: $firebase.database.Reference;
     id: string;
 }
 
+/**
+ * @todo:
+ * maybe, if the manager defines the implementation of data and update
+ * we could make the factory function to be absolutedly detached of whichever
+ * technology we're using in the background
+ */
 const $clientClass: ClientBehaviour = Object.freeze({
     async update(this: ClientProto, data: any): Promise<ClientData> {
         const clientData = $clientValidator.validate(data);
