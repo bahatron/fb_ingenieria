@@ -5,21 +5,10 @@ export interface ClientData {
     description?: string;
     visible: boolean;
 }
-export interface ClientBehaviour {
+
+export interface Client {
+    id: string;
     data(): Promise<ClientData>;
     update(data: any): Promise<ClientData>;
     on(condition: string, callback: (data: ClientData) => void): void;
-}
-
-export interface ClientProto {
-    id: string;
-    ref: firebase.database.Reference;
-}
-
-export interface ClientFactory {
-    create({ ref, id }: { ref: firebase.database.Reference; id: string }): Client;
-}
-
-export interface Client extends ClientBehaviour {
-    id: string;
 }

@@ -39,7 +39,7 @@ const mutations: MutationTree<ClientSate> = {
 
 const actions: ActionTree<ClientSate, any> = {
     async create(context, data): Promise<any> {
-        const client = await $clientManager.persist(data);
+        const client = await $clientManager.create(data);
 
         const clientData = await client.data();
 
@@ -54,8 +54,10 @@ const actions: ActionTree<ClientSate, any> = {
 
         await Promise.all(
             clients.map(async (client) => {
+                // save client
                 context.commit("client", client);
 
+                // save client's data
                 client.on("value", (data) => {
                     context.commit("clientData", {
                         id: client.id,

@@ -1,18 +1,8 @@
 <template>
   <v-container fluid fill-height style="background-color: grey">
-    <v-layout class="pa-2" column>
+    <v-layout class="pa-2" row wrap>
       <v-flex xs12>
         <ClientList/>
-      </v-flex>
-      <v-flex xs7>
-        <v-card style="background-color: red; height: 100px">
-
-        </v-card>
-      </v-flex>
-      <v-flex xs6>
-        <v-card style="background-color: red; height: 100px">
-
-        </v-card>
       </v-flex>
     </v-layout>
   </v-container>

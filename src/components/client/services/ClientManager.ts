@@ -1,54 +1,70 @@
 import $firebase from "../../../services/firebase";
-import { Client } from "../ClientFacade";
-import $clientFactory from "./ClientFactory";
+import { Client, ClientData } from "../ClientFacade";
+import $clientValidator from "./ClientValidator";
 
 const $db = $firebase.database();
 const uuid = require("uuid");
 
 const BASE_PATH = process.env.VUE_APP_DB_CLIENT_PATH;
 
-interface PersistInteface {
-    data: any;
-    id?: string;
+interface ClientInstance {
+    id: string;
+    ref: firebase.database.Reference;
 }
 
-interface UpdateInterface {
-    id: string;
-    data?: any;
-}
+// Client object prototype
+const $proto = Object.freeze({
+    async update(this: ClientInstance, data: any): Promise<ClientData> {
+        const clientData = $clientValidator.validate(data);
+        await this.ref.update(clientData);
 
-interface DeleteInterface {
-    id: string;
+        return clientData;
+    },
+
+    async data(this: ClientInstance): Promise<ClientData> {
+        const data = await this.ref.once("value");
+
+        return data.val();
+    },
+
+    on(this: ClientInstance, condition: string, callback: (data: ClientData) => void): void {
+        this.ref.on(<firebase.database.EventType>condition, snapshot => {
+            if (snapshot) {
+                callback(snapshot.val());
+            }
+        });
+    },
+});
+
+function factory(reference: firebase.database.Reference): Client {
+    const instance: ClientInstance = {
+        id: <string>reference.key,
+        ref: reference,
+    };
+
+    return Object.setPrototypeOf(instance, $proto);
 }
 
 const $clientManager = Object.freeze({
-    async persist({ data, id }: PersistInteface): Promise<Client> {
+    async create({ data, id }: { data: any; id?: string }): Promise<Client> {
         const clientId = id || uuid.v4();
         const reference = $db.ref(`${BASE_PATH}/${clientId}`);
 
-        await reference.set(data);
+        await reference.set($clientValidator.validate(data));
 
-        return $clientFactory.create({
-            ref: reference,
-            id: <string>reference.key,
-        });
+        return factory(reference);
     },
 
     async all(): Promise<Client[]> {
-        const collection: Client[] = [];
-
         const data = await $db
             .ref(`${BASE_PATH}`)
             .orderByKey()
             .once("value");
 
+        const collection: Client[] = [];
+
         data.forEach(record => {
-            collection.push(
-                $clientFactory.create({
-                    ref: record.ref,
-                    id: <string>record.ref.key,
-                }),
-            );
+            collection.push(factory(record.ref));
         });
 
         return collection;

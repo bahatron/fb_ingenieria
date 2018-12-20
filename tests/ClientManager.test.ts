@@ -12,7 +12,7 @@ describe("Client manager", () => {
             website: "https://google.com",
         };
 
-        const result = await $clientManager.persist({
+        const result = await $clientManager.create({
             data: dummy,
             id: "test_id_1",
         });
@@ -25,6 +25,7 @@ describe("Client manager", () => {
     it("can fetch all clients", async () => {
         const clients = await $clientManager.all();
 
+        /** @todo: validate clients */
         expect(Array.isArray(clients)).to.be.true;
     });
 });
