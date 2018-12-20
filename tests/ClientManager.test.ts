@@ -1,14 +1,9 @@
-import "dotenv/config";
+import "./init.test"; // workaround for mocha
+
 import { expect } from "chai";
 import $clientManager from "../src/components/client/services/ClientManager";
-import $firebase from "../src/services/firebase";
 
 describe("Client manager", () => {
-    after(() => {
-        // close connection to firebase
-        $firebase.database().goOffline();
-    });
-
     it("can persist clients", async () => {
         const dummy = {
             name: "test_name",
@@ -25,5 +20,11 @@ describe("Client manager", () => {
         const data = await result.data();
 
         return expect(data).to.deep.equal(dummy);
+    });
+
+    it("can fetch all clients", async () => {
+        const clients = await $clientManager.all();
+
+        expect(Array.isArray(clients)).to.be.true;
     });
 });

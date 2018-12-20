@@ -5,10 +5,7 @@ import $clientFactory from "./ClientFactory";
 const $db = $firebase.database();
 const uuid = require("uuid");
 
-/**
- * @todo: move this to an env file?
- */
-const BASE_PATH = "/clients";
+const BASE_PATH = process.env.VUE_APP_DB_CLIENT_PATH;
 
 interface PersistInteface {
     data: any;
@@ -33,11 +30,28 @@ const $clientManager = Object.freeze({
 
         return $clientFactory.create({
             ref: reference,
-            /**
-             * @todo: investigate where key is not ID
-             */
-            id: reference.key || clientId,
+            id: <string>reference.key,
         });
+    },
+
+    async all(): Promise<Client[]> {
+        const collection: Client[] = [];
+
+        const data = await $db
+            .ref(`${BASE_PATH}`)
+            .orderByKey()
+            .once("value");
+
+        data.forEach(record => {
+            collection.push(
+                $clientFactory.create({
+                    ref: record.ref,
+                    id: <string>record.ref.key,
+                }),
+            );
+        });
+
+        return collection;
     },
 });
 

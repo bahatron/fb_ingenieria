@@ -1,3 +1,5 @@
+import $sentry from "./sentry";
+
 export interface AppError {
     type: string;
     statusCode: number;
@@ -5,7 +7,7 @@ export interface AppError {
     stack?: string;
 }
 
-function createError(type: string, statusCode: number, message: any): Error {
+function createError(type: string, statusCode: number, message: any): AppError {
     const error = Object.assign(new Error(), {
         name: type,
         type,
@@ -17,7 +19,11 @@ function createError(type: string, statusCode: number, message: any): Error {
 }
 
 const $error = {
-    ValidationException(message: string): Error {
+    handle(err: any): any {
+        $sentry.captureException(err);
+    },
+
+    ValidationException(message: string): AppError {
         return createError("ValidationException", 400, message);
     },
 };
