@@ -1,7 +1,8 @@
-import "./init.test"; // workaround for mocha
+// @TODO: mock database call
+import "./firebase.config"; // workaround for mocha
 
 import { expect } from "chai";
-import $clientManager from '../../domain/client/services/ClientManager';
+import $clientManager from "../../domain/client/services/ClientManager";
 
 describe("Client manager", () => {
     it("can persist clients", async () => {
