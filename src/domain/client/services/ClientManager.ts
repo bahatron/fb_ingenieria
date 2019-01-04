@@ -1,10 +1,10 @@
 import $firebase from "../../../adapters/firebase";
 import { Client, ClientData } from "..";
 import $clientValidator from "./ClientValidator";
-const $db = $firebase.database();
+const $db = $firebase.database;
 const uuid = require("uuid");
 
-const BASE_PATH = process.env.VUE_APP_DB_CLIENT_PATH;
+const BASE_PATH = "/clients";
 
 interface ClientInstance {
     id: string;
@@ -17,7 +17,7 @@ interface ClientInstance {
 function closureFactory(reference: firebase.database.Reference): Client {
     return {
         id: <string>reference.key,
-        
+
         async update(data: any): Promise<ClientData> {
             const clientData = $clientValidator.validate(data);
             await reference.update(clientData);
