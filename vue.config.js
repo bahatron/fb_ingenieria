@@ -7,4 +7,10 @@ module.exports = {
             .loader("style!css!sass")
             .options({ modules: true });
     },
+
+    configureWebpack: {
+        entry: "./src/spa/main.ts",
+    },
+
+    assetsDir: "./src/spa/assets",
 };

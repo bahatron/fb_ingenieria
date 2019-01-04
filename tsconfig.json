@@ -1,7 +1,6 @@
 {
     "compilerOptions": {
         "target": "esnext",
-        "module": "esnext",
         "strict": true,
         "jsx": "preserve",
         "importHelpers": true,
@@ -11,18 +10,12 @@
         "sourceMap": true,
         "types": ["webpack-env", "mocha", "chai"],
         "lib": ["esnext", "dom", "dom.iterable", "scripthost"],
-        "outDir": "./dist",
+        "outDir": "./js",
         "noImplicitAny": true,
         "noImplicitReturns": true,
         "noImplicitThis": true,
         "removeComments": true
     },
-    "include": [
-        "./src/**/*.ts",
-        "./src/**/*.tsx",
-        "./src/**/*.vue",
-        "vue.config.js",
-        "vue.config.ts"
-    ],
+    "include": ["./src/**/*.ts", "./src/**/*.vue", "vue.config.js", "vue.config.ts"],
     "exclude": ["node_modules"]
 }
