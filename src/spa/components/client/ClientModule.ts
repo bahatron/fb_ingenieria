@@ -19,9 +19,6 @@ const state: ClientSate = {
     clientData: {},
 };
 
-/**
- * @todo: define getters
- */
 const getters: GetterTree<ClientSate, any> = {
     all: state => Object.values(state.clientData),
 };
@@ -56,8 +53,8 @@ const actions: ActionTree<ClientSate, any> = {
                 // save client
                 context.commit("client", client);
 
-                // save client's data
-                client.on("value", (data) => {
+                // update client data when it changes
+                client.on("value", (data: ClientData) => {
                     context.commit("clientData", {
                         id: client.id,
                         data: {

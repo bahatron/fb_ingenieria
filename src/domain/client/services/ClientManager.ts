@@ -1,102 +1,34 @@
-import $firebase from "../../../adapters/firebase";
 import { Client, ClientData } from "..";
-import $clientValidator from "./ClientValidator";
-const $db = $firebase.database;
-const uuid = require("uuid");
+import $error from "../../error";
+import $firebaseManager from '../../services/FirebaseManager';
 
-const BASE_PATH = "/clients";
+const PATH = "/clients";
 
-interface ClientInstance {
-    id: string;
-    ref: firebase.database.Reference;
-}
+function validate(data: any): ClientData {
+    const {
+        name, website, description, visible, image,
+    } = data;
 
-/**
- * @todo: measure impact of this function vs protoFactory
- */
-function closureFactory(reference: firebase.database.Reference): Client {
+    if (!name || typeof visible !== "boolean") {
+        throw $error.ValidationException("'name' and 'visible' are required");
+    }
+
     return {
-        id: <string>reference.key,
-
-        async update(data: any): Promise<ClientData> {
-            const clientData = $clientValidator.validate(data);
-            await reference.update(clientData);
-
-            return clientData;
-        },
-
-        async data(): Promise<ClientData> {
-            const data = await reference.once("value");
-
-            return data.val();
-        },
-
-        on(condition: string, callback: (data: ClientData) => void): void {
-            reference.on(<firebase.database.EventType>condition, snapshot => {
-                if (snapshot) {
-                    callback(snapshot.val());
-                }
-            });
-        },
+        name,
+        visible,
+        image: image || null,
+        website: website || null,
+        description: description || null,
     };
-}
-
-// Client object prototype
-const $proto = Object.freeze({
-    async update(this: ClientInstance, data: any): Promise<ClientData> {
-        const clientData = $clientValidator.validate(data);
-        await this.ref.update(clientData);
-
-        return clientData;
-    },
-
-    async data(this: ClientInstance): Promise<ClientData> {
-        const data = await this.ref.once("value");
-
-        return data.val();
-    },
-
-    on(this: ClientInstance, condition: string, callback: (data: ClientData) => void): void {
-        this.ref.on(<firebase.database.EventType>condition, snapshot => {
-            if (snapshot) {
-                callback(snapshot.val());
-            }
-        });
-    },
-});
-
-function protoFactory(reference: firebase.database.Reference): Client {
-    const instance: ClientInstance = {
-        id: <string>reference.key,
-        ref: reference,
-    };
-
-    return Object.setPrototypeOf(instance, $proto);
 }
 
 const $clientManager = Object.freeze({
     async create({ data, id }: { data: any; id?: string }): Promise<Client> {
-        const clientId = id || uuid.v4();
-        const reference = $db.ref(`${BASE_PATH}/${clientId}`);
-
-        await reference.set($clientValidator.validate(data));
-
-        return protoFactory(reference);
+        return $firebaseManager.persist(validate(data), PATH, id);
     },
 
     async all(): Promise<Client[]> {
-        const data = await $db
-            .ref(`${BASE_PATH}`)
-            .orderByKey()
-            .once("value");
-
-        const collection: Client[] = [];
-
-        data.forEach(record => {
-            collection.push(protoFactory(record.ref));
-        });
-
-        return collection;
+        return await $firebaseManager.fetch<ClientData>({ path: PATH });
     },
 });
 

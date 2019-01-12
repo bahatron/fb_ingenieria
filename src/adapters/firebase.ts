@@ -1,5 +1,5 @@
 // import Vue from "vue";
-import firebase from "firebase";
+import $firebase from "firebase";
 
 const config = {
     apiKey: process.env.VUE_APP_FIREBASE_API_KEY,
@@ -8,14 +8,6 @@ const config = {
     projectId: process.env.VUE_APP_FIREBASE_DATABASE_URL,
 };
 
-firebase.initializeApp(config);
-
-// // sets global access to firebase by calling this.$firebase
-// Vue.prototype.$firebase = $firebase;
-
-const $firebase = {
-    database: firebase.database(),
-    storage: firebase.storage(),
-};
+$firebase.initializeApp(config);
 
 export default $firebase;

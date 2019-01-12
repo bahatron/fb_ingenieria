@@ -1,4 +1,5 @@
 import $clientManager from "./services/ClientManager";
+import { Model } from "../services/FirebaseManager";
 
 export interface ClientData {
     name: string;
@@ -8,12 +9,7 @@ export interface ClientData {
     visible: boolean;
 }
 
-export interface Client {
-    id: string;
-    data(): Promise<ClientData>;
-    update(data: any): Promise<ClientData>;
-    on(condition: string, callback: (data: ClientData) => void): void;
-}
+export type Client = Model<ClientData>;
 
 const $client = {
     manager: $clientManager,
