@@ -1,4 +1,4 @@
-import $firebase from "../../adapters/firebase";
+import $firebase from "../adapters/firebase";
 
 const uuid = require("uuid");
 
