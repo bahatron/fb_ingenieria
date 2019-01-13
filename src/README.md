@@ -2,7 +2,11 @@
 
 ## Adapters
 
-The adapters folder contains any adapter to third-party software we may require. Like axios or the firebase SDK
+Adapters are objects that configure or setup any service external to the application, like axios, sentry or firebase
+
+## Services
+
+Services are objects that centralize a particular generic process, they contain no business rules and are accesible to both domain entities and applications
 
 ## Domain
 

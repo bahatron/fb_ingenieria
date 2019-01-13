@@ -10,7 +10,4 @@ const config = {
 
 $firebase.initializeApp(config);
 
-// // sets global access to firebase by calling this.$firebase
-// Vue.prototype.$firebase = $firebase;
-
 export default $firebase;
