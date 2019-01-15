@@ -1,6 +1,6 @@
 import { Client, ClientData } from "..";
 import $error from "../../error";
-import $firebaseManager from "../../../services/FirebaseManager";
+import $firebaseManager from "../../../services/DatabaseManager";
 
 const PATH = "/clients";
 
@@ -15,10 +15,10 @@ function validate(data: any): ClientData {
 
     return {
         name,
-        visible,
         image: image || null,
         website: website || null,
         description: description || null,
+        visible,
     };
 }
 

@@ -1,10 +1,10 @@
 import $clientManager from "./services/ClientManager";
-import { Model } from "../services/FirebaseManager";
+import { Model } from "../../services/DatabaseManager";
 
 export interface ClientData {
     name: string;
-    website?: string;
     image?: string;
+    website?: string;
     description?: string;
     visible: boolean;
 }

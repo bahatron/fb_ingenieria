@@ -2,7 +2,7 @@ import {
     Module, GetterTree, MutationTree, ActionTree,
 } from "vuex";
 
-import $client, { Client } from "../../../domain/client";
+import $client, { Client, ClientData } from "../../../domain/client";
 
 export interface ClientSate {
     clients: {
@@ -34,12 +34,12 @@ const mutations: MutationTree<ClientSate> = {
 };
 
 const actions: ActionTree<ClientSate, any> = {
-    async create(context, data): Promise<any> {
+    async persist(context, data): Promise<void> {
         const client = await $client.manager.create(data);
 
         const clientData = await client.data();
 
-        return context.commit("client", {
+        await context.commit("client", {
             id: client.id,
             data: clientData,
         });
