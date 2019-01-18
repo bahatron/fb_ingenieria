@@ -1,79 +1,66 @@
-import {
-    Module, GetterTree, MutationTree, ActionTree,
-} from "vuex";
+import { Store, Module, GetterTree, MutationTree, ActionTree, ActionContext } from "vuex";
+import Vue from "vue";
 
-import $client, { Client, ClientData } from "../../../domain/client";
+import $client, { ClientData } from "../../../domain/client";
 
+interface Client {
+    id: string;
+    data: ClientData;
+}
 export interface ClientSate {
     clients: {
         [id: string]: Client;
     };
-
-    clientData: {
-        [id: string]: ClientData;
-    };
 }
-
-const state: ClientSate = {
-    clients: {},
-    clientData: {},
-};
-
-const getters: GetterTree<ClientSate, any> = {
-    all: state => Object.values(state.clientData),
-};
-
-const mutations: MutationTree<ClientSate> = {
-    client(this: any, state, client: Client) {
-        this._vm.$set(state.clients, client.id, client);
-    },
-
-    clientData(this: any, state, { id, data }) {
-        this._vm.$set(state.clientData, id, data);
-    },
-};
-
-const actions: ActionTree<ClientSate, any> = {
-    async persist(context, data): Promise<void> {
-        const client = await $client.manager.create(data);
-
-        const clientData = await client.data();
-
-        await context.commit("client", {
-            id: client.id,
-            data: clientData,
-        });
-    },
-
-    async load(context): Promise<void> {
-        const clients = await $client.manager.all();
-
-        await Promise.all(
-            clients.map(async (client) => {
-                // save client
-                context.commit("client", client);
-
-                // update client data when it changes
-                client.on("value", (data: ClientData) => {
-                    context.commit("clientData", {
-                        id: client.id,
-                        data: {
-                            id: client.id,
-                            ...data,
-                        },
-                    });
-                });
-            }),
-        );
-    },
-};
 
 const $clientModule: Module<ClientSate, any> = {
     namespaced: true,
-    state,
-    getters,
-    mutations,
-    actions,
+    state: {
+        clients: {},
+    },
+
+    getters: <GetterTree<ClientSate, any>>{
+        all: state => Object.values(state.clients),
+        get: state => (id: string) => state.clients[id],
+    },
+
+    mutations: <MutationTree<ClientSate>>{
+        addClient(state, client: Client) {
+            Vue.set(state.clients, client.id, client);
+        },
+        removeClient(state, { id }) {
+            Vue.delete(state.clients, id);
+        },
+    },
+
+    actions: <ActionTree<ClientSate, any>>{
+        async create(context, data): Promise<void> {
+            const client = await $client.create({ data });
+
+            const clientData = await client.data();
+
+            context.commit("addClient", { id: client.id, data: clientData });
+        },
+
+        async delete(context, id): Promise<void> {
+            /** @todo */
+        },
+
+        async load(context): Promise<void> {
+            const clients = await $client.all();
+
+            await Promise.all(
+                clients.map(async client => {
+                    client.on("value", (data: ClientData) => {
+                        context.commit("addClient", {
+                            id: client.id,
+                            data,
+                        });
+                    });
+                }),
+            );
+        },
+    },
 };
 
 export default $clientModule;

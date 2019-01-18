@@ -4,6 +4,7 @@ import $firebaseManager from "../../../services/DatabaseManager";
 
 const PATH = "/clients";
 
+/** @todo: refactor this to use an external validator service */
 function validate(data: any): ClientData {
     const {
         name, website, description, visible, image,
@@ -24,11 +25,19 @@ function validate(data: any): ClientData {
 
 const $clientManager = Object.freeze({
     async create({ data, id }: { data: any; id?: string }): Promise<Client> {
-        return $firebaseManager.persist(validate(data), PATH, id);
+        return $firebaseManager.persist({
+            data,
+            path: PATH,
+            id,
+            validator: validate,
+        });
     },
 
     async all(): Promise<Client[]> {
-        return await $firebaseManager.fetch<ClientData>({ path: PATH });
+        return await $firebaseManager.fetch<ClientData>({
+            path: PATH,
+            validator: validate,
+        });
     },
 });
 

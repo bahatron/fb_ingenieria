@@ -7,10 +7,16 @@ const $db = $firebase.database();
 export interface Model<T> {
     id: string;
     data(): Promise<T>;
+    update(data: T): Promise<T>;
     on(condition: firebase.database.EventType, callback: (data: T) => void): void;
 }
 
-function factory<T>(reference: firebase.database.Reference): Model<T> {
+interface Validator<T> {
+    (data: any): T;
+}
+
+/** @todo: would it be good to freeze he instnace? */
+function factory<T>(reference: firebase.database.Reference, validator: (ddata: any) => T): Model<T> {
     return {
         get id(): string {
             return <string>reference.key;
@@ -19,13 +25,20 @@ function factory<T>(reference: firebase.database.Reference): Model<T> {
         async data(): Promise<T> {
             const data: any = await reference.once("value");
 
-            return <T>data;
+            return <T>data.val();
+        },
+
+        async update(data: T): Promise<T> {
+            /** @todo: convert this into a pipe, maybe use lodash */
+            return reference.update(validator(data));
         },
 
         on(condition: firebase.database.EventType, callback: (data: T) => void): void {
             reference.on(condition, snapshot => {
                 if (snapshot) {
-                    callback(snapshot.val());
+                    /** @todo: create unit test for revealing the behaviour difference of this */
+                    // callback(snpashot.val());
+                    callback.call(this, snapshot.val());
                 }
             });
         },
@@ -33,17 +46,27 @@ function factory<T>(reference: firebase.database.Reference): Model<T> {
 }
 
 const $firebaseManager = {
-    async persist<T>(data: T, path: string, id?: string): Promise<Model<T>> {
+    async persist<T>({
+        data,
+        path,
+        id,
+        validator,
+    }: {
+        data: T;
+        path: string;
+        id?: string;
+        validator: Validator<T>;
+    }): Promise<Model<T>> {
         const key = id || uuid.v4();
 
         const reference = $db.ref(`${path}/${key}`);
 
         await reference.set(data);
 
-        return factory(reference);
+        return factory(reference, validator);
     },
 
-    async fetch<T>({ path }: { path: string }): Promise<Model<T>[]> {
+    async fetch<T>({ path, validator }: { path: string; validator: Validator<T> }): Promise<Model<T>[]> {
         const data = await $db
             .ref(path)
             .orderByKey()
@@ -52,7 +75,7 @@ const $firebaseManager = {
         const collection: Model<T>[] = [];
 
         data.forEach(record => {
-            collection.push(factory(record.ref));
+            collection.push(factory(record.ref, validator));
         });
 
         return collection;

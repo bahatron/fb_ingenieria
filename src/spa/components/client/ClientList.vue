@@ -1,29 +1,23 @@
 <template>
-  <v-container fluid>
-    <v-data-table :headers="headers" :items="clients" hide-actions>
-      <template slot="items" slot-scope="props">
-        <td>{{ props.item.name }}</td>
+  <v-data-table :headers="headers" :items="clients" :search="search">
+    <template slot="items" slot-scope="props">
+      <td>{{ props.item }}</td>
 
-        <td>
-          <v-icon v-if="props.item.visible" color="green">done</v-icon>
-          <v-icon v-else color="red">clear</v-icon>
-        </td>
+      <td>
+        <v-icon v-if="props.item.data.visible" color="green">done</v-icon>
+        <v-icon v-else color="red">clear</v-icon>
+      </td>
 
-        <td>
-          <a :href="props.item.website">{{ props.item.website }}</a>
-        </td>
+      <td>
+        <a target="_blank" :href="props.item.data.website">{{ props.item.website }}</a>
+      </td>
 
-        <td>
-          <v-icon small class="mr-2" @click="$emit('edit', props.item.id)">edit</v-icon>
-          <v-icon small @click="$emit('dekete', props.item.id)">delete</v-icon>
-        </td>
-      </template>
-
-      <template slot="no-data">
-        <v-btn color="primary" @click="$emit('create')">Reset</v-btn>
-      </template>
-    </v-data-table>
-  </v-container>
+      <td>
+        <v-icon small class="mr-2" @click="$emit('edit', props.item.id)">edit</v-icon>
+        <v-icon small @click="$emit('remove', props.item.id)">delete</v-icon>
+      </td>
+    </template>
+  </v-data-table>
 </template>
 
 <script lang="ts">
@@ -34,6 +28,9 @@ export default Vue.extend({
         clients: {
             type: Array,
             required: true,
+        },
+        search: {
+            type: String,
         },
     },
 
@@ -58,7 +55,6 @@ export default Vue.extend({
                     sortable: false,
                 },
             ],
-            selected: null,
         };
     },
 

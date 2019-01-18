@@ -1,14 +1,18 @@
 <template>
   <v-card class="pa-4">
-    <v-text-field v-model="client.name" label="Nombre del cliente"></v-text-field>
+    <v-text-field v-model="client.name" label="Nombre del cliente" required></v-text-field>
     <!-- <v-text-field v-model="client.image" label="Logo o Imagen URL"></v-text-field> -->
     <v-text-field v-model="client.website" label="Pagina web del cliente"></v-text-field>
     <v-textarea auto-grow rows="2" v-model="client.descripcion" label="Descripcion del cliente"></v-textarea>
-    <v-checkbox v-model="client.visible" label="Visible en pagina principal"></v-checkbox>
+    <v-checkbox v-model="client.visible" label="Visible en pagina principal" required></v-checkbox>
 
     <v-card-actions>
       <v-layout justify-end>
-        <v-btn class="primary" @click="alert('clicked')">{{client.id ? 'update' : 'create'}}</v-btn>
+        <v-btn
+          class="primary"
+          @click="persist()"
+          :disabled="!valid"
+        >{{client.id ? 'update' : 'create'}}</v-btn>
       </v-layout>
     </v-card-actions>
   </v-card>
@@ -18,7 +22,6 @@
 import Vue from "vue";
 
 export default Vue.extend({
-
     props: {
         client: {
             type: Object,
@@ -36,18 +39,18 @@ export default Vue.extend({
     },
 
     computed: {
-        translate(this: Vue, label = "") {
-            return this.$store.getters["lang/translate"](label) || label;
+        valid(this: any) {
+            return this.client.name && this.client.name.length > 0;
         },
     },
 
     methods: {
-        async submit() {
-            await this.$store.dispatch("clients/persist", this.client);
-        },
+        persist() {
+            if (typeof this.client.visible !== "boolean") {
+                this.client.visible = false;
+            }
 
-        alert(msg: any): void {
-            alert(msg);
+            this.$emit("persist", this.client);
         },
     },
 });
