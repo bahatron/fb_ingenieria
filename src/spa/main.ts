@@ -4,8 +4,7 @@ import router from "./router";
 import store from "./store";
 
 // plugins
-import "./plugins/i18n";
-import "./plugins/vuetify"
+import "./plugins/vuetify";
 
 // PWA
 import "./registerServiceWorker";
