@@ -1,6 +1,6 @@
 import { Client, ClientData } from "..";
 import $error from "../../error";
-import $firebaseManager from "../../../services/DatabaseManager";
+import $firebaseManager from "../../../services/FirebaseManager";
 
 const PATH = "/clients";
 

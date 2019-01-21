@@ -4,6 +4,7 @@ const uuid = require("uuid");
 
 const $db = $firebase.database();
 
+/** @todo: create an external interface for this */
 export interface Model<T> {
     id: string;
     data(): Promise<T>;
@@ -15,7 +16,7 @@ interface Validator<T> {
     (data: any): T;
 }
 
-/** @todo: would it be good to freeze he instnace? */
+/** @todo: would it be good to freeze the instance? */
 function factory<T>(reference: firebase.database.Reference, validator: (ddata: any) => T): Model<T> {
     return {
         get id(): string {
