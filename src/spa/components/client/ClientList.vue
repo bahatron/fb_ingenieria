@@ -1,15 +1,15 @@
 <template>
-  <v-data-table :headers="headers" :items="clients" :search="search">
+  <v-data-table :headers="headers" :items="clients" :search="search" item-key="id">
     <template slot="items" slot-scope="props">
-      <td>{{ props.item }}</td>
+      <td>{{ props.item.name }}</td>
 
       <td>
-        <v-icon v-if="props.item.data.visible" color="green">done</v-icon>
+        <v-icon v-if="props.item.visible" color="green">done</v-icon>
         <v-icon v-else color="red">clear</v-icon>
       </td>
 
       <td>
-        <a target="_blank" :href="props.item.data.website">{{ props.item.website }}</a>
+        <a target="_blank" :href="props.item.website">{{ props.item.website }}</a>
       </td>
 
       <td>

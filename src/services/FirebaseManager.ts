@@ -10,6 +10,7 @@ export interface Model<T> {
     data(): Promise<T>;
     update(data: T): Promise<T>;
     on(condition: firebase.database.EventType, callback: (data: T) => void): void;
+    delete(): Promise<void>;
 }
 
 interface Validator<T> {
@@ -34,11 +35,15 @@ function factory<T>(reference: firebase.database.Reference, validator: (ddata: a
             return reference.update(validator(data));
         },
 
+        async delete(): Promise<void> {
+            await reference.remove();
+        },
+
         on(condition: firebase.database.EventType, callback: (data: T) => void): void {
             reference.on(condition, snapshot => {
                 if (snapshot) {
                     /** @todo: create unit test for revealing the behaviour difference of this */
-                    // callback(snpashot.val());
+                    // callback(snapshot.val());
                     callback.call(this, snapshot.val());
                 }
             });

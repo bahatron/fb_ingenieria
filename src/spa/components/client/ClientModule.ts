@@ -1,15 +1,27 @@
 import { Store, Module, GetterTree, MutationTree, ActionTree, ActionContext } from "vuex";
 import Vue from "vue";
 
-import $client, { ClientData } from "../../../domain/client";
-
-interface Client {
+import $client, { ClientData, Client } from "../../../domain/client";
+interface ClientRef {
     id: string;
+    data: ClientData;
+    client: Client;
+}
+
+interface addClientPayload {
+    client: Client;
     data: ClientData;
 }
 export interface ClientSate {
     clients: {
-        [id: string]: Client;
+        [id: string]: ClientRef;
+    };
+}
+
+function mapClientData(record: ClientRef) {
+    return {
+        id: record.id,
+        ...record.data,
     };
 }
 
@@ -20,45 +32,64 @@ const $clientModule: Module<ClientSate, any> = {
     },
 
     getters: <GetterTree<ClientSate, any>>{
-        all: state => Object.values(state.clients),
-        get: state => (id: string) => state.clients[id],
+        all: state => Object.values(state.clients).map(mapClientData),
+
+        id: state => (id: string) => mapClientData(state.clients[id]),
+
+        client: state => (id: string) => state.clients[id].client,
     },
 
     mutations: <MutationTree<ClientSate>>{
-        addClient(state, client: Client) {
-            Vue.set(state.clients, client.id, client);
+        addClient(state, { client, data }: addClientPayload) {
+            Vue.set(state.clients, client.id, { id: client.id, client, data });
         },
-        removeClient(state, { id }) {
+
+        removeClient(state, { id }: { id: string }) {
             Vue.delete(state.clients, id);
         },
     },
 
     actions: <ActionTree<ClientSate, any>>{
-        async create(context, data): Promise<void> {
-            const client = await $client.create({ data });
+        async create(context, payload): Promise<void> {
+            const client = await $client.create({ data: payload });
 
+            const data = await client.data();
+
+            context.commit("addClient", { client, data });
+        },
+
+        async update(context, data): Promise<void> {
+            const client = context.getters.client(data.id);
+
+            await client.update(data);
+
+            /** @todo: find out why the on condition is not triggering the mutations */
             const clientData = await client.data();
 
-            context.commit("addClient", { id: client.id, data: clientData });
+            context.commit("addClient", { client, data: clientData });
         },
 
         async delete(context, id): Promise<void> {
-            /** @todo */
+            const client = context.getters.client(id);
+
+            /** @todo: use error module */
+            if (!client) {
+                throw new Error(`Client ${id} not found in store`);
+            }
+
+            await client.delete();
+
+            context.commit("removeClient", { id: client.id });
         },
 
         async load(context): Promise<void> {
             const clients = await $client.all();
 
-            await Promise.all(
-                clients.map(async client => {
-                    client.on("value", (data: ClientData) => {
-                        context.commit("addClient", {
-                            id: client.id,
-                            data,
-                        });
-                    });
-                }),
-            );
+            clients.forEach(client => {
+                client.on("value", (data: ClientData) => {
+                    context.commit("addClient", { client, data });
+                });
+            });
         },
     },
 };

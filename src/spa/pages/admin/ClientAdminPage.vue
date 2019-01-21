@@ -60,10 +60,11 @@ export default Vue.extend({
     },
 
     methods: {
-        async persist(clientData: any) {
+        async persist(data: any) {
             try {
-                console.log("clientDasnapshot.val()ta", clientData);
-                await this.$store.dispatch("clients/create", clientData);
+                const action = data.id ? "update" : "create";
+
+                await this.$store.dispatch(`clients/${action}`, data);
             } catch (err) {
                 alert(err.message);
                 console.log(err.stack);
@@ -80,7 +81,7 @@ export default Vue.extend({
 
         async edit(id: string) {
             try {
-                this.client = this.$store.getters["clients/get"](id);
+                this.client = this.$store.getters["clients/id"](id);
                 this.dialog = true;
             } catch (err) {
                 alert(err.message);
@@ -89,7 +90,9 @@ export default Vue.extend({
         },
 
         async remove(id: string) {
-            const client = this.$store.getters["clients/get"](id);
+            const client = this.$store.getters["clients/id"](id);
+
+            /** @todo: refactor into proper dialog */
             if (confirm(`Esta seguro de que quiere eliminar al cliente: ${client.name}`)) {
                 try {
                     await this.$store.dispatch("clients/delete", id);
