@@ -14,7 +14,7 @@ module.exports = {
         "no-param-reassign": ["error", { props: false }],
         "import/prefer-default-export": "off",
         quotes: ["warn", "double"],
-        "max-len": ["warn", 120],
+        "max-len": ["warn", 100],
         "no-restricted-globals": ["off"]
     },
     parserOptions: {

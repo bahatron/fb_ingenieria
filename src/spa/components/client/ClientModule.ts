@@ -1,18 +1,12 @@
-import { Store, Module, GetterTree, MutationTree, ActionTree, ActionContext } from "vuex";
 import Vue from "vue";
-
+import { Module, GetterTree, MutationTree, ActionTree } from "vuex";
 import $client, { ClientData, Client } from "../../../domain/client";
 interface ClientRef {
     id: string;
     data: ClientData;
     client: Client;
 }
-
-interface addClientPayload {
-    client: Client;
-    data: ClientData;
-}
-export interface ClientSate {
+interface ClientSate {
     clients: {
         [id: string]: ClientRef;
     };
@@ -27,20 +21,21 @@ function mapClientData(record: ClientRef) {
 
 const $clientModule: Module<ClientSate, any> = {
     namespaced: true,
-    state: {
+
+    state: <ClientSate>{
         clients: {},
     },
 
     getters: <GetterTree<ClientSate, any>>{
-        all: state => Object.values(state.clients).map(mapClientData),
-
         id: state => (id: string) => mapClientData(state.clients[id]),
 
-        client: state => (id: string) => state.clients[id].client,
+        all: state => Object.values(state.clients).map(mapClientData),
+
+        ref: state => (id: string) => state.clients[id].client,
     },
 
     mutations: <MutationTree<ClientSate>>{
-        addClient(state, { client, data }: addClientPayload) {
+        addClient(state, { client, data }: { client: Client; data: ClientData }) {
             Vue.set(state.clients, client.id, { id: client.id, client, data });
         },
 
@@ -51,7 +46,7 @@ const $clientModule: Module<ClientSate, any> = {
 
     actions: <ActionTree<ClientSate, any>>{
         async create(context, payload): Promise<void> {
-            const client = await $client.create({ data: payload });
+            const client = await $client.manager.create({ data: payload });
 
             const data = await client.data();
 
@@ -59,23 +54,17 @@ const $clientModule: Module<ClientSate, any> = {
         },
 
         async update(context, data): Promise<void> {
-            const client = context.getters.client(data.id);
+            const client = context.getters.ref(data.id);
 
             await client.update(data);
 
-            /** @todo: find out why the on condition is not triggering the mutations */
             const clientData = await client.data();
 
             context.commit("addClient", { client, data: clientData });
         },
 
         async delete(context, id): Promise<void> {
-            const client = context.getters.client(id);
-
-            /** @todo: use error module */
-            if (!client) {
-                throw new Error(`Client ${id} not found in store`);
-            }
+            const client = context.getters.ref(id);
 
             await client.delete();
 
@@ -83,7 +72,7 @@ const $clientModule: Module<ClientSate, any> = {
         },
 
         async load(context): Promise<void> {
-            const clients = await $client.all();
+            const clients = await $client.manager.all();
 
             clients.forEach(client => {
                 client.on("value", (data: ClientData) => {

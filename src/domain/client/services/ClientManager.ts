@@ -5,7 +5,7 @@ import $firebaseManager from "../../../services/FirebaseManager";
 const PATH = "/clients";
 
 /** @todo: refactor this to use an external validator service */
-function validate(data: any): ClientData {
+function validator(data: any): ClientData {
     const {
         name, website, description, visible, image,
     } = data;
@@ -29,14 +29,14 @@ const $clientManager = Object.freeze({
             data,
             path: PATH,
             id,
-            validator: validate,
+            validator,
         });
     },
 
     async all(): Promise<Client[]> {
         return await $firebaseManager.fetch<ClientData>({
             path: PATH,
-            validator: validate,
+            validator,
         });
     },
 });

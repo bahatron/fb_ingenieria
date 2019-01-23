@@ -12,8 +12,7 @@ export interface ClientData {
 export type Client = Model<ClientData>;
 
 const $client = {
-    create: $clientManager.create,
-    all: $clientManager.all,
+    manager: $clientManager
 };
 
 export default $client;

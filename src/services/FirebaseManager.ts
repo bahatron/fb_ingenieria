@@ -9,7 +9,7 @@ export interface Model<T> {
     id: string;
     data(): Promise<T>;
     update(data: T): Promise<T>;
-    on(condition: firebase.database.EventType, callback: (data: T) => void): void;
+    on(condition: string, callback: (data: T) => void): void;
     delete(): Promise<void>;
 }
 
@@ -18,7 +18,7 @@ interface Validator<T> {
 }
 
 /** @todo: would it be good to freeze the instance? */
-function factory<T>(reference: firebase.database.Reference, validator: (ddata: any) => T): Model<T> {
+function factory<T>(reference: firebase.database.Reference, validator: Validator<T>): Model<T> {
     return {
         get id(): string {
             return <string>reference.key;
@@ -72,7 +72,13 @@ const $firebaseManager = {
         return factory(reference, validator);
     },
 
-    async fetch<T>({ path, validator }: { path: string; validator: Validator<T> }): Promise<Model<T>[]> {
+    async fetch<T>({
+        path,
+        validator,
+    }: {
+        path: string;
+        validator: Validator<T>;
+    }): Promise<Model<T>[]> {
         const data = await $db
             .ref(path)
             .orderByKey()

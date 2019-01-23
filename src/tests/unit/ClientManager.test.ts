@@ -5,7 +5,7 @@ import { expect } from "chai";
 import $clientManager from "../../domain/client/services/ClientManager";
 
 describe("Client manager", () => {
-    it("can persist clients", async () => {
+    it("can create clients", async () => {
         const dummy = {
             name: "test_name",
             visible: false,

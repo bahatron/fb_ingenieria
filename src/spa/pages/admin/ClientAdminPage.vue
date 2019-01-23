@@ -20,9 +20,9 @@
 
           <ClientList
             :clients="clients"
-            @edit="edit($event)"
+            @edit="openDialogWithClient($event)"
             @remove="remove($event)"
-            @create="create()"
+            @create="openEmptyDialog()"
             :search="search"
           />
         </v-card>
@@ -30,7 +30,7 @@
     </v-layout>
 
     <v-dialog v-model="dialog" max-width="50%">
-      <clientCard :client="client" @persist="persist($event)"/>
+      <clientCard :client="client" @persist="updateOrCreateClient($event)"/>
     </v-dialog>
   </v-container>
 </template>
@@ -60,32 +60,25 @@ export default Vue.extend({
     },
 
     methods: {
-        async persist(data: any) {
-            try {
-                const action = data.id ? "update" : "create";
-
-                await this.$store.dispatch(`clients/${action}`, data);
-            } catch (err) {
-                alert(err.message);
-                console.log(err.stack);
-            } finally {
-                this.dialog = false;
-            }
-        },
-
-        create() {
-            // reset client
+        openEmptyDialog() {
             this.client = {};
             this.dialog = true;
         },
 
-        async edit(id: string) {
+        openDialogWithClient(id: string) {
+            this.client = this.$store.getters["clients/id"](id);
+            this.dialog = true;
+        },
+
+        async updateOrCreateClient(payload: any) {
             try {
-                this.client = this.$store.getters["clients/id"](id);
-                this.dialog = true;
+                const action = payload.id ? "update" : "create";
+
+                await this.$store.dispatch(`clients/${action}`, payload);
             } catch (err) {
-                alert(err.message);
-                console.log(err);
+                throw err;
+            } finally {
+                this.dialog = false;
             }
         },
 
@@ -93,13 +86,14 @@ export default Vue.extend({
             const client = this.$store.getters["clients/id"](id);
 
             /** @todo: refactor into proper dialog */
-            if (confirm(`Esta seguro de que quiere eliminar al cliente: ${client.name}`)) {
-                try {
-                    await this.$store.dispatch("clients/delete", id);
-                    alert("done");
-                } catch (err) {
-                    alert(`Error: ${err.message}`);
-                }
+            if (!confirm(`Esta seguro de que quiere eliminar al cliente: ${client.name}`)) {
+                return;
+            }
+
+            try {
+                await this.$store.dispatch("clients/delete", id);
+            } catch (err) {
+                throw err;
             }
         },
     },
