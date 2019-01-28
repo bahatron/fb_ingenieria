@@ -12,22 +12,14 @@ function setupTestEnv(): void {
     Object.keys(env).forEach((key) => {
         process.env[key] = env[key];
     });
-
-    console.log("test environment configured!");
 }
 
 function closeDatabaseConnection() {
-    console.log("closing firebase connection..");
-
     $firebase.database().goOffline();
-
-    console.log("connection to firebase closed!");
 }
 
 before(() => {
     setupTestEnv();
-
-    console.log("global before hook complete! \n");
 });
 
 after(() => {
