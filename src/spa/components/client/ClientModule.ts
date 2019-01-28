@@ -46,7 +46,7 @@ const $clientModule: Module<ClientSate, any> = {
 
     actions: <ActionTree<ClientSate, any>>{
         async create(context, payload): Promise<void> {
-            const client = await $client.manager.create({ data: payload });
+            const client = await $client.create({ data: payload });
 
             const data = await client.data();
 
@@ -72,7 +72,7 @@ const $clientModule: Module<ClientSate, any> = {
         },
 
         async load(context): Promise<void> {
-            const clients = await $client.manager.all();
+            const clients = await $client.all();
 
             clients.forEach(client => {
                 client.on("value", (data: ClientData) => {
