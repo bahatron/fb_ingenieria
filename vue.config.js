@@ -10,7 +10,10 @@ module.exports = {
             .options({ modules: true });
     },
 
+    baseUrl: "./",
+
     configureWebpack: {
+        entry: "./js/spa/main.js",
         entry: "./src/spa/main.ts",
         resolve: {
             alias: {
