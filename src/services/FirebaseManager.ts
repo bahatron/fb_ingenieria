@@ -8,7 +8,7 @@ export interface Model<T> {
     id: string;
     data(): Promise<T>;
     update(data: T): Promise<T>;
-    on(condition: string, callback: (data: T) => void): void;
+    on(condition: firebase.database.EventType, callback: (data: T) => void): void;
     delete(): Promise<void>;
 }
 
@@ -39,8 +39,8 @@ function factory<T>({ reference, validator }: FactoryInterface<T>): Model<T> {
             await reference.remove();
         },
 
-        on(condition: firebase.database.EventType, callback: (data: T) => void): void {
-            reference.on(condition, snapshot => {
+        on(condition: string, callback: (data: T) => void): void {
+            reference.on(<firebase.database.EventType>condition, snapshot => {
                 if (snapshot) {
                     /** @todo: create unit test for revealing the behaviour difference of this */
                     // callback(snapshot.val());

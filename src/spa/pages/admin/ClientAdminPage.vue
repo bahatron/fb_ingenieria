@@ -4,7 +4,7 @@
       <v-flex xs12>
         <v-card>
           <v-card-title>
-            <v-btn color="primary" @click="create()">Agregar</v-btn>
+            <v-btn color="primary" @click="openEmptyDialog()">Agregar</v-btn>
 
             <v-spacer></v-spacer>
 
@@ -18,6 +18,7 @@
             ></v-text-field>
           </v-card-title>
 
+          <!-- create generalized list component -->
           <ClientList
             :clients="clients"
             @edit="openDialogWithClient($event)"

@@ -12,7 +12,7 @@
           class="primary"
           @click="persist()"
           :disabled="!valid"
-        >{{client.id ? 'update' : 'create'}}</v-btn>
+        >{{client.id ? 'actualizar' : 'crear'}}</v-btn>
       </v-layout>
     </v-card-actions>
   </v-card>

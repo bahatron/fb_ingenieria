@@ -1,7 +1,8 @@
-import $errorHandler from "./ErrorHandler";
+import "../../adapters/sentry";
+
 import $errorFactory from "./ErrorFactory";
 
-export interface AppError {
+export interface Exception {
     type: string;
     statusCode: number;
     message: any;
@@ -9,7 +10,6 @@ export interface AppError {
 }
 
 const $error = {
-    handle: $errorHandler.handle,
     ...$errorFactory,
 };
 

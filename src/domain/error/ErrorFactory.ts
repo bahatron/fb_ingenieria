@@ -1,10 +1,6 @@
-import { AppError } from ".";
+import { Exception } from ".";
 
-const $proto = {};
-
-Object.setPrototypeOf($proto, Error.prototype);
-
-function createError(type: string, statusCode: number, message: any): AppError {
+function factory(type: string, statusCode: number, message: any): Exception {
     const error = Object.assign(new Error(), {
         name: type,
         type,
@@ -12,18 +8,16 @@ function createError(type: string, statusCode: number, message: any): AppError {
         message,
     });
 
-    Object.setPrototypeOf(error, $proto);
-
     return error;
 }
 
 const $errorFactory = {
-    isError(err: any): boolean {
-        return Object.getPrototypeOf(err) === $proto;
+    ValidationFailed(message: string): Exception {
+        return factory("ValidationFailed", 400, message);
     },
 
-    ValidationException(message: string): AppError {
-        return createError("ValidationException", 400, message);
+    NotFound(message: string): Exception {
+        return factory("NotFound", 404, message);
     },
 };
 

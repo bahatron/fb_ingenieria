@@ -2,16 +2,10 @@ import "dotenv/config";
 import { expect } from "chai";
 import $errorFactory from "../../domain/error/ErrorFactory";
 
-const func = $errorFactory.isError;
-$errorFactory.isError = function (err: any) {
-    expect(true).to.be.true;
-    return func(err);
-};
-
 describe("ErrorFactory", () => {
-    it("will check if error is own", () => {
-        const error = $errorFactory.ValidationException("message");
+    it("can create validation error", () => {
+        const error = $errorFactory.ValidationFailed("message");
 
-        expect($errorFactory.isError(error)).to.be.true;
+        expect(error instanceof Error).to.be.true;
     });
 });

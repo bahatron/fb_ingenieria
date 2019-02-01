@@ -2,7 +2,7 @@ import Vue from "vue";
 import Vuex from "vuex";
 import $loginModule from "./components/auth/LoginModule";
 import $layoutModule from "./components/layout/LayoutModule";
-import $clientModule from '../domain/client/vue/ClientModule';
+import $clientModule from "../domain/client/vue/ClientModule";
 
 Vue.use(Vuex);
 export default new Vuex.Store<any>({

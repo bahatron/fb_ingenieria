@@ -1,4 +1,4 @@
-import { Client, ClientData } from "..";
+import { ClientData, Client } from "..";
 import $error from "../../error";
 import $firebaseManager from "../../../services/FirebaseManager";
 
@@ -11,7 +11,7 @@ function validator(data: any): ClientData {
     } = data;
 
     if (!name || typeof visible !== "boolean") {
-        throw $error.ValidationException("'name' and 'visible' are required");
+        throw $error.ValidationFailed("'name' and 'visible' are required");
     }
 
     return {
@@ -25,7 +25,7 @@ function validator(data: any): ClientData {
 
 const $clientManager = Object.freeze({
     async create({ data, id }: { data: any; id?: string }): Promise<Client> {
-        return $firebaseManager.persist({
+        return $firebaseManager.persist<ClientData>({
             data,
             path: PATH,
             id,
