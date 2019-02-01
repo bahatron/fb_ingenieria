@@ -1,3 +1,4 @@
+import $projectManager from "./services/ProjectManager";
 import { Model } from "../../services/FirebaseManager";
 
 export interface ProjectData {
@@ -12,3 +13,10 @@ export interface ProjectData {
 }
 
 export type Project = Model<ProjectData>;
+
+const $project = {
+    create: $projectManager.create,
+    all: $projectManager.all,
+};
+
+export default $project;
