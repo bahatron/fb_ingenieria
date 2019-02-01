@@ -41,7 +41,7 @@ describe("firebase manager", () => {
 
             const model = await createModel(data);
 
-            /** NOTE: if we remove the await from the update, the test will still work, but won't do the assertion */
+            /** NOTE: if we remove the await from the update, the test will pass, but won't do the assertion */
             model.on("value", (value: any) => {
                 expect(value).to.deep.equal({ ...data, ...newData });
             });

@@ -10,10 +10,10 @@ import "./assets/styles/bootstrap.css";
 import "./assets/styles/hestia.css";
 import "./assets/styles/styles.css";
 
-import $firebase from "../adapters/firebase";
+import $firebase from "../../adapters/firebase";
 
 /** @todo: why is ESlint giving an error here? */
-import $firebaseManager, { Model } from "../services/FirebaseManager";
+import $firebaseManager, { Model } from "../../services/FirebaseManager";
 
 const $db = $firebase.database();
 

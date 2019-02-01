@@ -37,8 +37,8 @@
 
 <script lang="ts">
 import Vue from "vue";
-import ClientCard from "../../components/client/ClientCard.vue";
-import ClientList from "../../components/client/ClientList.vue";
+import ClientCard from "../../../domain/client/vue/ClientCard.vue";
+import ClientList from "../../../domain/client/vue/ClientList.vue";
 
 export default Vue.extend({
     data() {

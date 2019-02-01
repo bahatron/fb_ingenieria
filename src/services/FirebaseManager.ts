@@ -26,13 +26,12 @@ function factory<T>({ reference, validator }: FactoryInterface<T>): Model<T> {
         },
 
         async data(): Promise<T> {
-            const data: any = await reference.once("value");
+            const snapshot = await reference.once("value");
 
-            return <T>data.val();
+            return <T>snapshot.val();
         },
 
         async update(data: T): Promise<T> {
-            /** @todo: convert this into a pipe */
             return reference.update(validator(data));
         },
 
