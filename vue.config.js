@@ -1,3 +1,5 @@
+const path = require("path");
+
 module.exports = {
     chainWebpack: (config) => {
         config.module
@@ -10,6 +12,11 @@ module.exports = {
 
     configureWebpack: {
         entry: "./src/spa/main.ts",
+        resolve: {
+            alias: {
+                "@@": path.resolve(__dirname, "src/domain/"),
+            },
+        },
     },
 
     assetsDir: "./src/spa/assets",

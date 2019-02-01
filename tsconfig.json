@@ -3,7 +3,6 @@
         "target": "esnext",
         "module": "esnext",
         "strict": true,
-        "jsx": "preserve",
         "importHelpers": true,
         "moduleResolution": "node",
         "esModuleInterop": true,
@@ -12,6 +11,10 @@
         "types": ["webpack-env", "mocha", "chai"],
         "lib": ["esnext", "dom", "dom.iterable", "scripthost"],
         "outDir": "./js",
+        "baseUrl": "./src",
+        "paths": {
+            "@@/*": ["domain/*"]
+        },
         "noImplicitAny": true,
         "noImplicitReturns": true,
         "noImplicitThis": true,
