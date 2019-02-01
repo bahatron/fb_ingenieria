@@ -49,7 +49,7 @@ function validator(data: any): ProjectData {
 
 const $projectManager = {
     async create({ data, id }: { data: any; id?: string }): Promise<Project> {
-        return $firebaseManager.persist({
+        return $firebaseManager.persist<ProjectData>({
             data,
             path: PATH,
             validator,
@@ -58,7 +58,7 @@ const $projectManager = {
     },
 
     async all(): Promise<Project[]> {
-        return $firebaseManager.fetch({ path: PATH, validator });
+        return $firebaseManager.fetch<ProjectData>({ path: PATH, validator });
     },
 };
 
