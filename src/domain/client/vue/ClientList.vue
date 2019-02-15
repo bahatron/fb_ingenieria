@@ -1,5 +1,5 @@
 <template>
-  <v-data-table :headers="headers" :items="clients" :search="search" item-key="id">
+  <v-data-table :headers="headers" :items="clients" :search="search" item-key="id" :hide-actions="true">
     <template slot="items" slot-scope="props">
       <td>{{ props.item.name }}</td>
 
