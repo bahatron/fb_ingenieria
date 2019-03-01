@@ -24,13 +24,14 @@ describe("Client manager", () => {
     });
 
     it("can fetch all clients", async () => {
-        const clients = await $clientManager.all();
         const clientInstance = await $clientManager.create({ data: DUMMY_DATA });
+
+        const clients = await $clientManager.all();
 
         expect(Array.isArray(clients)).to.be.true;
 
         clients.forEach((client) => {
-            expect(client).to.be.instanceOf(clientInstance);
+            expect(Object.getPrototypeOf(client)).to.equal(Object.getPrototypeOf(clientInstance));
         });
     });
 });
