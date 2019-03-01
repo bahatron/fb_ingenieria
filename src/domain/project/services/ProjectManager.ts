@@ -1,4 +1,4 @@
-import $firebaseManager, { Model } from "../../../services/FirebaseManager";
+import $database, { Model } from "../../../services/Database";
 import $error from "../../error";
 import { ProjectData, Project } from "../ProjectFacade";
 
@@ -49,7 +49,7 @@ function validator(data: any): ProjectData {
 
 const $projectManager = {
     async create({ data, id }: { data: any; id?: string }): Promise<Project> {
-        return $firebaseManager.persist<ProjectData>({
+        return $database.persist<ProjectData>({
             data,
             path: PATH,
             validator,
@@ -58,7 +58,7 @@ const $projectManager = {
     },
 
     async all(): Promise<Project[]> {
-        return $firebaseManager.fetch<ProjectData>({ path: PATH, validator });
+        return $database.fetch<ProjectData>({ path: PATH, validator });
     },
 };
 

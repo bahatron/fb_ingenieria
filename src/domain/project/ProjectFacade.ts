@@ -1,5 +1,5 @@
 import $projectManager from "./services/ProjectManager";
-import { Model } from "../../services/FirebaseManager";
+import { Model } from "../../services/Database";
 
 export interface ProjectData {
     name: string;

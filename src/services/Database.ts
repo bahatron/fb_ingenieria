@@ -95,9 +95,9 @@ async function fetch<T>({ path, validator }: FetchInterface<T>): Promise<Model<T
     return collection;
 }
 
-const $firebaseManager = {
+const $database = {
     persist,
     fetch,
 };
 
-export default $firebaseManager;
+export default $database;

@@ -1,5 +1,5 @@
 import $clientManager from "./services/ClientManager";
-import { Model } from "../../services/FirebaseManager";
+import { Model } from "../../services/Database";
 
 export interface ClientData {
     name: string;

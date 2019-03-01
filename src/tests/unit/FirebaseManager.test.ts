@@ -1,13 +1,13 @@
 import "dotenv/config";
 import { expect } from "chai";
-import $firebaseManager from "../../services/FirebaseManager";
+import $database from "../../services/Database";
 
 function validator(data: any): any {
     return data;
 }
 
 async function createModel(data: any) {
-    return $firebaseManager.persist({
+    return $database.persist({
         path: "test",
         id: "testy",
         data,

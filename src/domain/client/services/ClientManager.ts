@@ -1,6 +1,6 @@
 import { ClientData, Client } from "..";
 import $error from "../../error";
-import $firebaseManager from "../../../services/FirebaseManager";
+import $database from "../../../services/Database";
 
 const PATH = "/clients";
 
@@ -25,7 +25,7 @@ function validator(data: any): ClientData {
 
 const $clientManager = Object.freeze({
     async create({ data, id }: { data: any; id?: string }): Promise<Client> {
-        return $firebaseManager.persist<ClientData>({
+        return $database.persist<ClientData>({
             data,
             path: PATH,
             id,
@@ -34,7 +34,7 @@ const $clientManager = Object.freeze({
     },
 
     async all(): Promise<Client[]> {
-        return await $firebaseManager.fetch<ClientData>({
+        return await $database.fetch<ClientData>({
             path: PATH,
             validator,
         });
