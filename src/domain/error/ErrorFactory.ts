@@ -12,11 +12,11 @@ function factory(type: string, statusCode: number, message: any): Exception {
 }
 
 const $errorFactory = {
-    ValidationFailed(message: string): Exception {
+    ValidationFailed(message = "Validation failed"): Exception {
         return factory("ValidationFailed", 400, message);
     },
 
-    NotFound(message: string): Exception {
+    NotFound(message = "Not found"): Exception {
         return factory("NotFound", 404, message);
     },
 };
