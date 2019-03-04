@@ -4,18 +4,17 @@ import $database from "../../../services/Database";
 
 const PATH = "/clients";
 
-/** @todo: improve validations */
+/** @todo: refactor this to use an external validator service */
 function validator(data: any): ClientData {
     const {
-        name, website, description, visible, image, id,
+        name, website, description, visible, image,
     } = data;
 
-    if (!name || typeof visible !== "boolean" || !id) {
+    if (!name || typeof visible !== "boolean") {
         throw $error.ValidationFailed("'name' and 'visible' are required");
     }
 
     return {
-        id,
         name,
         image: image || null,
         website: website || null,
