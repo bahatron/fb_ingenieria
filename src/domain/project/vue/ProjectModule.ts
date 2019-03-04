@@ -5,10 +5,15 @@ import $error from "../../error";
 
 const PROJECT_REF: { [id: string]: Project } = {};
 
-async function mapProject({ project, commit }: { project: Project; commit: Commit }) {
+interface mapProject {
+    project: Project;
+    commit: Commit;
+}
+
+async function mapProject({ project, commit }: mapProject): Promise<void> {
     PROJECT_REF[project.id] = project;
 
-    project.on("value", (data) => {
+    project.on("value", data => {
         commit("add", { id: project.id, data });
     });
 
@@ -21,10 +26,19 @@ interface ProjectRecord extends ProjectData {
     id: string;
 }
 
-const $projectModule: Module<any, any> = {
+interface ProjectState {
+    projects: {
+        // [id: string]: {
+        //     id: string & ProjectData;
+        // };
+        [id: string]: ProjectRecord;
+    };
+}
+
+const $projectModule: Module<ProjectState, any> = {
     namespaced: true,
 
-    state: {
+    state: <ProjectState>{
         projects: {},
     },
 
@@ -60,7 +74,7 @@ const $projectModule: Module<any, any> = {
             const model = PROJECT_REF[project.id];
 
             if (!model) {
-                throw $error.NotFound(`${project.id}`);
+                throw $error.NotFound(`Project ID: ${project.id} not found`);
             }
 
             // this should trigger the registered callback on value

@@ -7,6 +7,7 @@ const VALID_COUNTRIES = ["panama", "venezuela"];
 const VALID_TYPES = ["shop", "restaurant", "office", "public", "private"];
 const VALID_AREAS = ["industrial", "commercial", "institutional", "residential"];
 
+/** @todo improve validation */
 function validator(data: any): ProjectData {
     const {
         clientId,
@@ -47,8 +48,13 @@ function validator(data: any): ProjectData {
     };
 }
 
+interface create {
+    data: any;
+    id?: string;
+}
+
 const $projectManager = {
-    async create({ data, id }: { data: any; id?: string }): Promise<Project> {
+    async create({ data, id }: create): Promise<Project> {
         return $database.persist<ProjectData>({
             data,
             path: PATH,

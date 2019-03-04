@@ -1,5 +1,5 @@
 import $errorFactory from "./ErrorFactory";
-import $errorHandler from "./ErrorHandler";
+import "../../adapters/sentry"; // error handler
 
 export interface Exception {
     statusCode: number;
@@ -9,7 +9,6 @@ export interface Exception {
 
 const $error = {
     ...$errorFactory,
-    handle: $errorHandler.handle,
 };
 
 export default $error;
