@@ -1,21 +1,13 @@
 import Vue from "vue";
 import { Module, GetterTree, MutationTree, ActionTree } from "vuex";
 import $client, { ClientData, Client } from "../../../domain/client";
-interface ClientRef {
-    id: string;
-    data: ClientData;
-    client: Client;
-}
+
 interface ClientSate {
     clients: {
-        [id: string]: ClientRef;
-    };
-}
-
-function mapClientData(record: ClientRef) {
-    return {
-        id: record.id,
-        ...record.data,
+        [id: string]: {
+            data: ClientData;
+            ref: Client;
+        };
     };
 }
 
@@ -27,16 +19,14 @@ const $clientModule: Module<ClientSate, any> = {
     },
 
     getters: <GetterTree<ClientSate, any>>{
-        id: state => (id: string) => mapClientData(state.clients[id]),
+        id: state => (id: string) => state.clients[id].data,
 
-        all: state => Object.values(state.clients).map(mapClientData),
-
-        ref: state => (id: string) => state.clients[id].client,
+        all: state => Object.values(state.clients),
     },
 
     mutations: <MutationTree<ClientSate>>{
         addClient(state, { client, data }: { client: Client; data: ClientData }) {
-            Vue.set(state.clients, client.id, { id: client.id, client, data });
+            Vue.set(state.clients, client.id, { client, data });
         },
 
         removeClient(state, { id }: { id: string }) {
@@ -54,7 +44,8 @@ const $clientModule: Module<ClientSate, any> = {
         },
 
         async update(context, data): Promise<void> {
-            const client = context.getters.ref(data.id);
+            // @todo: validate!!
+            const client = context.state.clients[data.id].ref;
 
             await client.update(data);
 
@@ -64,7 +55,8 @@ const $clientModule: Module<ClientSate, any> = {
         },
 
         async delete(context, id): Promise<void> {
-            const client = context.getters.ref(id);
+            // @todo: validate!!
+            const client = context.state.clients[id].ref;
 
             await client.delete();
 

@@ -2,6 +2,7 @@ import $clientManager from "./services/ClientManager";
 import { Model } from "../../services/Database";
 
 export interface ClientData {
+    id: string;
     name: string;
     image?: string;
     website?: string;

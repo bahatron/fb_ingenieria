@@ -1,8 +1,9 @@
 version: "3.5"
 
 services:
-    firebase:
-        container_name: fb_ingenieria_firebase
+    app:
+        container_name: fb_ingenieria
+        image: fb_ingenieria
         build: .
         user: node
         command: sh -c '${DEPLOY_CMD}'
