@@ -10,17 +10,19 @@ function validator(data: any): ClientData {
         name, website, description, visible, image,
     } = data;
 
-    if (!name || typeof visible !== "boolean") {
+    if (!name) {
         throw $error.ValidationFailed("'name' and 'visible' are required");
     }
 
-    return {
+    const client = {
         name,
         image: image || null,
         website: website || null,
         description: description || null,
         visible,
     };
+
+    return client;
 }
 
 const $clientManager = Object.freeze({

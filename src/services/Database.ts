@@ -62,7 +62,7 @@ async function persist<T>({ data, path, id, validator }: PersistInterface<T>): P
 
     const reference = $db.ref(`${path}/${key}`);
 
-    await reference.set(data);
+    await reference.set(validator(data));
 
     return factory({
         reference,

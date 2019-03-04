@@ -6,6 +6,7 @@
         "dev": "vue-cli-service serve",
         "build": "vue-cli-service build",
         "mocha-ts": "cross-env TS_NODE_COMPILER_OPTIONS={\\\"module\\\":\\\"commonjs\\\"} mocha -r ts-node/register src/tests/unit/*.ts --recursive",
+        "test": "npm run mocha-ts",
         "lint": "vue-cli-service lint"
     },
     "dependencies": {

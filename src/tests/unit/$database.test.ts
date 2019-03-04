@@ -15,7 +15,7 @@ async function createModel(data: any) {
     });
 }
 
-describe("firebase manager", () => {
+describe("Database", () => {
     describe("data model", () => {
         it("can retrieved stored data", async () => {
             const data = {
