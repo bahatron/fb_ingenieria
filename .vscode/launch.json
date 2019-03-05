@@ -10,14 +10,11 @@
             "name": "TS Mocha Current File",
             "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
             "args": [
-                "TS_NODE_COMPILER_OPTIONS",
-                "'{\"module\":\"commonjs\"}'",
                 "--colors",
                 "-r",
                 "ts-node/register",
                 "${file}"
             ],
-            "console": "integratedTerminal",
             "internalConsoleOptions": "neverOpen"
         }
     ]

@@ -1,6 +1,6 @@
 import "dotenv/config";
 import { expect } from "chai";
-import $database from "../../services/Database";
+import $database from "../../../services/Database";
 
 function validator(data: any): any {
     return data;

@@ -5,13 +5,11 @@
     "scripts": {
         "dev": "vue-cli-service serve",
         "build": "vue-cli-service build",
-        "mocha-ts": "cross-env TS_NODE_COMPILER_OPTIONS={\\\"module\\\":\\\"commonjs\\\"} mocha -r ts-node/register src/tests/unit/*.ts --recursive",
-        "test": "npm run mocha-ts",
+        "test": "ts-node src/tests/",
         "lint": "vue-cli-service lint"
     },
     "dependencies": {
         "@sentry/browser": "^4.4.2",
-        "cross-env": "^5.2.0",
         "cucumber": "^5.0.2",
         "dotenv": "^6.1.0",
         "firebase": "^5.7.0",
@@ -19,7 +17,6 @@
         "moment": "^2.22.2",
         "register-service-worker": "^1.0.0",
         "roboto-fontface": "*",
-        "ts-node": "^7.0.1",
         "vue": "^2.5.17",
         "vue-router": "^3.0.1",
         "vuetify": "^1.3.0",

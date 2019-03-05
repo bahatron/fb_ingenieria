@@ -1,15 +1,14 @@
 {
     "compilerOptions": {
         "target": "esnext",
-        "module": "esnext",
+        "module": "commonjs",
         "strict": true,
-        "jsx": "preserve",
         "importHelpers": true,
         "moduleResolution": "node",
         "esModuleInterop": true,
         "allowSyntheticDefaultImports": true,
-        "sourceMap": true,
-        "types": ["webpack-env", "mocha", "chai"],
+        "sourceMap": false,
+        "types": ["webpack-env", "mocha", "chai", "node"],
         "lib": ["esnext", "dom", "dom.iterable", "scripthost"],
         "outDir": "./js",
         "noImplicitAny": true,
