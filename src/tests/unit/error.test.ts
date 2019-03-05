@@ -1,4 +1,3 @@
-import "dotenv/config";
 import { expect } from "chai";
 import $errorFactory from "../../domain/error/ErrorFactory";
 

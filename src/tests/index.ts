@@ -1,6 +1,6 @@
 import "dotenv/config";
 
-import $mocha from "mocha";
+import mocha from "mocha";
 import FS from "fs";
 import PATH from "path";
 
@@ -26,33 +26,31 @@ function loadFolderFilesRecursive(path: string): string[] {
     }, []);
 }
 
-async function loadMochaTests(): Promise<string[]> {
+function loadMochaTests(): string[] {
     const path = PATH.resolve(__dirname, MOCHA_TEST_PATH);
 
     return loadFolderFilesRecursive(path);
 }
 
-async function mochaTests() {
-    const mochaRunner = new $mocha();
+function mochaTests(): Promise<void> {
+    return new Promise((resolve, reject) => {
+        const $mocha = new mocha();
 
-    const mochaTests = await loadMochaTests();
+        const mochaTests = loadMochaTests();
 
-    mochaTests.forEach((testFile) => {
-        mochaRunner.addFile(testFile);
-    });
+        mochaTests.forEach((testFile) => {
+            $mocha.addFile(testFile);
+        });
 
-    mochaRunner.run((failures) => {
-        console.log(`Failures: ${failures}`);
+        $mocha.run(failures => (failures ? reject() : resolve()));
     });
 }
 
 async function main() {
     try {
-        console.log("hello");
         await mochaTests();
         process.exit(0);
     } catch (err) {
-        console.log(`Error: ${err.message}`);
         process.exit(-1);
     }
 }

@@ -1,6 +1,3 @@
-// @TODO: mock database call
-import "./firebase.config"; // workaround for mocha
-
 import { expect } from "chai";
 
 import $client from "../../domain/client";
@@ -16,6 +13,7 @@ const BAD_DATA = {
     website: "https://google.com",
 };
 
+/** @todo: mock database call */
 describe("$client", () => {
     describe("create", () => {
         it("throws an error if the data is incomplete", async () => {

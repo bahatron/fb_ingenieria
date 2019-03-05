@@ -1,4 +1,3 @@
-import "dotenv/config";
 import { expect } from "chai";
 import $database from "../../../services/Database";
 
