@@ -1,7 +1,7 @@
 import Vue from "vue";
 import { Module, Commit } from "vuex";
-import $project, { Project, ProjectData } from "../ProjectFacade";
-import $error from "../../error";
+import $project, { Project, ProjectData } from "../../../domain/project/ProjectFacade";
+import $error from "../../../domain/error";
 
 const PROJECT_REF: { [id: string]: Project } = {};
 

@@ -1,13 +1,13 @@
 import { Exception } from ".";
 
 interface FactoryParameters {
-    statusCode: number;
+    httpCode: number;
     message: string;
 }
 
-function factory({ statusCode, message }: FactoryParameters): Exception {
+function factory({ httpCode, message }: FactoryParameters): Exception {
     const error = Object.assign(new Error(), {
-        statusCode,
+        httpCode,
         message,
     });
 
@@ -16,11 +16,11 @@ function factory({ statusCode, message }: FactoryParameters): Exception {
 
 const $errorFactory = {
     ValidationFailed(message = "Validation failed"): Exception {
-        return factory({ statusCode: 400, message });
+        return factory({ httpCode: 400, message });
     },
 
     NotFound(message = "Not found"): Exception {
-        return factory({ statusCode: 404, message });
+        return factory({ httpCode: 404, message });
     },
 };
 

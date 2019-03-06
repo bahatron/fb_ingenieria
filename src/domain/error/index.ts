@@ -2,7 +2,7 @@ import $errorFactory from "./ErrorFactory";
 import "../../adapters/sentry"; // error handler
 
 export interface Exception {
-    statusCode: number;
+    httpCode: number;
     message: string;
     stack?: string;
 }
