@@ -1,3 +1,4 @@
+import "dotenv/config"; // this is to run tests directly from vscode
 import { expect } from "chai";
 import $database from "../../../services/Database";
 

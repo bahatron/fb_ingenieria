@@ -1,14 +1,14 @@
 {
     "compilerOptions": {
         "target": "esnext",
-        "module": "commonjs",
+        "module": "esnext",
         "strict": true,
         "importHelpers": true,
         "moduleResolution": "node",
         "esModuleInterop": true,
         "allowSyntheticDefaultImports": true,
         "sourceMap": false,
-        "types": ["webpack-env", "mocha", "chai", "node"],
+        "types": ["webpack-env", "node", "chai", "mocha"],
         "lib": ["esnext", "dom", "dom.iterable", "scripthost"],
         "outDir": "./js",
         "noImplicitAny": true,
@@ -17,5 +17,5 @@
         "removeComments": true
     },
     "include": ["./src/**/*.ts", "./src/**/*.vue", "vue.config.js", "vue.config.ts"],
-    "exclude": ["node_modules"]
+    "exclude": ["./src/tests/*"]
 }
