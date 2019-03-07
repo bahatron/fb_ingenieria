@@ -3,7 +3,7 @@
     <MenuBar/>
     <ToolBar/>
     <v-content>
-      <v-container fluid fill-height class="pa-0" justify-center>
+      <v-container fluid fill-height class="pa-0 grey lighten-1" justify-center>
         <slot>Default layout content</slot>
       </v-container>
     </v-content>

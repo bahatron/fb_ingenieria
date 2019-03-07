@@ -36,7 +36,7 @@ const $clientManager = Object.freeze({
     },
 
     async all(): Promise<Client[]> {
-        return await $database.fetch<ClientData>({
+        return $database.fetch<ClientData>({
             path: PATH,
             validator,
         });

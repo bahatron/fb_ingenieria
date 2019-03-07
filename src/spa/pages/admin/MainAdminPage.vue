@@ -13,10 +13,6 @@ export default Vue.extend({
     components: {
         Default,
     },
-
-    mounted() {
-        const self: any = this;
-    },
 });
 
 </script>
