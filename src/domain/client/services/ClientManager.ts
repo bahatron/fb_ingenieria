@@ -1,6 +1,6 @@
 import { ClientData, Client } from "..";
-import $error from "../../error";
 import $database from "../../../services/Database";
+import $error from "../../../services/error";
 
 const PATH = "/clients";
 
