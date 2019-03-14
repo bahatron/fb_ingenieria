@@ -23,18 +23,31 @@ const router = new Router({
         },
         {
             path: "/admin",
-            name: "admin",
+            name: "mainAdminPage",
             component: () => import(/* webpackChunkName: "AdminPage" */ "./pages/admin/MainAdminPage.vue"),
             meta: {
                 requiresAuth: true,
             },
             children: [
                 {
+                    path: "",
+                    component: () => import(/* webpackChunkName: "AdminPage" */ "./components/admin/AdminDashboard.vue"),
+                    meta: {
+                        requiresAuth: true, // is this really necessary for children pages?
+                    },
+                },
+                {
                     path: "clients",
+                    name: "clientAdminPage",
                     component: () => import(/* webpackChunkName: "ClientAdminPage" */ "./pages/admin/ClientAdminPage.vue"),
                     meta: {
                         requiresAuth: true, // is this really necessary for children pages?
                     },
+                },
+                {
+                    path: "projects",
+                    name: "projectAdminPage",
+                    component: () => import(/* webpackChunkName: "ClientAdminPage" */ "./components/project/pages/ProjectAdminPage.vue"),
                 },
             ],
         },
