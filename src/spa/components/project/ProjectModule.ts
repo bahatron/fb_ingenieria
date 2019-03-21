@@ -1,7 +1,7 @@
 import Vue from "vue";
 import { Module, Commit } from "vuex";
 import $project, { Project, ProjectData } from "../../../domain/project/ProjectFacade";
-import $error from "../../../domain/error";
+import $error from "../../../services/error";
 
 const PROJECT_REF: { [id: string]: Project } = {};
 
@@ -28,9 +28,6 @@ interface ProjectRecord extends ProjectData {
 
 interface ProjectState {
     projects: {
-        // [id: string]: {
-        //     id: string & ProjectData;
-        // };
         [id: string]: ProjectRecord;
     };
 }
@@ -43,7 +40,7 @@ const $projectModule: Module<ProjectState, any> = {
     },
 
     getters: {
-        id: state => (id: string) => state.projects[id],
+        id: state => (id: string) => Object.assign({}, state.projects[id] || {}),
         all: state => Object.values(state.projects),
     },
 

@@ -1,3 +1,79 @@
 <template>
-  <h1>WIP</h1>
+    <v-container fluid fill-height style="background-color: grey">
+        <v-layout class="pa-2" row wrap>
+            <v-flex xs12>
+                <v-card>
+                    <v-card-title>
+                        <v-btn color="primary" @click="openModel()">Agregar</v-btn>
+
+                        <v-spacer></v-spacer>
+
+                        <!-- create search component -->
+                        <v-text-field
+                            v-model="search"
+                            append-icon="search"
+                            label="Search"
+                            single-line
+                            hide-details
+                        ></v-text-field>
+                    </v-card-title>
+
+                    <ProjectList :projects="projects" @edit="openModal($event)"/>
+                </v-card>
+            </v-flex>
+        </v-layout>
+
+        <v-dialog v-model="dialog" max-width="75%">
+            <ProjectCard :project="selectedProject" @persist="persist($event)"/>
+        </v-dialog>
+    </v-container>
 </template>
+
+<script lang="ts">
+import Vue from "vue";
+import ProjectCard from "../components/ProjectCard.vue";
+import ProjectList from "../components/ProjectList.vue";
+import { ProjectData } from "../../../../domain/project/ProjectFacade";
+
+export default Vue.extend({
+    data() {
+        return {
+            dialog: false,
+            search: null,
+            selectedProject: {},
+        };
+    },
+
+    created() {
+        this.$store.dispatch("projects/load");
+        this.$store.dispatch("clients/load");
+    },
+
+    computed: {
+        projects(): ProjectData[] {
+            return this.$store.getters["projects/all"];
+        },
+    },
+
+    methods: {
+        openModel(projectId?: string) {
+            this.selectedProject = this.$store.getters["projects/id"](projectId) || {};
+            this.dialog = true;
+        },
+
+        /** @todo: URGENTLY merge the two actions into one */
+        async persist(project: any) {
+            if (project.id) {
+                await this.$store.dispatch("projects/update", { project });
+            } else {
+                await this.$store.dispatch("projects/create", project);
+            }
+        },
+    },
+
+    components: {
+        ProjectList,
+        ProjectCard,
+    },
+});
+</script>

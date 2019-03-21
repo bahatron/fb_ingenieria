@@ -1,11 +1,14 @@
-import $database, { Model } from "../../../services/Database";
-import { ProjectData, Project } from "../ProjectFacade";
+import $database from "../../../services/Database";
+import {
+    ProjectData,
+    Project,
+    PROJECT_TYPES,
+    PROJECT_COUNTRIES,
+    PROJECT_AREAS,
+} from "../ProjectFacade";
 import $error from "../../../services/error";
 
 const PATH = "/projects";
-const VALID_COUNTRIES = ["panama", "venezuela"];
-const VALID_TYPES = ["shop", "restaurant", "office", "public", "private"];
-const VALID_AREAS = ["industrial", "commercial", "institutional", "residential"];
 
 /** @todo improve validation */
 function validator(data: any): ProjectData {
@@ -20,19 +23,23 @@ function validator(data: any): ProjectData {
         longDescription,
     } = data;
 
-    if (!clientId || !name) {
-        throw $error.ValidationFailed("client ID and name are required");
+    if (!clientId) {
+        throw $error.ValidationFailed("client id is required");
     }
 
-    if (!VALID_COUNTRIES.includes(country)) {
+    if (!name) {
+        throw $error.ValidationFailed("name is required");
+    }
+
+    if (!PROJECT_COUNTRIES.includes(country)) {
         throw $error.ValidationFailed(`${country} is not valid`);
     }
 
-    if (!VALID_TYPES.includes(type)) {
+    if (!PROJECT_TYPES.includes(type)) {
         throw $error.ValidationFailed(`${type} is not a valid project type`);
     }
 
-    if (!VALID_AREAS.includes(area)) {
+    if (!PROJECT_AREAS.includes(area)) {
         throw $error.ValidationFailed(`${area} is not a valid project area`);
     }
 

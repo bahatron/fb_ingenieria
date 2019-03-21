@@ -1,7 +1,7 @@
 <template>
     <v-data-table
         :headers="headers"
-        :items="clients"
+        :items="projects"
         :search="search"
         item-key="id"
         :hide-actions="true"
@@ -14,9 +14,13 @@
                 <v-icon v-else color="red">clear</v-icon>
             </td>
 
-            <td>
-                <a target="_blank" :href="props.item.website">{{ props.item.website }}</a>
-            </td>
+            <td>{{ props.item.country }}</td>
+
+            <td>{{ props.item.type }}</td>
+
+            <td>{{ props.item.area }}</td>
+
+            <td>{{$store.getters["clients/id"](props.item.clientId).name}}</td>
 
             <td>
                 <v-icon small class="mr-2" @click="$emit('edit', props.item.id)">edit</v-icon>
@@ -28,10 +32,11 @@
 
 <script lang="ts">
 import Vue from "vue";
+import { ProjectData } from "../../../../domain/project/ProjectFacade";
 
 export default Vue.extend({
     props: {
-        clients: {
+        projects: {
             type: Array,
             required: true,
         },
@@ -44,7 +49,7 @@ export default Vue.extend({
         return {
             headers: [
                 {
-                    text: "Cliente",
+                    text: "Projecto",
                     value: "name",
                 },
                 {
@@ -52,8 +57,20 @@ export default Vue.extend({
                     value: "visible",
                 },
                 {
-                    text: "Pagina web",
-                    value: "website",
+                    text: "Pais",
+                    value: "country",
+                },
+                {
+                    text: "Tipo",
+                    value: "type",
+                },
+                {
+                    text: "Area",
+                    value: "area",
+                },
+                {
+                    text: "Cliente",
+                    value: "clientId",
                 },
                 {
                     text: "Acciones",
@@ -63,5 +80,12 @@ export default Vue.extend({
             ],
         };
     },
+
+    methods: {
+        test(this: any) {
+            const a: ProjectData[] = this.projects;
+        },
+    },
+
 });
 </script>
