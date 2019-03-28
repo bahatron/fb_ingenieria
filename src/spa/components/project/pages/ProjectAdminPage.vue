@@ -18,7 +18,11 @@
                         ></v-text-field>
                     </v-card-title>
 
-                    <ProjectList :projects="projects" @edit="openModal($event)"/>
+                    <ProjectList
+                        :projects="projects"
+                        @edit="openModel($event)"
+                        @remove="remove($event)"
+                    />
                 </v-card>
             </v-flex>
         </v-layout>
@@ -45,8 +49,8 @@ export default Vue.extend({
     },
 
     created() {
-        this.$store.dispatch("projects/load");
         this.$store.dispatch("clients/load");
+        this.$store.dispatch("projects/load");
     },
 
     computed: {
@@ -61,12 +65,25 @@ export default Vue.extend({
             this.dialog = true;
         },
 
-        /** @todo: URGENTLY merge the two actions into one */
         async persist(project: any) {
             if (project.id) {
                 await this.$store.dispatch("projects/update", { project });
             } else {
                 await this.$store.dispatch("projects/create", project);
+            }
+
+            this.dialog = false;
+        },
+
+        remove(projectID: string) {
+            if (confirm("Esta seguro de que quiere eliminar este project?")) {
+                this.$store.dispatch("projects/delete", { id: projectID }).then(() => {
+                    alert("Projecto eliminado");
+                }).catch((err) => {
+                    /** @todo report on sentry */
+                    console.log(err.message);
+                    alert("Hubo un error eliminando el projecto, intente nuevamente");
+                });
             }
         },
     },

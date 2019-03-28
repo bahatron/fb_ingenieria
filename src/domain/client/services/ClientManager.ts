@@ -44,3 +44,29 @@ const $clientManager = Object.freeze({
 });
 
 export default $clientManager;
+
+interface runtimeProp {
+    type: string;
+    value: any;
+}
+
+interface someObject {
+    prop1: string;
+    prop2: number;
+    [prop: string]: runtimeProp|any;
+}
+
+interface addedAtRuntime {
+    [prop: string]: runtimeProp|any;
+}
+
+type Combi = someObject
+
+const yclass: someObject = {
+    prop1: "string",
+    prop2: 5,
+    prop3: {
+        type: "any",
+        value: 5,
+    },
+};

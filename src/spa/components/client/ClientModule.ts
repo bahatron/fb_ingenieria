@@ -12,11 +12,13 @@ interface ClientSate {
     };
 }
 
-function mapClientData(record: ClientRef) {
-    return {
-        id: record.id,
-        ...record.data,
-    };
+function mapClientData(record?: ClientRef) {
+    return record
+        ? {
+              id: record.id,
+              ...record.data,
+          }
+        : {};
 }
 
 const $clientModule: Module<ClientSate, any> = {

@@ -8,15 +8,7 @@
             label="Descripcion corta"
             counter="140"
         ></v-textarea>
-        <v-textarea auto-grow rows="2" v-model="project.longDescription" label="Descripcion corta"></v-textarea>
-        <v-select
-            :items="$store.getters['clients/all']"
-            label="Cliente"
-            item-value="id"
-            v-model="project.clientId"
-            item-text="name"
-        ></v-select>
-
+        <v-textarea auto-grow rows="2" v-model="project.longDescription" label="Reseña"></v-textarea>
         <v-select
             :items="$store.getters['clients/all']"
             label="Cliente"

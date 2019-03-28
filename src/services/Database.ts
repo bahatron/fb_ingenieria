@@ -39,6 +39,7 @@ function factory<T>({ reference, validator }: FactoryInterface<T>): Model<T> {
             await reference.remove();
         },
 
+        /** @todo: use self defined events instead of RT events */
         on(condition: string, callback: (data: T) => void): void {
             reference.on(<firebase.database.EventType>condition, snapshot => {
                 if (snapshot) {
@@ -82,7 +83,7 @@ async function fetch<T>({ path, validator }: FetchInterface<T>): Promise<Model<T
 
     const collection: Model<T>[] = [];
 
-    // this forEach is not the Array.prototype.forEach
+    // this forEach is NOT Array.prototype.forEach
     data.forEach(record => {
         collection.push(
             factory({

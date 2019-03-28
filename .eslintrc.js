@@ -16,6 +16,7 @@ module.exports = {
         quotes: ["warn", "double"],
         "max-len": ["warn"],
         "no-restricted-globals": ["off"],
+        "no-alert": ["off"]
     },
     parserOptions: {
         parser: "typescript-eslint-parser",
