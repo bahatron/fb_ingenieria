@@ -1,45 +1,45 @@
 <template>
-  <v-container fluid fill-height style="background-color: grey">
-    <v-layout class="pa-2" row wrap>
-      <v-flex xs12>
-        <v-card>
-          <v-card-title>
-            <v-btn color="primary" @click="openEmptyDialog()">Agregar</v-btn>
+    <v-container fluid fill-height style="background-color: grey">
+        <v-layout class="pa-2" row wrap>
+            <v-flex xs12>
+                <v-card>
+                    <v-card-title>
+                        <v-btn color="primary" @click="openEmptyDialog()">Agregar</v-btn>
 
-            <v-spacer></v-spacer>
+                        <v-spacer></v-spacer>
 
-            <!-- create search component -->
-            <v-text-field
-              v-model="search"
-              append-icon="search"
-              label="Search"
-              single-line
-              hide-details
-            ></v-text-field>
-          </v-card-title>
+                        <!-- create search component -->
+                        <v-text-field
+                            v-model="search"
+                            append-icon="search"
+                            label="Search"
+                            single-line
+                            hide-details
+                        ></v-text-field>
+                    </v-card-title>
 
-          <!-- create generalized list component -->
-          <ClientList
-            :clients="clients"
-            @edit="openDialogWithClient($event)"
-            @remove="remove($event)"
-            @create="openEmptyDialog()"
-            :search="search"
-          />
-        </v-card>
-      </v-flex>
-    </v-layout>
+                    <!-- create generalized list component -->
+                    <ClientList
+                        :clients="clients"
+                        @edit="openDialogWithClient($event)"
+                        @remove="remove($event)"
+                        @create="openEmptyDialog()"
+                        :search="search"
+                    />
+                </v-card>
+            </v-flex>
+        </v-layout>
 
-    <v-dialog v-model="dialog" max-width="50%">
-      <clientCard :client="client" @persist="updateOrCreateClient($event)"/>
-    </v-dialog>
-  </v-container>
+        <v-dialog v-model="dialog" max-width="50%">
+            <clientCard :client="client" @persist="updateOrCreateClient($event)"/>
+        </v-dialog>
+    </v-container>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
-import ClientCard from "../../components/client/ClientCard.vue";
-import ClientList from "../../components/client/ClientList.vue";
+import ClientCard from "../ClientCard.vue";
+import ClientList from "../ClientList.vue";
 
 export default Vue.extend({
     data() {

@@ -42,6 +42,7 @@
         ></v-select>
 
         <v-checkbox v-model="project.visible" label="Visible en pagina principal" required></v-checkbox>
+
         <v-card-actions>
             <v-layout justify-end>
                 <v-btn

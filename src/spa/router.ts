@@ -4,8 +4,8 @@ import store from "./store";
 /**
  * @todo: fix eslint rules to not defining file name index.vue
  */
-import Home from "./pages/homepage/HomePage.vue";
-import Login from "./pages/login/LoginPage.vue";
+import Home from "./components/homepage/HomePage.vue";
+import Login from "./components/auth/pages/LoginPage.vue";
 
 Vue.use(Router);
 
@@ -24,14 +24,14 @@ const router = new Router({
         {
             path: "/admin",
             name: "mainAdminPage",
-            component: () => import(/* webpackChunkName: "AdminPage" */ "./pages/admin/MainAdminPage.vue"),
+            component: () => import(/* webpackChunkName: "AdminPage" */ "./components/admin/pages/MainAdminPage.vue"),
             meta: {
                 requiresAuth: true,
             },
             children: [
                 {
                     path: "",
-                    component: () => import(/* webpackChunkName: "AdminPage" */ "./components/admin/AdminDashboard.vue"),
+                    component: () => import(/* webpackChunkName: "AdminPage" */ "./components/admin/pages/AdminDashboard.vue"),
                     meta: {
                         requiresAuth: true, // is this really necessary for children pages?
                     },
@@ -39,7 +39,7 @@ const router = new Router({
                 {
                     path: "clients",
                     name: "clientAdminPage",
-                    component: () => import(/* webpackChunkName: "ClientAdminPage" */ "./pages/admin/ClientAdminPage.vue"),
+                    component: () => import(/* webpackChunkName: "ClientAdminPage" */ "./components/client/pages/ClientAdminPage.vue"),
                     meta: {
                         requiresAuth: true, // is this really necessary for children pages?
                     },
