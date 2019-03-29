@@ -4,7 +4,7 @@
             <v-flex xs12>
                 <v-card>
                     <v-card-title>
-                        <v-btn color="primary" @click="openModel()">Agregar</v-btn>
+                        <v-btn color="primary" @click="showCard()">Agregar</v-btn>
 
                         <v-spacer></v-spacer>
 
@@ -20,7 +20,7 @@
 
                     <ProjectList
                         :projects="projects"
-                        @edit="openModel($event)"
+                        @edit="showCard($event)"
                         @remove="remove($event)"
                     />
                 </v-card>
@@ -60,7 +60,7 @@ export default Vue.extend({
     },
 
     methods: {
-        openModel(projectId?: string) {
+        showCard(projectId?: string) {
             this.selectedProject = this.$store.getters["projects/id"](projectId) || {};
             this.dialog = true;
         },
