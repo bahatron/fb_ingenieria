@@ -41,6 +41,8 @@
             v-model="project.country"
         ></v-select>
 
+        <FileDropbox/>
+
         <v-checkbox v-model="project.visible" label="Visible en pagina principal" required></v-checkbox>
 
         <v-card-actions>
@@ -56,9 +58,15 @@
 
 <script lang="ts">
 import Vue from "vue";
+import FileDropbox from "../../common/FileDropbox.vue";
+
 import { PROJECT_TYPES, PROJECT_COUNTRIES, PROJECT_AREAS } from "../../../../domain/project/ProjectFacade";
 
 export default Vue.extend({
+    components: {
+        FileDropbox,
+    },
+
     props: {
         project: {
             type: Object,

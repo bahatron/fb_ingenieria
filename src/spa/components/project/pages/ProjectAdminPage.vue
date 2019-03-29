@@ -28,7 +28,7 @@
         </v-layout>
 
         <v-dialog v-model="dialog" max-width="75%">
-            <ProjectCard :project="selectedProject" @persist="persist($event)"/>
+            <ProjectCard ref="card" :project="selectedProject" @persist="persist($event)"/>
         </v-dialog>
     </v-container>
 </template>
@@ -46,6 +46,14 @@ export default Vue.extend({
             search: null,
             selectedProject: {},
         };
+    },
+
+    watch: {
+        dialog(newVal) {
+            if (newVal === false) {
+                (this.$refs.card as Vue).$destroy();
+            }
+        },
     },
 
     created() {
