@@ -18,18 +18,28 @@ export default Vue.extend({
     components: {
         vueDropzone,
     },
+
     data() {
         return {
             dropzoneOptions: {
-                url: (file: File) => {
-                    console.log("file", file);
-                    return "";
-                },
+                url: "/",
                 autoProcessQueue: false,
                 acceptedFiles: "image/*",
                 addRemoveLinks: true,
             },
         };
     },
+
+    methods: {
+        files(this: any): File[] {
+            return this.$refs.dropzone.getAcceptedFiles();
+        },
+    },
 });
 </script>
+
+<style>
+.dz-progress {
+    display: none;
+}
+</style>

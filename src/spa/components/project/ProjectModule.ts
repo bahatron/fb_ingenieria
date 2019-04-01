@@ -1,6 +1,12 @@
 import Vue from "vue";
 import { Module, Commit } from "vuex";
-import $project, { Project, ProjectData } from "../../../domain/project/ProjectFacade";
+import $project, {
+    PROJECT_TYPES,
+    PROJECT_COUNTRIES,
+    PROJECT_AREAS,
+    Project,
+    ProjectData,
+} from "../../../domain/project/ProjectFacade";
 import $error from "../../../services/error";
 
 const PROJECT_REF: { [id: string]: Project } = {};
@@ -32,6 +38,17 @@ interface ProjectState {
     };
 }
 
+async function updateProject(project: ProjectRecord) {
+    const model = PROJECT_REF[project.id];
+
+    if (!model) {
+        throw $error.NotFound(`Project ID: ${project.id} not found`);
+    }
+
+    // this should trigger the registered callback on value
+    await model.update(project);
+}
+
 const $projectModule: Module<ProjectState, any> = {
     namespaced: true,
 
@@ -42,6 +59,9 @@ const $projectModule: Module<ProjectState, any> = {
     getters: {
         id: state => (id: string) => Object.assign({}, state.projects[id] || {}),
         all: state => Object.values(state.projects),
+        types: () => PROJECT_TYPES,
+        areas: () => PROJECT_AREAS,
+        countries: () => PROJECT_COUNTRIES,
     },
 
     mutations: {
@@ -49,7 +69,7 @@ const $projectModule: Module<ProjectState, any> = {
             Vue.set(state.projects, id, { id, ...data });
         },
 
-        remove(state, { id }) {
+        remove(state, id) {
             Vue.delete(state.projects, id);
         },
     },
@@ -61,21 +81,14 @@ const $projectModule: Module<ProjectState, any> = {
             await Promise.all(projects.map(project => mapProject({ project, commit })));
         },
 
-        async create({ commit }, payload) {
+        async persist({ commit }, payload) {
+            if (payload.id) {
+                return updateProject(payload);
+            }
+
             const project = await $project.create({ data: payload });
 
             await mapProject({ project, commit });
-        },
-
-        async update(context, { project }: { project: ProjectRecord }) {
-            const model = PROJECT_REF[project.id];
-
-            if (!model) {
-                throw $error.NotFound(`Project ID: ${project.id} not found`);
-            }
-
-            // this should trigger the registered callback on value
-            await model.update(project);
         },
 
         async delete(context, { id }) {
@@ -86,6 +99,8 @@ const $projectModule: Module<ProjectState, any> = {
             }
 
             await model.delete();
+
+            context.commit("remove");
         },
     },
 };

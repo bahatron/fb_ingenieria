@@ -48,14 +48,6 @@ export default Vue.extend({
         };
     },
 
-    watch: {
-        dialog(newVal) {
-            if (newVal === false) {
-                (this.$refs.card as Vue).$destroy();
-            }
-        },
-    },
-
     created() {
         this.$store.dispatch("clients/load");
         this.$store.dispatch("projects/load");
@@ -74,13 +66,21 @@ export default Vue.extend({
         },
 
         async persist(project: any) {
-            if (project.id) {
-                await this.$store.dispatch("projects/update", { project });
-            } else {
-                await this.$store.dispatch("projects/create", project);
-            }
+            try {
+                await this.$store.dispatch("projects/persist", project);
 
-            this.dialog = false;
+                this.dialog = false;
+            } catch (err) {
+                switch (err.httpCode) {
+                case 400:
+                    alert(err.message);
+                    break;
+                default:
+                    this.dialog = false;
+                    alert("Error de coneccion, intente de nuevo");
+                    throw err;
+                }
+            }
         },
 
         remove(projectID: string) {

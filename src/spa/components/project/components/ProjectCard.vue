@@ -41,16 +41,13 @@
             v-model="project.country"
         ></v-select>
 
-        <FileDropbox/>
+        <FileDropzone ref="dropzone"/>
 
         <v-checkbox v-model="project.visible" label="Visible en pagina principal" required></v-checkbox>
 
         <v-card-actions>
             <v-layout justify-end>
-                <v-btn
-                    class="primary"
-                    @click="$emit('persist', project)"
-                >{{project.id ? 'actualizar' : 'crear'}}</v-btn>
+                <v-btn class="primary" @click="persist">{{project.id ? 'actualizar' : 'crear'}}</v-btn>
             </v-layout>
         </v-card-actions>
     </v-card>
@@ -58,13 +55,11 @@
 
 <script lang="ts">
 import Vue from "vue";
-import FileDropbox from "../../common/FileDropbox.vue";
-
-import { PROJECT_TYPES, PROJECT_COUNTRIES, PROJECT_AREAS } from "../../../../domain/project/ProjectFacade";
+import FileDropzone from "../../common/FileDropzone.vue";
 
 export default Vue.extend({
     components: {
-        FileDropbox,
+        FileDropzone,
     },
 
     props: {
@@ -90,25 +85,30 @@ export default Vue.extend({
         capitalize(string: string) {
             return string.charAt(0).toUpperCase() + string.slice(1);
         },
+
+        persist() {
+            this.project.files = (this.$refs.dropzone as any).files();
+            this.$emit("persist", this.project);
+        },
     },
 
     computed: {
         projectTypes(this: any) {
-            return PROJECT_TYPES.map(string => ({
+            return this.$store.getters["projects/types"].map((string: string) => ({
                 label: this.capitalize(string),
                 value: string,
             }));
         },
 
         projectAreas(this: any) {
-            return PROJECT_AREAS.map(string => ({
+            return this.$store.getters["projects/areas"].map((string: string) => ({
                 label: this.capitalize(string),
                 value: string,
             }));
         },
 
         projectCountries(this: any) {
-            return PROJECT_COUNTRIES.map(string => ({
+            return this.$store.getters["projects/countries"].map((string: string) => ({
                 label: this.capitalize(string),
                 value: string,
             }));
