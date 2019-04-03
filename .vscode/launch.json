@@ -11,6 +11,7 @@
             "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
             "args": ["--colors", "-r", "ts-node/register", "${file}"],
             "internalConsoleOptions": "neverOpen",
+            "skipFiles": ["<node_internals>/**/*.js", "${workspaceFolder}/node_modules/**/*.js"],
             "env": {
                 "TS_NODE_PROJECT": "tsconfig.node.json"
                 // "TS_NODE_COMPILER_OPTIONS": {}
