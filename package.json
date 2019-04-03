@@ -12,7 +12,7 @@
         "@sentry/browser": "^4.4.2",
         "cucumber": "^5.0.2",
         "dotenv": "^6.1.0",
-        "firebase": "^5.7.0",
+        "firebase": "^5.9.2",
         "font-awesome": "^4.7.0",
         "moment": "^2.22.2",
         "register-service-worker": "^1.0.0",
