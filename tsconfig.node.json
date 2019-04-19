@@ -2,7 +2,8 @@
     "extends": "./tsconfig.json",
     "compilerOptions": {
         "module": "commonjs",
-        "types": ["mocha", "chai", "node"]
+        "types": ["mocha", "chai", "node"],
+        "allowJs": true
     },
     "include": ["./src/tests/**/*"]
 }

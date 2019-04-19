@@ -1,9 +1,9 @@
 import { expect } from "chai";
-import $errorFactory from "../../domain/error/ErrorFactory";
+import $error from "../../services/error";
 
 describe("ErrorFactory", () => {
     it("can create validation error", () => {
-        const error = $errorFactory.ValidationFailed("message");
+        const error = $error.ValidationFailed("message");
 
         expect(error instanceof Error).to.be.true;
     });
