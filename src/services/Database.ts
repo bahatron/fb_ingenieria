@@ -8,18 +8,22 @@ export interface Model<T> {
     id: string;
     data(): Promise<T>;
     update(data: T): Promise<T>;
-    on(condition: firebase.database.EventType, callback: (data: T) => void): void;
+    on(condition: ModelEvents, callback: (data: T) => void): void;
     delete(): Promise<void>;
 }
 
 interface Validator<T> {
     (data: any): T;
 }
+
 interface FactoryInterface<T> {
     reference: firebase.database.Reference;
     validator: Validator<T>;
 }
-function factory<T>({ reference, validator }: FactoryInterface<T>): Model<T> {
+
+type ModelEvents = "value";
+
+function modelFactory<T>({ reference, validator }: FactoryInterface<T>): Model<T> {
     return {
         get id(): string {
             return <string>reference.key;
@@ -31,20 +35,19 @@ function factory<T>({ reference, validator }: FactoryInterface<T>): Model<T> {
             return <T>snapshot.val();
         },
 
-        async update(data: T): Promise<T> {
-            return reference.update(validator(data));
+        async update(data: Partial<T>): Promise<T> {
+            const currentData = await this.data();
+
+            return reference.update(validator({ ...currentData, ...data }));
         },
 
         async delete(): Promise<void> {
             await reference.remove();
         },
 
-        /** @todo: use self defined events instead of RT events */
-        on(condition: string, callback: (data: T) => void): void {
-            reference.on(<firebase.database.EventType>condition, snapshot => {
+        on(condition: ModelEvents, callback: (data: T) => void): void {
+            reference.on(condition, snapshot => {
                 if (snapshot) {
-                    /** @todo: create unit test for revealing the behaviour difference of this */
-                    // callback(snapshot.val());
                     callback.call(this, snapshot.val());
                 }
             });
@@ -65,7 +68,7 @@ async function persist<T>({ data, path, id, validator }: PersistInterface<T>): P
 
     await reference.set(validator(data));
 
-    return factory({
+    return modelFactory({
         reference,
         validator,
     });
@@ -86,7 +89,7 @@ async function fetch<T>({ path, validator }: FetchInterface<T>): Promise<Model<T
     // this forEach is NOT Array.prototype.forEach
     data.forEach(record => {
         collection.push(
-            factory({
+            modelFactory({
                 reference: record.ref,
                 validator,
             }),

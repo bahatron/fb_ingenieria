@@ -87,6 +87,7 @@ export default Vue.extend({
         },
 
         persist() {
+            /** @todo: find a way to get the correct typescript for the dropzone component */
             this.project.files = (this.$refs.dropzone as any).files();
             this.$emit("persist", this.project);
         },

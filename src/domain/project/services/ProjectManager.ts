@@ -1,4 +1,4 @@
-import $database from "../../../services/Database";
+import $database, { Model } from "../../../services/Database";
 import {
     ProjectData,
     Project,
@@ -7,8 +7,23 @@ import {
     PROJECT_AREAS,
 } from "../ProjectFacade";
 import $error from "../../../services/error";
+import $storage from "../../../services/Storage";
 
 const PATH = "/projects";
+
+interface projectFactory {
+    dataRef: Model<ProjectData>;
+}
+
+interface ProjectManager {
+    create(params: create): Promise<Project>;
+    all(): Promise<Project[]>;
+}
+
+interface create {
+    data: any;
+    id?: string;
+}
 
 /** @todo improve validation */
 function validator(data: any): ProjectData {
@@ -21,6 +36,7 @@ function validator(data: any): ProjectData {
         visible,
         shortDescription,
         longDescription,
+        images
     } = data;
 
     if (!clientId) {
@@ -51,27 +67,54 @@ function validator(data: any): ProjectData {
         type,
         shortDescription,
         longDescription,
+        images,
         visible: Boolean(visible),
     };
 }
 
-interface create {
-    data: any;
-    id?: string;
+function projectFactory({ dataRef }: projectFactory): Project {
+    const project = {
+        async delete() {
+            const data = await dataRef.data();
+
+            await Promise.all([dataRef.delete(), data.images.map($storage.delete)]);
+        },
+    };
+
+    return Object.setPrototypeOf(project, dataRef);
 }
 
-const $projectManager = {
+const $projectManager: ProjectManager = {
     async create({ data, id }: create): Promise<Project> {
-        return $database.persist<ProjectData>({
+
+        console.log(data);
+
+        let files: File[] = [];
+
+        if (Array.isArray(data.files)) {
+            files = files.concat(data.files.filter((item: any) => item instanceof File));
+        }
+
+        if (Array.isArray(data.images)) {
+            files = files.concat(data.images.files((item: any) => item instanceof File));
+        }
+
+        data.images = await Promise.all(files.map(async file => $storage.upload(file)));
+
+        const dataRef = await $database.persist<ProjectData>({
             data,
             path: PATH,
             validator,
             id,
         });
+
+        return projectFactory({ dataRef });
     },
 
     async all(): Promise<Project[]> {
-        return $database.fetch<ProjectData>({ path: PATH, validator });
+        const dataRefs = await $database.fetch<ProjectData>({ path: PATH, validator });
+
+        return dataRefs.map(ref => projectFactory({ dataRef: ref }));
     },
 };
 

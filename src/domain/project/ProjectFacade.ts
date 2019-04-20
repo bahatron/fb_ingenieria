@@ -10,7 +10,9 @@ export interface ProjectData {
     country: ProjectCountry;
     type: ProjectType;
     area: ProjectArea;
+    images: string[];
 }
+
 export type Project = Model<ProjectData>;
 
 export type ProjectCountry = "panama" | "venezuela";

@@ -100,7 +100,7 @@ const $projectModule: Module<ProjectState, any> = {
 
             await model.delete();
 
-            context.commit("remove");
+            context.commit("remove", id);
         },
     },
 };

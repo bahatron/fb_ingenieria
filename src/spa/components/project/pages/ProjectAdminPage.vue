@@ -44,7 +44,7 @@ export default Vue.extend({
         return {
             dialog: false,
             search: null,
-            selectedProject: {},
+            selectedProject: {}
         };
     },
 
@@ -56,49 +56,54 @@ export default Vue.extend({
     computed: {
         projects(): ProjectData[] {
             return this.$store.getters["projects/all"];
-        },
+        }
     },
 
     methods: {
         showCard(projectId?: string) {
-            this.selectedProject = this.$store.getters["projects/id"](projectId) || {};
+            this.selectedProject =
+                this.$store.getters["projects/id"](projectId) || {};
             this.dialog = true;
         },
 
         async persist(project: any) {
             try {
                 await this.$store.dispatch("projects/persist", project);
-
-                this.dialog = false;
             } catch (err) {
                 switch (err.httpCode) {
-                case 400:
-                    alert(err.message);
-                    break;
-                default:
-                    this.dialog = false;
-                    alert("Error de coneccion, intente de nuevo");
-                    throw err;
+                    case 400:
+                        alert(err.message);
+                        break;
+                    default:
+                        alert("Error de coneccion, intente de nuevo");
+                        throw err;
                 }
+            } finally {
+                this.dialog = false;
             }
         },
 
         remove(projectID: string) {
             if (confirm("Esta seguro de que quiere eliminar este project?")) {
-                this.$store.dispatch("projects/delete", { id: projectID }).then(() => {
-                    alert("Projecto eliminado");
-                }).catch((err) => {
-                    /** @todo report on sentry */
-                    console.log(err.message);
-                    alert("Hubo un error eliminando el projecto, intente nuevamente");
-                });
+                this.$store
+                    .dispatch("projects/delete", { id: projectID })
+                    .then(() => {
+                        alert("Projecto eliminado");
+                    })
+                    .catch(err => {
+                        /** @todo report on sentry */
+                        console.log(err.message);
+                        alert(
+                            "Hubo un error eliminando el projecto, intente nuevamente"
+                        );
+                    });
             }
-        },
+        }
     },
 
     components: {
         ProjectList,
-        ProjectCard,
-    },
+        ProjectCard
+    }
 });
 </script>
