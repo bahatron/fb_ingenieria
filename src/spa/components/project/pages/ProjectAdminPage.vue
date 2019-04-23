@@ -4,7 +4,7 @@
             <v-flex xs12>
                 <v-card>
                     <v-card-title>
-                        <v-btn color="primary" @click="showCard()">Agregar</v-btn>
+                        <v-btn color="primary" @click="test()">Agregar</v-btn>
 
                         <v-spacer></v-spacer>
 
@@ -37,14 +37,16 @@
 import Vue from "vue";
 import ProjectCard from "../components/ProjectCard.vue";
 import ProjectList from "../components/ProjectList.vue";
-import { ProjectData } from "../../../../domain/project/ProjectFacade";
+import { ProjectData } from "../ProjectModule";
+import $database from "../../../../services/Database";
 
 export default Vue.extend({
     data() {
         return {
             dialog: false,
             search: null,
-            selectedProject: {}
+            selectedProject: {},
+            references: []
         };
     },
 

@@ -4,10 +4,14 @@ import $project, {
     PROJECT_TYPES,
     PROJECT_COUNTRIES,
     PROJECT_AREAS,
-    Project,
     ProjectData,
-} from "../../../domain/project/ProjectFacade";
+} from "../../../domain/project";
 import $error from "../../../services/error";
+import { Model } from "../../../services/Database";
+
+export { ProjectData };
+
+type Project = Model<ProjectData>;
 
 const PROJECT_REF: { [id: string]: Project } = {};
 

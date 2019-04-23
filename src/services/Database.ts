@@ -7,9 +7,10 @@ const $db = $firebase.database();
 export interface Model<T> {
     id: string;
     data(): Promise<T>;
-    update(data: T): Promise<T>;
+    update(data: Partial<T>): Promise<T>;
     on(condition: ModelEvents, callback: (data: T) => void): void;
     delete(): Promise<void>;
+    set(data: T): Promise<T>;
 }
 
 interface Validator<T> {
@@ -39,6 +40,10 @@ function modelFactory<T>({ reference, validator }: FactoryInterface<T>): Model<T
             const currentData = await this.data();
 
             return reference.update(validator({ ...currentData, ...data }));
+        },
+
+        async set(data: T): Promise<T> {
+            return reference.set(data);
         },
 
         async delete(): Promise<void> {
@@ -99,9 +104,24 @@ async function fetch<T>({ path, validator }: FetchInterface<T>): Promise<Model<T
     return collection;
 }
 
+interface NewInterface<T> {
+    path: string;
+    id: string;
+    validator: Validator<T>;
+}
+async function newModel<T>({ path, id, validator }: NewInterface<T>): Promise<Model<T>> {
+    const reference = $db.ref(`${path}/${id}`);
+
+    return modelFactory({
+        reference,
+        validator,
+    });
+}
+
 const $database = {
     persist,
     fetch,
+    new: newModel,
 };
 
 export default $database;
