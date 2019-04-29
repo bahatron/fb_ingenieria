@@ -3,30 +3,11 @@ import {
     ProjectData, PROJECT_TYPES, PROJECT_COUNTRIES, PROJECT_AREAS,
 } from "..";
 import $error from "../../../services/error";
-import $storage from "../../../services/Storage";
+import $storage, { FileRecord } from "../../../services/Storage";
 
 const UUID: any = require("uuid");
 
 const PATH = "/projects";
-
-interface Project {
-
-}
-
-interface projectFactory {
-    record: Model<ProjectData>;
-    isNew: boolean;
-}
-
-interface ProjectManager {
-    create(params: create): Promise<Project>;
-    all(): Promise<Project[]>;
-}
-
-interface create {
-    data?: any;
-    id?: string;
-}
 
 /** @todo improve validation */
 function validator(data: any): ProjectData {
@@ -75,47 +56,110 @@ function validator(data: any): ProjectData {
     };
 }
 
-function projectFactory({ record, isNew }: projectFactory): Project {
-    let $data: Partial<ProjectData> = {};
+async function mapImageRecords(images?: string[]): Promise<FileRecord[]> {
+    if (!Array.isArray(images)) {
+        return [];
+    }
 
-    const project = {
+    return Promise.all(images.map(uid => $storage.get(uid)));
+}
+
+export interface ProjectRecord {
+    on(event: "value", cb: (data: ProjectData) => void): void;
+    delete(): Promise<void>;
+    update(data: Partial<ProjectData>): ProjectRecord;
+    save(): Promise<void>;
+    addImage(file: File): Promise<void>;
+    imageUrls(): string[];
+}
+
+interface projectFactory {
+    record: Model<ProjectData>;
+    isNew: boolean;
+    data?: Partial<ProjectData>;
+}
+async function projectFactory({ record, isNew, data }: projectFactory): Promise<ProjectRecord> {
+    let $projectData: Partial<ProjectData> = data || {};
+
+    const $projectImages: FileRecord[] = await mapImageRecords($projectData.images);
+
+    record.on("value", (projectData) => {
+        $projectData = projectData;
+    });
+
+    return {
+        on: record.on,
+
         async delete() {
-            const data = await record.data();
-
-            await Promise.all([record.delete(), data.images.map($storage.delete)]);
+            await Promise.all(
+                $projectImages.map(async record => record.delete()).concat([record.delete()]),
+            );
         },
 
-        async update(data: Partial<ProjectData>): Promise<Project> {
+        update(this: ProjectRecord, data: Partial<ProjectData>): ProjectRecord {
             /** @todo: deepMerge */
-            $data = validator({ ...$data, ...data });
-
-            if (!isNew) {
-                await record.update($data);
-            }
+            $projectData = { ...$projectData, ...data };
 
             return this;
         },
 
         async save(): Promise<void> {
-            if(isNew) {
-                record.set(validator($data));
+            const validatedData = validator($projectData);
+            if (isNew) {
+                await record.set(validatedData);
+
+                isNew = false;
+                return;
+            }
+
+            await record.update(validatedData);
+        },
+
+        async addImage(this: ProjectRecord, image: File): Promise<void> {
+            // if the record is new, validate that it can be saved
+            if (isNew) {
+                validator($projectData);
+            }
+
+            const fileRecord = await $storage.upload(image);
+
+            $projectImages.push(fileRecord);
+
+            const images = $projectData.images || [];
+
+            images.push(fileRecord.id);
+
+            $projectData.images = images;
+
+            try {
+                await this.save();
+            } catch (err) {
+                // delete image if there was an error attaching image uid to project
+                await record.delete();
+                throw err;
             }
         },
-    };
 
-    return Object.setPrototypeOf(project, record);
+        imageUrls(): string[] {
+            return $projectImages.map(record => record.url);
+        },
+    };
 }
 
-const $projectManager: ProjectManager = {
-    async create({ data }): Promise<Project> {
+interface create {
+    data?: any;
+}
+
+const $projectManager = {
+    async create({ data }: create) {
         const uid = UUID.v4();
 
         const record = await $database.new({ path: PATH, id: uid, validator });
 
-        return projectFactory({ record, isNew: true });
+        return projectFactory({ record, isNew: true, data });
     },
 
-    async all(): Promise<Project[]> {
+    async all() {
         const dataRefs = await $database.fetch<ProjectData>({ path: PATH, validator });
 
         return dataRefs.map(record => projectFactory({ record, isNew: false }));

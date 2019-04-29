@@ -17,13 +17,11 @@ interface Validator<T> {
     (data: any): T;
 }
 
+type ModelEvents = "value";
 interface FactoryInterface<T> {
     reference: firebase.database.Reference;
-    validator: Validator<T>;
+    validator?: Validator<T>;
 }
-
-type ModelEvents = "value";
-
 function modelFactory<T>({ reference, validator }: FactoryInterface<T>): Model<T> {
     return {
         get id(): string {
@@ -37,9 +35,11 @@ function modelFactory<T>({ reference, validator }: FactoryInterface<T>): Model<T
         },
 
         async update(data: Partial<T>): Promise<T> {
-            const currentData = await this.data();
+            if (validator) {
+                data = validator(Object.assign(await this.data(), data));
+            }
 
-            return reference.update(validator({ ...currentData, ...data }));
+            return reference.update(data);
         },
 
         async set(data: T): Promise<T> {
@@ -64,14 +64,19 @@ interface PersistInterface<T> {
     data: T;
     path: string;
     id?: string;
-    validator: Validator<T>;
+    validator?: Validator<T>;
 }
-async function persist<T>({ data, path, id, validator }: PersistInterface<T>): Promise<Model<T>> {
+async function persist<T = any>({
+    data,
+    path,
+    id,
+    validator,
+}: PersistInterface<T>): Promise<Model<T>> {
     const key = id || uuid.v4();
 
     const reference = $db.ref(`${path}/${key}`);
 
-    await reference.set(validator(data));
+    await reference.set(validator ? validator(data) : data);
 
     return modelFactory({
         reference,
@@ -81,9 +86,9 @@ async function persist<T>({ data, path, id, validator }: PersistInterface<T>): P
 
 interface FetchInterface<T> {
     path: string;
-    validator: Validator<T>;
+    validator?: Validator<T>;
 }
-async function fetch<T>({ path, validator }: FetchInterface<T>): Promise<Model<T>[]> {
+async function fetch<T = any>({ path, validator }: FetchInterface<T>): Promise<Model<T>[]> {
     const data = await $db
         .ref(path)
         .orderByKey()
@@ -107,7 +112,7 @@ async function fetch<T>({ path, validator }: FetchInterface<T>): Promise<Model<T
 interface NewInterface<T> {
     path: string;
     id: string;
-    validator: Validator<T>;
+    validator?: Validator<T>;
 }
 async function newModel<T>({ path, id, validator }: NewInterface<T>): Promise<Model<T>> {
     const reference = $db.ref(`${path}/${id}`);
