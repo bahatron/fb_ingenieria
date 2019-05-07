@@ -6,7 +6,7 @@ const $db = $firebase.database();
 
 export interface Model<T> {
     id: string;
-    data(): Promise<T>;
+    data(): Promise<T | null>;
     update(data: Partial<T>): Promise<T>;
     on(condition: ModelEvents, callback: (data: T) => void): void;
     delete(): Promise<void>;
@@ -28,10 +28,10 @@ function modelFactory<T>({ reference, validator }: FactoryInterface<T>): Model<T
             return <string>reference.key;
         },
 
-        async data(): Promise<T> {
+        async data(): Promise<T | null> {
             const snapshot = await reference.once("value");
 
-            return <T>snapshot.val();
+            return snapshot.val();
         },
 
         async update(data: Partial<T>): Promise<T> {

@@ -1,19 +1,19 @@
 <template>
     <v-card class="pa-4">
-        <v-text-field v-model="project.name" label="Nombre del projecto" required></v-text-field>
+        <v-text-field v-model="formData.name" label="Nombre del projecto"></v-text-field>
         <v-textarea
             auto-grow
             rows="2"
-            v-model="project.shortDescription"
+            v-model="formData.shortDescription"
             label="Descripcion corta"
             counter="140"
         ></v-textarea>
-        <v-textarea auto-grow rows="2" v-model="project.longDescription" label="Reseña"></v-textarea>
+        <v-textarea auto-grow rows="2" v-model="formData.longDescription" label="Reseña"></v-textarea>
         <v-select
             :items="$store.getters['clients/all']"
             label="Cliente"
             item-value="id"
-            v-model="project.clientId"
+            v-model="formData.clientId"
             item-text="name"
         ></v-select>
 
@@ -22,7 +22,7 @@
             label="Tipo de Projecto"
             item-text="label"
             item-value="value"
-            v-model="project.type"
+            v-model="formData.type"
         ></v-select>
 
         <v-select
@@ -30,7 +30,7 @@
             label="Area de Projecto"
             item-text="label"
             item-value="value"
-            v-model="project.area"
+            v-model="formData.area"
         ></v-select>
 
         <v-select
@@ -38,16 +38,17 @@
             label="Pais de Projecto"
             item-text="label"
             item-value="value"
-            v-model="project.country"
+            v-model="formData.country"
         ></v-select>
 
         <FileDropzone ref="dropzone"/>
 
-        <v-checkbox v-model="project.visible" label="Visible en pagina principal" required></v-checkbox>
+        <v-checkbox v-model="formData.visible" label="Visible en pagina principal"></v-checkbox>
 
         <v-card-actions>
             <v-layout justify-end>
-                <v-btn class="primary" @click="persist">{{project.id ? 'actualizar' : 'crear'}}</v-btn>
+                <v-btn class="primary" @click="persist">OK</v-btn>
+                <v-btn class="primary" @click="formData = {}">Reset</v-btn>
             </v-layout>
         </v-card-actions>
     </v-card>
@@ -56,28 +57,33 @@
 <script lang="ts">
 import Vue from "vue";
 import FileDropzone from "../../common/FileDropzone.vue";
+import $error from "../../../../services/error";
+import { ProjectRecord, ProjectData } from "../../../../domain/project";
 
 export default Vue.extend({
     components: {
         FileDropzone,
     },
 
+    // data() {
+    //     return {
+    //         formData: ({} as Partial<ProjectData>),
+    //     };
+    // },
+
     props: {
         project: {
             type: Object,
-            default() {
-                return {
-                    id: null,
-                    name: null,
-                    shortDescription: null,
-                    longDescription: null,
-                    visible: false,
-                    clientId: null,
-                    country: null,
-                    type: null,
-                    area: null,
-                };
-            },
+        },
+    },
+
+    watch: {
+        project() {
+            if (this.project !== null) {
+                this.formData = this.project.data;
+            } else {
+                this.formData = {};
+            }
         },
     },
 
@@ -86,14 +92,38 @@ export default Vue.extend({
             return string.charAt(0).toUpperCase() + string.slice(1);
         },
 
-        persist() {
+        persist(this: any) {
             /** @todo: find a way to get the correct typescript for the dropzone component */
-            this.project.files = (this.$refs.dropzone as any).files();
-            this.$emit("persist", this.project);
+            const images = (this.$refs.dropzone as any).getFiles() || [];
+
+            this.$store.dispatch("projects/save", {
+                images,
+                project: this.project,
+                data: this.formData,
+            }).then(() => {
+                /** @todo: use snackbar, maybe move this logic to the module */
+                alert("Projecto guardado");
+            }).catch((err: Error) => {
+                /** @todo: use snackbar, maybe move this logic to the module */
+                alert(`Error guardando projecto: ${err.message}`);
+                console.log(err);
+            });
+
+            this.$emit("close");
         },
     },
 
     computed: {
+        formData: {
+            get(this: any): any {
+                return this.project ? this.project.data : {};
+            },
+
+            set(wat: any) {
+                console.log("what: ", wat);
+            },
+        },
+
         projectTypes(this: any) {
             return this.$store.getters["projects/types"].map((string: string) => ({
                 label: this.capitalize(string),

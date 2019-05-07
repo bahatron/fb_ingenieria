@@ -1,11 +1,5 @@
 <template>
-    <vue-dropzone
-        ref="dropzone"
-        id="dropzone_id"
-        :options="dropzoneOptions"
-        :duplicateCheck="true"
-        :destroyDropzone="true"
-    ></vue-dropzone>
+    <vue-dropzone ref="dropzone" id="dropzone_id" :options="dropzoneOptions" :duplicateCheck="true"></vue-dropzone>
 </template>
 
 <script lang="ts">
@@ -31,8 +25,12 @@ export default Vue.extend({
     },
 
     methods: {
-        files(this: any): File[] {
-            return this.$refs.dropzone.getAcceptedFiles();
+        getFiles(this: any): File[] {
+            const files = this.$refs.dropzone.getAcceptedFiles();
+
+            this.$refs.dropzone.removeAllFiles();
+
+            return files;
         },
     },
 });

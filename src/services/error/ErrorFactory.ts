@@ -22,6 +22,10 @@ const $errorFactory = {
     NotFound(message = "Not found"): Exception {
         return factory({ httpCode: 404, message });
     },
+
+    InternalError(message = "Internal error"): Exception {
+        return factory({ httpCode: 500, message });
+    },
 };
 
 export default $errorFactory;

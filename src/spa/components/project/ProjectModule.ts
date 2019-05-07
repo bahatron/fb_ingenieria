@@ -1,58 +1,46 @@
 import Vue from "vue";
-import { Module, Commit } from "vuex";
+import { Module, ActionContext } from "vuex";
 import $project, {
     PROJECT_TYPES,
     PROJECT_COUNTRIES,
     PROJECT_AREAS,
     ProjectData,
+    ProjectRecord,
 } from "../../../domain/project";
-import $error from "../../../services/error";
-import { Model } from "../../../services/Database";
-
-export { ProjectData };
-
-type Project = Model<ProjectData>;
-
-const PROJECT_REF: { [id: string]: Project } = {};
-
-interface mapProject {
-    project: Project;
-    commit: Commit;
+interface ProjectState {
+    projects: Record<string, ProjectRecord>;
 }
 
-async function mapProject({ project, commit }: mapProject): Promise<void> {
-    PROJECT_REF[project.id] = project;
+/**
+ * This could be a Vuex mutator, but then it would be accesible to all components through the store.
+ * Which would serve no purpose as it's the store's responsability to keep the state of all records
+ */
+function register(state: ProjectState, project: ProjectRecord) {
+    Vue.set(state.projects, project.uid, project);
 
-    project.on("value", data => {
-        commit("add", { id: project.id, data });
+    project.on("updated", () => {
+        Vue.set(state.projects, project.uid, project);
     });
 
-    const projectData = await project.data();
-
-    commit("add", { id: project.id, data: projectData });
+    project.on("deleted", () => {
+        Vue.delete(state.projects, project.uid);
+    });
 }
 
-interface ProjectRecord extends ProjectData {
-    id: string;
+async function create({ state }: ActionContext<ProjectState, any>) {
+    const project = await $project.create();
+
+    project.on("created", () => {
+        register(state, project);
+    });
+
+    return project;
 }
 
-interface ProjectState {
-    projects: {
-        [id: string]: ProjectRecord;
-    };
+interface PersistPayload {
+    data: ProjectData;
+    images?: File[];
 }
-
-async function updateProject(project: ProjectRecord) {
-    const model = PROJECT_REF[project.id];
-
-    if (!model) {
-        throw $error.NotFound(`Project ID: ${project.id} not found`);
-    }
-
-    // this should trigger the registered callback on value
-    await model.update(project);
-}
-
 const $projectModule: Module<ProjectState, any> = {
     namespaced: true,
 
@@ -61,50 +49,32 @@ const $projectModule: Module<ProjectState, any> = {
     },
 
     getters: {
-        id: state => (id: string) => Object.assign({}, state.projects[id] || {}),
-        all: state => Object.values(state.projects),
+        id: state => (id: string) => state.projects[id],
+        data: state => Object.values(state.projects).map(record => record.data),
         types: () => PROJECT_TYPES,
         areas: () => PROJECT_AREAS,
         countries: () => PROJECT_COUNTRIES,
     },
 
-    mutations: {
-        add(state, { id, data }) {
-            Vue.set(state.projects, id, { id, ...data });
-        },
-
-        remove(state, id) {
-            Vue.delete(state.projects, id);
-        },
-    },
-
     actions: {
-        async load({ commit }) {
+        async load({ state }) {
             const projects = await $project.all();
 
-            await Promise.all(projects.map(project => mapProject({ project, commit })));
+            projects.forEach(project => {
+                register(state, project);
+            });
         },
 
-        async persist({ commit }, payload) {
-            if (payload.id) {
-                return updateProject(payload);
-            }
+        async save(context, { data, images }: PersistPayload) {
+            const record = data.uid ? context.getters.id(data.uid) : await create(context);
 
-            const project = await $project.create({ data: payload });
+            record.update(data);
 
-            await mapProject({ project, commit });
-        },
+            (images || []).forEach((file: File) => {
+                record.addImage(file);
+            });
 
-        async delete(context, { id }) {
-            const model = PROJECT_REF[id];
-
-            if (!model) {
-                return;
-            }
-
-            await model.delete();
-
-            context.commit("remove", id);
+            await record.save();
         },
     },
 };

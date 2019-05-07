@@ -4,7 +4,7 @@
             <v-flex xs12>
                 <v-card>
                     <v-card-title>
-                        <v-btn color="primary" @click="test()">Agregar</v-btn>
+                        <v-btn color="primary" @click="showCard()">Agregar</v-btn>
 
                         <v-spacer></v-spacer>
 
@@ -18,17 +18,13 @@
                         ></v-text-field>
                     </v-card-title>
 
-                    <ProjectList
-                        :projects="projects"
-                        @edit="showCard($event)"
-                        @remove="remove($event)"
-                    />
+                    <ProjectList @edit="showCard($event)" @remove="remove($event)"/>
                 </v-card>
             </v-flex>
         </v-layout>
 
         <v-dialog v-model="dialog" max-width="75%">
-            <ProjectCard ref="card" :project="selectedProject" @persist="persist($event)"/>
+            <ProjectCard ref="card" :project="selectedProject" @close="dialog = false"/>
         </v-dialog>
     </v-container>
 </template>
@@ -37,16 +33,14 @@
 import Vue from "vue";
 import ProjectCard from "../components/ProjectCard.vue";
 import ProjectList from "../components/ProjectList.vue";
-import { ProjectData } from "../ProjectModule";
-import $database from "../../../../services/Database";
+import { ProjectData, ProjectRecord } from "../../../../domain/project";
 
 export default Vue.extend({
     data() {
         return {
             dialog: false,
             search: null,
-            selectedProject: {},
-            references: []
+            selectedProject: null,
         };
     },
 
@@ -55,57 +49,29 @@ export default Vue.extend({
         this.$store.dispatch("projects/load");
     },
 
-    computed: {
-        projects(): ProjectData[] {
-            return this.$store.getters["projects/all"];
-        }
-    },
-
     methods: {
-        showCard(projectId?: string) {
-            this.selectedProject =
-                this.$store.getters["projects/id"](projectId) || {};
+        async showCard(projectId?: string) {
+            // this.projectData = projectId
+            //     ? this.$store.getters["projects/id"](projectId).data
+            //     : {};
+
+            this.selectedProject = this.$store.getters["projects/id"](projectId) || null;
+
             this.dialog = true;
         },
 
-        async persist(project: any) {
-            try {
-                await this.$store.dispatch("projects/persist", project);
-            } catch (err) {
-                switch (err.httpCode) {
-                    case 400:
-                        alert(err.message);
-                        break;
-                    default:
-                        alert("Error de coneccion, intente de nuevo");
-                        throw err;
-                }
-            } finally {
-                this.dialog = false;
+        async remove(projectID: string) {
+            if (confirm("Esta seguro de que quiere eliminar este projecto?")) {
+                const project: ProjectRecord = this.$store.getters["projects/id"](projectID);
+
+                await project.delete();
             }
         },
-
-        remove(projectID: string) {
-            if (confirm("Esta seguro de que quiere eliminar este project?")) {
-                this.$store
-                    .dispatch("projects/delete", { id: projectID })
-                    .then(() => {
-                        alert("Projecto eliminado");
-                    })
-                    .catch(err => {
-                        /** @todo report on sentry */
-                        console.log(err.message);
-                        alert(
-                            "Hubo un error eliminando el projecto, intente nuevamente"
-                        );
-                    });
-            }
-        }
     },
 
     components: {
         ProjectList,
-        ProjectCard
-    }
+        ProjectCard,
+    },
 });
 </script>

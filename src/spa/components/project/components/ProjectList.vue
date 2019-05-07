@@ -23,8 +23,8 @@
             <td>{{$store.getters["clients/id"](props.item.clientId).name}}</td>
 
             <td>
-                <v-icon small class="mr-2" @click="$emit('edit', props.item.id)">edit</v-icon>
-                <v-icon small @click="$emit('remove', props.item.id)">delete</v-icon>
+                <v-icon small class="mr-2" @click="$emit('edit', props.item.uid)">edit</v-icon>
+                <v-icon small @click="$emit('remove', props.item.uid)">delete</v-icon>
             </td>
         </template>
     </v-data-table>
@@ -32,14 +32,10 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { ProjectData } from "../../../../domain/project/ProjectFacade";
+import { ProjectData } from "../../../../domain/project";
 
 export default Vue.extend({
     props: {
-        projects: {
-            type: Array,
-            required: true,
-        },
         search: {
             type: String,
         },
@@ -81,9 +77,9 @@ export default Vue.extend({
         };
     },
 
-    methods: {
-        test(this: any) {
-            const a: ProjectData[] = this.projects;
+    computed: {
+        projects(): ProjectData[] {
+            return this.$store.getters["projects/data"];
         },
     },
 
