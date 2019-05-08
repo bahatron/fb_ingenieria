@@ -1,13 +1,13 @@
 <template>
-  <v-container fluid>
-    <About/>
-    <section class="spacing"></section>
-    <WhyUs/>
-    <Portfolio/>
-    <Journey/>
-    <Clients/>
-    <ContactUs/>
-  </v-container>
+    <v-container fluid>
+        <About/>
+        <section class="spacing"></section>
+        <WhyUs/>
+        <Portfolio/>
+        <Journey/>
+        <Clients/>
+        <ContactUs/>
+    </v-container>
 </template>
 
 <script lang="ts">
