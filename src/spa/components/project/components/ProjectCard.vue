@@ -47,8 +47,7 @@
 
         <v-card-actions>
             <v-layout justify-end>
-                <v-btn class="primary" @click="persist">OK</v-btn>
-                <v-btn class="primary" @click="formData = {}">Reset</v-btn>
+                <v-btn class="primary" @click="persist">{{projectData ? "Actualizar" : "Crear"}}</v-btn>
             </v-layout>
         </v-card-actions>
     </v-card>
@@ -58,32 +57,16 @@
 import Vue from "vue";
 import FileDropzone from "../../common/FileDropzone.vue";
 import $error from "../../../../services/error";
-import { ProjectRecord, ProjectData } from "../../../../domain/project";
+import { ProjectData } from "../../../../domain/project";
 
 export default Vue.extend({
     components: {
         FileDropzone,
     },
 
-    // data() {
-    //     return {
-    //         formData: ({} as Partial<ProjectData>),
-    //     };
-    // },
-
     props: {
-        project: {
+        projectData: {
             type: Object,
-        },
-    },
-
-    watch: {
-        project() {
-            if (this.project !== null) {
-                this.formData = this.project.data;
-            } else {
-                this.formData = {};
-            }
         },
     },
 
@@ -98,7 +81,6 @@ export default Vue.extend({
 
             this.$store.dispatch("projects/save", {
                 images,
-                project: this.project,
                 data: this.formData,
             }).then(() => {
                 /** @todo: use snackbar, maybe move this logic to the module */
@@ -114,14 +96,8 @@ export default Vue.extend({
     },
 
     computed: {
-        formData: {
-            get(this: any): any {
-                return this.project ? this.project.data : {};
-            },
-
-            set(wat: any) {
-                console.log("what: ", wat);
-            },
+        formData(): any {
+            return Object.assign({}, this.projectData || {});
         },
 
         projectTypes(this: any) {

@@ -23,6 +23,7 @@ export interface ProjectRecord {
     update(data: Partial<ProjectData>): ProjectRecord;
     save(): Promise<void>;
     addImage(file: File): Promise<void>;
+    deleteImage(id: string): Promise<void>;
 }
 
 /** @todo improve validation */
@@ -41,23 +42,23 @@ function validateProject(data: any): ProjectData {
     } = data;
 
     if (!clientId) {
-        throw $error.ValidationFailed("client id is required");
+        throw $error.ValidationFailed("Campo Cliente es obligatorio");
     }
 
     if (!name) {
-        throw $error.ValidationFailed("name is required");
+        throw $error.ValidationFailed("Campo Nombre es obligatorio");
     }
 
     if (!PROJECT_COUNTRIES.includes(country)) {
-        throw $error.ValidationFailed(`${country} is not valid`);
+        throw $error.ValidationFailed(`Campo Pais es obligatorio`);
     }
 
     if (!PROJECT_TYPES.includes(type)) {
-        throw $error.ValidationFailed(`${type} is not a valid project type`);
+        throw $error.ValidationFailed(`Campo Tipo es obligatorio`);
     }
 
     if (!PROJECT_AREAS.includes(area)) {
-        throw $error.ValidationFailed(`${area} is not a valid project area`);
+        throw $error.ValidationFailed(`Campo Area es obligatorio`);
     }
 
     return {
@@ -67,25 +68,31 @@ function validateProject(data: any): ProjectData {
         country,
         area,
         type,
-        shortDescription,
-        longDescription,
+        shortDescription: shortDescription || "",
+        longDescription: longDescription || "",
         images: images || [],
         visible: Boolean(visible),
     };
 }
 
-async function mapImageRecords(images?: string[]): Promise<FileRecord[]> {
+async function mapImageRecords(images?: string[]): Promise<Record<string, FileRecord>> {
     if (!Array.isArray(images)) {
-        return [];
+        return {};
     }
 
-    return Promise.all(images.map(uid => $storage.get(uid)));
+    const array = await Promise.all(images.map(uid => $storage.get(uid)));
+
+    return array.reduce((carry: Record<string, FileRecord>, file) => {
+        carry[file.id] = file;
+
+        return carry;
+    }, {});
 }
 
 interface createProject {
     isNew: boolean;
     record: Model<ProjectData>;
-    images: FileRecord[];
+    images: Record<string, FileRecord>;
     data: Partial<ProjectData>;
 }
 function ProjectRecord({ record, images, isNew, data }: createProject): ProjectRecord {
@@ -115,7 +122,9 @@ function ProjectRecord({ record, images, isNew, data }: createProject): ProjectR
 
         async delete() {
             await Promise.all(
-                $projectImages.map(async record => record.delete()).concat([record.delete()]),
+                Object.values($projectImages)
+                    .map(async record => record.delete())
+                    .concat([record.delete()]),
             );
 
             processEvents("deleted");
@@ -151,7 +160,7 @@ function ProjectRecord({ record, images, isNew, data }: createProject): ProjectR
             }
 
             const fileRecord = await $storage.upload(image);
-            $projectImages.push(fileRecord);
+            $projectImages[fileRecord.id] = fileRecord;
             const images = $projectData.images || [];
             images.push(fileRecord.id);
             $projectData.images = images;
@@ -165,12 +174,26 @@ function ProjectRecord({ record, images, isNew, data }: createProject): ProjectR
             }
         },
 
+        async deleteImage(this: ProjectRecord, imageId: string): Promise<void> {
+            const fileRecord = $projectImages[imageId];
+
+            if (!fileRecord) {
+                return;
+            }
+
+            const images = $projectData.images || [];
+            $projectData.images = images.filter(value => value !== imageId);
+
+            /** @todo: inconsistant state if there's an error here */
+            await Promise.all([this.save(), fileRecord.delete()]);
+        },
+
         imageUrls(): string[] {
-            return $projectImages.map(record => record.url);
+            return Object.values($projectImages).map(record => record.url);
         },
 
         get data() {
-            return $projectData;
+            return Object.assign({}, $projectData);
         },
 
         get uid(): string {
@@ -185,7 +208,7 @@ interface projectFactory {
 }
 async function projectFactory({ record, isNew }: projectFactory): Promise<ProjectRecord> {
     const recordData: Partial<ProjectData> = (await record.data()) || {};
-    const images: FileRecord[] = await mapImageRecords(recordData.images);
+    const images = await mapImageRecords(recordData.images);
 
     return ProjectRecord({
         record,

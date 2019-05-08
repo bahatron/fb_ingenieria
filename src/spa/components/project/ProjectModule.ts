@@ -7,9 +7,6 @@ import $project, {
     ProjectData,
     ProjectRecord,
 } from "../../../domain/project";
-interface ProjectState {
-    projects: Record<string, ProjectRecord>;
-}
 
 /**
  * This could be a Vuex mutator, but then it would be accesible to all components through the store.
@@ -19,11 +16,12 @@ function register(state: ProjectState, project: ProjectRecord) {
     Vue.set(state.projects, project.uid, project);
 
     project.on("updated", () => {
-        Vue.set(state.projects, project.uid, project);
+        Vue.set(state.projectData, project.uid, project.data);
     });
 
     project.on("deleted", () => {
         Vue.delete(state.projects, project.uid);
+        Vue.delete(state.projectData, project.uid);
     });
 }
 
@@ -37,20 +35,25 @@ async function create({ state }: ActionContext<ProjectState, any>) {
     return project;
 }
 
-interface PersistPayload {
+interface SavePayload {
     data: ProjectData;
     images?: File[];
+}
+interface ProjectState {
+    projects: Record<string, ProjectRecord>;
+    projectData: Record<string, ProjectData>;
 }
 const $projectModule: Module<ProjectState, any> = {
     namespaced: true,
 
     state: <ProjectState>{
         projects: {},
+        projectData: {},
     },
 
     getters: {
         id: state => (id: string) => state.projects[id],
-        data: state => Object.values(state.projects).map(record => record.data),
+        data: state => Object.values(state.projectData),
         types: () => PROJECT_TYPES,
         areas: () => PROJECT_AREAS,
         countries: () => PROJECT_COUNTRIES,
@@ -65,8 +68,10 @@ const $projectModule: Module<ProjectState, any> = {
             });
         },
 
-        async save(context, { data, images }: PersistPayload) {
-            const record = data.uid ? context.getters.id(data.uid) : await create(context);
+        async save(context, { data, images }: SavePayload) {
+            const record = data.uid
+                ? context.getters.id(data.uid) || (await create(context))
+                : await create(context);
 
             record.update(data);
 
