@@ -25,16 +25,6 @@ function register(state: ProjectState, project: ProjectRecord) {
     });
 }
 
-async function create({ state }: ActionContext<ProjectState, any>) {
-    const project = await $project.create();
-
-    project.on("created", () => {
-        register(state, project);
-    });
-
-    return project;
-}
-
 interface SavePayload {
     data: ProjectData;
     images?: File[];
@@ -67,19 +57,15 @@ const $projectModule: Module<ProjectState, any> = {
                 register(state, project);
             });
         },
+        
+        async create({ state }: ActionContext<ProjectState, any>): Promise<ProjectRecord> {
+            const project = await $project.create();
 
-        async save(context, { data, images }: SavePayload) {
-            const record = data.uid
-                ? context.getters.id(data.uid) || (await create(context))
-                : await create(context);
-
-            record.update(data);
-
-            (images || []).forEach((file: File) => {
-                record.addImage(file);
+            project.on("created", () => {
+                register(state, project);
             });
 
-            await record.save();
+            return project;
         },
     },
 };

@@ -24,7 +24,7 @@
         </v-layout>
 
         <v-dialog v-model="dialog" max-width="75%">
-            <ProjectCard ref="card" :projectData="selectedProject" @close="dialog = false"/>
+            <ProjectCard ref="card" :project="selectedProject" @close="dialog = false"/>
         </v-dialog>
     </v-container>
 </template>
@@ -51,11 +51,11 @@ export default Vue.extend({
 
     methods: {
         async showCard(projectId?: string) {
-            this.selectedProject = projectId
-                ? this.$store.getters["projects/id"](projectId).data
-                : null;
+            // this.selectedProject = projectId
+            //     ? this.$store.getters["projects/id"](projectId).data
+            //     : null;
 
-            // this.selectedProject = this.$store.getters["projects/id"](projectId) || null;
+            this.selectedProject = this.$store.getters["projects/id"](projectId) || null;
 
             this.dialog = true;
         },

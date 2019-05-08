@@ -47,7 +47,7 @@
 
         <v-card-actions>
             <v-layout justify-end>
-                <v-btn class="primary" @click="persist">{{projectData ? "Actualizar" : "Crear"}}</v-btn>
+                <v-btn class="primary" @click="persist">{{project ? "Actualizar" : "Crear"}}</v-btn>
             </v-layout>
         </v-card-actions>
     </v-card>
@@ -57,7 +57,7 @@
 import Vue from "vue";
 import FileDropzone from "../../common/FileDropzone.vue";
 import $error from "../../../../services/error";
-import { ProjectData } from "../../../../domain/project";
+import { ProjectData, ProjectRecord } from "../../../../domain/project";
 
 export default Vue.extend({
     components: {
@@ -65,7 +65,7 @@ export default Vue.extend({
     },
 
     props: {
-        projectData: {
+        project: {
             type: Object,
         },
     },
@@ -75,29 +75,33 @@ export default Vue.extend({
             return string.charAt(0).toUpperCase() + string.slice(1);
         },
 
-        persist(this: any) {
-            /** @todo: find a way to get the correct typescript for the dropzone component */
-            const images = (this.$refs.dropzone as any).getFiles() || [];
+        async persist(this: any) {
+            const images: File[] = this.$refs.dropzone.getFiles() || [];
 
-            this.$store.dispatch("projects/save", {
-                images,
-                data: this.formData,
-            }).then(() => {
-                /** @todo: use snackbar, maybe move this logic to the module */
+            const projectRecord: ProjectRecord = this.project || await this.$store.dispatch("projects/create");
+
+            try {
+                projectRecord.update(this.formData);
+
+                await Promise.all(images.map((file: File) => projectRecord.addImage(file)));
+
+                await projectRecord.save();
+
+                this.$emit("close");
+
                 alert("Projecto guardado");
-            }).catch((err: Error) => {
-                /** @todo: use snackbar, maybe move this logic to the module */
-                alert(`Error guardando projecto: ${err.message}`);
-                console.log(err);
-            });
-
-            this.$emit("close");
+            } catch (err) {
+                alert(err.message);
+                if (!err.httpCode) {
+                    throw err;
+                }
+            }
         },
     },
 
     computed: {
         formData(): any {
-            return Object.assign({}, this.projectData || {});
+            return Object.assign({}, this.project ? this.project.data : {});
         },
 
         projectTypes(this: any) {
