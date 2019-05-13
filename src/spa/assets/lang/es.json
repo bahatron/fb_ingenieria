@@ -47,9 +47,12 @@
 	"Residencial": "Residencial",
 	"Comercial": "Comercial",
 	"Institucional": "Institucional",
-	"Tiendas": "Tiendas",
-	"Oficinas": "Oficinas",
-	"Restaurantes": "Restaurantes",
-	"Publico": "Publico",
-	"Privado": "Privado"
+	"shop": "Tiendas",
+	"office": "Oficinas",
+	"restaurant": "Restaurantes",
+	"public": "Publico",
+	"private": "Privado",
+	"institutional": "Institucional",
+	"residential": "Residencial",
+	"commercial": "Comercial"
 }

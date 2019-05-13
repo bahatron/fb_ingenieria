@@ -1,8 +1,11 @@
 <template>
     <section class="padding-top project-portfolio" id="portfolio">
-        <p class="section-title" align="center">portfolio-title</p>
+        <p
+            class="section-title"
+            align="center"
+        >{{$store.getters["lang/translate"]("portfolio-title")}}</p>
         <hr class="hr-color">
-        <PortfolioFilter/>
+        <PortfolioFilter @filterChange="updateList($event)"/>
         <PortfolioCarousel/>
     </section>
 </template>
@@ -17,6 +20,12 @@ export default Vue.extend({
     components: {
         PortfolioCarousel,
         PortfolioFilter,
+    },
+
+    methods: {
+        updateList(filter: Record<string, string>) {
+            console.log("filter: ", filter);
+        },
     },
 });
 </script>
