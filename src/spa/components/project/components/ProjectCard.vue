@@ -58,11 +58,14 @@ import Vue from "vue";
 import FileDropzone from "../../common/FileDropzone.vue";
 import $error from "../../../../services/error";
 import { ProjectData, ProjectRecord } from "../../../../domain/project";
+import capitalize from "../../../mixins/capitalize";
 
 export default Vue.extend({
     components: {
         FileDropzone,
     },
+
+    mixins: [capitalize],
 
     props: {
         project: {
@@ -71,10 +74,6 @@ export default Vue.extend({
     },
 
     methods: {
-        capitalize(string: string) {
-            return string.charAt(0).toUpperCase() + string.slice(1);
-        },
-
         async persist(this: any) {
             const images: File[] = this.$refs.dropzone.getFiles() || [];
 
