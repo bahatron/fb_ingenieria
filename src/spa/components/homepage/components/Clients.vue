@@ -1,6 +1,6 @@
 <template>
     <section class="padding-top" id="clients">
-        <p class="section-title" align="center">clients-title/p></p>
+        <p class="section-title" align="center">clients-title</p>
         <hr class="hr-color">
         <span class="clients-p">clients-text</span>
         <div class="client-carousel">
@@ -10,7 +10,7 @@
                         <img src="client.imageUrl" style="height:100px;width:auto;">
                     </a>
                 </v-carousel-item>
-            </v-carousel> -->
+            </v-carousel>-->
         </div>
     </section>
 </template>

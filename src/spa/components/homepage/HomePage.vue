@@ -1,5 +1,6 @@
 <template>
     <v-container fluid>
+        <Header/>
         <About/>
         <section class="spacing"></section>
         <WhyUs/>
@@ -12,7 +13,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-
+import Header from "./components/Header.vue";
 import About from "./components/About.vue";
 import WhyUs from "./components/WhyUs.vue";
 import Portfolio from "./components/Portfolio.vue";
@@ -28,6 +29,7 @@ export default Vue.extend({
         Journey,
         Clients,
         ContactUs,
+        Header,
     },
 });
 </script>
