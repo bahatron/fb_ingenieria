@@ -31,5 +31,10 @@ export default Vue.extend({
         ContactUs,
         Header,
     },
+
+    created() {
+        this.$store.dispatch("clients/load");
+        this.$store.dispatch("projects/load");
+    },
 });
 </script>

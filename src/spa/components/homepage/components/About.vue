@@ -73,6 +73,14 @@
     </section>
 </template>
 
+<script lang="ts">
+import Vue from "vue";
+
+export default Vue.extend({
+
+});
+</script>
+
 <style>
 .header-section {
     background: url("/img/about-background.jpg") center / cover no-repeat;

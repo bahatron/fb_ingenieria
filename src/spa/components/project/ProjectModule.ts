@@ -43,6 +43,7 @@ const $projectModule: Module<ProjectState, any> = {
 
     getters: {
         id: state => (id: string) => state.projects[id],
+        records: state => Object.values(state.projects),
         data: state => Object.values(state.projectData),
         types: () => PROJECT_TYPES,
         areas: () => PROJECT_AREAS,
@@ -57,7 +58,7 @@ const $projectModule: Module<ProjectState, any> = {
                 register(state, project);
             });
         },
-        
+
         async create({ state }: ActionContext<ProjectState, any>): Promise<ProjectRecord> {
             const project = await $project.create();
 

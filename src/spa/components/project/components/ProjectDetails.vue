@@ -13,3 +13,15 @@
         </v-carousel>
     </v-card>
 </template>
+
+<script lang="ts">
+import Vue from "vue";
+
+export default Vue.extend({
+    props: {
+        project: {
+            type: Object,
+        },
+    },
+});
+</script>

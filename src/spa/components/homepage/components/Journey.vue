@@ -4,7 +4,8 @@
             <p class="p-journey">journey-title</p>
             <hr class="hr-color hr-journey" width="20%">
             <div class="div-journey">
-                <p class="text-journey">journey-text-1
+                <p class="text-journey">
+                    journey-text-1
                     <br>journey-text-2
                 </p>
                 <p>
@@ -19,8 +20,16 @@
     </section>
 </template>
 
+<script lang="ts">
+import Vue from "vue";
+
+export default Vue.extend({
+
+});
+</script>
+
 <style>
 .journey-backgound {
-    background: url('/img/journey.png') center center / cover no-repeat;
+    background: url("/img/journey.png") center center / cover no-repeat;
 }
 </style>

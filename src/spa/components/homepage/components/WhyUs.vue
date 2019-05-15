@@ -1,5 +1,6 @@
 <template>
-    <section class="padding-top" id="whyus">
+    <!-- <section class="padding-top" id="whyus"> -->
+    <section id="whyus">
         <p class="section-title" align="center">{{$store.getters["lang/translate"]("why-us-title")}}</p>
         <hr class="hr-color">
         <div class="row">
@@ -28,3 +29,11 @@
         </div>
     </section>
 </template>
+
+<script lang="ts">
+import Vue from "vue";
+
+export default Vue.extend({
+
+});
+</script>
