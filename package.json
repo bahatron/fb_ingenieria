@@ -6,7 +6,8 @@
         "dev": "vue-cli-service serve",
         "build": "vue-cli-service build",
         "test": "ts-node --project tsconfig.node.json src/tests/",
-        "lint": "vue-cli-service lint"
+        "lint": "vue-cli-service lint",
+        "deploy": "npm run build && firebase deploy"
     },
     "dependencies": {
         "@sentry/browser": "^4.4.2",

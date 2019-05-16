@@ -7,7 +7,6 @@
         <Portfolio/>
         <Journey/>
         <OurClients/>
-        <ContactUs/>
     </v-container>
 </template>
 
