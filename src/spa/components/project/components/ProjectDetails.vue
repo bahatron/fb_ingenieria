@@ -27,7 +27,7 @@ export default Vue.extend({
         },
 
         projectImages(this: any): string[] {
-            return this.project.imageUrls() || [];
+            return this.project ? this.project.imageUrls() : [];
         },
     },
 });
