@@ -6,10 +6,39 @@
                 align="center"
             >{{$store.getters["lang/translate"]("portfolio-title")}}</p>
             <hr class="hr-color">
-            <PortfolioFilter @filterChange="filter = $event"/>
-            <!-- <PortfolioCarousel :projects="filteredProjects"/> -->
+
+            <v-layout class="project-filter" row wrap>
+                <v-flex xs12 class="project-filter-list">
+                    <v-chip
+                        class="white--text"
+                        :style="isFilterSelected('country', country)"
+                        v-for="country in projectCountries"
+                        :key="country"
+                        @click="changeFilter('country', country)"
+                    >{{$store.getters["lang/translate"](country)}}</v-chip>
+                </v-flex>
+                <v-flex xs12 class="project-filter-list">
+                    <v-chip
+                        class="white--text"
+                        :style="isFilterSelected('area', area)"
+                        v-for="area in projectAreas"
+                        :key="area"
+                        @click="changeFilter('area', area)"
+                    >{{$store.getters["lang/translate"](area)}}</v-chip>
+                </v-flex>
+                <v-flex xs12 class="project-filter-list">
+                    <v-chip
+                        class="white--text"
+                        :style="isFilterSelected('type', type)"
+                        v-for="type in projectTypes"
+                        :key="type"
+                        @click="changeFilter('type', type)"
+                    >{{$store.getters["lang/translate"](type)}}</v-chip>
+                </v-flex>
+            </v-layout>
         </section>
-        <section class="padding-top">
+
+        <section class="pt-4">
             <v-layout align-start justify-space-around row fill-height>
                 <v-flex xs12 md3 v-for="project in filteredProjects" :key="project.uid">
                     <div class="p-box" @click="dialogOpen = !dialogOpen">
@@ -34,32 +63,33 @@
 <script lang="ts">
 import Vue from "vue";
 
-import PortfolioFilter from "./PortfolioFilter.vue";
 import { ProjectRecord, Project } from "../../../../domain/project";
+import capitalize from "../../../mixins/capitalize";
 
 export default Vue.extend({
     // maybe this should be in the store
     data() {
         return {
-            filter: {},
             dialogOpen: false,
+            selectedColor: "#fb6816",
+            availableColor: "#202835",
+            filter: {
+                country: null,
+                area: null,
+                type: null,
+            },
         };
     },
-    components: {
-        PortfolioFilter,
-    },
+
+    mixins: [capitalize],
+
     computed: {
         filteredProjects(this: any): ProjectRecord[] {
-            console.log("i changed");
             return this.$store.getters["projects/records"].filter((project: any) => {
                 let result = project.data.visible;
 
                 Object.keys(this.filter).forEach((key) => {
-                    console.log("key", key);
-                    console.log("filter key", this.filter[key]);
-                    console.log("project data key", project.data[key]);
-                    if (this.filter[key] && project.data[key] === this.filter[key]) {
-                        console.log("should be false");
+                    if (this.filter[key] && project.data[key] !== this.filter[key]) {
                         result = false;
                     }
                 });
@@ -67,10 +97,42 @@ export default Vue.extend({
                 return result;
             });
         },
+
+        projectCountries(this: any) {
+            return this.$store.getters["projects/countries"];
+        },
+
+        projectAreas(this: any) {
+            return this.$store.getters["projects/areas"];
+        },
+
+        projectTypes(this: any) {
+            return this.$store.getters["projects/types"];
+        },
+
+        isFilterSelected(this: any) {
+            return (filter: string, value: string) => {
+                const colour = this.filter[filter] === value ? this.selectedColor : this.availableColor;
+                return {
+                    "background-color": colour,
+                    "border-color": colour,
+                };
+            };
+        },
     },
     methods: {
         projectFrontImage(project: ProjectRecord): string {
             return project.imageUrls().shift() || "/img/journey.png";
+        },
+
+        changeFilter(this: any, filter: string, value: string) {
+            if (this.filter[filter] === value) {
+                this.filter[filter] = null;
+            } else {
+                this.filter[filter] = value;
+            }
+
+            this.$emit("filterChange", this.filter);
         },
     },
 });
