@@ -1,6 +1,6 @@
 import Vue from "vue";
 import { Module, GetterTree, MutationTree, ActionTree } from "vuex";
-import $client, { ClientData, Client } from "../../../domain/client";
+import $client, { ClientData, Client } from "../../domain/client";
 interface ClientRef {
     id: string;
     data: ClientData;

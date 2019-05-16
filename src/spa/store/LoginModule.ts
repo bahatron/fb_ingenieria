@@ -2,7 +2,7 @@ import {
     Module, GetterTree, MutationTree, ActionTree,
 } from "vuex";
 import { User } from "firebase";
-import $firebase from "../../../adapters/firebase";
+import $firebase from "../../adapters/firebase";
 
 export interface AuthState {
     user: User | null;

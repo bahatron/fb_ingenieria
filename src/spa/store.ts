@@ -1,10 +1,10 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import $loginModule from "./components/auth/LoginModule";
-import $layoutModule from "./components/layout/LayoutModule";
-import $clientModule from "./components/client/ClientModule";
-import $projectModule from "./components/project/ProjectModule";
-import $languageModule from "./modules/LanguageModule";
+import $loginModule from "./store/LoginModule";
+import $layoutModule from "./store/LayoutModule";
+import $clientModule from "./store/ClientModule";
+import $projectModule from "./store/ProjectModule";
+import $languageModule from "./store/LanguageModule";
 
 Vue.use(Vuex);
 export default new Vuex.Store<any>({

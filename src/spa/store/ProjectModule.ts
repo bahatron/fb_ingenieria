@@ -6,7 +6,7 @@ import $project, {
     PROJECT_AREAS,
     Project,
     ProjectRecord,
-} from "../../../domain/project";
+} from "../../domain/project";
 
 /**
  * This could be a Vuex mutator, but then it would be accesible to all components through the store.

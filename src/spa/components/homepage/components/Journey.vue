@@ -9,13 +9,6 @@
                     <br>
                     {{$store.getters["lang/translate"]("journey-text-2")}}
                 </p>
-                <p>
-                    <a
-                        href="#portfolio"
-                        class="btn"
-                        style="background-color:#fb6816; box-shadow:none;color:white;"
-                    >{{$store.getters["lang/translate"]("journey-botton")}}</a>
-                </p>
             </div>
         </div>
     </section>
