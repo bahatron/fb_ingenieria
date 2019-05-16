@@ -41,7 +41,7 @@
         <section class="pt-4">
             <v-layout align-start justify-space-around row fill-height>
                 <v-flex xs12 md3 v-for="project in filteredProjects" :key="project.uid">
-                    <div class="p-box" @click="dialogOpen = !dialogOpen">
+                    <div class="p-box" @click="openDialog(project)">
                         <img :src="projectFrontImage(project)" class="portoflio-img">
                         <div class="p-hover">
                             <br>
@@ -56,6 +56,16 @@
                     </div>
                 </v-flex>
             </v-layout>
+
+            <v-dialog fullscreen v-model="dialogOpen">
+                <v-toolbar dark color="primary">
+                    <v-btn icon dark @click="dialogOpen = false">
+                        <v-icon>close</v-icon>
+                    </v-btn>
+                    <v-toolbar-title>{{selectedProject ? selectedProject.data.name : ""}}</v-toolbar-title>
+                </v-toolbar>
+                <ProjectDetials :project="selectedProject"/>
+            </v-dialog>
         </section>
     </div>
 </template>
@@ -65,6 +75,7 @@ import Vue from "vue";
 
 import { ProjectRecord, Project } from "../../../../domain/project";
 import capitalize from "../../../mixins/capitalize";
+import ProjectDetials from "../../project/components/ProjectDetails.vue";
 
 export default Vue.extend({
     // maybe this should be in the store
@@ -78,7 +89,12 @@ export default Vue.extend({
                 area: null,
                 type: null,
             },
+            selectedProject: null,
         };
+    },
+
+    components: {
+        ProjectDetials,
     },
 
     mixins: [capitalize],
@@ -120,7 +136,13 @@ export default Vue.extend({
             };
         },
     },
+
     methods: {
+        openDialog(this: any, project: ProjectRecord): void {
+            this.selectedProject = project;
+            this.dialogOpen = true;
+        },
+
         projectFrontImage(project: ProjectRecord): string {
             return project.imageUrls().shift() || "/img/journey.png";
         },

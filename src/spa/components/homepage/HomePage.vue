@@ -6,7 +6,7 @@
         <WhyUs/>
         <Portfolio/>
         <Journey/>
-        <Clients/>
+        <ClientList/>
         <ContactUs/>
     </v-container>
 </template>
@@ -18,7 +18,7 @@ import About from "./components/About.vue";
 import WhyUs from "./components/WhyUs.vue";
 import Portfolio from "./components/Portfolio.vue";
 import Journey from "./components/Journey.vue";
-import Clients from "./components/Clients.vue";
+import ClientList from "./components/ClientList.vue";
 import ContactUs from "./components/ContactUs.vue";
 
 export default Vue.extend({
@@ -27,7 +27,7 @@ export default Vue.extend({
         WhyUs,
         Portfolio,
         Journey,
-        Clients,
+        ClientList,
         ContactUs,
         Header,
     },

@@ -1,8 +1,11 @@
 <template>
     <section class="padding-top" id="clients">
-        <p class="section-title" align="center">clients-title</p>
+        <p
+            class="section-title"
+            align="center"
+        >{{$store.getters["lang/translate"]("clients-title")}}</p>
         <hr class="hr-color">
-        <span class="clients-p">clients-text</span>
+        <span class="clients-p">{{$store.getters["lang/translate"]("clients-text")}}</span>
         <div class="client-carousel">
             <!-- <v-carousel class="client-carousel">
                 <v-carousel-item>

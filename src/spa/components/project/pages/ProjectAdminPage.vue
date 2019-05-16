@@ -51,10 +51,6 @@ export default Vue.extend({
 
     methods: {
         async showCard(projectId?: string) {
-            // this.selectedProject = projectId
-            //     ? this.$store.getters["projects/id"](projectId).data
-            //     : null;
-
             this.selectedProject = this.$store.getters["projects/id"](projectId) || null;
 
             this.dialog = true;
