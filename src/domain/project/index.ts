@@ -2,7 +2,7 @@ import $projectManager from "./services/ProjectManager";
 
 export { ProjectRecord } from "./services/ProjectManager";
 
-export interface ProjectData {
+export interface Project {
     uid: string;
     name: string;
     shortDescription?: string;

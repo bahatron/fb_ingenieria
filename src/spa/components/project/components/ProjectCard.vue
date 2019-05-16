@@ -57,7 +57,7 @@
 import Vue from "vue";
 import FileDropzone from "../../common/FileDropzone.vue";
 import $error from "../../../../services/error";
-import { ProjectData, ProjectRecord } from "../../../../domain/project";
+import { Project, ProjectRecord } from "../../../../domain/project";
 import capitalize from "../../../mixins/capitalize";
 
 export default Vue.extend({

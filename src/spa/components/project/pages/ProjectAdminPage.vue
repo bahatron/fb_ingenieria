@@ -33,7 +33,7 @@
 import Vue from "vue";
 import ProjectCard from "../components/ProjectCard.vue";
 import ProjectList from "../components/ProjectList.vue";
-import { ProjectData, ProjectRecord } from "../../../../domain/project";
+import { Project, ProjectRecord } from "../../../../domain/project";
 
 export default Vue.extend({
     data() {

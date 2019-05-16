@@ -4,7 +4,7 @@ import $project, {
     PROJECT_TYPES,
     PROJECT_COUNTRIES,
     PROJECT_AREAS,
-    ProjectData,
+    Project,
     ProjectRecord,
 } from "../../../domain/project";
 
@@ -25,13 +25,9 @@ function register(state: ProjectState, project: ProjectRecord) {
     });
 }
 
-interface SavePayload {
-    data: ProjectData;
-    images?: File[];
-}
 interface ProjectState {
     projects: Record<string, ProjectRecord>;
-    projectData: Record<string, ProjectData>;
+    projectData: Record<string, Project>;
 }
 const $projectModule: Module<ProjectState, any> = {
     namespaced: true,

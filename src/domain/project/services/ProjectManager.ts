@@ -1,5 +1,5 @@
 import $database, { Model } from "../../../services/Database";
-import { ProjectData, PROJECT_TYPES, PROJECT_COUNTRIES, PROJECT_AREAS } from "..";
+import { Project, PROJECT_TYPES, PROJECT_COUNTRIES, PROJECT_AREAS } from "..";
 import $error from "../../../services/error";
 import $storage, { FileRecord } from "../../../services/Storage";
 
@@ -9,25 +9,25 @@ const PATH = "/projects";
 
 /** @todo: generalize this interface */
 interface Callback {
-    (data: ProjectData): void;
+    (data: Project): void;
 }
 
 export type ProjectRecordEvents = "updated" | "deleted" | "created";
 
 export interface ProjectRecord {
-    readonly data: Partial<ProjectData>;
+    readonly data: Partial<Project>;
     readonly uid: string;
     imageUrls(): string[];
     on(event: ProjectRecordEvents, cb: Callback): void;
     delete(): Promise<void>;
-    update(data: Partial<ProjectData>): ProjectRecord;
+    update(data: Partial<Project>): ProjectRecord;
     save(): Promise<void>;
     addImage(file: File): Promise<void>;
     deleteImage(id: string): Promise<void>;
 }
 
 /** @todo improve validation */
-function validateProject(data: any): ProjectData {
+function validateProject(data: any): Project {
     const {
         clientId,
         name,
@@ -91,12 +91,12 @@ async function mapImageRecords(images?: string[]): Promise<Record<string, FileRe
 
 interface createProject {
     isNew: boolean;
-    record: Model<ProjectData>;
+    record: Model<Project>;
     images: Record<string, FileRecord>;
-    data: Partial<ProjectData>;
+    data: Partial<Project>;
 }
 function ProjectRecord({ record, images, isNew, data }: createProject): ProjectRecord {
-    const $projectData: Partial<ProjectData> = Object.assign(data, {
+    const $projectData: Partial<Project> = Object.assign(data, {
         uid: record.id,
     });
 
@@ -109,7 +109,7 @@ function ProjectRecord({ record, images, isNew, data }: createProject): ProjectR
     };
 
     function processEvents(eventType: ProjectRecordEvents) {
-        $callbacks[eventType].forEach(cb => cb(<ProjectData>$projectData));
+        $callbacks[eventType].forEach(cb => cb(<Project>$projectData));
     }
     return {
         on(event, callback) {
@@ -130,7 +130,7 @@ function ProjectRecord({ record, images, isNew, data }: createProject): ProjectR
             processEvents("deleted");
         },
 
-        update(this: ProjectRecord, data: Partial<ProjectData>): ProjectRecord {
+        update(this: ProjectRecord, data: Partial<Project>): ProjectRecord {
             if (data.uid && data.uid !== this.uid) {
                 throw $error.ValidationFailed("UID mismatch");
             }
@@ -144,7 +144,7 @@ function ProjectRecord({ record, images, isNew, data }: createProject): ProjectR
         async save(): Promise<void> {
             Object.assign($projectData, validateProject($projectData));
             if (isNew) {
-                await record.set(<ProjectData>$projectData);
+                await record.set(<Project>$projectData);
                 isNew = false;
 
                 return processEvents("created");
@@ -203,11 +203,11 @@ function ProjectRecord({ record, images, isNew, data }: createProject): ProjectR
 }
 
 interface projectFactory {
-    record: Model<ProjectData>;
+    record: Model<Project>;
     isNew: boolean;
 }
 async function projectFactory({ record, isNew }: projectFactory): Promise<ProjectRecord> {
-    const recordData: Partial<ProjectData> = (await record.data()) || {};
+    const recordData: Partial<Project> = (await record.data()) || {};
     const images = await mapImageRecords(recordData.images);
 
     return ProjectRecord({
@@ -219,10 +219,10 @@ async function projectFactory({ record, isNew }: projectFactory): Promise<Projec
 }
 
 const $projectManager = {
-    async create(data?: ProjectData) {
+    async create(data?: Project) {
         const uid = UUID.v4();
 
-        const record = await $database.new<ProjectData>({ path: PATH, id: uid });
+        const record = await $database.new<Project>({ path: PATH, id: uid });
 
         const project = await projectFactory({ record, isNew: true });
 
@@ -234,7 +234,7 @@ const $projectManager = {
     },
 
     async all() {
-        const dataRefs = await $database.fetch<ProjectData>({ path: PATH });
+        const dataRefs = await $database.fetch<Project>({ path: PATH });
 
         return Promise.all(dataRefs.map(async record => projectFactory({ record, isNew: false })));
     },

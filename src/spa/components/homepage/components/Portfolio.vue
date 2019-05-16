@@ -35,7 +35,7 @@
 import Vue from "vue";
 
 import PortfolioFilter from "./PortfolioFilter.vue";
-import { ProjectRecord, ProjectData } from "../../../../domain/project";
+import { ProjectRecord, Project } from "../../../../domain/project";
 
 export default Vue.extend({
     // maybe this should be in the store

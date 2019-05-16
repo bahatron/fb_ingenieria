@@ -32,7 +32,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { ProjectData } from "../../../../domain/project";
+import { Project } from "../../../../domain/project";
 
 export default Vue.extend({
     props: {
@@ -78,7 +78,7 @@ export default Vue.extend({
     },
 
     computed: {
-        projects(): ProjectData[] {
+        projects(): Project[] {
             return this.$store.getters["projects/data"];
         },
     },
