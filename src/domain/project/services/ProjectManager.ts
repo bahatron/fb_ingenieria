@@ -18,6 +18,7 @@ export interface ProjectRecord {
     readonly data: Partial<Project>;
     readonly uid: string;
     imageUrls(): string[];
+    imageMap(): Record<string, string>;
     on(event: ProjectRecordEvents, cb: Callback): void;
     delete(): Promise<void>;
     update(data: Partial<Project>): ProjectRecord;
@@ -185,11 +186,23 @@ function ProjectRecord({ record, images, isNew, data }: createProject): ProjectR
             $projectData.images = images.filter(value => value !== imageId);
 
             /** @todo: inconsistant state if there's an error here */
-            await Promise.all([this.save(), fileRecord.delete()]);
+            await fileRecord.delete();
+            await this.save();
         },
 
         imageUrls(): string[] {
             return Object.values($projectImages).map(record => record.url);
+        },
+
+        imageMap(): Record<string, string> {
+            return Object.entries($projectImages).reduce(
+                (collection: Record<string, string>, entry) => {
+                    collection[entry[0]] = entry[1].url;
+
+                    return collection;
+                },
+                {},
+            );
         },
 
         get data() {

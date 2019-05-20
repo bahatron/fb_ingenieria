@@ -17,6 +17,7 @@ function register(state: ProjectState, project: ProjectRecord) {
 
     project.on("updated", () => {
         Vue.set(state.projectData, project.uid, project.data);
+        Vue.set(state.projects, project.uid, project);
     });
 
     project.on("deleted", () => {

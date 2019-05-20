@@ -41,6 +41,19 @@
             v-model="formData.country"
         ></v-select>
 
+        <div>
+            <v-layout row wrap>
+                <v-flex xs12 md3 v-for="entry in projectImages" :key="entry[0]">
+                    <div class="p-box">
+                        <img :src="entry[1]" class="portoflio-img">
+                        <div class="p-hover">
+                            <v-btn @click="deleteImage(entry[0])">Eliminar</v-btn>
+                        </div>
+                    </div>
+                </v-flex>
+            </v-layout>
+        </div>
+
         <FileDropzone ref="dropzone"/>
 
         <v-checkbox v-model="formData.visible" label="Visible en pagina principal"></v-checkbox>
@@ -96,6 +109,17 @@ export default Vue.extend({
                 }
             }
         },
+
+        async deleteImage(uid: string) {
+            if (confirm("Esta seguro que quiere eliminar esta imagen?")) {
+                try {
+                    await this.project.deleteImage(uid);
+                    alert("Imagen eliminada");
+                } catch (err) {
+                    alert("No se pudo eliminar la imagen, refresque la pagina e intente nuevamente");
+                }
+            }
+        },
     },
 
     computed: {
@@ -122,6 +146,10 @@ export default Vue.extend({
                 label: this.capitalize(string),
                 value: string,
             }));
+        },
+
+        projectImages(this: any) {
+            return this.project ? Object.entries(this.project.imageMap()) : [];
         },
     },
 });
